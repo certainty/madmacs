@@ -4,8 +4,6 @@
    '("j" . meow-next)
    '("k" . meow-prev))
 
-  (setq meow-keypad-leader-dispatch "C-c")
-
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -93,6 +91,7 @@
   (meow-use-cursor-position-hack t)
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
+  (meow-keypad-leader-dispatch "C-c")
   :config
   (setq meow-use-dynamic-face-color nil)
   (setq meow--kbd-delete-char "<deletechar>")

@@ -15,7 +15,8 @@
      (selection . (semibold italic))))
   (setq modus-themes-common-palette-overrides
         (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
-                                    `((bg-paren-match bg-magenta-intense)
+                                    `((bg-main "#000000")
+                                      (bg-paren-match bg-magenta-intense)
                                       (underline-paren-match fg-main)
                                       (border-mode-line-active unspecified)
                                       (border-mode-line-inactive unspecified)

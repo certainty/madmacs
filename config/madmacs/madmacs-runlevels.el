@@ -25,10 +25,13 @@
       '(
         madmacs-keys-essentials
         madmacs-keys-meow
-        ; madmacs-ux-help
-        ; madmacs-ux-completion
-        ; madmacs-ux-search
-        ; madmacs-ui-modeline
+        madmacs-ui-modeline
+        madmacs-ux-dashboard
+
+                                        ; madmacs-ux-help
+                                        ; madmacs-ux-completion
+                                        ; madmacs-ux-search
+                                        ; madmacs-ui-modeline
                                         ; madmacs-projects
                                         ; madmacs-workspaces-projects
         madmacs-ux-workspaces))
@@ -37,6 +40,7 @@
 (setf (alist-get 3 madmacs--runlevel-files-alist)
       '(
         ; madmacs-keys-leader-system
+
         ))
 
 (defun madmacs-open-runlevels-file ()
