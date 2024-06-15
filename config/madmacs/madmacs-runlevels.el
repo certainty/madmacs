@@ -5,7 +5,9 @@
         ))
 
 (setf (alist-get 1 madmacs--runlevel-files-alist)
-      '(madmacs-init-packages))
+      '(madmacs-init-packages
+        madmacs-settings
+        ))
 
 (setf (alist-get 2 madmacs--runlevel-files-alist)
       '())

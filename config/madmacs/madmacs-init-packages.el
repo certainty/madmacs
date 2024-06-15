@@ -18,7 +18,8 @@
 
 (use-package straight
   :custom
-  (straight-use-package 'use-package))
+  (straight-use-package 'use-package)
+  (straight-use-package-by-default t))
 
 (use-package use-package
   :custom
@@ -36,5 +37,28 @@
   (package-archive-priority
    '(("elpa-devel" . 99)
      ("melpa" . 90))))
+
+(use-package no-littering
+  :ensure t
+  :demand t
+  :init
+  (setopt no-littering-etc-directory (madmacs--ensure-data-dir "etc"))
+  (setopt no-littering-var-directory (madmacs--ensure-data-dir "var")))
+
+(use-package gnutls
+  :ensure nil
+  :custom
+  (gnutls-verify-error t)
+  (gnutls-min-prime-bits 3072))
+
+(use-package auto-compile
+  :ensure t
+  :hook (emacs-startup . auto-compile-on-save-mode)
+  :custom
+  (auto-compile-display-buffer nil)
+  (auto-compile-mode-line-counter t)
+  (auto-compile-update-autoloads t)
+  :config
+  (auto-compile-on-load-mode))
 
 (provide 'madmacs-init-packages)
