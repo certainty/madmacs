@@ -39,4 +39,12 @@
         ; madmacs-keys-leader-system
         ))
 
+(defun madmacs-open-runlevels-file ()
+    "Open the runlevels file."
+    (interactive)
+    (let ((runlevels-file (expand-file-name "madmacs/madmacs-runlevels.el" madmacs--config-dir)))
+      (unless (file-exists-p runlevels-file)
+        (error "Runlevels file does not exist"))
+      (find-file runlevels-file)))
+
 (provide 'madmacs-runlevels)

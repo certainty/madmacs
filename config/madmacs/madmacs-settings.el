@@ -63,6 +63,9 @@
 (defvar madmacs--cache-dir (expand-file-name (concat madmacs--user-home-dir (file-name-as-directory "/.cache") madmacs--base-dir-name))
   "Directory where we store cache files")
 
+(defvar madmacs--config-dir (expand-file-name "config" user-emacs-directory)
+  "Directory where we store configuration files")
+
 (defvar madmacs--data-dir (expand-file-name (concat madmacs--user-home-dir (file-name-as-directory "/.local/share") madmacs--base-dir-name))
   "Directory where we store data files")
 
