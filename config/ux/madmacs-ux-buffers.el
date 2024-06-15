@@ -2,6 +2,7 @@
   :ensure nil
   :straight nil
   :custom
+  (auto-save-default nil)
   (auto-window-vscroll nil)
   (scroll-step 1)
   (scroll-margin 3)

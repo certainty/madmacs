@@ -8,6 +8,7 @@
         madmacs-settings
         madmacs-libraries
 
+        madmacs-ux-essentials
         madmacs-ui-windows
         madmacs-ui-frames
 
@@ -20,7 +21,7 @@
         ))
 
 (setf (alist-get 2 madmacs--runlevel-files-alist)
-      '())
+      '(madmacs-ux-workspaces))
 
 (setf (alist-get 3 madmacs--runlevel-files-alist)
       '())
