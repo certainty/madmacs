@@ -1,6 +1,7 @@
-# Madmacs Emacs Configuration
+# Madmacs
 ![img](assets/logo.png)
 
+> This is my Emacs configuration. There are many like it, but this one is mine.
 
 ## Usage 
 
