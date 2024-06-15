@@ -7,11 +7,8 @@
 (use-package ace-window
   :straight nil
   :ensure nil
-  :hook (before-make-frame . window-divider-mode)
-  :custom
-  (window-divider-default-right-width 1)
-  (window-divider-default-bottom-width 1)
-  (window-divider-default-places 'right-only))
+  :bind
+  ("M-o" . ace-window))
 
 (use-package windmove
   :straight nil
@@ -22,6 +19,7 @@
 (use-package winner
   :straight nil
   :ensure nil
-  :hook after-init)
+  :config
+  (winner-mode 1))
 
 (provide 'madmacs-ui-windows)

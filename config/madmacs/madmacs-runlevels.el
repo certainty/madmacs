@@ -9,13 +9,14 @@
         madmacs-libraries
 
         madmacs-ui-windows
-        ;madmacs-ui-frames
+        madmacs-ui-frames
 
-        ;madmacs-ui-theme
-        ;madmacs-ui-faces
-        ;madmacs-ui-fonts
+        madmacs-ui-theme
+        madmacs-ui-faces
+        madmacs-ui-fonts
 
-        ;madmacs-ux-buffers
+        madmacs-ux-osx
+        madmacs-ux-buffers
         ))
 
 (setf (alist-get 2 madmacs--runlevel-files-alist)

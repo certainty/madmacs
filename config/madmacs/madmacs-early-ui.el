@@ -5,6 +5,7 @@
   (inhibit-startup-screen t)
   (inhibit-startup-message t)
   (inhibit-splash-screen t)
+  (inhibit-startup-echo-area-message "david.krentzlin")
   (initial-scratch-message nil)
   (tool-bar-mode nil)
   (scroll-bar-mode nil)

@@ -14,4 +14,7 @@
   :config
   (setopt dired-async--modeline-mode nil))
 
+(use-package diminish
+  :ensure t)
+
 (provide 'madmacs-libraries)
