@@ -24,7 +24,7 @@
 (setf (alist-get 2 madmacs--runlevel-files-alist)
       '(
         madmacs-keys-essentials
-        ; madmacs-keys-meow
+        madmacs-keys-meow
         ; madmacs-ux-help
         ; madmacs-ux-completion
         ; madmacs-ux-search
