@@ -80,12 +80,13 @@
   (add-to-list 'meow-mode-state-list '(mu4e-view-mode . motion))
   (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
 
+
   )
 
 ;;;; Meow
 (use-package meow
   :ensure t
-  :after which-key
+
   :custom
   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-use-cursor-position-hack t)

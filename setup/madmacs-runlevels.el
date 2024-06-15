@@ -1,7 +1,5 @@
 (setq madmacs-run-level-1-features
         '(
-          madmacs-libraries
-
           madmacs-ux-essentials
           madmacs-ui-windows
           madmacs-ui-frames
@@ -30,7 +28,6 @@
 (setq madmacs-run-level-3-features
         '(
           ;; madmacs-keys-leader-system
-
           ))
 
 

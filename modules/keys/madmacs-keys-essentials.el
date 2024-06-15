@@ -6,6 +6,7 @@
 
 (use-package which-key
   :ensure t
+  :defer 1 ; only if we do this will meow correctly use which-key
   :custom
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-max-display-columns 8)
@@ -16,8 +17,7 @@
   (which-key-side-window-location 'bottom)
   (which-key-setup-minibuffer)
   (which-key-separator " → ")
-
-  :config
+  :init
   (which-key-mode))
 
 (use-package general

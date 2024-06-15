@@ -53,6 +53,7 @@
 (defun madmacs--boot ()
   "Boot the madmacs configuration"
   (require 'madmacs-init-packages)
+  (require 'madmacs-libraries)
 
   (madmacs--load-files "Runlevel 1" madmacs-run-level-1-features)
 
