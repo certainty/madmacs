@@ -1,4 +1,9 @@
 # Madmacs Emacs Configuration
+![img](assets/logo.png)
 
-![img](https://github.com/certainty/madmacs/assets/338957/343aee3b-2738-458f-a2ac-1e6357c861cd])
 
+## Usage 
+
+1. clone the repository to ~/.config/emacs
+2. run `make deps`
+3. start emacs 
