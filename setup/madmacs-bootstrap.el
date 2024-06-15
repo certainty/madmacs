@@ -14,9 +14,10 @@
             (setq gc-cons-threshold 800000)
             (setq file-name-handler-alist madmacs--file-name-handler-alist)))
 
-
 ;; setup the load paths so that I can require my own packages to drive the boot process
-(dolist (dir (directory-files (expand-file-name "config" user-emacs-directory) t "^[^.]+$"))
+(add-to-list 'load-path (expand-file-name "setup" user-emacs-directory))
+
+(dolist (dir (directory-files (expand-file-name "modules" user-emacs-directory) t "^[^.]+$"))
   (when (file-directory-p dir)
     (add-to-list 'load-path dir)))
 

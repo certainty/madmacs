@@ -2,7 +2,7 @@
   "Measure the time it takes to evaluate BODY."
   (require 'benchmark)
   `(let ((elapsed (benchmark-elapse ,@body)))
-     (message "Elapsed time: %.06f" elapsed)))
+     (message "elapsed time: %.06f" elapsed)))
 
 (defun madmacs--ensure-cache-dir (path)
   "Ensure that the cache directory exists"
@@ -29,28 +29,34 @@
   (setopt native-comp-speed 2)
   (setopt native-comp-deferred-compilation t))
 
-(defun madmacs--report-run-level (run-level)
-  "Report the run-level we're at"
-  (message ";; =================== Run-level: %d ========================" run-level))
-
-(defun madmacs--run-level (run-level)
-  "Run the configuration for the specified run-level"
-  (madmacs--report-run-level run-level)
-
+(defun madmacs--load-files (context files)
+  "Loads all files in FILES in logging that as context and measuring the time it takes"
+  (message ";; ========================== %s ======================" context)
   (madmacs--measure-time
-   (dolist (file (alist-get run-level madmacs--runlevel-files-alist))
+   (dolist (file files)
      (require file nil (not madmacs-debug)))))
 
-(defun madmacs--boot (&key early )
-  "Run the full boot process up until the configured `madmacs-boot-run-level' boot process"
-  (message ";; We are all mad here .....")
-  (if early
-      (progn
-        (madmacs--setup-native-compilation)
-        (madmacs--run-level 0))
-    (progn
-      (madmacs--run-level 1)
-      (add-hook 'after-init-hook    (lambda () (madmacs--run-level 2)))
-      (add-hook 'emacs-startup-hook (lambda () (madmacs--run-level 3))))))
+(defun madmacs--boot-early ()
+    "Run the early boot process"
+    (message ";; We are all mad here .....")
+    (madmacs--setup-native-compilation)
+    (madmacs--load-files "Early boot" '(madmacs-early-packages madmacs-early-ui)))
+
+(defun madmacs--after-init ()
+    "Run the after init boot process"
+    (madmacs--load-files "Runlevel 2" madmacs-run-level-2-features))
+
+(defun madmacs--after-startup ()
+  "Run the after startup boot process"
+  (madmacs--load-files "Runlevel 3" madmacs-run-level-3-features))
+
+(defun madmacs--boot ()
+  "Boot the madmacs configuration"
+  (require 'madmacs-init-packages)
+
+  (madmacs--load-files "Runlevel 1" madmacs-run-level-1-features)
+
+  (add-hook 'after-init-hook  'madmacs--after-init)
+  (add-hook 'emacs-startup-hook 'madmacs--after-startup))
 
 (provide 'madmacs-boot)

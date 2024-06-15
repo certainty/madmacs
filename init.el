@@ -3,4 +3,4 @@
 ;; you can still configure madmacs before running the boot process
 ;; (setopt madmacs-debug t)
 
-(madmacs--boot :early nil)
+(madmacs--boot)
