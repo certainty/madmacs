@@ -1,13 +1,12 @@
 
 (setf (alist-get 0 madmacs--runlevel-files-alist)
       '(madmacs-early-packages
-        madmacs-early-ui
-        ))
+        madmacs-early-ui))
 
 (setf (alist-get 1 madmacs--runlevel-files-alist)
       '(madmacs-init-packages
         madmacs-settings
-        ))
+        madmacs-libraries))
 
 (setf (alist-get 2 madmacs--runlevel-files-alist)
       '())

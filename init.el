@@ -1,4 +1,6 @@
-(require 'madmacs-boot)
-(require 'madmacs-runlevels)
+;; -*- lexical-binding: t; -*-
 
-(madmacs--boot)
+;; you can still configure madmacs before running the boot process
+;; (setopt madmacs-debug t)
+
+(madmacs--boot :early nil)
