@@ -29,8 +29,15 @@
 (setq madmacs-run-level-3-features
         '(
           madmacs-writing-checkers
+          madmacs-writing-essentials
           madmacs-tools-terminal
           madmacs-tools-vcs
+
+          madmacs-coding-version-manager
+          madmacs-coding-checkers
+          madmacs-coding-lsp
+
+          madmacs-coding-ruby
           ;madmacs-keys-leader-system
           ))
 

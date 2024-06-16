@@ -103,7 +103,7 @@
    (:map madmacs-goto-map
          ("l" . consult-line))
    (:map madmacs-file-map
-         ("f" .  consult-find)
+         ("f" .  find-file)
          ("r" . consult-recent-file)
          ("o" .  consult-outline)
          ("a" .  consult-apropos)
