@@ -2,5 +2,4 @@
 
 ;; Tweak some very basic settings
 (setopt madmacs-debug t)
-
 (madmacs--boot-early)

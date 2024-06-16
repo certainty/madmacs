@@ -15,11 +15,16 @@
 
 (setq madmacs-run-level-2-features
       '(
-        madmacs-ux-dashboard
         madmacs-keys-meow
+        madmacs-ux-completion
+        madmacs-ux-dashboard
         madmacs-ui-modeline
+
+        ;madmacs-projects-essentials
+        madmacs-edit-actions
+                                        ;madmacs-files-dired
         ;; madmacs-ux-help
-        ;; madmacs-ux-completion
+
         ;; madmacs-ux-search
         ;; madmacs-ui-modeline
         ;; madmacs-projects
