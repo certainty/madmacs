@@ -20,19 +20,15 @@
         madmacs-ux-dashboard
         madmacs-ui-modeline
 
-        ;madmacs-projects-essentials
+        madmacs-projects-essentials
         madmacs-edit-actions
-                                        ;madmacs-files-dired
-        ;; madmacs-ux-help
-
+        madmacs-files-dired
         ;; madmacs-ux-search
-        ;; madmacs-ui-modeline
-        ;; madmacs-projects
-        ;; madmacs-workspaces-projects
         madmacs-ux-workspaces))
 
 (setq madmacs-run-level-3-features
         '(
+          madmacs-tools-terminal
           ;madmacs-keys-leader-system
           ))
 

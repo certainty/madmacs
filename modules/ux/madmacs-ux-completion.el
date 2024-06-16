@@ -94,7 +94,10 @@
   :demand t
   :bind
   (("C-h i" . consult-info)
-
+   (:map madmacs-project-map
+         ("b" . consult-project-buffer)
+         ("s" . consult-ripgrep)
+         ("m" . consult-bookmark))
    (:map madmacs-buffer-map
          ("b" .  consult-buffer)
          ("m" .  consult-bookmark))
@@ -117,11 +120,6 @@
   :init
   (fset 'multi-occur #'consult-multi-occur)
 
-  :bind
-  (:map madmacs-project-map
-             ("b" . consult-project-buffer)
-             ("s" . consult-ripgrep)
-             ("m" . consult-bookmark))
   :config
   (consult-customize
    consult-ripgrep consult-git-grep consult-grep

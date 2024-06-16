@@ -34,6 +34,9 @@
   (bind-keys :prefix-map madmacs-madmacs-map :prefix "C-c M" :prefix-docstring "Madmacs")
   (madmacs--describe-key "C-c M" "Madmacs")
 
+  (bind-keys :prefix-map madmacs-open-map :prefix "C-c o" :prefix-docstring "Open")
+  (madmacs--describe-key "C-c o" "Open")
+
   (bind-keys :prefix-map madmacs-project-map :prefix "C-c p" :prefix-docstring "Project")
   (madmacs--describe-key "C-c p" "Project")
 
@@ -47,6 +50,10 @@
   (madmacs--describe-key "C-c v" "VCS")
 
   (bind-keys :prefix-map madmacs-window-map :prefix "C-c w" :prefix-docstring "Window")
-  (madmacs--describe-key "C-c w" "Window"))
+  (madmacs--describe-key "C-c w" "Window")
+
+  (bind-keys :prefix-map madmacs-workspace-map :prefix "C-c TAB" :prefix-docstring "Workspaces")
+  (madmacs--describe-key "C-c TAB" "Workspaces"))
+
 
 (provide 'madmacs-keys-keymaps)

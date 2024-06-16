@@ -24,4 +24,43 @@
   :custom
   (multisession-directory (madmacs--ensure-cache-dir "multisession")))
 
+(use-package tab-bar
+  :ensure nil
+  :straight nil
+  :after (project)
+  :commands (tab-bar-new-tab
+             tab-bar-switch-to-tab
+             tab-bar-switch-to-next-tab
+             tab-bar-switch-to-prev-tab)
+  :custom
+  (tab-bar-show 1)
+  (tab-bar-tab-hints t) ;; show numbers in tabs
+  (tab-bar-new-tab-choice "*scratch*")
+  (tab-bar-select-tab-modifiers '(super))
+  (tab-bar-close-tab-select 'recent)
+  (tab-bar-new-tab-to 'rightmost)
+  (tab-bar-new-button nil)
+  (tab-bar-close-button nil)
+  (tab-bar-auto-width nil)
+  (tab-bar-format '(tab-bar-format-history
+                    tab-bar-format-tabs
+                    lem--tab-bar-suffix
+                    tab-bar-format-add-tab)))
+
+(use-package tabspaces
+  :bind
+  (:map madmacs-project-map
+        ;; we overwrite this one to open the project in a new tab
+        ("p" . tabspaces-open-or-create-project-and-workspace))
+  (:map madmacs-workspace-map
+        ("o" . tabspaces-open-or-create-project-and-workspace)
+        ("s" . tabspaces-switch-or-create-workspace)
+        ("q" . tabspaces-close-workspace))
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+
+  :config
+  (tabspaces-mode))
+
+
 (provide 'madmacs-ux-workspaces)

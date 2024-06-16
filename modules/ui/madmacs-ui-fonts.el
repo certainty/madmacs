@@ -45,15 +45,4 @@
   (unless (member "all-the-icons" (font-family-list))
     (all-the-icons-install-fonts 'yes)))
 
-(use-package all-the-icons-dired
-  :ensure t
-  :hook dired-mode)
-
-(use-package all-the-icons-completion
-  :ensure t
-  :straight (all-the-icons-completion :type git :host github :repo "MintSoup/all-the-icons-completion")
-  :hook
-  (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  (emacs-startup . all-the-icons-completion-mode))
-
 (provide 'madmacs-ui-fonts)
