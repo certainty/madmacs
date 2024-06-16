@@ -68,6 +68,11 @@
 (defvar madmacs--data-dir (expand-file-name (concat madmacs--user-home-dir (file-name-as-directory "/.local/share") madmacs--base-dir-name))
   "Directory where we store data files")
 
+(defcustom madmacs-org-directory (expand-file-name "org" madmacs--data-dir)
+  "Directory where we store org files"
+  :type 'string
+  :group 'madmacs)
+
 (defun madmacs--defaults-with-overrides (defaults overrides)
   "Merge overrides into defaults. Overriding any defaults."
   (append (cl-remove-if (lambda (x) (member (car x) (mapcar 'car overrides))) defaults) overrides))

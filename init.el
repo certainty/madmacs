@@ -44,6 +44,9 @@
           madmacs-coding-lsp
           madmacs-coding-dap
           madmacs-coding-scala
-          madmacs-coding-ruby))
+          madmacs-coding-ruby
+;; FIXME: doesn't load yet
+          ;madmacs-org-essentials
+          ))
 
 (madmacs--boot)

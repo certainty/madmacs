@@ -34,6 +34,9 @@
   (bind-keys :prefix-map madmacs-madmacs-map :prefix "C-c M" :prefix-docstring "Madmacs")
   (madmacs--describe-key "C-c M" "Madmacs")
 
+  (bind-keys :prefix-map madmacs-notes-map :prefix "C-c n" :prefix-docstring "Notes")
+  (madmacs--describe-key "C-c n" "Notes")
+
   (bind-keys :prefix-map madmacs-open-map :prefix "C-c o" :prefix-docstring "Open")
   (madmacs--describe-key "C-c o" "Open")
 
