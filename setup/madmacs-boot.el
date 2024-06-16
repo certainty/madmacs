@@ -40,22 +40,25 @@
     "Run the early boot process"
     (message ";; We are all mad here .....")
     (madmacs--setup-native-compilation)
-    (madmacs--load-files "Early boot" '(madmacs-early-packages madmacs-early-ui)))
+    (madmacs--load-files "Madmacs Boot" '(madmacs-early-packages madmacs-early-ui))
+
+    (when madmacs-early-init-features
+      (madmacs--load-files "Madmacs Early Init" madmacs-early-init-features)))
 
 (defun madmacs--after-init ()
     "Run the after init boot process"
-    (madmacs--load-files "Runlevel 2" madmacs-run-level-2-features))
+    (madmacs--load-files "Madmacs After Init" madmacs-after-init-features))
 
 (defun madmacs--after-startup ()
   "Run the after startup boot process"
-  (madmacs--load-files "Runlevel 3" madmacs-run-level-3-features))
+  (madmacs--load-files "Madmacs After Startup" madmacs-after-startup-features))
 
 (defun madmacs--boot ()
   "Boot the madmacs configuration"
   (require 'madmacs-init-packages)
   (require 'madmacs-libraries)
 
-  (madmacs--load-files "Runlevel 1" madmacs-run-level-1-features)
+  (madmacs--load-files "Madmacs Init" madmacs-init-features)
 
   (add-hook 'after-init-hook  'madmacs--after-init)
   (add-hook 'emacs-startup-hook 'madmacs--after-startup))

@@ -6,14 +6,17 @@
   :prefix "madmacs-"
   :group 'emacs)
 
-(defvar madmacs-run-level-1-features nil
-    "The packages to load for run-level 1 which is is executed immediately after early-init")
+(defvar madmacs-early-init-features nil
+  "These packages are loaded as part of the early init process")
 
-(defvar madmacs-run-level-2-features nil
-  "The packages to load for run-level 2 which is executed as after-init hook")
+(defvar madmacs-init-features nil
+  "These packages are loaded as part of the init process directly after the early init process")
 
-(defvar madmacs-run-level-3-features nil
-  "The packages to load for run-level 3 which is executed as emacs-startup-hook")
+(defvar madmacs-after-init-features nil
+  "These packages are loaded as an after-init-hook")
+
+(defvar madmacs-after-startup-features nil
+  "These packages are loaded as an emacs-startup-hook")
 
 (defcustom madmacs-debug nil
   "Enable debug mode"

@@ -22,7 +22,6 @@
     (add-to-list 'load-path dir)))
 
 (require 'madmacs-settings)
-(require 'madmacs-runlevels)
 (require 'madmacs-boot)
 
 (provide 'madmacs-bootstrap)
