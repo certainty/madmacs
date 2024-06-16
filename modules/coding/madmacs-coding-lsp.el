@@ -1,5 +1,11 @@
 (use-package lsp-mode
   :ensure t
+  :bind
+  (:map madmacs-goto-map
+        ("d" . xref-find-definitions)
+        ("b" . xref-go-back)
+        ("R" . xref-find-references))
+
   :hook
   (lsp-mode . lsp-completion-mode)
   (lsp-mode . lsp-enable-which-key-integration)

@@ -33,10 +33,12 @@
           madmacs-tools-terminal
           madmacs-tools-vcs
 
+          madmacs-coding-essentials
           madmacs-coding-version-manager
           madmacs-coding-checkers
           madmacs-coding-lsp
-
+          madmacs-coding-dap
+          madmacs-coding-scala
           madmacs-coding-ruby
           ;madmacs-keys-leader-system
           ))
