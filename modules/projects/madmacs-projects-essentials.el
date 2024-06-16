@@ -4,6 +4,8 @@
   :bind
   (:map madmacs-project-map
         ("p" . project-switch-project)
+        ("f" . project-find-file)
+        ("D" . project-find-dir)
         ("r" . project-query-replace-regexp)
         ("v" . project-vc-dir)
         ("R" . project-remember-projects-under)

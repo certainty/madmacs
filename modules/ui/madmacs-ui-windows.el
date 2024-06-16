@@ -5,10 +5,24 @@
   (display-buffer-base-action nil))
 
 (use-package ace-window
-  :straight nil
-  :ensure nil
+  :ensure t
   :bind
-  ("M-o" . ace-window))
+  ("M-o" . ace-window)
+  (:map madmacs-window-map
+        ("h" . windmove-left)
+        ("j" . windmove-down)
+        ("k" . windmove-up)
+        ("l" . windmove-right)
+        ("a" . ace-select-window)
+        ("b" . balance-windows)
+        ("v" . split-window-right)
+        ("H" . split-window-below)
+        ("o" . other-window)
+        ("w" . ace-window)
+        ("q" . delete-window)
+        ("d" . delete-window)
+        ("x" . ace-swap-window)
+        ("m" . ace-maximize-window)))
 
 (use-package windmove
   :straight nil

@@ -46,7 +46,7 @@
   (bind-keys :prefix-map madmacs-toggle-map :prefix "C-c t" :prefix-docstring "Toggle")
   (madmacs--describe-key "C-c t" "Toggle")
 
-  (bind-keys :prefix-map madmacs-vc-map :prefix "C-c v" :prefix-docstring "VCS")
+  (bind-keys :prefix-map madmacs-vcs-map :prefix "C-c v" :prefix-docstring "VCS")
   (madmacs--describe-key "C-c v" "VCS")
 
   (bind-keys :prefix-map madmacs-window-map :prefix "C-c w" :prefix-docstring "Window")

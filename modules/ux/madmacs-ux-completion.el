@@ -60,7 +60,6 @@
   (vertico-resize nil)
 
   :init
-  (message "STARTING VERTICO")
   (vertico-mode))
 
 (use-package vertico-repeat

@@ -28,7 +28,9 @@
 
 (setq madmacs-run-level-3-features
         '(
+          madmacs-writing-checkers
           madmacs-tools-terminal
+          madmacs-tools-vcs
           ;madmacs-keys-leader-system
           ))
 
