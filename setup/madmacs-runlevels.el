@@ -1,5 +1,7 @@
 (setq madmacs-run-level-1-features
         '(
+          madmacs-keys-essentials
+          madmacs-keys-keymaps ; make keymaps available very early on
           madmacs-ux-essentials
           madmacs-ui-windows
           madmacs-ui-frames
@@ -14,7 +16,6 @@
 (setq madmacs-run-level-2-features
       '(
         madmacs-ux-dashboard
-        madmacs-keys-essentials
         madmacs-keys-meow
         madmacs-ui-modeline
         ;; madmacs-ux-help
@@ -27,7 +28,7 @@
 
 (setq madmacs-run-level-3-features
         '(
-          ;; madmacs-keys-leader-system
+          ;madmacs-keys-leader-system
           ))
 
 
@@ -38,5 +39,9 @@
       (unless (file-exists-p runlevels-file)
         (error "Runlevels file does not exist"))
       (find-file runlevels-file)))
+
+(add-hook 'emacs-startup-hook (lambda ()
+                                (bind-keys :map madmacs-madmacs-map ("r" . madmacs-open-runlevels-file))
+                                (madmacs--describe-key-in-keymap madmacs-madmacs-map "r" "Go to runlevels.el")))
 
 (provide 'madmacs-runlevels)

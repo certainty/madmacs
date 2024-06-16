@@ -11,6 +11,9 @@
   (diminish 'fontaine-mode)
   (fontaine-set-preset 'regular)
 
+  (bind-keys :map madmacs-toggle-map
+             ("f" . madmacs-toggle-font))
+
   :custom
   (x-underline-at-descent-line nil)
   (fontaine-presets
