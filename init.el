@@ -51,8 +51,11 @@
           madmacs-coding-terraform
           madmacs-coding-lisp
           madmacs-coding-common-lisp
-
+          madmacs-coding-prolog
           madmacs-coding-copilot
+          madmacs-coding-configurations
+
+          madmacs-tools-docker
 
 ;; FIXME: doesn't load yet
           ;madmacs-org-essentials

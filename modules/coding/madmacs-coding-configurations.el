@@ -8,12 +8,11 @@
   :hook
   (yaml-mode  . lsp-deferred))
 
+
 (use-package json-mode
   :ensure t
   :hook (json-mode . lsp-deferred)
   :mode (("\\.json\\'" . json-mode)))
 
-(use-package json-snatcher
-  :ensure t)
 
-(provide 'madmacs-coding-configuration)
+(provide 'madmacs-coding-configurations)

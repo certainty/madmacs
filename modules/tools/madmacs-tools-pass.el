@@ -1,0 +1,3 @@
+
+
+(provide 'madmacs-tools-pass)
