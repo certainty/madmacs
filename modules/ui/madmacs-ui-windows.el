@@ -8,6 +8,8 @@
   :ensure t
   :bind
   ("M-o" . ace-window)
+  (:map madmacs-toggle-map
+        ("W" . toggle-frame-fullscreen))
   (:map madmacs-window-map
         ("h" . windmove-left)
         ("j" . windmove-down)

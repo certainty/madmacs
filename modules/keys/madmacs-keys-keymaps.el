@@ -28,6 +28,8 @@
   (bind-keys :prefix-map madmacs-goto-map :prefix "C-c j" :prefix-docstring "Goto")
   (madmacs--describe-key "C-c j" "Goto")
 
+  (madmacs--describe-key "C-c z" "Mode")
+
   (bind-keys :prefix-map madmacs-file-map :prefix "C-c f" :prefix-docstring "File")
   (madmacs--describe-key "C-c f" "File")
 
@@ -55,8 +57,8 @@
   (bind-keys :prefix-map madmacs-window-map :prefix "C-c w" :prefix-docstring "Window")
   (madmacs--describe-key "C-c w" "Window")
 
-  (bind-keys :prefix-map madmacs-workspace-map :prefix "C-c TAB" :prefix-docstring "Workspaces")
-  (madmacs--describe-key "C-c TAB" "Workspaces"))
+  (bind-keys :prefix-map madmacs-workspace-map :prefix "C-c P" :prefix-docstring "Workspaces")
+  (madmacs--describe-key "C-c P" "Workspaces"))
 
 
 (provide 'madmacs-keys-keymaps)

@@ -1,7 +1,13 @@
 (use-package sly
   :ensure t
+  :bind
+  (:map sly-mode-map
+        ("C-c z z" . sly)
+        ("C-c e s" . sly-export-symbol-at-point)
+        ("C-c e s" . sly-export-struct)
+        ("C-c e t" . sly-export-class))
   :hook
-  (sly-mode . dk-setup-common-lisp)
+  (sly-mode . madmacs--setup-common-lisp)
 
   :config
   (setopt sly-lisp-implementations
@@ -12,14 +18,16 @@
   (setopt sly-lisp-implementation 'sbcl)
   (setopt inferior-lisp-program "sbcl")
   (setopt sly-complete-symbol-function #'sly-flex-completions)
+  (setq sly-contribs '(sly-fancy sly-stickers sly-scratch sly-mrepl sly-autodoc sly-trace-dialog))
+  
 
   (add-to-list 'display-buffer-alist
-               '("^\\*sly-compilation"
-                 (display-buffer-reuse-window
-                  display-buffer-in-side-window)
-                 (side . bottom)
-                 (reusable-frames . visible)
-                 (window-height . 0.3)))
+                 '("^\\*sly-compilation"
+                   (display-buffer-reuse-window
+                    display-buffer-in-side-window)
+                   (side . bottom)
+                   (reusable-frames . visible)
+                   (window-height . 0.3)))
 
   (add-to-list 'display-buffer-alist
                '("^\\*sly-mrepl"
@@ -60,7 +68,7 @@
       (recurse 1)
       (sly-asdf-load-system)))
 
-  (defun dk-setup-common-lisp ()
+  (defun madmacs--setup-common-lisp ()
     (if (file-exists-p "~/.local/share/quicklisp/log4sly-setup.el")
         (progn
           (load "~/.local/share/quicklisp/log4sly-setup.el")
@@ -69,6 +77,14 @@
 
 (use-package sly-asdf
   :ensure t
+  :after sly
+  :bind
+  (:map sly-mode-map
+        ("C-c z s c" . sly-asdf-compile-system)
+        ("C-c z s l" . sly-asdf-load-system)
+        ("C-c z s r" . sly-asdf-reload-system)
+        ("C-c z s d" . sly-asdf-browse-system)
+        ("C-c z s t" . sly-asdf-test-system))
   :init
   (add-to-list 'sly-contribs 'sly-asdf 'append))
 

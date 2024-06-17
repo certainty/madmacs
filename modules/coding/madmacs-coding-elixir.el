@@ -9,7 +9,7 @@
   :straight (apprentice :type git :host github :repo "Sasanidas/Apprentice")
   :hook (elixir-mode . apprentice-mode)
   :custom
-  (apprentice-key-command-prefix "C-c l"))
+  (appretice-key-command-prefix "C-c z"))
 
 (use-package elixir-mode
   :ensure t
