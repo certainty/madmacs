@@ -49,6 +49,8 @@
           madmacs-coding-typescript
           madmacs-coding-web
           madmacs-coding-terraform
+          madmacs-coding-lisp
+          madmacs-coding-common-lisp
 
           madmacs-coding-copilot
 
