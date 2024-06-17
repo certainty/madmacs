@@ -20,6 +20,11 @@
 
   (project-vc-extra-root-markers '(".dir-locals.el" ".project" "package.json" "autogen.sh")))
 
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
 (use-package dotenv
   :ensure t
   :straight (dotenv :type git :host github :repo "pkulev/dotenv.el")

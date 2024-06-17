@@ -19,3 +19,7 @@ So you have all those bindings available also in keypad mode under `SPC`.
 
 Most major modes will provide their bindings under `C-c C-<letter>` which is equally easily available.
 
+Avy & Embark are available in buffer via `C-j` for avy and `C-.` and `M-.` for embark.
+
+If you're lost just hit `C-c` and let which-key guide you.
+

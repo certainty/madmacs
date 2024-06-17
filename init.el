@@ -28,7 +28,6 @@
           madmacs-projects-essentials
           madmacs-edit-actions
           madmacs-files-dired
-          ;; madmacs-ux-search
           madmacs-ux-workspaces))
 
 (setopt madmacs-after-startup-features
