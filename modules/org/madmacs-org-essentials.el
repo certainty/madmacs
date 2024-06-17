@@ -169,3 +169,5 @@
   :custom
   (org-modern-label-border 0.1)
   (org-modern-block-fringe 1))
+
+(provide 'madmacs-org-essentials)

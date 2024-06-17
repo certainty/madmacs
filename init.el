@@ -52,13 +52,14 @@
           madmacs-coding-lisp
           madmacs-coding-common-lisp
           madmacs-coding-prolog
+          madmacs-coding-elixir
+          madmacs-coding-elm
           madmacs-coding-copilot
           madmacs-coding-configurations
 
           madmacs-tools-docker
 
-;; FIXME: doesn't load yet
-          ;madmacs-org-essentials
+          madmacs-org-essentials
           ))
 
 (madmacs--boot)
