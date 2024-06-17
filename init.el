@@ -45,6 +45,13 @@
           madmacs-coding-dap
           madmacs-coding-scala
           madmacs-coding-ruby
+          madmacs-coding-golang
+          madmacs-coding-typescript
+          madmacs-coding-web
+          madmacs-coding-terraform
+
+          madmacs-coding-copilot
+
 ;; FIXME: doesn't load yet
           ;madmacs-org-essentials
           ))

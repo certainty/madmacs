@@ -40,6 +40,9 @@
           madmacs-coding-dap
           madmacs-coding-scala
           madmacs-coding-ruby
+          madmacs-coding-golang
+
+          madmacs-coding-configurations
           ;madmacs-keys-leader-system
           ))
 
