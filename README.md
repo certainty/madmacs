@@ -5,8 +5,14 @@
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
 ## Madmacs in a few bullet points 
-* Work in progress 
-* Optimized for software engineers 
+* Work in progress
+  * build by me for me
+  * not a framework but feel free to take it as a start for your own version
+* Built on the shoulders of giants
+  * many parts are based on other configurations like doom, lambda-emacs, centaur-emacs, etc.
+  * it's slightly nuts that we have to go to that length to configure our editor 
+* Optimized for software engineers
+  * I use this as my daily driver 
 * Configuration in plain emacs lisp
   * `use-package` with straight
   * simple boot approach that's easy to follow and modify
