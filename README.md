@@ -18,6 +18,7 @@ In fact, this configuration uses meow mode and leaves the leader pointing to `C-
 So you have all those bindings available also in keypad mode under `SPC`.
 
 Most major modes will provide their bindings under `C-c C-<letter>` which is equally easily available.
+For convenience some of those are re-bound under the `C-c z` local leader prefix.
 
 Avy & Embark are available in buffer via `C-j` for avy and `C-.` and `M-.` for embark.
 
