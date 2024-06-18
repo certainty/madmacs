@@ -56,7 +56,6 @@ targets."
               :around #'embark-hide-which-key-indicator))
 
 (use-package embark-consult
-  :ensure t
   :hook (embark-collect-mode . consult-preview-at-point-mode)
   :after consult
   :ensure t)

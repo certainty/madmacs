@@ -53,7 +53,6 @@
    '("r" . meow-replace)
    '("R" . overwrite-mode)
    '("s" . meow-kill)
-   '("S" . embrace-commander)
    '("t" . meow-till)
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
@@ -71,7 +70,7 @@
    '("=" . meow-grab)
    '("/" . meow-visit)
    '("<escape>" . meow-cancel-selection))
-
+   
   (meow-thing-register 'angle '(regexp "<" ">") '(regexp "<" ">"))
   (add-to-list 'meow-char-thing-table '(?a . angle))
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))

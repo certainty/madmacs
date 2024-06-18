@@ -48,6 +48,16 @@
   :type 'integer
   :group 'madmacs)
 
+(defcustom madmacs-user-full-name ""
+  "User full name"
+  :type 'string
+  :group 'madmacs)
+
+(defcustom madmacs-user-email ""
+  "User email"
+  :type 'string
+  :group 'madmacs)
+
 (defcustom madmacs--base-dir-name "madmacs"
   "Base directory name for madmacs configuration, cache, state and other files. We use XDG base directory specification and will group all madmacs related files under this directory"
   :type 'string
@@ -79,8 +89,8 @@
 
 (use-package emacs
   :custom
-  (user-full-name "David Krentzlin")
-  (user-mail-address "david.krentzlin@gmail.com")
-  (custom-file (expand-file-name "custom.el" user-emacs-directory)))
+  (user-full-name madmacs-user-full-name)
+  (user-mail-address madmacs-user-email)
+  (custom-file (expand-file-name "custom.el" madmacs--data-dir)))
 
 (provide 'madmacs-settings)
