@@ -47,7 +47,7 @@ Most major modes will provide their bindings under `C-c C-<letter>` which is equ
 
 For convenience some of those are re-bound under the `C-c z` mode specific prefix.
 
-Avy & Embark are available in buffer via `C-j` for avy and `C-.` and `M-.` for embark.
+Avy & Embark are available in buffer via `C-:` for avy and `C-.` and `M-.` for embark.
 
 If you're lost just hit `C-c` and let which-key guide you.
 

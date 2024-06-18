@@ -63,7 +63,7 @@ targets."
 (use-package avy
   :ensure t
   :bind
-  (("C-j" . avy-goto-char-timer)
+  (("C-:" . avy-goto-char-timer)
    (:map madmacs-goto-map
          ("j" . avy-goto-char-timer)
          ("J" . avy-goto-char-2))))

@@ -7,6 +7,7 @@
         '(
           madmacs-keys-essentials
           madmacs-keys-keymaps ; make keymaps available very early on
+          madmacs-edit-essentials
           madmacs-ux-essentials
           madmacs-ui-windows
           madmacs-ui-frames

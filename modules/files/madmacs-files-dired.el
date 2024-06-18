@@ -11,10 +11,10 @@
   (dirvish-override-dired-mode)
 
   :custom
-  (dirvish-quick-access-entries         ; It's a custom option, `setq' won't work
-   '(("h" "~/"                          "Home")
-     ("d" "~/Downloads/"                "Downloads")
-     ("w" "~/NewWork/Code/"                       "Work")
+  (dirvish-quick-access-entris         ; It's a custom option, `setq' won't work
+   '(("h" "~/"                "Home")
+     ("d" "~/Downloads/"      "Downloads")
+     ("w" "~/NewWork/Code/"   "Work")
      ("p" "~/Private/"        "Private")))
 
   (dirvish-use-header-line 'global)
