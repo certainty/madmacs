@@ -3,8 +3,10 @@
   :bind
   (:map madmacs-vcs-map
         ("v" . magit-status)
+        ("," . magit-dispatch)
+        ("." . magit-file-dispatch)
         ("t" . magit-todos-list)
-        ("d" . magit-diff-buffer-file))
+        ("D" . magit-diff-buffer-file))
   :custom
   (git-commit-summary-max-length 80)
   (git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
@@ -27,7 +29,10 @@
 (use-package smerge-mode
   :ensure nil
   :straight nil
-  :after (hydra general)
+  :after (hydra)
+  :bind
+  (:map smerge-mode-map
+        ("C-c v m" . hydra-smerge/body))
   :config
   (defhydra hydra-smerge (:color pink
                                  :hint nil

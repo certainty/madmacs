@@ -8,7 +8,7 @@
   :mode (("\\.org$" . org-mode))
   ;:hook (org-mode . madmacs--nicer-org)
   :bind
-  (:map madmacs-notes-keymap
+  (:map madmacs-notes-map
         ("a" . org-agenda))
   (:map org-mode-map
         ("C-M-k" . org-metaup)
@@ -129,7 +129,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font dk/variable-width-font :weight 'medium :height (cdr face)))
+    (set-face-attribute (car face) nil :font madmacs-variable-pitch-font :weight 'medium :height (cdr face)))
 
   (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
