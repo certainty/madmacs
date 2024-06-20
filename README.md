@@ -51,3 +51,15 @@ Avy & Embark are available in buffer via `C-:` for avy and `C-.` and `M-.` for e
 
 If you're lost just hit `C-c` and let which-key guide you.
 
+## Screenshots
+<img src="https://github.com/certainty/madmacs/assets/338957/d74304b2-3a2f-4f71-949e-a23bff07e17a" width=400px>
+
+
+<img src="https://github.com/certainty/madmacs/assets/338957/c39f4c50-7cc7-4948-9066-615413ec2f4c" width=400px>
+
+<img src="https://github.com/certainty/madmacs/assets/338957/93123f71-eb3a-4bc5-9d76-ffa450040858" width=400px>
+
+<img src="https://github.com/certainty/madmacs/assets/338957/478b536b-28c6-4572-a203-5aa9f7bf030b" width=400px>
+
+
+
