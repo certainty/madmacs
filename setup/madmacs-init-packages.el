@@ -18,6 +18,7 @@
 
 (use-package straight
   :custom
+  (straight-check-for-modifications '(check-on-save))
   (straight-use-package 'use-package)
   (straight-use-package-by-default t))
 

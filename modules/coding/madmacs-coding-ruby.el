@@ -5,7 +5,10 @@
   :interpreter "j?ruby\\(?:[0-9.]+\\)"
   :hook (ruby-mode . lsp-deferred)
   :custom
-  (ruby-insert-encoding-magic-comment nil))
+  (ruby-insert-encoding-magic-comment nil)
+  :config
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.ruby-lsp\\'")))
 
 (use-package rubocop
   :ensure t

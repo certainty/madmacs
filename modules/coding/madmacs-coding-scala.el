@@ -4,7 +4,9 @@
 
 (use-package lsp-metals
   :ensure t
-  :hook (scala-mode . lsp))
+  :hook (scala-mode . lsp)
+  :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'"))
 
 (use-package sbt-mode
   :ensure t

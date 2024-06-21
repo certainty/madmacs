@@ -23,7 +23,7 @@
    '(:left (sort symlink) :right (omit yank index)))
 
   (dirvish-attributes
-   '(vc-state subtree-state all-the-icons file-time file-size collapse git-msg ))
+   '(subtree-state collapse))
 
   ;; (dirvish-peek-mode) ; Preview files in minibuffer
   ;;(dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'

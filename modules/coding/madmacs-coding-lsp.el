@@ -21,6 +21,7 @@
   (lsp-completion-provider :none)
   (lsp-file-watch-threshold 3000))
 
+
 (use-package lsp-ui
   :after (lsp-mode)
   :hook (lsp-mode . lsp-ui-mode))
