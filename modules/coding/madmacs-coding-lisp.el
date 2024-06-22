@@ -1,7 +1,4 @@
 (use-package paredit
-  :bind
-  (:map paredit-mode-map
-        ("C-<" . paredit-forward-barf-sexp))
   :hook
   (lisp-mode . paredit-mode)
   (emacs-lisp-mode . paredit-mode)
