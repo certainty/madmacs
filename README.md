@@ -49,7 +49,9 @@ For convenience some of those are re-bound under the `C-c z` mode specific prefi
 
 Avy & Embark are available in buffer via `C-:` for avy and `C-.` and `M-.` for embark.
 
-If you're lost just hit `C-c` and let which-key guide you.
+If you're lost just hit `C-c` followed by `C-h` to explore the possible keybindings.
+
+If you insist you can also enable which-key mode via `C-c t k`.
 
 ## Screenshots
 <img src="https://github.com/certainty/madmacs/assets/338957/d74304b2-3a2f-4f71-949e-a23bff07e17a" width=400px>

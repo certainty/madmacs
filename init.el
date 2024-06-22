@@ -5,8 +5,9 @@
 
 (setopt  madmacs-init-features
         '(
-          madmacs-keys-essentials
           madmacs-keys-keymaps ; make keymaps available very early on
+
+          madmacs-keys-essentials
           madmacs-edit-essentials
           madmacs-ux-essentials
           madmacs-ui-windows

@@ -6,9 +6,6 @@
 
 (use-package which-key
   :ensure t
-  :bind
-  (:map madmacs-toggle-map
-        ("k" . which-key-mode))
   :custom
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-max-display-columns 8)
@@ -18,6 +15,9 @@
   (which-key-popup-type 'side-window)
   (which-key-side-window-location 'bottom)
   (which-key-setup-minibuffer)
-  (which-key-separator " → "))
+  (which-key-separator " → ")
+  
+  :init
+  (define-key madmacs-toggle-map (kbd "k") 'which-key-mode))
 
 (provide 'madmacs-keys-essentials)

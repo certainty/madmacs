@@ -106,6 +106,9 @@
          ("m" .  consult-bookmark))
    (:map madmacs-goto-map
          ("l" . consult-line))
+   (:map madmacs-help-map
+         ("m" . consult-mode-command)
+         ("." . display-local-help))
    (:map madmacs-file-map
          ("f" .  find-file)
          ("r" . consult-recent-file)

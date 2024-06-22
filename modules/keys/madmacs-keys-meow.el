@@ -1,10 +1,14 @@
 (defun meow-setup ()
   "Setup meow bindings."
   (meow-motion-overwrite-define-key
-   '("<escape>" . meow-normal-mode)
    '("j" . meow-next)
-   '("k" . meow-prev))
- 
+   '("k" . meow-prev)
+   '("h" . meow-left)
+   '("l" . meow-right))
+  
+  (meow-define-keys 'motion
+    '("C-M-s-^" . meow-normal-mode))
+  
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -16,6 +20,7 @@
    '("3" . meow-expand-3)
    '("2" . meow-expand-2)
    '("1" . meow-expand-1)
+   '("^" . meow-motion-mode)
    '("-" . negative-argument)
    '(";" . meow-reverse)
    '("," . meow-inner-of-thing)
@@ -49,14 +54,14 @@
    '("o" . meow-block)
    '("O" . meow-to-block)
    '("p" . meow-yank)
-   ;'("q" . meow-quit)
+                                        ;'("q" . meow-quit)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
    '("s" . meow-kill)
    '("t" . meow-till)
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
-   '("v" . "C-x SPC") ; enter rectangle mark mode
+   '("v" . "C-x SPC")                   ; enter rectangle mark mode
    '("w" . meow-mark-word)
    '("W" . meow-mark-symbol)
    '("x" . meow-line)
