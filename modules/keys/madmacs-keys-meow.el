@@ -1,9 +1,10 @@
 (defun meow-setup ()
   "Setup meow bindings."
   (meow-motion-overwrite-define-key
+   '("<escape>" . meow-normal-mode)
    '("j" . meow-next)
    '("k" . meow-prev))
-
+ 
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)

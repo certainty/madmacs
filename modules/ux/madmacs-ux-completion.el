@@ -10,10 +10,11 @@
 
   (completion-auto-help 'always) ; Open completion always; `lazy' another option
   (completions-max-height 30)    ; This is arbitrary
-  (completions-detailed t)
   (completions-format 'one-column)
   (completions-group t)
   (completion-auto-select 'second-tab)
+  (suggest-keybindings t)
+
   :config
   (keymap-set minibuffer-mode-map "TAB" 'minibuffer-complete))
 

@@ -60,6 +60,8 @@
           madmacs-tools-docker
 
           madmacs-org-essentials
+
+          madmacs-games-chess
           ))
 
 (madmacs--boot)
