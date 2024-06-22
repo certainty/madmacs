@@ -1,8 +1,11 @@
 (defmacro madmacs--measure-time (&rest body)
   "Measure the time it takes to evaluate BODY."
-  (require 'benchmark)
-  `(let ((elapsed (benchmark-elapse ,@body)))
-     (message ";; ========================== elapsed time: %.06f ===============================" elapsed)))
+  `(progn ,@body)
+   ;(require 'benchmark)
+  ;; `(let ((elapsed (benchmark-elapse ,@body)))
+  ;;    (message ";; ========================== elapsed time: %.06f ===============================" elapsed))
+
+  )
 
 (defun madmacs--ensure-cache-dir (path)
   "Ensure that the cache directory exists"

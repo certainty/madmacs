@@ -25,8 +25,7 @@
   (setopt embark-prompter 'embark-completing-read-prompter)
 
   (setq embark-indicators
-        '(embark-which-key-indicator
-          embark-highlight-indicator
+        '(embark-highlight-indicator
           embark-isearch-highlight-indicator)))
 
 (use-package embark-consult
