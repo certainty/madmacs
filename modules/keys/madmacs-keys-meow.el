@@ -1,10 +1,11 @@
 (defun meow-setup ()
-  "Setup meow bindings."
+  "Setup meow keys"
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
    '("k" . meow-prev)
    '("h" . meow-left)
-   '("l" . meow-right))
+   '("l" . meow-right)
+   '("<escape>" . ignore))
   
   (meow-define-keys 'motion
     '("C-M-s-^" . meow-normal-mode))
@@ -75,16 +76,7 @@
    '("/" . meow-visit)
    '("<escape>" . meow-cancel-selection))
    
-  (meow-thing-register 'angle '(regexp "<" ">") '(regexp "<" ">"))
-  (add-to-list 'meow-char-thing-table '(?a . angle))
-  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
-  (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
-  (add-to-list 'meow-mode-state-list '(mu4e-headers-mode . motion))
-  (add-to-list 'meow-mode-state-list '(mu4e-view-mode . motion))
-  (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
-
-
-  )
+  (meow-thing-register 'angle '(regexp "<" ">") '(regexp "<" ">")))
 
 ;;;; Meow
 (use-package meow
@@ -92,17 +84,26 @@
 
   :custom
   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  
   (meow-use-cursor-position-hack t)
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
   (meow-keypad-leader-dispatch "C-c")
+  
   :config
+  (add-to-list 'meow-char-thing-table '(?a . angle))
+  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
+  (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
+  (add-to-list 'meow-mode-state-list '(mu4e-headers-mode . motion))
+  (add-to-list 'meow-mode-state-list '(mu4e-view-mode . motion))
+  (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
+
   (setq meow-use-dynamic-face-color nil)
   (setq meow--kbd-delete-char "<deletechar>")
   (with-eval-after-load 'org
     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
-   (meow-setup)
-  (meow-global-mode 1)
-  )
+  
+  (meow-setup)
+  (meow-global-mode 1))
 
 (provide 'madmacs-keys-meow)

@@ -26,6 +26,7 @@
           madmacs-ux-completion
           madmacs-ux-dashboard
           madmacs-ui-modeline
+          madmacs-ux-repeat
 
           madmacs-projects-essentials
           madmacs-edit-actions
