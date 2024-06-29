@@ -76,7 +76,7 @@
   :straight nil
   :after vertico
   :bind (:map vertico-map
-              
+
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
@@ -97,26 +97,19 @@
   :demand t
   :bind
   (("C-h i" . consult-info)
-   (:map madmacs-project-map
+   (:map madmacs-find-keys
          ("b" . consult-project-buffer)
-         ("s" . consult-ripgrep)
-         ("m" . consult-bookmark))
-   (:map madmacs-buffer-map
-         ("b" .  consult-buffer)
-         ("m" .  consult-bookmark))
-   (:map madmacs-goto-map
-         ("l" . consult-line))
-   (:map madmacs-help-map
-         ("m" . consult-mode-command)
-         ("." . display-local-help))
-   (:map madmacs-file-map
-         ("f" .  find-file)
-         ("r" . consult-recent-file)
-         ("o" .  consult-outline)
+         ("B" .  consult-buffer)
+         ("g" . consult-ripgrep)
+         ("L" .  consult-goto-line)
+         ("l" . consult-line)
+         ("o" . consult-recent-file)
+         ("m" . consult-bookmark)
          ("a" .  consult-apropos)
-         ("y" .  consult-yank-pop)
-         ("g" .  consult-goto-line)))
-
+         ("y" .  consult-yank-pop))
+   (:map madmacs-docs-keys
+         ("m" . consult-mode-command)
+         ("." . display-local-help)))
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
@@ -171,11 +164,8 @@
 (use-package consult-dir
   :ensure t
   :bind (("C-x C-d" . consult-dir)
-         :map madmacs-project-map
+         :map madmacs-project-keys
          ("d" . consult-dir)
-         :map madmacs-file-map
-         ("d" . consult-dir)
-         ("j" . consult-dir-jump-file)
 
          :map vertico-map
          ("C-x C-d" . consult-dir)
@@ -185,7 +175,7 @@
   :ensure t
   :after consult
   :bind
-  (:map madmacs-project-map
+  (:map madmacs-project-keys
         ("F f" . consult-project-extra-find)
         ("F F" . consult-project-extra-find-other-window)))
 

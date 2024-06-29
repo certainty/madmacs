@@ -1,8 +1,6 @@
 (use-package docker
   :ensure t
-  :bind
-  (:map madmacs-open-map
-        ("D" . docker)))
+  :commands (docker))
 
 (use-package dockerfile-mode
   :ensure t

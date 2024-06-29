@@ -8,16 +8,17 @@
   :ensure t
   :custom
   (which-key-sort-order 'which-key-prefix-then-key-order)
-  (which-key-max-display-columns 8)
+  (which-key-max-display-columns 10)
   (which-key-show-early-on-C-h t)
   (which-key-idle-delay .75)
   (which-key-idle-secondary-delay 0.05)
   (which-key-popup-type 'side-window)
   (which-key-side-window-location 'bottom)
   (which-key-setup-minibuffer)
-  (which-key-separator " → ")
-  
-  :init
-  (define-key madmacs-toggle-map (kbd "k") 'which-key-mode))
+  (which-key-separator " • ")
+  (which-key-prefix-prefix nil)
+
+  :config
+  (which-key-mode))
 
 (provide 'madmacs-keys-essentials)

@@ -1,12 +1,12 @@
 (use-package magit
   :ensure t
   :bind
-  (:map madmacs-vcs-map
-        ("v" . magit-status)
+  (:map madmacs-git-keys
+        ("g" . magit-status)
         ("," . magit-dispatch)
         ("." . magit-file-dispatch)
-        ("t" . magit-todos-list)
-        ("D" . magit-diff-buffer-file))
+        ;; TODO: add more magit commands (browse commits and branches with consult?)
+       )
   :custom
   (git-commit-summary-max-length 80)
   (git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
@@ -20,7 +20,7 @@
 (use-package git-timemachine
   :ensure t
   :bind
-  (:map madmacs-toggle-map
+  (:map madmacs-git-keys
     ("v" . git-timemachine-toggle)))
 
 (use-package hydra
@@ -32,7 +32,7 @@
   :after (hydra)
   :bind
   (:map smerge-mode-map
-        ("C-c v m" . hydra-smerge/body))
+        ("<localleader>m" . hydra-smerge/body))
   :config
   (defhydra hydra-smerge (:color pink
                                  :hint nil

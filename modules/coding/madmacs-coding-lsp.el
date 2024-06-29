@@ -1,17 +1,11 @@
 (use-package lsp-mode
   :ensure t
-  :bind
-  (:map madmacs-goto-map
-        ("d" . etags-xref-find-definitions-tag-order)
-        ("b" . xref-go-back)
-        ("R" . xref-find-references))
-
   :hook
   (lsp-mode . lsp-completion-mode)
   (lsp-mode . lsp-enable-which-key-integration)
 
   :custom
-  (lsp-keymap-prefix "C-c l")
+  (lsp-keymap-prefix "<leader>l")
   (lsp-headerline-breadcrumb-enable nil)
   (lsp-auto-configure t)
   (lsp-auto-execute-action nil)
@@ -31,8 +25,8 @@
   :after lsp-mode
   :bind
   (:map lsp-mode-map
-        ("C-c l !" . consult-lsp-diagnostics)
-        ("C-c l S" . consult-lsp-file-symbols))
+        ("<leader>l !" . consult-lsp-diagnostics)
+        ("<leader>l S" . consult-lsp-file-symbols))
   :config
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
 

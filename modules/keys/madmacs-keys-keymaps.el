@@ -2,7 +2,6 @@
 
 ;; predefined maps which can be used to bind keys by the modules that we load later
 
-
 (use-package emacs
   :ensure nil
   :straight nil
@@ -19,50 +18,48 @@
       (which-key-add-keymap-based-replacements keymap binding name)))
   ;; we try to avoid prefixes that would colide with meow's keypad keys (c,x,g,m)
 
-  (bind-keys :prefix-map madmacs-actions-map :prefix "C-c a" :prefix-docstring "Actions")
-  (madmacs--describe-key "C-c a" "Actions")
 
-  (bind-keys :prefix-map madmacs-buffer-map :prefix "C-c b" :prefix-docstring "Buffer")
-  (madmacs--describe-key "C-c b" "Buffer")
+  (defvar-keymap madmacs-buffers-keys
+    :doc "Buffer related commands and utilities")
 
-  (bind-keys :prefix-map madmacs-goto-map :prefix "C-c j" :prefix-docstring "Goto")
-  (madmacs--describe-key "C-c j" "Goto")
+  (defvar-keymap madmacs-find-keys
+    :doc "Keys which are related to finding and navigating things")
 
-  (madmacs--describe-key "C-c z" "Mode")
+  (defvar-keymap madmacs-docs-keys
+    :doc "Keys to find help and documentation")
 
-  (bind-keys :prefix-map madmacs-file-map :prefix "C-c f" :prefix-docstring "File")
-  (madmacs--describe-key "C-c f" "File")
-  
-  (bind-keys :prefix-map madmacs-help-map :prefix "C-c H" :prefix-docstring "File")
-  (madmacs--describe-key "C-c H" "Help")
+  (defvar-keymap madmacs-lsp-keys
+    :doc "LSP keys that are the same for all languages")
 
-  (bind-keys :prefix-map madmacs-madmacs-map :prefix "C-c M" :prefix-docstring "Madmacs")
-  (madmacs--describe-key "C-c M" "Madmacs")
+  (defvar-keymap madmacs-test-keys
+    :doc "Test related keys for the different programming languages")
 
-  (bind-keys :prefix-map madmacs-notes-map :prefix "C-c n" :prefix-docstring "Notes")
-  (madmacs--describe-key "C-c n" "Notes")
+  (defvar-keymap madmacs-debugger-keys
+    :doc "Keys related to debugging")
 
-  
-  (bind-keys :prefix-map madmacs-open-map :prefix "C-c o" :prefix-docstring "Open")
-  (madmacs--describe-key "C-c o" "Open")
+  (defvar-keymap madmacs-terminal-keys
+    :doc "Keys related to interact with the terminal")
 
-  (bind-keys :prefix-map madmacs-project-map :prefix "C-c p" :prefix-docstring "Project")
-  (madmacs--describe-key "C-c p" "Project")
+  (defvar-keymap madmacs-ux-keys
+    :doc "Keys to control and toggle various aspects of the ux")
 
-  (bind-keys :prefix-map madmacs-search-map :prefix "C-c s" :prefix-docstring "Search")
-  (madmacs--describe-key "C-c s" "Search")
+  (defvar-keymap madmacs-git-keys
+    :doc "Keys to interact with git")
 
-  (bind-keys :prefix-map madmacs-toggle-map :prefix "C-c t" :prefix-docstring "Toggle")
-  (madmacs--describe-key "C-c t" "Toggle")
+  (defvar-keymap madmacs-project-keys
+    :doc "Keys related to interactions with the current project")
 
-  (bind-keys :prefix-map madmacs-vcs-map :prefix "C-c v" :prefix-docstring "VCS")
-  (madmacs--describe-key "C-c v" "VCS")
+  (defvar-keymap madmacs-session-keys
+    :doc "Keys to interact with the session / workspace")
 
-  (bind-keys :prefix-map madmacs-window-map :prefix "C-c w" :prefix-docstring "Window")
-  (madmacs--describe-key "C-c w" "Window")
+  (defvar-keymap madmacs-compiler-keys
+    :doc "Keys to build projects and interact with the compiler")
 
-  (bind-keys :prefix-map madmacs-workspace-map :prefix "C-c P" :prefix-docstring "Workspaces")
-  (madmacs--describe-key "C-c P" "Workspaces"))
+  (defvar-keymap madmacs-packages-keys
+    :doc "Keys to interact with the package manager and the configuration")
+
+
+  )
 
 
 (provide 'madmacs-keys-keymaps)

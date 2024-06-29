@@ -6,7 +6,6 @@
 (setopt  madmacs-init-features
         '(
           madmacs-keys-keymaps ; make keymaps available very early on
-
           madmacs-keys-essentials
           madmacs-edit-essentials
           madmacs-ux-essentials
@@ -22,7 +21,7 @@
 
 (setopt madmacs-after-init-features
         '(
-          madmacs-keys-meow
+          madmacs-keys-evil
           madmacs-ux-completion
           madmacs-ux-dashboard
           madmacs-ui-modeline
@@ -58,12 +57,10 @@
           madmacs-coding-elm
           madmacs-coding-copilot
           madmacs-coding-configurations
-
           madmacs-tools-docker
-
           madmacs-org-essentials
-
           madmacs-games-chess
+          madmacs-keys-leader-system
           ))
 
 (madmacs--boot)

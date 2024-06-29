@@ -29,14 +29,7 @@
   ;;(dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
 
   :bind                                 ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-  ((:map madmacs-open-map
-         ("p" . dirvish-dwim)
-         ("P" . dirvish-side))
-
-   (:map madmacs-file-map
-         ("d" . dirvish))
-
-   :map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
+  (:map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
    ("a"   . dirvish-quick-access)
    ("f"   . dirvish-file-info-menu)
    ("y"   . dirvish-yank-menu)
