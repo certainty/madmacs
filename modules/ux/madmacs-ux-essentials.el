@@ -76,6 +76,7 @@
   (undo-limit 67108864)
   (undo-strong-limit 100663296)
   :config
-  (blink-cursor-mode 0))
+  (blink-cursor-mode 0)
+  (global-hl-line-mode))
 
 (provide 'madmacs-ux-essentials)

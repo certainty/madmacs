@@ -18,6 +18,9 @@
   (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
   (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
 
+  (evil-global-set-key 'visual (kbd "v") 'er/expand-region)
+  (evil-global-set-key 'visual (kbd "V") 'er/contract-region)
+
   ;; Buffers
   (defvar-keymap madmacs-buffers-keys :doc "Buffer related commands and utilities")
   
@@ -31,10 +34,8 @@
     "x" '("Swap" . ace-swap-window)
     "m" '("Maximize" . ace-maximize-window))
 
-
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
-
 
 
   ;; Docs
@@ -128,8 +129,6 @@
     "W" '("Toggle Fullscreen" . toggle-frame-fullscreen))
 
 
-
-
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
 
   (which-key-add-keymap-based-replacements madmacs-leader-keys
@@ -155,7 +154,8 @@
     "s" `("󱂬  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `("󰙨 Test" . ,madmacs-test-keys)
-    "u" `("  UX" . ,madmacs-ux-keys))
+    "u" '("Universal Argument" . universal-argument) 
+    "U" `("  UX" . ,madmacs-ux-keys))
 
   (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
 

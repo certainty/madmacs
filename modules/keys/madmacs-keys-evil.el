@@ -3,6 +3,8 @@
   :init
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-redo)
+
   :config
   (setopt which-key-allow-evil-operators t)
   
@@ -25,6 +27,9 @@
   :ensure t)
 
 (use-package evil-indent-plus
+  :ensure t)
+
+(use-package expand-region
   :ensure t)
 
 (provide 'madmacs-keys-evil)

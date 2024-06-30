@@ -1,17 +1,8 @@
-(use-package lispy
+(use-package evil-cleverparens
   :ensure t
   :hook (lisp-mode emacs-lisp-mode scheme-mode)
   :custom
-  (lispy-safe-delete t)
-  (lispy-safe-copy t)
-  (lispy-safe-paste t)
-  (lispy-safe-actions-no-pull-delimiters-into-comments t))
-
-(use-package lispyville
-  :ensure t
-  :hook lispy-mode
-  :config
-  (lispyville-set-key-theme '(operators prettify text-objects c-w additional-motions commentary slurp barf wrap additional)))
+  (evil-cleverparens-use-additional-bindings t))
 
 (use-package emacs-lisp-mode
   :ensure nil
@@ -53,5 +44,14 @@
   :hook (after-init . show-paren-mode)
   :custom
   (show-paren-delay 0))
+
+(use-package highlight-parentheses
+  :ensure t
+  :hook prog-mode)
+
+(use-package electric-pair
+  :ensure nil
+  :straight nil
+  :hook (emacs-lisp-mode lisp-mode))
 
 (provide 'madmacs-coding-lisp)
