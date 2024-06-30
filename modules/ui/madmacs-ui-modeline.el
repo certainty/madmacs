@@ -1,10 +1,17 @@
-(use-package hide-mode-line
-  :commands hide-mode-line-mode)
+;; (use-package moody
+;;   :config
+;;   (moody-replace-mode-line-front-space)
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode))
 
-(use-package moody
+(use-package doom-modeline
+  :ensure t
+  :custom
+  (doom-modeline-major-mode-icon nil)
+  (doom-modeline-time nil)
+  (doom-modeline-check-simple-format t)
+
   :config
-  (moody-replace-mode-line-front-space)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+  (doom-modeline-mode))
 
 (provide 'madmacs-ui-modeline)

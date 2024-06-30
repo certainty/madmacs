@@ -17,6 +17,9 @@
      ("w" "~/NewWork/Code/"   "Work")
      ("p" "~/Private/"        "Private")))
 
+  (dirvish-side-width 80)
+  (dirvish-side-auto-close t)
+
   (dirvish-use-header-line 'global)
   (dirvish-default-layout '(0 0.3 0.7))
   (dirvish-mode-line-format

@@ -7,11 +7,14 @@
 
   :config
   (setopt which-key-allow-evil-operators t)
-  
+  (setopt evil-emacs-state-modes nil)
+  (setopt evil-insert-state-modes nil)
+  (setopt evil-motion-state-modes nil)
+
   (evil-set-leader nil (kbd "C-SPC"))
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-set-leader 'normal "," t)
-  
+
   (evil-mode 1))
 
 (use-package evil-collection

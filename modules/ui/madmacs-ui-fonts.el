@@ -33,13 +33,7 @@
            :variable-pitch-height 1.0))))
 
 
-(use-package all-the-icons
-  :ensure t
-  :custom
-  (all-the-icons-scale-factor 1)
-
-  :config
-  (unless (member "all-the-icons" (font-family-list))
-    (all-the-icons-install-fonts 'yes)))
+(use-package nerd-icons
+  :ensure t)
 
 (provide 'madmacs-ui-fonts)

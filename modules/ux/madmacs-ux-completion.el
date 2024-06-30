@@ -199,7 +199,7 @@
 (use-package kind-icon
   :ensure t
   :custom
-  (kind-icon-style 'alltheicons)
+  (kind-icon-style 'nerd-icons)
   (kind-icon-use-icons t)
   (kind-icon-default-face 'corfu-default)
   (kind-icon-blend-background nil)

@@ -59,7 +59,7 @@
           madmacs-tools-docker
           madmacs-org-essentials
           madmacs-games-chess
-          madmacs-keys-leader-system
+          madmacs-keys-keybindings
           ))
 
 (madmacs--boot)
