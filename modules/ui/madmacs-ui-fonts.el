@@ -11,9 +11,6 @@
   (diminish 'fontaine-mode)
   (fontaine-set-preset 'regular)
   
-  (which-key-add-keymap-based-replacements madmacs-ux-keys
-    "f" '("Toggle Big Font" . madmacs-toggle-font))
-
   :custom
   (x-underline-at-descent-line nil)
   (fontaine-presets

@@ -1,16 +1,11 @@
 (use-package magit
   :ensure t
-  :bind
-  (:map madmacs-git-keys
-        ("g" . magit-status)
-        ("," . magit-dispatch)
-        ("." . magit-file-dispatch)
-        ;; TODO: add more magit commands (browse commits and branches with consult?)
-       )
   :custom
   (git-commit-summary-max-length 80)
   (git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
   (magit-diff-refine-hunk t)
+  (with-editor-emacsclient-executable "emacsclient")
+  
   :config
   (setopt magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
   (add-to-list 'display-buffer-alist
@@ -18,10 +13,7 @@
                (display-buffer-same-window))))
 
 (use-package git-timemachine
-  :ensure t
-  :bind
-  (:map madmacs-git-keys
-    ("v" . git-timemachine-toggle)))
+  :ensure t)
 
 (use-package hydra
   :ensure t)
@@ -29,11 +21,11 @@
 (use-package smerge-mode
   :ensure nil
   :straight nil
-  :after (hydra)
-  :bind
-  (:map smerge-mode-map
-        ("<localleader>m" . hydra-smerge/body))
+  :after hydra
   :config
+  (evil-define-key 'normal smerge-mode-map
+    (kbd "<localleader>m") hydra-smerge/body)
+  
   (defhydra hydra-smerge (:color pink
                                  :hint nil
                                  :pre (smerge-mode 1)

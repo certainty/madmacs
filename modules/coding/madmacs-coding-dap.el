@@ -1,9 +1,6 @@
 
 (use-package dap-mode
   :ensure t
-  :bind
-  (:map madmacs-debugger-keys
-        ("d" . dap-hydra))
   :hook (dap-mode . dap-tooltip-mode))
 
 (use-package dap-ui

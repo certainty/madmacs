@@ -5,9 +5,11 @@
   (setq evil-want-keybinding nil)
   :config
   (setopt which-key-allow-evil-operators t)
+  
+  (evil-set-leader nil (kbd "C-SPC"))
   (evil-set-leader 'normal (kbd "SPC"))
-  (evil-set-leader 'insert (kbd "C-SPC"))
   (evil-set-leader 'normal "," t)
+  
   (evil-mode 1))
 
 (use-package evil-collection
@@ -15,9 +17,6 @@
   :ensure t
   :config
   (evil-collection-init))
-
-(use-package evil-easymotion
-  :ensure t)
 
 (use-package evil-nerd-commenter
   :ensure t)
@@ -27,11 +26,6 @@
 
 (use-package evil-indent-plus
   :ensure t)
-
-(use-package neotree
-  :ensure t
-  :custom
-  (neo-theme 'icons))
 
 (provide 'madmacs-keys-evil)
 

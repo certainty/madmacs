@@ -48,14 +48,6 @@
                     tab-bar-format-add-tab)))
 
 (use-package tabspaces
-  :bind
-  (:map madmacs-project-map
-        ;; we overwrite this one to open the project in a new tab
-        ("p" . tabspaces-open-or-create-project-and-workspace))
-  (:map madmacs-workspace-map
-        ("o" . tabspaces-open-or-create-project-and-workspace)
-        ("s" . tabspaces-switch-or-create-workspace)
-        ("q" . tabspaces-close-workspace))
   :custom
   (tabspaces-use-filtered-buffers-as-default t)
 

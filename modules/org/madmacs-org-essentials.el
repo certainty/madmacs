@@ -8,8 +8,6 @@
   :mode (("\\.org$" . org-mode))
   ;:hook (org-mode . madmacs--nicer-org)
   :bind
-  (:map madmacs-notes-map
-        ("a" . org-agenda))
   (:map org-mode-map
         ("C-M-k" . org-metaup)
         ("C-M-j" . org-metadown)

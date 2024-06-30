@@ -28,6 +28,7 @@
         ("<leader>l !" . consult-lsp-diagnostics)
         ("<leader>l S" . consult-lsp-file-symbols))
   :config
+  ;; TODO: add LSP replacements for which-keys
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
 
 (provide 'madmacs-coding-lsp)

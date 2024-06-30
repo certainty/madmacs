@@ -76,7 +76,6 @@
   :straight nil
   :after vertico
   :bind (:map vertico-map
-
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word))
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
@@ -96,20 +95,7 @@
   :ensure t
   :demand t
   :bind
-  (("C-h i" . consult-info)
-   (:map madmacs-find-keys
-         ("b" . consult-project-buffer)
-         ("B" .  consult-buffer)
-         ("g" . consult-ripgrep)
-         ("L" .  consult-goto-line)
-         ("l" . consult-line)
-         ("o" . consult-recent-file)
-         ("m" . consult-bookmark)
-         ("a" .  consult-apropos)
-         ("y" .  consult-yank-pop))
-   (:map madmacs-docs-keys
-         ("m" . consult-mode-command)
-         ("." . display-local-help)))
+  (("C-h i" . consult-info))
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
@@ -164,20 +150,13 @@
 (use-package consult-dir
   :ensure t
   :bind (("C-x C-d" . consult-dir)
-         :map madmacs-project-keys
-         ("d" . consult-dir)
-
          :map vertico-map
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package consult-project-extra
   :ensure t
-  :after consult
-  :bind
-  (:map madmacs-project-keys
-        ("F f" . consult-project-extra-find)
-        ("F F" . consult-project-extra-find-other-window)))
+  :after consult)
 
 
 ;; ;;;

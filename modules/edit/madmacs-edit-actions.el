@@ -33,9 +33,6 @@
 (use-package avy
   :ensure t
   :config
-  (which-key-add-keymap-based-replacements madmacs-find-keys
-    "c" '("Char" . avy-goto-char-2))
-
   ;; https://karthinks.com/software/avy-can-do-anything/
   (defun avy-action-embark (pt)
     (unwind-protect

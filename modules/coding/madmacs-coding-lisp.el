@@ -1,8 +1,17 @@
-(use-package paredit
-  :hook
-  (lisp-mode . paredit-mode)
-  (emacs-lisp-mode . paredit-mode)
-  (scheme-mode . paredit-mode))
+(use-package lispy
+  :ensure t
+  :hook (lisp-mode emacs-lisp-mode scheme-mode)
+  :custom
+  (lispy-safe-delete t)
+  (lispy-safe-copy t)
+  (lispy-safe-paste t)
+  (lispy-safe-actions-no-pull-delimiters-into-comments t))
+
+(use-package lispyville
+  :ensure t
+  :hook lispy-mode
+  :config
+  (lispyville-set-key-theme '(operators prettify text-objects c-w additional-motions commentary slurp barf wrap additional)))
 
 (use-package emacs-lisp-mode
   :ensure nil

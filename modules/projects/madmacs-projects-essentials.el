@@ -1,17 +1,6 @@
 (use-package project
   :ensure nil
   :straight nil
-  :bind
-  ((:map madmacs-find-keys
-        ("p" . project-switch-project)
-        ("f" . project-find-file)
-        ("D" . project-find-dir))
-    (:map madmacs-project-keys
-        ("r" . project-query-replace-regexp)
-        ("v" . project-vc-dir)
-        ("R" . project-remember-projects-under)
-        ("z" . project-kill-buffers)))
-
   :custom
   (project-switch-commands '((project-find-file "Find file")
                              (project-find-regexp "Find regexp")
@@ -19,8 +8,7 @@
                              (project-vc-dir "VC-Dir")
                              (project-magit-dir "Magit status")))
 
-  (project-vc-extra-root-markers '(".dir-locals.el" ".project" "package.json" "autogen.sh"))
-  )
+  (project-vc-extra-root-markers '(".dir-locals.el" ".project" "package.json" "autogen.sh")))
 
 (use-package direnv
   :ensure t
