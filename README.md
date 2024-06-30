@@ -16,10 +16,9 @@
 * Configuration in plain emacs lisp
   * `use-package` with straight
   * simple boot approach that's easy to follow and modify
-* Vanilla emacs + meow
-  * Consistent keybinding scheme using `C-c` as prefix
-  * `C-c z` is mode specific prefix
-  * meow for qwerty, which can be disabled
+* Evil emacs (I just can't get out of modal editing) 
+  * Consistent keybinding scheme using `SPC` as prefix
+  * `,` is mode specific prefix
 * Useful power-ups
   * Avy + Embark
   * Hydras
@@ -36,22 +35,8 @@
 
 ## Keybindings
 
-This uses the standard key bindings provided by the various modes.
-It builds on top a system in which keys are defined under `C-c <letter>` prefixes which turns `C-c` effectively into a leader key.
-
-In fact, this configuration uses meow mode and leaves the leader pointing to `C-c`.
-
-So you have all those bindings available also in keypad mode under `SPC`.
-
-Most major modes will provide their bindings under `C-c C-<letter>` which is equally easily available.
-
-For convenience some of those are re-bound under the `C-c z` mode specific prefix.
-
-Avy & Embark are available in buffer via `C-:` for avy and `C-.` and `M-.` for embark.
-
-If you're lost just hit `C-c` followed by `C-h` to explore the possible keybindings.
-
-If you insist you can also enable which-key mode via `C-c t k`.
+The global keybinds are available in the leader map via `SPC`.
+Mode specific leader bindings are available (if they exist) under the local leader `,`.
 
 ## Screenshots
 <img src="https://github.com/certainty/madmacs/assets/338957/d74304b2-3a2f-4f71-949e-a23bff07e17a" width=400px>
