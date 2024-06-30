@@ -2,6 +2,7 @@
   :ensure t
   :hook
   (lsp-mode . lsp-completion-mode)
+  (lsp-mode . lsp-enable-which-key-integration)
 
   :custom
   (lsp-keymap-prefix "C-c l")
@@ -15,7 +16,7 @@
   (lsp-file-watch-threshold 3000)
 
   :config
-  (lsp-enable-imenu))
+  (lsp-enable-which-key-integration))
   
   
 

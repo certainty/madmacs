@@ -30,13 +30,13 @@
     "H" '("Split horizontal" . split-window-below)
     "o" '("Other" . other-window)
     "b" '("ACE"  . ace-window)
-    "d" '("Delete" . delete-window)
+    "d" '("Close" . delete-window)
+    "D" '("Close all others" . delete-other-windows)
     "x" '("Swap" . ace-swap-window)
     "m" '("Maximize" . ace-maximize-window))
 
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
-
 
   ;; Docs
   (defvar-keymap madmacs-docs-keys :doc "Keys to find help and documentation")
@@ -71,9 +71,10 @@
   ;; Git
   (defvar-keymap madmacs-git-keys :doc "Keys to interact with git")
   (which-key-add-keymap-based-replacements madmacs-git-keys
-    "g" '("Status" . magit-status)
     "," '("Dispatch" . magit-dispatch)
     "." '("File dispatch" . magit-file-dispatch)
+    "b" '("Blame" . magit-blame)
+    "g" '("Status" . magit-status)
     "l" '("Log" . magit-log)
     "t" '("Toggle timemachine" . git-timemachine-toggle))
   

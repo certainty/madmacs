@@ -7,6 +7,8 @@
   (catppuccin-set-color 'base "#000000")
   (load-theme 'catppuccin :no-confirm))
 
+
+
 ;; (use-package modus-themes
 ;;   :ensure t
 ;;   :config
