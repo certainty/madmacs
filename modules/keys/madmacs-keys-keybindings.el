@@ -206,6 +206,7 @@
     "/" `("Toggle Comment" . comment-dwim)
     "." `("Embark Act" . embark-act)
     "," `("Embark Dwim" . embark-dwim)
+    "SPC" `("Avy" . avy-goto-char-timer)
     "j" `("Jump" . avy-goto-char-timer)
     "e" `("Filetree" . dirvish-side)
     "q" `("Quit" . kill-emacs)
