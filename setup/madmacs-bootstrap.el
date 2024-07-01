@@ -7,11 +7,12 @@
 ;; speed up startup
 (defvar madmacs--file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
+(setq madmacs--original-cons-threshold gc-cons-threshold)
 (setq gc-cons-threshold most-positive-fixnum)
 
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (setq gc-cons-threshold 800000)
+            (setq gc-cons-threshold madmacs--original-cons-threshold)
             (setq file-name-handler-alist madmacs--file-name-handler-alist)))
 
 ;; setup the load paths so that I can require my own packages to drive the boot process
