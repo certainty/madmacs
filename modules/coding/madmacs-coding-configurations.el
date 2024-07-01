@@ -1,18 +1,20 @@
 (use-package yaml
   :ensure t)
 
-(use-package yaml-mode
-  :ensure t
-  :mode (("\\.yml\\'" . yaml-mode)
-         ("\\.yaml\\'" . yaml-mode))
+(use-package yaml-ts-mode
+  :ensure nil
+  :straight nil
+  :mode (("\\.yml\\'" . yaml-ts-mode)
+         ("\\.yaml\\'" . yaml-ts-mode))
   :hook
-  (yaml-mode  . lsp-deferred))
+  (yaml-ts-mode  . lsp-deferred))
 
 
-(use-package json-mode
-  :ensure t
-  :hook (json-mode . lsp-deferred)
-  :mode (("\\.json\\'" . json-mode)))
+(use-package json-ts-mode
+  :ensure nil
+  :straight nil
+  :hook (json-ts-mode . lsp-deferred)
+  :mode (("\\.json\\'" . json-ts-mode)))
 
 
 (provide 'madmacs-coding-configurations)

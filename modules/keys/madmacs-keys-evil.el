@@ -35,5 +35,13 @@
 (use-package expand-region
   :ensure t)
 
+(use-package evil-textobj-tree-sitter
+  :ensure t
+  :config
+  (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+  (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj  "function.inner"))
+  (define-key evil-inner-text-objects-map "i" (evil-textobj-tree-sitter-get-textobj ("conditional.inner" "loop.inner")))
+  (define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj ("conditional.outer" "loop.outer"))))
+
 (provide 'madmacs-keys-evil)
 

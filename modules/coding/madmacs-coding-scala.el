@@ -1,15 +1,17 @@
 
 (defvar-keymap madmacs-scala-local-leader-keys :doc "Local bindings for scala metals")
 
-(use-package scala-mode
+(use-package scala-ts-mode
   :ensure t
-  :interpreter ("scala" . scala-mode)
+  :interpreter ("scala" . scala-ts-mode)
   :config
-  (evil-define-key 'normal scala-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
+  (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
 
 (use-package lsp-metals
   :ensure t
-  :hook (scala-mode . lsp)
+  :hook
+  (scala-ts-mode . lsp)
+
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
 

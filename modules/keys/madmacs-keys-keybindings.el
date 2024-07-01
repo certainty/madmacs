@@ -210,6 +210,7 @@
     "SPC" `("Avy" . avy-goto-char-timer)
     "j" `("Jump" . avy-goto-char-timer)
     "e" `("Filetree" . dirvish-side)
+    "E" `("Filetree DWIM" . dirvish-dwim)
     "q" `("Quit" . kill-emacs)
     "w" `("Save" . save-buffer)
     "C" `("Close Buffer" . kill-buffer-and-window)

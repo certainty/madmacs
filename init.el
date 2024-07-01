@@ -54,8 +54,12 @@
           madmacs-coding-prolog
           madmacs-coding-elixir
           madmacs-coding-elm
+
+          madmacs-coding-graphql
+
           madmacs-coding-copilot
           madmacs-coding-configurations
+
           madmacs-tools-docker
           madmacs-org-essentials
           madmacs-games-chess
