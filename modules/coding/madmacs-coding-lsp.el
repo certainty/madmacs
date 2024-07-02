@@ -17,9 +17,6 @@
 
   :config
   (lsp-enable-which-key-integration))
-  
-  
-
 
 (use-package lsp-ui
   :after (lsp-mode)
@@ -31,5 +28,11 @@
   :config
   ;; TODO: add LSP replacements for which-keys
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
+
+(defmacro br-lsp (lhs rhs)
+    "If LSP is eglot, evaluate LHS, otherwise evaluate LHS."
+    `(if (eq madmacs-lsp-client 'eglot)
+         ,lhs
+         ,rhs))
 
 (provide 'madmacs-coding-lsp)

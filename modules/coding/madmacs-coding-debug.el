@@ -12,4 +12,7 @@
 (use-package posframe
   :ensure t)
 
-(provide 'madmacs-coding-dap)
+;; (use-package realgud
+;;   :ensure t)
+
+(provide 'madmacs-coding-debug)

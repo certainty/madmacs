@@ -20,11 +20,11 @@
 (use-package emacs
   :ensure nil
   :straight nil
-  :hook
-  (prog-mode . electric-pair-mode)
-  (prog-mode . display-line-number-mode)
 
   :init
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook 'electric-pair-mode)
+
   (add-to-list 'display-buffer-alist
                '("\\*\\(Backtrace\\|Compile-log\\|Messages\\|Warnings\\)\\*"
                  (display-buffer-in-side-window)

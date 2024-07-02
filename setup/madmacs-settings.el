@@ -48,6 +48,12 @@
   :type 'integer
   :group 'madmacs)
 
+(defcustom madmacs-lsp-client 'eglot
+  "The LSP client to use."
+  :type 'symbol
+  :options '(eglot lsp-mode)
+  :group 'madmacs)
+
 (defcustom madmacs-user-full-name ""
   "User full name"
   :type 'string

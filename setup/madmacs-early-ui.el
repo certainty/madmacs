@@ -1,6 +1,6 @@
 (use-package emacs
   :custom
-  (frame-inhibit-implied-resize t)
+  (frame-inhibit-implied-resize nil)
   (frame-title-format "\n")
   (inhibit-startup-screen t)
   (inhibit-startup-message t)

@@ -80,64 +80,64 @@
   
   ;; LSP 
   (defvar-keymap madmacs-lsp-keys :doc "LSP keys that are the same for all languages")
-
   (defvar-keymap madmacs-lsp-workspace-keys :doc "LSP prefix map")
+  
   (which-key-add-keymap-based-replacements madmacs-lsp-workspace-keys
-    "D" '("Disconnect" . lsp-disconnect)
-    "d" '("Describe" . lsp-describe-session)
-    "q" '("Shutdown Server" . lsp-workspace-shutdown)
-    "r" '("Restart Server" . lsp-workspace-restart)
-    "s" '("Start Server" . lsp))
+    "D" `("Disconnect" .  lsp-disconnect)
+    "d" `("Describe" . lsp-describe-session)
+    "q" `("Shutdown Server" . (br-lsp eglot-shutdown lsp-workspace-shutdown))
+    "r" `("Restart Server" .  lsp-workspace-restart)
+    "s" `("Start Server" . lsp))
 
   (defvar-keymap madmacs-lsp-folders-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-folders-keys
-    "a" '("Add" . lsp-workspace-folders-add)
-    "b" '("un-blocklist folder" . lsp-workspace-blocklist-remove)
-    "r" '("remove folder" . lsp-workspace-folders-remove))
+    "a" `("Add" . lsp-workspace-folders-add)
+    "b" `("un-blocklist folder" . lsp-workspace-blocklist-remove)
+    "r" `("remove folder" . lsp-workspace-folders-remove))
 
   (defvar-keymap madmacs-lsp-formatting-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-formatting-keys
-    "b" '("Buffer" . lsp-format-buffer)
-    "r" '("Region" . lsp-format-region))
+    "b" `("Buffer" . lsp-format-buffer)
+    "r" `("Region" . lsp-format-region))
 
   (defvar-keymap madmacs-lsp-toggle-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-toggle-keys
-    "D" '("Toggle modeline diagnostics" . lsp-modeline-diagnostics-mode)
-    "L" '("Toggle log io" . lsp-toggle-trace-io)
-    "l" '("Toggle lenses" . lsp-lens-mode))
+    "D" `("Toggle modeline diagnostics" . lsp-modeline-diagnostics-mode)
+    "L" `("Toggle log io" . lsp-toggle-trace-io)
+    "l" `("Toggle lenses" . lsp-lens-mode))
 
   (defvar-keymap madmacs-lsp-goto-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-goto-keys
-    "a" '("Find symbol in workspace" . xref-find-apropos)
-    "D" '("Find declaration" . lsp-find-declaration)
-    "d" '("Find definition" . lsp-find-definition)
-    "i" '("Find implementation" . lsp-find-implementation)
-    "r" '("Find references" . lsp-find-references)
-    "t" '("Find type definition" . lsp-find-type-definition))
+    "a" `("Find symbol in workspace" . xref-find-apropos)
+    "D" `("Find declaration" . lsp-find-declaration)
+    "d" `("Find definition" . lsp-find-definition)
+    "i" `("Find implementation" . lsp-find-implementation)
+    "r" `("Find references" . lsp-find-references)
+    "t" `("Find type definition" . lsp-find-type-definition))
 
   (defvar-keymap madmacs-lsp-help-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-help-keys
-    "g" '("Glance Symbol" . lsp-ui-doc-glance)
-    "." '("Describe thing" . lsp-describe-thing-at-point)
-    "s" '("Signature" . lsp-signature-activate))
+    "g" `("Glance Symbol" . lsp-ui-doc-glance)
+    "." `("Describe thing" . lsp-describe-thing-at-point)
+    "s" `("Signature" . lsp-signature-activate))
 
   (defvar-keymap madmacs-lsp-refactor-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-refactor-keys
-    "o" '("Optimize Imports" . lsp-organize-imports)
-    "r" '("Rename" . lsp-renam))
+    "o" `("Optimize Imports" . lsp-organize-imports)
+    "r" `("Rename" . lsp-renam))
 
   (defvar-keymap madmacs-lsp-actions-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
-    "a" '("Execute" . lsp-execute-code-action)
-    "h" '("Highlight symbol" . lsp-document-highlight)
-    "l" '("Avy lens" . lsp-avy-lens))
+    "a" `("Execute" . lsp-execute-code-action)
+    "h" `("Highlight symbol" . lsp-document-highlight)
+    "l" `("Avy lens" . lsp-avy-lens))
 
   (defvar-keymap madmacs-lsp-peek-keys :doc "LSP prefix map")
   (which-key-add-keymap-based-replacements madmacs-lsp-peek-keys
-    "d" '("Peek definitions" . lsp-ui-peek-find-definitions)
-    "i" '("Peek implementations" . lsp-ui-peek-find-implementation)
-    "r" '("Peek references" . lsp-ui-peek-find-references)
-    "s" '("Peek workspace symbol" . lsp-ui-peek-find-workspace-symbol))
+    "d" `("Peek definitions" . lsp-ui-peek-find-definitions)
+    "i" `("Peek implementations" . lsp-ui-peek-find-implementation)
+    "r" `("Peek references" . lsp-ui-peek-find-references)
+    "s" `("Peek workspace symbol" . lsp-ui-peek-find-workspace-symbol))
 
   (which-key-add-keymap-based-replacements madmacs-lsp-keys
     "!"  '("Diagnostics" . consult-lsp-diagnostics)
