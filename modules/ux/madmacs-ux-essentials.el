@@ -25,7 +25,6 @@
 (use-package savehist
   :ensure nil
   :straight nil
-  :hook after-init
   :custom
   (savehist-file  (expand-file-name "savehist" madmacs--cache-dir))
   (savehist-save-minibuffer-history t)

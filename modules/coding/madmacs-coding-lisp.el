@@ -41,7 +41,7 @@
 (use-package paren
   :ensure nil
   :straight nil
-  :hook (after-init . show-paren-mode)
+  :hook (prog-mode . show-paren-mode)
   :custom
   (show-paren-delay 0))
 

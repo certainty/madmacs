@@ -16,7 +16,8 @@
           madmacs-ui-fonts
 
           madmacs-ux-osx
-          madmacs-ux-buffers))
+          madmacs-ux-buffers
+          ))
 
 (setopt madmacs-after-init-features
         '(
@@ -29,14 +30,17 @@
           madmacs-projects-essentials
           madmacs-edit-actions
           madmacs-files-dired
-          madmacs-ux-workspaces))
+          madmacs-ux-workspaces
+          ))
 
 (setopt madmacs-after-startup-features
         '(
           madmacs-writing-checkers
           madmacs-writing-essentials
+
           madmacs-tools-terminal
           madmacs-tools-vcs
+          madmacs-tools-docker
 
           madmacs-coding-essentials
           madmacs-coding-version-manager
@@ -54,14 +58,12 @@
           madmacs-coding-prolog
           madmacs-coding-elixir
           madmacs-coding-elm
-
           madmacs-coding-graphql
-
           madmacs-coding-copilot
           madmacs-coding-configurations
 
-          madmacs-tools-docker
           madmacs-org-essentials
+
           madmacs-games-chess
           madmacs-keys-keybindings
           ))

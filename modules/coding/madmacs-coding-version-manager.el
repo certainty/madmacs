@@ -6,6 +6,8 @@
   (asdf-enable))
 
 (use-package envrc
-  :hook (after-init . envrc-global-mode))
+  :ensure t
+  :config
+  (envrc-global-mode))
 
 (provide 'madmacs-coding-version-manager)

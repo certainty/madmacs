@@ -5,8 +5,8 @@
   :hook (prog-mode . copilot-mode)
   :bind
   (:map copilot-completion-map
-        ("<tab>" . 'copilot-accept-completion)
-        ("M-<tab>" . 'copilot-accept-completion-by-word))
+        ("C-y" . 'copilot-accept-completion)
+        ("M-y" . 'copilot-accept-completion-by-word))
   :config
   (setq warning-suppress-log-types '((copilot copilot-no-mode-indent))))
 

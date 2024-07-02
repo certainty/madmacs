@@ -173,6 +173,8 @@
   (:map corfu-map
         ("C-SPC" . corfu-insert-separator)
         ("<escape>" . corfu-quit)
+        ("<tab>" . nil)
+        ("<return>" . nil)
         ("C-y" . corfu-insert)
         ("C-g" . corfu-quit)
         ("C-j" . corfu-next)

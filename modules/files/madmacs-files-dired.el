@@ -1,6 +1,7 @@
 (use-package dired
   :ensure nil
   :straight nil
+  :hook (dired-mode . dired-omit-mode)
   :config
   (when (and (eq system-type 'darwin) (executable-find "gls"))
     (setq insert-directory-program "gls")))

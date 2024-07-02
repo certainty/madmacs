@@ -152,9 +152,6 @@
     "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
     "w" `("Workspaces" . ,madmacs-lsp-workspace-keys))
 
-  ;; Tests
-  (defvar-keymap madmacs-test-keys :doc "Test related keys for the different programming languages")
-
   ;; Debugger
   (defvar-keymap madmacs-debugger-keys :doc "Keys related to debugging")
   
@@ -194,12 +191,20 @@
   
   (which-key-add-keymap-based-replacements madmacs-ux-keys
     "f" '("Toggle Big Font" . madmacs-toggle-font)
+    "g" '("Toggle golden ratio" . golden-ratio-mode)
+    "G" '("Toggle golden ratio widescreen" . golden-ratio-toggle-widescreen)
     "l" '("Line numbers" . display-line-numbers-mode)
     "t" '("Highlight Todo" . hl-todo-mode)
     "h" '("Highlight Line" . hl-line-mode)
     "H" '("Global Highlight Line" . global-hl-line-mode)
-    "W" '("Toggle Fullscreen" . toggle-frame-fullscreen))
+    "W" '("Toggle Fullscreen" . toggle-frame-fullscreen)
+    )
 
+  ;; Madmacs
+  (defvar-keymap madmacs-madmacs-keys :doc "Keys for madmacs related functionality")
+  (which-key-add-major-mode-key-based-replacements 'madmacs-madmacs-keys
+    "r" '("Restart" . restart-emacs)
+    "q" '("Quit" . kill-emacs))
 
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
 
@@ -207,15 +212,13 @@
     "/" `("Toggle Comment" . comment-dwim)
     "." `("Embark Act" . embark-act)
     "," `("Embark Dwim" . embark-dwim)
-    "SPC" `("Avy" . avy-goto-char-timer)
-    "j" `("Jump" . avy-goto-char-timer)
+    "SPC" `("Avy" . avy-goto-char-2)
+    "C-SPC" `("Avy Timer" . avy-goto-char-timer)
+    "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . dirvish-side)
     "E" `("Filetree DWIM" . dirvish-dwim)
-    "q" `("Quit" . kill-emacs)
     "w" `("Save" . save-buffer)
-    "C" `("Close Buffer" . kill-buffer-and-window)
-    "x" `("Execute" . execute-extended-command)
-    "R" `("Restart" . restart-emacs)
+    "q" `("󰅖 Close Buffer" . kill-buffer-and-window)
     "b" `("󰓩  Buffers" . ,madmacs-buffers-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
@@ -223,12 +226,12 @@
     "g" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
     "m" `("󰑮  Compile" . ,madmacs-compiler-keys)
+    "M" `(" Madmads" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "s" `("󱂬  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
-    "T" `("󰙨 Test" . ,madmacs-test-keys)
-    "u" '("Universal Argument" . universal-argument) 
+    "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
 
   (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys)

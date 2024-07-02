@@ -33,7 +33,7 @@
   :type 'string
   :group 'madmacs)
 
-(defcustom madmacs-default-font-size 140
+(defcustom madmacs-default-font-size 130
   "Default font size to use"
   :type 'integer
   :group 'madmacs)

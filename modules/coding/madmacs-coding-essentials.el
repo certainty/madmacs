@@ -14,11 +14,15 @@
           ("NOTE:"  . ((lambda (tag) (svg-tag-make "NOTE:"  :face 'info :inverse t))))
           ("TODO:"  . ((lambda (tag) (svg-tag-make "TODO:"  :face 'warning :inverse t)))))))
 
+(use-package quickrun
+  :ensure t)
+
 (use-package emacs
   :ensure nil
   :straight nil
   :hook
   (prog-mode . electric-pair-mode)
+  (prog-mode . display-line-number-mode)
 
   :init
   (add-to-list 'display-buffer-alist
