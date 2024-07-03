@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package emacs
   :custom
   (frame-inhibit-implied-resize nil)

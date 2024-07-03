@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar bootstrap-version)
 (setopt straight-base-dir madmacs--data-dir)
 

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 (use-package emacs
   :config
@@ -6,7 +7,7 @@
    (setopt mac-command-modifier 'super)
    (setopt mac-function-modifier 'hyper)
    (setopt mac-right-option-modifier 'none)
-   (setopt ns-use-native-fullscreen t)
+   ;(setopt ns-use-native-fullscreen t)
    (setopt ns-use-thin-smoothing t)
    (setopt ns-pop-up-frames nil)
    (setopt trash-directory "~/.Trash")

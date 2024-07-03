@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package svg-tag-mode
   :ensure t
   :when (image-type-available-p 'svg)
@@ -49,64 +51,13 @@
                  (side . bottm)
                  (slot . 5))))
 
-(use-package treesit
-  :ensure nil
-  :straight nil
+(use-package treesit-auto
+  :ensure t
   :custom
-  (treesit-extra-load-path (list (concat madmacs--data-dir "ts/")))
-  (major-mode-remap-alist '((c++-mode . c++-ts-mode)
-                            (c-mode . c-ts-mode)
-                            (c-or-c++-mode . c-or-c++-ts-mode)
-                            (conf-toml-mode . toml-ts-mode)
-                            (csharp-mode . csharp-ts-mode)
-                            (css-mode . css-ts-mode)
-                            (java-mode . java-ts-mode)
-                            (js-json-mode . json-ts-mode)
-                            (python-mode . python-ts-mode)
-                            (ruby-mode . ruby-ts-mode)
-                            (sh-mode . bash-ts-mode)))
-  :init
-  (setq treesit-language-source-alist
-        '(
-          (css   . ("https://github.com/tree-sitter/tree-sitter-css"))
-          (go    . ("https://github.com/tree-sitter/tree-sitter-go"))
-          (gomod .    ("https://github.com/camdencheek/tree-sitter-go-mod"))
-          (ruby . ("https://github.com/tree-sitter/tree-sitter-ruby"))
-          (scala      . ("https://github.com/tree-sitter/tree-sitter-scala"))
-          (graphql . ("https://github.com/bkegley/tree-sitter-graphql"))
-          (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
-          (elixir    . ("https://github.com/elixir-lang/tree-sitter-elixir"))
-          (elm        . ("https://github.com/razzeee/tree-sitter-elm"))
-          (erlang     . ("https://github.com/WhatsApp/tree-sitter-erlang"))
-          (html       . ("https://github.com/tree-sitter/tree-sitter-html"))
-          (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
-          (yaml       . ("https://github.com/ikatyang/tree-sitter-yaml"))
-          (json       . ("https://github.com/tree-sitter/tree-sitter-json"))))
-
-  (defun madmacs--treesit-install-all-languages ()
-    "Install all languages specified by `treesit-language-source-alist'."
-    (interactive)
-    (let ((languages (mapcar 'car treesit-language-source-alist)))
-      (dolist (lang languages)
-        (treesit-install-language-grammar lang)
-        (message "`%s' parser was installed." lang)
-        (sit-for 0.75))))
-
-  (setq major-mode-remap-alist
-        '((yaml-mode . yaml-ts-mode)
-          (json-mode . json-ts-mode)
-          (yaml-mode . yaml-ts-mode)
-          (go-mode . go-ts-mode)
-          (go-mod-mode . go-mod-ts-mode)
-          (graphql-mode . graphql-ts-mode)
-          (ruby-mode . ruby-ts-mode)
-          (rust-mode . rust-ts-mode)
-          (scala-mode . scala-ts-mode)
-          (json-mode . json-ts-mode)
-          (tsx-mode . tsx-ts-mode)
-          (typescript-mode . typescript-ts-mode)
-          (css-mode . css-ts-mode)
-          (html-mode . html-ts-mode))))
+  (treesit-auto-install 'prompt)
+  (treesit-auto-langs '(ruby go gomod scala rust typescript javascript yaml dockerfile json html css lua shell terraform))
+  :config
+  (global-treesit-auto-mode))
 
 
 (provide 'madmacs-coding-essentials)

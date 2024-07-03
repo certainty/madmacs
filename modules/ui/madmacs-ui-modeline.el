@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; (use-package moody
 ;;   :config
 ;;   (moody-replace-mode-line-front-space)

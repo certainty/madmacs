@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package project
   :ensure nil
   :straight nil

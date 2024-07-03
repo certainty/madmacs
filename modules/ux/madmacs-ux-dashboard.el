@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package dashboard
   :ensure t
   :hook (emacs-startup . (lambda ()

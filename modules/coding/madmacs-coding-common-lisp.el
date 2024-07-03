@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar-keymap madmacs-sly-local-leader-keys :doc "Sly related commands")
 (defvar-keymap madmacs-sly-asdf-keys :doc "Sly asdf keys")
 

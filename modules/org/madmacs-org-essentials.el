@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 ;; this is taken almost verbatim from lambda-emacs which is great when it comes to note-taking
 

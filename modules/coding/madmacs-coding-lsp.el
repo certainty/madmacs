@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package lsp-mode
   :ensure t
   :hook
@@ -29,10 +31,18 @@
   ;; TODO: add LSP replacements for which-keys
   (define-key lsp-mode-map [remap xref-find-apropos] #'consult-lsp-symbols))
 
-(defmacro br-lsp (lhs rhs)
-    "If LSP is eglot, evaluate LHS, otherwise evaluate LHS."
-    `(if (eq madmacs-lsp-client 'eglot)
-         ,lhs
-         ,rhs))
+;;; Eglot
+(use-package eglot
+  :ensure nil
+  :straight nil
+  :config
+  (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-stay-out-of 'eldoc))
+
+(defun madmacs--lsp (&rest args)
+  "If LSP is eglot, call eglot-ensure, otherwise call lsp-deferred."
+  (if (eq madmacs-lsp-client 'eglot)
+      (apply #'eglot-ensure args)
+    (apply #'lsp-deferred args)))
 
 (provide 'madmacs-coding-lsp)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defmacro madmacs--measure-time (&rest body)
   "Measure the time it takes to evaluate BODY."
   `(progn ,@body)

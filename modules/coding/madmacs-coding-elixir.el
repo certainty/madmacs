@@ -1,4 +1,4 @@
-
+;; -*- lexical-binding: t; -*-
 
 ;; Elixir / Erlang
 (use-package inf-elixir
@@ -15,7 +15,7 @@
   :ensure t
   :hook
   (elixir-mode . apprentice-mode)
-  (elixir-mode . lsp-deferred)
+  (elixir-mode . madmacs--lsp)
   :init
   (add-to-list 'exec-path ' "/opt/homebrew/bin/elixir-ls"))
 

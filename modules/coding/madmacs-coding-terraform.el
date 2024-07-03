@@ -1,5 +1,7 @@
- (use-package terraform-mode
+;; -*- lexical-binding: t; -*-
+
+(use-package terraform-mode
    :ensure t
-   :hook lsp-deferred)
+   :hook madmacs--lsp)
 
 (provide 'madmacs-coding-terraform)

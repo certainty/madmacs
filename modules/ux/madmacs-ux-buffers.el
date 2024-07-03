@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package emacs
   :ensure nil
   :straight nil
@@ -39,40 +41,28 @@
   :bind
   ("C-c b R" . revert-buffer-all))
 
-(use-package popper
-  :ensure t
-  :bind (("M-`"   . popper-toggle-latest)
-         ("C-`"   . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :custom
-  (popper-window-height 20)
-  (popper-display-control t)
-  (popper-group-function #'popper-group-by-directory)
+;; I am not convinced that I need this
+;; (use-package popper
+;;   :ensure t
+;;   :bind (("M-`"   . popper-toggle-latest)
+;;          ("C-`"   . popper-cycle)
+;;          ("C-M-`" . popper-toggle-type))
+;;   :custom
+;;   (popper-window-height 20)
+;;   (popper-display-control t)
+;;   (popper-group-function #'popper-group-by-directory)
 
-  (popper-reference-buffers
-   '("\\*Messages\\*"
-     "Output\\*$"
-     "\\*Async Shell Command\\*"
-     help-mode
-     compilation-mode))
+;;   (popper-reference-buffers
+;;    '("\\*Messages\\*"
+;;      "Output\\*$"
+;;      "\\*Async Shell Command\\*"
+;;      help-mode
+;;      compilation-mode))
 
-  :init
-  (popper-echo-mode +1)
+;;   :init
+;;   (popper-echo-mode +1)
 
-  :config
-  (popper-mode))
-
-(use-package mwheel
-  :ensure nil
-  :straight nil
-  :custom
-  (mouse-wheel-follow-mouse t)
-  (mouse-wheel-progressive-speed t)
-  (mouse-wheel-coalesce-scroll-events t)
-  (mouse-wheel-scroll-amount '(1 ((shift) . 2))))
-
-(use-package pixel-scroll
-  :ensure nil
-  :disabled)
+;;   :config
+;;   (popper-mode))
 
 (provide 'madmacs-ux-buffers)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defun meow-setup ()
   "Setup meow keys"
   (meow-motion-overwrite-define-key

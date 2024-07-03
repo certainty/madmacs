@@ -1,20 +1,25 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package yaml
   :ensure t)
 
-(use-package yaml-ts-mode
+(use-package yaml-mode
   :ensure nil
   :straight nil
-  :mode (("\\.yml\\'" . yaml-ts-mode)
-         ("\\.yaml\\'" . yaml-ts-mode))
+  :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode))
   :hook
-  (yaml-ts-mode  . lsp-deferred))
+  (yaml-ts-mode  . madmacs--lsp)
+  (yaml-mode  . madmacs--lsp))
 
 
-(use-package json-ts-mode
+(use-package json-mode
   :ensure nil
   :straight nil
-  :hook (json-ts-mode . lsp-deferred)
-  :mode (("\\.json\\'" . json-ts-mode)))
+  :hook
+  (json-ts-mode . madmacs--lsp)
+  (json-mode . madmacs--lsp)
+  :mode (("\\.json\\'" . json-mode)))
 
 
 (provide 'madmacs-coding-configurations)

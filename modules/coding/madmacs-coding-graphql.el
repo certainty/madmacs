@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package graphql-ts-mode
   :ensure t
   :mode ("\\.graphql\\'" "\\.gql\\'"))

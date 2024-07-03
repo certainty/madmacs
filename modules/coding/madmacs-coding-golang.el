@@ -1,25 +1,22 @@
-;; (use-package go-mode
-;;   :ensure t
-;;   :mode "\\.go\\'"
-;;   :hook
-;;   (go-mode . lsp-deferred)
-;;   (before-save . gofmt-before-save)
-;;   :config
-;;   (setq gofmt-command "goimports"))
+;; -*- lexical-binding: t; -*-
 
-(use-package go-ts-mode
+(use-package go-mode
   :ensure nil
   :straight nil
   :mode "\\.go\\'"
   :hook
-  (go-ts-mode . lsp-deferred))
+  (go-ts-mode . madmacs--lsp)
+  (go-mode . madmacs--lsp)
+  :config
+  (setopt gofmt-command "goimports"))
 
-(use-package go-mod-ts-mode
+(use-package go-mod-mode
   :ensure nil
   :straight nil
   :mode "\\.mod\\'"
   :hook
-  (go-mod-ts-mode . lsp-deferred))
+  (go-mod-ts-mode . madmacs--lsp)
+  (go-mod-mode . madmacs--lsp))
 
 (use-package go-guru
    :ensure t)

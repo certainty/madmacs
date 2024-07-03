@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 ;; (use-package catppuccin-theme
 ;;   :ensure t
@@ -11,6 +12,7 @@
   :ensure t
   :config
   (setq
+   modus-themes-mode-line '(moody)
    modus-themes-custom-auto-reload t
    modus-themes-disable-other-themes nil
    modus-themes-mixed-fonts t
@@ -18,6 +20,8 @@
    modus-themes-bold-constructs t
    modus-themes-variable-pitch-ui t
    modus-themes-prompts '(extrabold italic)
+   modus-themes-paren-match '(bold intense)
+   modus-themes-org-blocks 'tinted-background
    modus-themes-completions
    '((matches . (extrabold underline))
      (selection . (semibold italic))))

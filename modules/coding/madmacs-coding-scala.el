@@ -1,16 +1,18 @@
+;; -*- lexical-binding: t; -*-
 
 (defvar-keymap madmacs-scala-local-leader-keys :doc "Local bindings for scala metals")
 
-(use-package scala-ts-mode
+(use-package scala-mode
   :ensure t
-  :interpreter ("scala" . scala-ts-mode)
+  :interpreter ("scala" . scala-mode)
   :config
   (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
 
 (use-package lsp-metals
   :ensure t
   :hook
-  (scala-ts-mode . lsp)
+  (scala-ts-mode . madmacs--lsp)
+  (scala-mode . madmacs--lsp)
 
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
@@ -42,9 +44,7 @@
     "m" `("Metals" . ,madmacs-metals-server-keys)
     "b" `("Metals Build" . ,madmacs-metals-build-keys)
     "c" `("Metals Compile" . ,madmacs-metals-compile-keys)
-    "t" `("Metals Test" . ,madmacs-metals-test-keys))
-
-  )
+    "t" `("Metals Test" . ,madmacs-metals-test-keys)))
 
 (use-package sbt-mode
   :ensure t

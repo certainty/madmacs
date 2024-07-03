@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package highlight-numbers
   :ensure t
   :hook prog-mode)

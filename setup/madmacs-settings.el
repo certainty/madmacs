@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defconst madmacs--sys-mac-p (eq system-type 'darwin))
 (defconst madmacs--sys-linux-p (eq system-type 'gnu/linux))
 
@@ -48,7 +50,7 @@
   :type 'integer
   :group 'madmacs)
 
-(defcustom madmacs-lsp-client 'eglot
+(defcustom madmacs-lsp-client 'lsp-mode
   "The LSP client to use."
   :type 'symbol
   :options '(eglot lsp-mode)
