@@ -1,19 +1,24 @@
 ;; -*- lexical-binding: t; -*-
 
-;; (use-package moody
-;;   :config
-;;   (moody-replace-mode-line-front-space)
-;;   (moody-replace-mode-line-buffer-identification)
-;;   (moody-replace-vc-mode))
-
-(use-package doom-modeline
-  :ensure t
-  :custom
-  (doom-modeline-major-mode-icon nil)
-  (doom-modeline-time nil)
-  (doom-modeline-check-simple-format t)
-
+(use-package moody
   :config
-  (doom-modeline-mode))
+  (moody-replace-mode-line-front-space)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :custom
+;;   (doom-modeline-major-mode-icon nil)
+;;   (doom-modeline-time nil)
+;;   (doom-modeline-check-simple-format t)
+
+;;   :config
+;;   (doom-modeline-mode))
+
+(use-package minions
+  :ensure t
+  :config
+  (minions-mode))
 
 (provide 'madmacs-ui-modeline)
