@@ -16,8 +16,19 @@
   (evil-set-leader nil (kbd "C-SPC"))
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-set-leader 'normal "," t)
-
   (evil-mode 1))
+
+(use-package evil-repeat
+  :ensure nil
+  :straight nil
+
+  :config
+  ;; restore some keybindings stolen by evil
+  (evil-define-key '(normal visual) 'global (kbd "C-.") 'embark-act)
+  (evil-define-key '(normal visual) 'global (kbd "M-.") 'embark-dwim)
+
+  (global-set-key (kbd  "C-.") 'embark-act)
+  (global-set-key (kbd  "M-.") 'embark-dwim))
 
 (use-package evil-collection
   :after evil
