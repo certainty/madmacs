@@ -38,13 +38,16 @@
 The global keybinds are available in the leader map via `SPC`.
 Mode specific leader bindings are available (if they exist) under the local leader `,`.
 
+
 ## Screenshots
 <img src="https://github.com/certainty/madmacs/assets/338957/d74304b2-3a2f-4f71-949e-a23bff07e17a" width=400px>
 
-<img src="https://github.com/certainty/madmacs/assets/338957/95d10099-e8af-4046-aed8-45e2bf0a0187" width=400px>
+<img src="https://github.com/certainty/madmacs/assets/338957/ad5a5eda-d22e-41e7-9be0-e667b3c1c8d3" width=400px>
 
 
-<img src="https://github.com/certainty/madmacs/assets/338957/93123f71-eb3a-4bc5-9d76-ffa450040858" width=400px>
+<img src="https://github.com/certainty/madmacs/assets/338957/77bc63dd-93dc-4f75-a81d-75327168c246" width=400px>
+
+
 
 <img src="https://github.com/certainty/madmacs/assets/338957/478b536b-28c6-4572-a203-5aa9f7bf030b" width=400px>
 
