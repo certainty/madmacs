@@ -4,7 +4,14 @@
   :config
   (moody-replace-mode-line-front-space)
   (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode))
+  (moody-replace-vc-mode)
+
+  (setq evil-normal-state-tag   (propertize " Ⓝ " 'face '((:weight extrabold :foreground "#ffffff")))
+        evil-emacs-state-tag    (propertize " Ⓔ " 'face '((:weight extrabold :foreground "#c0965b")))
+        evil-insert-state-tag   (propertize " Ⓘ " 'face '((:weight extrabold :foreground "#ff66ff")))
+        evil-motion-state-tag   (propertize " Ⓜ " 'face '((:weight extrabold :foreground "#79a8ff")))
+        evil-visual-state-tag   (propertize " Ⓥ " 'face '((:weight extrabold :foreground "#d0bc00")))
+        evil-operator-state-tag (propertize " Ⓞ " 'face '((:weight extrabold :foreground "#f78fe7")))))
 
 ;; (use-package doom-modeline
 ;;   :ensure t

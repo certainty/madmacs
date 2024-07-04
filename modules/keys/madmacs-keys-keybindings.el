@@ -273,23 +273,29 @@
 
   ;; Madmacs
   (defvar-keymap madmacs-madmacs-keys :doc "Keys for madmacs related functionality")
-  (which-key-add-major-mode-key-based-replacements 'madmacs-madmacs-keys
+  (which-key-add-keymap-based-replacements madmacs-madmacs-keys
     "r" '("Restart" . restart-emacs)
     "q" '("Quit" . kill-emacs))
+
+  (defvar-keymap madmacs-checker-keys :doc "Keys for checking flycheck / flymake")
+  (which-key-add-keymap-based-replacements madmacs-checker-keys
+    "v" '("Verify" . flycheck-verify-setup)
+    "." '("Explain" . flycheck-explain-error-at-point)
+    "," '("Help" . flycheck-display-error-at-point)
+    "l" '("List" . flycheck-list-errors)
+    "C" '("Clear" . flycheck-clear))
 
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
 
   (which-key-add-keymap-based-replacements madmacs-leader-keys
+    "!" `("Checkers" . ,madmacs-checker-keys)
     "/" `("Toggle Comment" . comment-dwim)
     "." `("Embark Act" . embark-act)
     "," `("Embark Dwim" . embark-dwim)
-    "SPC" `("Avy" . avy-goto-char-2)
-    "C-SPC" `("Avy Timer" . avy-goto-char-timer)
+    "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . dirvish-side)
     "E" `("Filetree DWIM" . dirvish-dwim)
-    "w" `("Save" . save-buffer)
-    "q" `("󰅖 Close Buffer" . kill-buffer-and-window)
     "b" `("󰓩  Buffers" . ,madmacs-buffers-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
@@ -297,7 +303,7 @@
     "g" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
     "m" `("󰑮  Compile" . ,madmacs-compiler-keys)
-    "M" `(" Madmads" . ,madmacs-madmacs-keys)
+    "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "s" `("󱂬  Session" . ,madmacs-session-keys)
