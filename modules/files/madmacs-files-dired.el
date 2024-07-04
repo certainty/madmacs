@@ -6,8 +6,17 @@
   (when (and (eq system-type 'darwin) (executable-find "gls"))
     (setq insert-directory-program "gls")))
 
+(use-package dired-x
+  :ensure nil
+  :straight nil
+  :config
+  ;; Make dired-omit-mode hide all "dotfiles"
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..*$")))
+
 (use-package dirvish
   :ensure t
+  :hook (dirvish-mode . dired-omit-mode)
   :init
   (dirvish-override-dired-mode)
 
@@ -42,6 +51,7 @@
    ("h"   . dirvish-history-jump)       ; remapped `describe-mode'
    ("s"   . dirvish-quicksort)          ; remapped `dired-sort-toggle-or-edit'
    ("v"   . dirvish-vc-menu)            ; remapped `dired-view-file'
+   ("O"   . dired-omit-mode)
    ("TAB" . dirvish-subtree-toggle)
    ("M-f" . dirvish-history-go-forward)
    ("M-b" . dirvish-history-go-backward)
