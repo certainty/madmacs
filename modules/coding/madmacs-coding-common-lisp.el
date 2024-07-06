@@ -82,16 +82,20 @@
     "S" '("export struct" . sly-export-struct)
     "c" '("export class" . sly-export-class))
 
+  (defvar-keymap madmacs-sly-diagnostics-map :doc "Sly mappings related to diagnostics")
+  (which-key-add-keymap-based-replacements madmacs-sly-diagnostics-map
+    "!" '("next note" . sly-next-note)
+    "c" '("clear notes" . sly-remove-notes)
+    "n" '("next note" . sly-next-note)
+    "e" '("next error" . sly-next-error))
+
   (defvar-keymap madmacs-sly-compile-keys :doc "Sly mappings related to compilation")
   (which-key-add-keymap-based-replacements madmacs-sly-compile-keys
-    "c" '("file" . sly-compile-file)
-    "C" '("and load file" . sly-compile-and-load-file)
-    "f" '("function" . sly-compile-defun)
+    "c" '("function" . sly-compile-defun)
+    "f" '("file" . sly-compile-file)
+    "F" '("and load file" . sly-compile-and-load-file)
     "r" '("region" . sly-compile-region)
-    "l" '("load" . sly-load-file)
-    "N" '("remove notes" . sly-remove-notes)
-    "e" '("next error" . sly-next-error)
-    "n" '("next note" . sly-next-note))
+    "l" '("load" . sly-load-file))
 
   (defvar-keymap madmacs-sly-help-keys :doc "Sly mappings related to help")
   (which-key-add-keymap-based-replacements madmacs-sly-help-keys
@@ -136,6 +140,7 @@
   
   (which-key-add-keymap-based-replacements madmacs-sly-local-leader-keys
      "," '("Sly" . sly)
+     "!" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
      "D" '("Disassemble" . sly-disassemble-symbol)
      "e" `("Export" . ,madmacs-sly-export-map)
      "a" `("ASDF" . ,madmacs-sly-asdf-keys)
@@ -147,7 +152,8 @@
      "m" '("expand macro" . macrostep-expand)
      "x" `("Xref" . ,madmacs-sly-xref-keys))
 
-  (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
+  (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
+  (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
 
 
 (use-package sly-asdf

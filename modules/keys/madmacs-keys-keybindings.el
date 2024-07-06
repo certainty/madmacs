@@ -298,6 +298,8 @@
     "/" `("Toggle Comment" . comment-dwim)
     "." `("Embark Act" . embark-act)
     "," `("Embark Dwim" . embark-dwim)
+    "'" '("Iedit" . iedit-mode)
+    "\"" '("Iedit DWIM" . iedit-dwim)
     "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . treemacs)

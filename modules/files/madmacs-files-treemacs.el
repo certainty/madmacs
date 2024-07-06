@@ -8,7 +8,7 @@
   (treemacs-width 80)
   (treemacs-toggle-width 120)
   (treemacs-workspace-switch-cleanup t)
-  (treemacs-peek-mode t)
+  (treemacs-peek-mode nil)
   (treemacs-litter-directories '("/node_modules" "/.venv" "/.cask" "\\.bloop" "\\.metals" "\\.idea" "\\.ruby-lsp" "target" "\\.bsp"))
   :init
   (with-eval-after-load 'winum
