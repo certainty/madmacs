@@ -35,6 +35,8 @@
 
 (setopt madmacs-after-startup-features
         '(
+          madmacs-files-treemacs
+
           madmacs-writing-checkers
           madmacs-writing-essentials
 

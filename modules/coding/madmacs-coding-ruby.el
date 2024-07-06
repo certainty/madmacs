@@ -11,7 +11,9 @@
   (ruby-mode . madmacs--lsp)
   :config
   (with-eval-after-load 'lsp-mode
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.ruby-lsp\\'")))
+    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.ruby-lsp\\'"))
+  (with-eval-after-load 'treemacs
+    (madmacs--treemacs-ignore-files '(".ruby-lsp"))))
 
 (use-package rubocop
   :ensure t

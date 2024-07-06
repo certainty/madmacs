@@ -50,7 +50,7 @@
   :type 'integer
   :group 'madmacs)
 
-(defcustom madmacs-lsp-client 'lsp-mode
+(defcustom madmacs-lsp-client 'eglot
   "The LSP client to use."
   :type 'symbol
   :options '(eglot lsp-mode)

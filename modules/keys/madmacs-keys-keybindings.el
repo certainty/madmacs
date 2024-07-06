@@ -59,6 +59,7 @@
     "." '("Find Project Things" . constult-project-extra-find)
     "b" '("Find Project Buffer" . consult-project-buffer)
     "B" '("Find Buffer" .  consult-buffer)
+    "i" `("Find Imenu" . consult-imenu)
     "g" '("Find Word in Project" . consult-ripgrep)
     "L" '("Find and goto line" .  consult-goto-line)
     "l" '("Find line" . consult-line)
@@ -120,7 +121,8 @@
 
   (when (eq madmacs-lsp-client 'eglot)
     (which-key-add-keymap-based-replacements madmacs-lsp-formatting-keys
-      "b" `("Buffer" . eglot-format)))
+      "b" `("Buffer" . eglot-format-buffer)
+      "f" `("Region" . eglot-format)))
 
   (defvar-keymap madmacs-lsp-toggle-keys :doc "LSP prefix map")
 
@@ -163,7 +165,6 @@
   (when (eq madmacs-lsp-client 'eglot)
     (which-key-add-keymap-based-replacements madmacs-lsp-help-keys
       "d" `("Describe thing" . helpful-at-point)
-      "s" `("Signature" . eglot-signature-help)
       "." `("Help for thing" . display-local-help)))
 
   (defvar-keymap madmacs-lsp-refactor-keys :doc "LSP prefix map")
@@ -188,7 +189,8 @@
 
   (when (eq madmacs-lsp-client 'eglot)
     (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
-      "a" `("Execute" . eglot-code-actions)))
+      "a" `("Execute" . eglot-code-actions)
+      "f" `("Fix" . eglot-code-action-quickfix)))
 
   (defvar-keymap madmacs-lsp-peek-keys :doc "LSP prefix map")
   (when (eq madmacs-lsp-client 'lsp-mode)
@@ -197,6 +199,7 @@
       "i" `("Peek implementations" . lsp-ui-peek-find-implementation)
       "r" `("Peek references" . lsp-ui-peek-find-references)
       "s" `("Peek workspace symbol" . lsp-ui-peek-find-workspace-symbol)))
+
 
   (when (eq madmacs-lsp-client 'lsp-mode)
     (which-key-add-keymap-based-replacements madmacs-lsp-keys
@@ -207,6 +210,7 @@
       "g" `("Goto" . ,madmacs-lsp-goto-keys)
       "G" `("Peek" . ,madmacs-lsp-peek-keys)
       "h" `("Help" . ,madmacs-lsp-help-keys)
+      "l" '("IMenu" . consult-imenu)
       "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
       "S"  '("Symbols" . consult-lsp-file-symbols)
       "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
@@ -215,11 +219,13 @@
 
   (when (eq madmacs-lsp-client 'eglot)
     (which-key-add-keymap-based-replacements madmacs-lsp-keys
+      "!" '("Diagnostics" . flymake-show-buffer-diagnostics)
       "a" `("Code actions" . ,madmacs-lsp-actions-keys)
       "f" `("Formatting" . ,madmacs-lsp-formatting-keys)
       "g" `("Goto" . ,madmacs-lsp-goto-keys)
-      "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
       "h" `("Help" . ,madmacs-lsp-help-keys)
+      "l" '("IMenu" . consult-imenu)
+      "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
       "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
       "w" `("Workspaces" . ,madmacs-lsp-workspace-keys)))
 
@@ -294,7 +300,7 @@
     "," `("Embark Dwim" . embark-dwim)
     "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
-    "e" `("Filetree" . dirvish-side)
+    "e" `("Filetree" . treemacs)
     "E" `("Filetree DWIM" . dirvish-dwim)
     "b" `("󰓩  Buffers" . ,madmacs-buffers-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)

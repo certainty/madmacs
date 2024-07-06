@@ -35,9 +35,18 @@
 (use-package eglot
   :ensure nil
   :straight nil
+  :custom
+  (eglot-report-progress t)
+  (eglot-extend-to-xref t)
+  (eglot-autoreconnect 5)
   :config
-  (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-stay-out-of 'eldoc))
+  (setopt eldoc-echo-area-use-multiline-p nil))
+
+;; (use-package eglot-booster
+;;   :ensure t
+;;   :after eglot
+;;   :config
+;;   (eglot-booster-mode))
 
 (defun madmacs--lsp (&rest args)
   "If LSP is eglot, call eglot-ensure, otherwise call lsp-deferred."

@@ -57,7 +57,7 @@
   :bind (:map vertico-map
               ("C-j" . vertico-next)
               ("C-k" . vertico-previous)
-              ("<escape>" . #'minibuffer-keyboard-quit)
+              ("C-g" . #'vertico-exit)
               ("M-RET"    . #'vertico-exit))
   :custom
   (vertico-cycle t)
@@ -173,11 +173,14 @@
   :bind
   (:map corfu-map
         ("C-SPC" . corfu-insert-separator)
-        ("<escape>" . corfu-quit)
-        ("<tab>" . nil)
+
+        ("TAB" . nil)
         ("<return>" . nil)
-        ("C-y" . corfu-insert)
+        ("C-<TAB>" . corfu-insert)
+
+        ("<escape>" . corfu-quit)
         ("C-g" . corfu-quit)
+
         ("C-j" . corfu-next)
         ("C-k" . corfu-previous))
   :init
@@ -187,7 +190,7 @@
 (use-package corfu-popupinfo
   :ensure nil
   :straight nil
-  :hook corfu
+  :hook (corfu-mode . corfu-popupinfo-mode)
   :custom
   (corfu-popupinfo-delay '(0.25 . 0.1))
   (corfu-popupinfo-hide nil))

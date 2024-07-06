@@ -6,7 +6,10 @@
   :ensure t
   :interpreter ("scala" . scala-mode)
   :config
-  (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
+  (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys)
+
+  (with-eval-after-load 'treemacs
+    (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target"))))
 
 (use-package lsp-metals
   :ensure t
