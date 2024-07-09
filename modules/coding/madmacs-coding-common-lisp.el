@@ -39,7 +39,7 @@
 
   (defvar inferior-lisp-program "sbcl")
 
-  (defun +lisp/open-repl ()
+  (defun madmacs--open-repl ()
     "Open the Sly REPL."
     (interactive)
     (require 'sly)
@@ -53,7 +53,7 @@
                           (t (recurse (1+ attempt))))))
         (recurse 1))))
 
-  (defun +lisp/reload-project ()
+  (defun madmacs--reload-project ()
     "Restart the Sly session and reload a chosen system."
     (interactive)
     (sly-restart-inferior-lisp)
@@ -122,6 +122,7 @@
     "c" '("clear" . sly-mrepl-clear-repl)
     "l" '("load system" . sly-asdf-load-system)
     "r" '("restart" . sly-restart-inferior-lisp)
+    "R" '("reload project" . madmacs--reload-project)
     "s" '("sync" . sly-mrepl-sync))
 
   (defvar-keymap madmacs-sly-stickers-keys :doc "Sly mappings related to stickers")
@@ -139,7 +140,7 @@
     "u" '("untrace all" . sly-untrace-all))
   
   (which-key-add-keymap-based-replacements madmacs-sly-local-leader-keys
-     "," '("Sly" . sly)
+     "," '("Sly" . madmacs--open-repl)
      "!" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
      "D" '("Disassemble" . sly-disassemble-symbol)
      "e" `("Export" . ,madmacs-sly-export-map)

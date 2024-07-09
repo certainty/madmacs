@@ -26,17 +26,17 @@
   (uniquify-ignore-buffers-re "^\\*"))
 
 ;; This doesn't play well will lsp / vcs as it slows down interaction considerably due to the timer functions it uses
-;; (use-package autorevert
-;;   :ensure nijl
-;;   :straight nil
-;;   :config
-;;   (global-auto-revert-mode nil)
-;;   :custom
-;;   (auto-revert-verbose nil)
-;;   (auto-revert-interval .5)
-;;   (auto-revert-check-vc-info t)
-;;   (rever-without-query '(".*"))
-;;   )
+(use-package autorevert
+  :ensure nil
+  :straight nil
+  :config
+  ;; if enabled causes lag with lsp and vcs 
+  (global-auto-revert-mode nil)
+  :custom
+  (auto-revert-verbose nil)
+  (auto-revert-interval .5)
+  (auto-revert-check-vc-info nil)
+  (rever-without-query '(".*")))
 
 (use-package revert-buffer-all
   :ensure t

@@ -5,6 +5,7 @@
   :defer t
   :custom
   (treemacs-follow-mode t)
+  (treemacs-display-current-project-exclusively t)
   (treemacs-width 80)
   (treemacs-toggle-width 120)
   (treemacs-workspace-switch-cleanup t)
@@ -29,7 +30,7 @@
   :ensure t
   :after (treemacs magit))
 
-(use-package treemacs-tab-bar
+ (use-package treemacs-tab-bar
   :ensure t
   :after treemacs
   :config
