@@ -5,16 +5,13 @@
   :defer t
   :custom
   (treemacs-follow-mode t)
-  (treemacs-display-current-project-exclusively t)
   (treemacs-width 80)
   (treemacs-toggle-width 120)
   (treemacs-workspace-switch-cleanup t)
   (treemacs-peek-mode nil)
   (treemacs-litter-directories '("/node_modules" "/.venv" "/.cask" "\\.bloop" "\\.metals" "\\.idea" "\\.ruby-lsp" "target" "\\.bsp"))
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
 
+  :init
   (defun madmacs--treemacs-ignore-files (names)
     "Ignore files in treemacs with NAMES. NAMES is a list of strings."
     (let ((file-regex (regexp-opt names)))
