@@ -48,7 +48,7 @@
                  (window-parameters . ((no-other-window . t)
                                        (no-delete-other-windows . t)))
                  (dedicated . t)
-                 (side . bottm)
+                 (side . bottom)
                  (slot . 5))))
 
 (use-package treesit-auto

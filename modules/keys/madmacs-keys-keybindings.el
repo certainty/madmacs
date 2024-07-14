@@ -29,7 +29,7 @@
   (which-key-add-keymap-based-replacements madmacs-buffers-keys
     "=" '("Balance" . balance-windows)
     "v" '("Split vertical" . split-window-right)
-    "H" '("Split horizontal" . split-window-below)
+    "h" '("Split horizontal" . split-window-below)
     "o" '("Other" . other-window)
     "b" '("ACE"  . ace-window)
     "d" '("Close" . delete-window)
@@ -56,7 +56,7 @@
   (which-key-add-keymap-based-replacements madmacs-find-keys
     "c" '("Find Char" . avy-goto-char-2)
     "f" '("Find Project File" . project-find-file)
-    "." '("Find Project Things" . constult-project-extra-find)
+    "." '("Find Project Things" . consult-project-extra-find)
     "b" '("Find Project Buffer" . consult-project-buffer)
     "B" '("Find Buffer" .  consult-buffer)
     "i" `("Find Imenu" . consult-imenu)
@@ -272,10 +272,9 @@
     "G" '("Toggle golden ratio widescreen" . golden-ratio-toggle-widescreen)
     "l" '("Line numbers" . display-line-numbers-mode)
     "t" '("Highlight Todo" . hl-todo-mode)
-    "h" '("Highlight Line" . hl-line-mode)
+    "h" '("Highlight Line" . global-hl-line-mode)
     "H" '("Global Highlight Line" . global-hl-line-mode)
-    "W" '("Toggle Fullscreen" . toggle-frame-fullscreen)
-    )
+    "W" '("Toggle Fullscreen" . toggle-frame-fullscreen))
 
   ;; Madmacs
   (defvar-keymap madmacs-madmacs-keys :doc "Keys for madmacs related functionality")
