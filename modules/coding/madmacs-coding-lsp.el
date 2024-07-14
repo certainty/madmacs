@@ -40,7 +40,7 @@
   (eglot-extend-to-xref t)
   (eglot-autoreconnect 5)
   :config
-  (setopt eldoc-echo-area-use-multiline-p nil))
+  (setopt eldoc-echo-area-use-multiline-p 3))
 
 ;; (use-package eglot-booster
 ;;   :ensure t
