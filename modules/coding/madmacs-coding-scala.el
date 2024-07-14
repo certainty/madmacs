@@ -2,21 +2,21 @@
 
 (defvar-keymap madmacs-scala-local-leader-keys :doc "Local bindings for scala metals")
 
-(use-package scala-mode
+(use-package scala-ts-mode
   :ensure t
   :interpreter ("scala" . scala-mode)
+  :hook (scala-ts-mode . madmacs--lsp)
   :config
   (evil-define-key 'normal scala-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys)
-
   (with-eval-after-load 'treemacs
-    (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target"))))
+    (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target")))
+  :init
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs '(scala-mode . ("metals")))
+    (add-to-list 'eglot-server-programs '(scala-ts-mode . ("metals")))))
 
 (use-package lsp-metals
   :ensure t
-  :hook
-  (scala-ts-mode . madmacs--lsp)
-  (scala-mode . madmacs--lsp)
-
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")
 

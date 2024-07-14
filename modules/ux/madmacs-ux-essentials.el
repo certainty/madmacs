@@ -78,6 +78,6 @@
   (undo-strong-limit 100663296)
   :config
   (blink-cursor-mode 0)
-  (global-hl-line-mode))
+  (global-hl-line-mode -1))
 
 (provide 'madmacs-ux-essentials)

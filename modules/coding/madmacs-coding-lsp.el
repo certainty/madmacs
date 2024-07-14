@@ -35,12 +35,14 @@
 (use-package eglot
   :ensure nil
   :straight nil
+  :after project
   :custom
   (eglot-report-progress t)
   (eglot-extend-to-xref t)
   (eglot-autoreconnect 5)
+
   :config
-  (setopt eldoc-echo-area-use-multiline-p 3))
+  (setopt eldoc-echo-area-use-multiline-p 1))
 
 ;; (use-package eglot-booster
 ;;   :ensure t
