@@ -314,12 +314,11 @@
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
-    "s" `("󱂬  Session" . ,madmacs-session-keys)
+    "s" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
 
-  (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys)
-  )
+  (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
 
 (provide 'madmacs-keys-keybindings)
