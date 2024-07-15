@@ -35,6 +35,7 @@
 
 (setopt madmacs-after-startup-features
         '(
+          madmacs-coding-treesitter
           madmacs-files-treemacs
 
           madmacs-writing-checkers
@@ -42,9 +43,9 @@
 
           madmacs-tools-terminal
           madmacs-tools-vcs
-          madmacs-tools-docker
 
           madmacs-coding-essentials
+
           madmacs-coding-version-manager
           madmacs-coding-checkers
           madmacs-coding-lsp
@@ -63,6 +64,9 @@
           madmacs-coding-graphql
           madmacs-coding-copilot
           madmacs-coding-configurations
+
+          madmacs-tools-docker
+          madmacs-tools-runner
 
           madmacs-org-essentials
 
