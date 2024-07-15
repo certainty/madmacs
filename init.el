@@ -66,7 +66,6 @@
           madmacs-coding-configurations
 
           madmacs-tools-docker
-          madmacs-tools-runner
 
           madmacs-org-essentials
 

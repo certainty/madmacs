@@ -1,6 +1,0 @@
-{
-  "$schema": "$schema": "https://raw.githubusercontent.com/nohzafk/cli2eli/main/cli2eli-schema.json",
-  "tool": "make",
-  "cwd": "git-root",
-  "commands": []
-}
