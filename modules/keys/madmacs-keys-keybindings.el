@@ -23,15 +23,14 @@
   (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
   (evil-global-set-key 'visual (kbd "V") 'expreg-contract)
 
-  ;; Buffers
-  (defvar-keymap madmacs-buffers-keys :doc "Buffer related commands and utilities")
+  (defvar-keymap madmacs-windows-keys :doc "Window related commands and utilities")
   
-  (which-key-add-keymap-based-replacements madmacs-buffers-keys
+  (which-key-add-keymap-based-replacements madmacs-windows-keys
     "=" '("Balance" . balance-windows)
     "v" '("Split vertical" . split-window-right)
     "h" '("Split horizontal" . split-window-below)
     "o" '("Other" . other-window)
-    "b" '("ACE"  . ace-window)
+    "w" '("ACE"  . ace-window)
     "d" '("Close" . delete-window)
     "D" '("Close all others" . delete-other-windows)
     "x" '("Swap" . ace-swap-window)
@@ -39,6 +38,14 @@
 
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
+  (which-key-add-keymap-based-replacements madmacs-compiler-keys
+    "." '("Quickrun" . quickrun)
+    "," '("Quickrun region" . quickrun-region)
+    ":" '("Quickrun select" . quickrun-select)
+    "c" '("Project run" . project-compile)
+    "C" '("Run" . compile)
+    "r" '("Rerun" . recompile)
+    "R" '("Project rerun" . project-recompile))
 
   ;; Docs
   (defvar-keymap madmacs-docs-keys :doc "Keys to find help and documentation")
@@ -304,13 +311,13 @@
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . treemacs)
     "E" `("Filetree Dwim" . dirvish-dwim)
-    "b" `("󰓩  Buffers" . ,madmacs-buffers-keys)
+    "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
     "f" `("  Find" . ,madmacs-find-keys)
     "g" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
-    "m" `("󰑮  Compile" . ,madmacs-compiler-keys)
+    "r" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
