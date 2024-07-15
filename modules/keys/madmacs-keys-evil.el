@@ -45,9 +45,6 @@
 (use-package evil-indent-plus
   :ensure t)
 
-(use-package expand-region
-  :ensure t)
-
 (use-package evil-textobj-tree-sitter
   :ensure t
   :config

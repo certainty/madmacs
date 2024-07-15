@@ -20,8 +20,8 @@
   (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
   (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
 
-  (evil-global-set-key 'visual (kbd "v") 'er/expand-region)
-  (evil-global-set-key 'visual (kbd "V") 'er/contract-region)
+  (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
+  (evil-global-set-key 'visual (kbd "V") 'expreg-contract)
 
   ;; Buffers
   (defvar-keymap madmacs-buffers-keys :doc "Buffer related commands and utilities")
