@@ -131,7 +131,7 @@
   (defun consult-info-emacs ()
     "Search through Emacs info pages."
     (interactive)
-    (consult-info "emacs" "efaq" "elisp" "cl" "compat"))
+    (consult-info "emacs" "efaq" "elisp" "cl"))
 
   (defun consult-info-org ()
     "Search through the Org info page."

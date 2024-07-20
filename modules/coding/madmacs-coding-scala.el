@@ -16,6 +16,7 @@
     (add-to-list 'eglot-server-programs '(scala-ts-mode . ("metals")))))
 
 (use-package lsp-metals
+  :disabled t
   :ensure t
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.bsp\\'")

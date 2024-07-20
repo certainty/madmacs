@@ -1,3 +1,6 @@
 .eln-cache
 /tree-sitter/
 flycheck_*
+/.cache/
+/fontaine-latest-state.eld
+/tabsession.el
