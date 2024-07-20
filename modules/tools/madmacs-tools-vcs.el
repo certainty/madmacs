@@ -8,7 +8,7 @@
   (magit-diff-refine-hunk t)
   (with-editor-emacsclient-executable "emacsclient")
   ;; this causes lag in buffers
-  ;;(magit-auto-revert-mode nil)
+  (magit-auto-revert-mode t)
   
   :config
   (setopt magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)

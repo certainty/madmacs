@@ -1,11 +1,11 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package lsp-mode
+  :disabled t ;; eglot is better
   :ensure t
   :hook
   (lsp-mode . lsp-completion-mode)
   (lsp-mode . lsp-enable-which-key-integration)
-
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-headerline-breadcrumb-enable nil)
@@ -21,10 +21,12 @@
   (lsp-enable-which-key-integration))
 
 (use-package lsp-ui
+  :disabled t ;; eglot is better
   :after (lsp-mode)
   :hook (lsp-mode . lsp-ui-mode))
 
 (use-package consult-lsp
+  :disabled t ;; eglot is better
   :ensure t
   :after lsp-mode
   :config

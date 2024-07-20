@@ -1,10 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package dap-mode
+  :disabled t ; we use eglot
   :ensure t
   :hook (dap-mode . dap-tooltip-mode))
 
 (use-package dap-ui
+  :disabled t ; we use eglot
   :ensure nil
   :straight nil
   :hook (dap-mode . dap-ui-mode)
