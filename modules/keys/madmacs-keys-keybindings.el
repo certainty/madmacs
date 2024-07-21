@@ -39,13 +39,13 @@
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
   (which-key-add-keymap-based-replacements madmacs-compiler-keys
-    "." '("Quickrun" . quickrun)
-    "," '("Quickrun region" . quickrun-region)
-    ":" '("Quickrun select" . quickrun-select)
-    "c" '("Project run" . project-compile)
-    "C" '("Run" . compile)
-    "r" '("Rerun" . recompile)
-    "R" '("Project rerun" . project-recompile))
+      "." '("Quickrun" . quickrun)
+      "," '("Quickrun region" . quickrun-region)
+      ":" '("Quickrun select" . quickrun-select)
+      "r" '("Project run" . project-compile)
+      "R" '("Project rerun" . project-recompile)
+      "c" '("Run" . compile)
+      "C" '("Rerun" . recompile))
 
   ;; Docs
   (defvar-keymap madmacs-docs-keys :doc "Keys to find help and documentation")
