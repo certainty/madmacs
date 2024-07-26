@@ -19,10 +19,16 @@
 (use-package quickrun
   :ensure t)
 
+(use-package fancy-compilation
+    :ensure t
+    :commands (fancy-compilation-mode)
+    :init
+    (with-eval-after-load 'compile
+      (fancy-compilation-mode)))
+
 (use-package emacs
   :ensure nil
   :straight nil
-
   :init
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'electric-pair-mode)
