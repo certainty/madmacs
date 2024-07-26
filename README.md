@@ -13,6 +13,7 @@
   * it's slightly nuts that we have to go to that length to configure our editor
 * Optimized for software engineers
   * I use this as my daily driver
+  * Uses eglot as LSP client
 * Configuration in plain emacs lisp
   * `use-package` with straight
   * simple boot approach that's easy to follow and modify
@@ -23,6 +24,8 @@
   * Avy + Embark
   * Hydras
   * Vetico + Corfu + Marginalia & the gang
+  * expand-region
+  * iedit
 * Fairly fast startup
   * I don't obsess over it. I don't know about you, but I do not restart my emacs all the time.
 
