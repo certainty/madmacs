@@ -21,6 +21,7 @@
 
 (use-package treemacs-evil
   :ensure t
+  :if (eql madmacs-modal-approach 'evil)
   :after (treemacs evil))
 
 (use-package treemacs-magit

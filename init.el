@@ -20,8 +20,10 @@
           ))
 
 (setopt madmacs-after-init-features
-        '(
-          madmacs-keys-evil
+        `(
+          ,(when (eql madmacs-modal-approach 'evil) 'madmacs-keys-evil)
+          ,(when (eql madmacs-modal-approach 'meow) 'madmacs-keys-meow)
+
           madmacs-ux-completion
           madmacs-ux-dashboard
           madmacs-ui-modeline

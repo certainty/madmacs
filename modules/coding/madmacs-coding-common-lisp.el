@@ -153,8 +153,12 @@
      "m" '("expand macro" . macrostep-expand)
      "x" `("Xref" . ,madmacs-sly-xref-keys))
 
-  (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
-  (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
+  (when (eql madmacs-modal-approach 'evil)
+    (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
+    (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
+
+  (when (eql madmacs-modal-approach 'meow)
+    (define-key sly-mode-map (kbd "C-,") madmacs-sly-local-leader-keys)))
 
 
 (use-package sly-asdf

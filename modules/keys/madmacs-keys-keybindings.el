@@ -13,15 +13,22 @@
   ;;
   ;; I am careful not to occupy the local leader key here
   
-  (evil-global-set-key 'normal "|" 'split-window-right)
-  (evil-global-set-key 'normal "\\" 'split-window-below)
-  (evil-global-set-key 'normal (kbd "M-h") 'evil-window-left)
-  (evil-global-set-key 'normal (kbd "M-l") 'evil-window-right)
-  (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
-  (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
+    (when (eql madmacs-modal-approach 'evil)
+        (evil-global-set-key 'normal "|" 'split-window-right)
+        (evil-global-set-key 'normal "\\" 'split-window-below)
+        (evil-global-set-key 'normal (kbd "M-h") 'evil-window-left)
+        (evil-global-set-key 'normal (kbd "M-l") 'evil-window-right)
+        (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
+        (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
+        (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
+        (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
 
-  (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
-  (evil-global-set-key 'visual (kbd "V") 'expreg-contract)
+    (when (eql madmacs-modal-approach 'meow)
+        (global-unset-key (kbd "C-,")) ;; used as local leader
+        (global-set-key (kbd "C-c |") 'split-window-right)
+        (global-set-key (kbd "C-c \\") 'split-window-below)
+        (global-set-key (kbd "C-=") 'expreg-expand)
+        (global-set-key (kbd "M-=") 'expreg-contract))
 
   (defvar-keymap madmacs-windows-keys :doc "Window related commands and utilities")
   
@@ -326,6 +333,10 @@
     "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
 
-  (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
+    (when (eql madmacs-modal-approach 'evil)
+        (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
+
+    (when (eql madmacs-modal-approach 'meow)
+        (global-set-key (kbd "C-c") madmacs-leader-keys)))
 
 (provide 'madmacs-keys-keybindings)

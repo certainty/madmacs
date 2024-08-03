@@ -33,8 +33,12 @@
   :straight nil
   :after hydra
   :config
-  (evil-define-key 'normal smerge-mode-map
-    (kbd "<localleader>m") hydra-smerge/body)
+  (when (eql madmacs-modal-approach 'evil)
+    (evil-define-key 'normal smerge-mode-map
+       (kbd "<localleader>m") hydra-smerge/body))
+  
+  (when (eql madmacs-modal-approach 'meow)
+    (define-key smerge-mode-map (kbd "C-, m") 'hydra-smerge/body))
   
   (defhydra hydra-smerge (:color pink
                                  :hint nil
@@ -68,6 +72,8 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
     ("r" smerge-resolve)
     ("k" smerge-kill-current)
     ("q" nil "cancel" :color blue)))
+
+
 
 
 (provide 'madmacs-tools-vcs)

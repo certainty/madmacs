@@ -2,6 +2,7 @@
 
 (use-package evil-cleverparens
   :ensure t
+  :if (eql madmacs-modal-approach 'evil)
   :hook (lisp-mode emacs-lisp-mode scheme-mode)
   :custom
   (evil-cleverparens-use-additional-bindings t))
@@ -10,7 +11,9 @@
   :ensure nil
   :straight nil
   :mode (("\\.el$" . emacs-lisp-mode))
-  :interpreter (("emacs" . emacs-lisp-mode)))
+  :interpreter (("emacs" . emacs-lisp-mode))
+  :custom
+  (lisp-indent-offset 2))
 
 (use-package eldoc
   :ensure nil

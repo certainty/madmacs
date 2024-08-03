@@ -90,7 +90,7 @@
   (meow-use-cursor-position-hack t)
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
-  (meow-keypad-leader-dispatch "C-c")
+  ;(meow-keypad-leader-dispatch "C-c")
   
   :config
   (add-to-list 'meow-char-thing-table '(?a . angle))
