@@ -32,8 +32,13 @@
 
 (defcustom madmacs-variable-pitch-font "Iosevka Aile"
     "Variable pitch font to use"
-    :type 'string
-    :group 'madmacs)
+  :type 'string
+  :group 'madmacs)
+
+(defcustom madmacs-theme 'catppuccin
+  "The theme to activate"
+  :type 'symbol
+  :options '(modus catppuccin))
 
 (defcustom madmacs-default-font-size 130
     "Default font size to use"

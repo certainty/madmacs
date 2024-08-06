@@ -3,7 +3,6 @@
 (use-package emacs
   :ensure nil
   :straight nil
-  :custom
   :bind
   ;; This is what I usually want
   ("M-z" . zap-up-to-char))
