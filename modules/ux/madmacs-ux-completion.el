@@ -169,9 +169,11 @@
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-bar-width 0.5)
+  (corfu-count 7)
 
   :bind
-  (:map corfu-map
+    (:map corfu-map
         ("C-SPC" . corfu-insert-separator)
 
         ("TAB" . nil)

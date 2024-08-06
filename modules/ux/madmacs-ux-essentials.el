@@ -66,7 +66,7 @@
   :ensure nil
   :custom
   (sentence-end-double-space nil)
-  (tab-width 4)
+  (tab-width 2)
   (fill-column 150)
   (indent-tabs-mode nil)
   (tab-always-indent 'complete)
