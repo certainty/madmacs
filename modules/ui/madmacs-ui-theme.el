@@ -13,7 +13,10 @@
   :config
   ;; I like it extra dark
   (catppuccin-set-color 'base "#000000")
-  (custom-set-faces `(corfu-border ((t (:background ,(catppuccin-get-color 'mauve) :foreground ,(catppuccin-get-color 'mauve))))))
+  (custom-set-faces
+    `(corfu-border ((t (:background ,(catppuccin-get-color 'mauve) :foreground ,(catppuccin-get-color 'mauve)))))
+    `(corfu-default ((t (:background "#000000"))))
+    `(corfu-current ((t (:background "#000000" :underline t :bold t)))))
 
   (load-theme 'catppuccin :no-confirm))
 
