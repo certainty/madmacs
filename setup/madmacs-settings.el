@@ -35,7 +35,7 @@
   :type 'string
   :group 'madmacs)
 
-(defcustom madmacs-theme 'catppuccin
+(defcustom madmacs-theme 'modus
   "The theme to activate"
   :type 'symbol
   :options '(modus catppuccin))

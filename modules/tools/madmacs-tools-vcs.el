@@ -15,7 +15,13 @@
   (add-to-list 'magit-no-confirm 'stage-all-changes)
   (add-to-list 'display-buffer-alist
              '("\\magit:"
-               (display-buffer-same-window))))
+                (display-buffer-same-window))))
+
+(use-package forge
+  :ensure t
+  :after magit
+  :config
+  (push '("source.xing.com" "api.source.xing.com" "source.xing.com" forge-github-repository) forge-alist))
 
 (use-package git-timemachine
   :ensure t)
