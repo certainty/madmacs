@@ -12,6 +12,7 @@
   (setopt evil-emacs-state-modes nil)
   (setopt evil-insert-state-modes nil)
   (setopt evil-motion-state-modes nil)
+  (setopt evil-search-module 'isearch)
 
   (evil-set-leader nil (kbd "C-SPC"))
   (evil-set-leader 'normal (kbd "SPC"))

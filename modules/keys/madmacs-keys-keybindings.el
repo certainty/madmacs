@@ -305,15 +305,21 @@
     "l" '("List" . flycheck-list-errors)
     "C" '("Clear" . flycheck-clear))
 
+  (defvar-keymap madmacs-list-keys :doc "List various entities")
+  (which-key-add-keymap-based-replacements madmacs-list-keys
+    "b" '("Buffers" . ibuffer)
+    "m" '("Bookmarks" . list-bookmarks))
+
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
 
   (which-key-add-keymap-based-replacements madmacs-leader-keys
     "!" `("Checkers" . ,madmacs-checker-keys)
-    "/" `("Toggle Comment" . comment-dwim)
+    ";" `("Toggle Comment" . comment-dwim)
     "." `("Embark Act" . embark-act)
     "," `("Embark Dwim" . embark-dwim)
     "'" '("Iedit" . iedit-mode)
     "\"" '("Iedit Dwim" . iedit-dwim)
+    "/" '("Avy(t)" . casual-avy-tmenu)
     "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . treemacs)
@@ -324,6 +330,7 @@
     "f" `("  Find" . ,madmacs-find-keys)
     "g" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
+    "L" `("  List" . ,madmacs-list-keys)
     "r" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)

@@ -43,28 +43,8 @@
   :bind
   ("C-c b R" . revert-buffer-all))
 
-;; I am not convinced that I need this
-;; (use-package popper
-;;   :ensure t
-;;   :bind (("M-`"   . popper-toggle-latest)
-;;          ("C-`"   . popper-cycle)
-;;          ("C-M-`" . popper-toggle-type))
-;;   :custom
-;;   (popper-window-height 20)
-;;   (popper-display-control t)
-;;   (popper-group-function #'popper-group-by-directory)
-
-;;   (popper-reference-buffers
-;;    '("\\*Messages\\*"
-;;      "Output\\*$"
-;;      "\\*Async Shell Command\\*"
-;;      help-mode
-;;      compilation-mode))
-
-;;   :init
-;;   (popper-echo-mode +1)
-
-;;   :config
-;;   (popper-mode))
+(use-package casual-ibuffer
+  :ensure t
+  :bind (:map ibuffer-mode-map ("M-o" . casual-ibuffer-tmenu)))
 
 (provide 'madmacs-ux-buffers)

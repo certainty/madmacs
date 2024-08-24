@@ -62,6 +62,19 @@
   (display-line-numbers-type 'visual)
   (display-line-numbers-width-start t))
 
+(use-package casual-isearch
+  :ensure t
+  :bind (:map isearch-mode-map ("M-o" . casual-isearch-tmenu)))
+
+(use-package casual-info
+  :ensure t
+  :bind (:map Info-mode-map ("M-o" . casual-info-tmenu)))
+
+(use-package casual-bookmarks
+  :ensure t
+  :after bookmark
+  :bind (:map bookmark-bmenu-mode-map ("M-o" . casual-bookmarks-tmenu)))
+
 (use-package emacs
   :ensure nil
   :custom

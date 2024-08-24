@@ -63,6 +63,10 @@
    ("M-s" . dirvish-setup-menu)
    ("M-j" . dirvish-fd-jump)))
 
+(use-package casual-dired
+  :ensure t
+  :bind (:map dired-mode-map
+          ("M-o" . casual-dired-tmenu)))
 
 (use-package wdired
   :ensure nil

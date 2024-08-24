@@ -22,10 +22,10 @@
   * `,` is mode specific prefix
 * Useful power-ups
   * Avy + Embark
-  * Hydras
+  * Transient via casual (suite)
   * Vetico + Corfu + Marginalia & the gang
   * expand-region
-  * iedit
+  * iedit for multiple cursor edit
 * Fairly fast startup
   * I don't obsess over it. I don't know about you, but I do not restart my emacs all the time.
 

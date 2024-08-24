@@ -109,6 +109,11 @@
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
+(use-package casual-avy
+  :ensure t
+  :after avy
+  :bind ("M-g" . casual-avy-tmenu))
+
 ;; iedit / edit multiple regions
 
 (use-package iedit
