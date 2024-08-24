@@ -39,7 +39,10 @@
 ## Keybindings
 
 The global keybinds are available in the leader map via `SPC`.
+
 Mode specific leader bindings are available (if they exist) under the local leader `,`.
+
+Use `M-o` in any mode that is supported by [casual suite](https://github.com/kickingvegas/casual-suite) to fire up the transient menu.
 
 
 ## Screenshots
