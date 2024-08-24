@@ -5,9 +5,7 @@
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
 ## Madmacs in a few bullet points
-* Work in progress
-  * build by me for me
-  * not a framework but feel free to take it as a start for your own version
+
 * Built on the shoulders of giants
   * many parts are based on other configurations like doom, lambda-emacs, centaur-emacs, etc.
   * it's slightly nuts that we have to go to that length to configure our editor
@@ -22,7 +20,7 @@
   * `,` is mode specific prefix
 * Useful power-ups
   * Avy + Embark
-  * Transient via casual (suite)
+  * Transient menues via casual (suite)
   * Vetico + Corfu + Marginalia & the gang
   * expand-region
   * iedit for multiple cursor edit

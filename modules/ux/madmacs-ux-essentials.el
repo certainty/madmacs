@@ -17,7 +17,7 @@
   (backup-directory-alist
      `(("." . ,(madmacs--ensure-cache-dir "backups"))))
 
-  (create-lockfiles nil)
+  (create-lockfiles nil) ; no lockfiles since I only ever have one instance of emacs running
   (delete-auto-save-files t)
   (auto-save-default nil)
   (auto-save-files-dir (madmacs--ensure-cache-dir "auto-save"))
