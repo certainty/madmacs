@@ -5,19 +5,28 @@
 
 (use-package sly
   :ensure t
-  :hook
-  (sly-mode . madmacs--setup-common-lisp)
+  ;:hook
+  ;(sly-mode . madmacs--setup-common-lisp)
+
+  :custom
+  (sly-lisp-implementation 'sbcl)
+  (inferior-lisp-program "sbcl")
+  (sly-complete-symbol-function #'sly-flex-completions)
+
+  :init
+  (add-to-list 'auto-mode-alist '("\\.ros\\'" . lisp-mode))
 
   :config
   (setopt sly-lisp-implementations
-          '((sbcl ("sbcl" "--eval '(ql:quickload :slite/parachute)'") :coding-system utf-8-unix)
-            (ros ("ros" "-Q" "run" "-e '(ql:quickload :slite/parachute)'") :coding-system utf-8-unix)
-            (qlot+sbcl ("qlot" "exec" "sbcl"))
-            (qlot+ros ("qlot" "exec" "ros" "-Q" "run"))))
-  (setopt sly-lisp-implementation 'sbcl)
-  (setopt inferior-lisp-program "sbcl")
-  (setopt sly-complete-symbol-function #'sly-flex-completions)
+    `((sbcl+prelude ("sbcl" "--eval" "(ql:quickload :cl-dk-prelude)") :coding-system utf-8-unix)
+       (sbcl+pure ("sbcl" :coding-system utf-8-unix))
+       (sbcl+scripting ("sbcl" "--core" ,(expand-file-name "~/common-lisp/cl-dk-prelude-scripting.core") "--eval" "(in-package :cl-dk-prelude-scripting)") :coding-system utf-8-unix)
+       (ros ("ros" "-Q" "run" "-e '(ql:quickload :slite/parachute)'") :coding-system utf-8-unix)
+       (qlot+sbcl ("qlot" "exec" "sbcl"))
+       (qlot+ros ("qlot" "exec" "ros" "-Q" "run"))))
+
   (setq sly-contribs '(sly-fancy sly-stickers sly-scratch sly-mrepl sly-autodoc sly-trace-dialog))
+  (setopt sly-common-lisp-set-style 'modern)
   
 
   (add-to-list 'display-buffer-alist
@@ -38,6 +47,12 @@
 
 
   (defvar inferior-lisp-program "sbcl")
+
+  (defun madmacs--select-implementation ()
+    "Select the Common Lisp implementation to use."
+    (interactive)
+    (let ((current-prefix-arg '-))
+      (call-interactively #'sly)))
 
   (defun madmacs--open-repl ()
     "Open the Sly REPL."
@@ -73,7 +88,6 @@
           (load "~/.local/share/quicklisp/log4sly-setup.el")
           (global-log4sly-mode 1))
       (message "log4sly not found")))
-  
 
   ;; keybindings
   (defvar-keymap madmacs-sly-export-map :doc "Sly mappings related to exports")
@@ -140,18 +154,20 @@
     "u" '("untrace all" . sly-untrace-all))
   
   (which-key-add-keymap-based-replacements madmacs-sly-local-leader-keys
-     "," '("Sly" . madmacs--open-repl)
-     "!" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
-     "D" '("Disassemble" . sly-disassemble-symbol)
-     "e" `("Export" . ,madmacs-sly-export-map)
-     "a" `("ASDF" . ,madmacs-sly-asdf-keys)
-     "c" `("Compile" . ,madmacs-sly-compile-keys)
-     "d" `("Docs" . ,madmacs-sly-help-keys)
-     "r" `("Repl" . ,madmacs-sly-repl-keys)
-     "s" `("Stickers" . ,madmacs-sly-stickers-keys)
-     "t" `("Trace" . ,madmacs-sly-trace-keys)
-     "m" '("expand macro" . macrostep-expand)
-     "x" `("Xref" . ,madmacs-sly-xref-keys))
+    "," '("Sly" . madmacs--open-repl)
+    ";" '("Sly select" . madmacs--select-implementation)
+    "!" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
+    "l" '("Quickload" . sly-quickload)
+    "D" '("Disassemble" . sly-disassemble-symbol)
+    "e" `("Export" . ,madmacs-sly-export-map)
+    "a" `("ASDF" . ,madmacs-sly-asdf-keys)
+    "c" `("Compile" . ,madmacs-sly-compile-keys)
+    "d" `("Docs" . ,madmacs-sly-help-keys)
+    "r" `("Repl" . ,madmacs-sly-repl-keys)
+    "s" `("Stickers" . ,madmacs-sly-stickers-keys)
+    "t" `("Trace" . ,madmacs-sly-trace-keys)
+    "m" '("expand macro" . macrostep-expand)
+    "x" `("Xref" . ,madmacs-sly-xref-keys))
 
   (when (eql madmacs-modal-approach 'evil)
     (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
