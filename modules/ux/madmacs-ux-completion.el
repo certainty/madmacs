@@ -230,4 +230,13 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
+
+;; now finally let's bring in a good old friend [hippie-expand](https://www.emacswiki.org/emacs/HippieExpand)
+
+(use-package emacs
+  :ensure nil
+  :straight nil
+  :init
+  (global-set-key [remap dabbrev-expand] 'hippie-expand))
+
 (provide 'madmacs-ux-completion)

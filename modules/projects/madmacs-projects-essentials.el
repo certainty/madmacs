@@ -10,7 +10,7 @@
                              (project-vc-dir "VC-Dir")
                              (project-magit-dir "Magit status")))
 
-  (project-vc-extra-root-markers '(".project" "package.json" "autogen.sh" ".projectile" "Gemfile" "go.mod")))
+  (project-vc-extra-root-markers '(".project" "package.json" "autogen.sh" ".projectile" "go.mod")))
 
 ;; (use-package direnv
 ;;   :ensure t

@@ -81,7 +81,6 @@
   (sentence-end-double-space nil)
   (tab-width 2)
   (fill-column 150)
-  (indent-tabs-mode nil)
   (tab-always-indent 'complete)
   (completion-cycle-threshold 3)
   (require-final-newline nil)
@@ -91,6 +90,7 @@
   (undo-strong-limit 100663296)
   :config
   (blink-cursor-mode 0)
-  (global-hl-line-mode -1))
+  (global-hl-line-mode -1)
+  (setq-default indent-tabs-mode nil))
 
 (provide 'madmacs-ux-essentials)

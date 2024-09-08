@@ -8,7 +8,8 @@
   (go-ts-mode . madmacs--lsp)
   (go-mode . madmacs--lsp)
   :config
-  (setopt gofmt-command "goimports"))
+  (setopt gofmt-command "goimports")
+  (setq-default indent-tabs-mode nil))
 
 (use-package go-mod-mode
   :ensure nil
@@ -23,6 +24,7 @@
 
 (use-package flycheck-golangci-lint
   :ensure t
+  :if nil ; currently not working correctly because of my golanci-lint setup
   :hook
   (go-mode . flycheck-golangci-lint-setup)
   (go-ts-mode . flycheck-golangci-lint-setup))
