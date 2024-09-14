@@ -254,7 +254,7 @@
   (defvar-keymap madmacs-project-keys :doc "Keys related to interactions with the current project")
 
   (which-key-add-keymap-based-replacements madmacs-project-keys
-    "e"   '("Filetree add project and scope" . treemacs-add-and-display-current-project-exclusively)
+    ;"e"   '("Filetree add project and scope" . treemacs-add-and-display-current-project-exclusively)
     "r"   '("Query replace" . project-query-replace-regexp)
     "d"   '("Consult dir" . consult-dir)
     "R"   '("Remember project under" . project-remember-projects-under)

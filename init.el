@@ -38,7 +38,7 @@
 (setopt madmacs-after-startup-features
         '(
           madmacs-coding-treesitter
-          madmacs-files-treemacs
+          ;madmacs-files-treemacs
 
           madmacs-writing-checkers
           madmacs-writing-essentials
