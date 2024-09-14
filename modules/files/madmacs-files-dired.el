@@ -4,6 +4,9 @@
   :ensure nil
   :straight nil
   :hook (dired-mode . dired-omit-mode)
+  :custom
+  (dired-omit-files (rx (seq bol ".")))
+
   :config
   (when (and (eq system-type 'darwin) (executable-find "gls"))
     (setq insert-directory-program "gls")))
