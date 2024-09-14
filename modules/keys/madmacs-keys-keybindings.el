@@ -322,7 +322,7 @@
     "/" '("Avy(t)" . casual-avy-tmenu)
     "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
-    "e" `("Filetree" . treemacs)
+    "e" `("Filetree" . dirvish-side)
     "E" `("Filetree Dwim" . dirvish-dwim)
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)

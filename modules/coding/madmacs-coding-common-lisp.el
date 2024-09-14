@@ -19,7 +19,7 @@
   :config
   (setopt sly-lisp-implementations
     `((sbcl+prelude ("sbcl" "--eval" "(ql:quickload :cl-dk-prelude)") :coding-system utf-8-unix)
-       (sbcl+pure ("sbcl" :coding-system utf-8-unix))
+       (sbcl+pure ("sbcl") :coding-system utf-8-unix)
        (sbcl+scripting ("sbcl" "--core" ,(expand-file-name "~/common-lisp/cl-dk-prelude-scripting.core") "--eval" "(in-package :cl-dk-prelude-scripting)") :coding-system utf-8-unix)
        (ros ("ros" "-Q" "run" "-e '(ql:quickload :slite/parachute)'") :coding-system utf-8-unix)
        (qlot+sbcl ("qlot" "exec" "sbcl"))
