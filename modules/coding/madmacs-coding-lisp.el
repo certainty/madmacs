@@ -1,11 +1,36 @@
 ;; -*- lexical-binding: t; -*-
 
-(use-package evil-cleverparens
+;; (use-package evil-cleverparens
+;;   :ensure t
+;;   :if (eql madmacs-modal-approach 'evil)
+;;   :hook (lisp-mode emacs-lisp-mode scheme-mode)
+;;   :custom
+;;   (evil-cleverparens-use-additional-bindings t))
+
+(use-package lispyville
   :ensure t
   :if (eql madmacs-modal-approach 'evil)
   :hook (lisp-mode emacs-lisp-mode scheme-mode)
-  :custom
-  (evil-cleverparens-use-additional-bindings t))
+  :config
+  (lispyville-set-key-theme
+    '(operator
+       normal
+       c-w
+       c-u
+       prettify
+       text-objects
+       (atom-motions (atom-movement t))
+       (additional-motions additional-movement)
+       commentary
+       slurp/barf-lispy
+       wrap
+       additional
+       additional-insert
+       additional-wrap
+       insert
+       escape
+     ;;  mark-special
+       mark-toggle)))
 
 (use-package emacs-lisp-mode
   :ensure nil

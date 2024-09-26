@@ -4,8 +4,6 @@
   :ensure nil
   :straight nil
   :hook (dired-mode . dired-omit-mode)
-  :custom
-  (dired-omit-files (rx (seq bol ".")))
 
   :config
   (when (and (eq system-type 'darwin) (executable-find "gls"))
@@ -15,9 +13,7 @@
   :ensure nil
   :straight nil
   :config
-  ;; Make dired-omit-mode hide all "dotfiles"
-  (setq dired-omit-files
-        (concat dired-omit-files "\\|^\\..*$")))
+  (setopt dired-omit-files (concat dired-omit-files "\\|^\\..*$")))
 
 (use-package dirvish
   :ensure t
@@ -27,12 +23,12 @@
 
   :custom
   (dirvish-quick-access-entris         ; It's a custom option, `setq' won't work
-   '(("h" "~/"                "Home")
-     ("d" "~/Downloads/"      "Downloads")
-     ("w" "~/NewWork/Code/"   "Work")
-     ("p" "~/Private/"        "Private")))
+    '(("h" "~/"                "Home")
+       ("d" "~/Downloads/"      "Downloads")
+       ("w" "~/NewWork/Code/"   "Work")
+       ("p" "~/Private/"        "Private")))
 
-  (dirvish-side-width 80)
+  (dirvish-side-width 100)
   (dirvish-side-auto-close t)
 
   (dirvish-use-header-line 'global)
@@ -42,9 +38,6 @@
 
   (dirvish-attributes
    '(subtree-state collapse))
-
-  ;; (dirvish-peek-mode) ; Preview files in minibuffer
-  ;;(dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
 
   :bind                                 ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
   (:map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
@@ -64,6 +57,7 @@
     ("M-t" . dirvish-layout-toggle)
     ("M-s" . dirvish-setup-menu)
     ("M-j" . dirvish-fd-jump))
+
   :config
   (evil-define-key 'normal dirvish-mode-map (kbd "TAB") 'dirvish-toggle-subtree)
   (evil-define-key 'normal dirvish-mode-map (kbd "<tab>") 'dirvish-toggle-subtree))
