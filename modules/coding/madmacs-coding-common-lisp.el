@@ -143,15 +143,16 @@
   (which-key-add-keymap-based-replacements madmacs-sly-stickers-keys
     "b" '("toggle break points" . sly-stickers-toggle-break-on-stickers)
     "c" '("clear defun" . sly-stickers-clear-defun-stickers)
-    "C" '("clear all" . sly-stickers-clear-all-stickers)
+    "C" '("clear buffer" . sly-stickers-clear-buffer-stickers)
     "f" '("fetch" . sly-stickers-fetch)
     "s" '("add/remove" . sly-stickers-dwim))
 
   (defvar-keymap madmacs-sly-trace-keys :doc "Sly mappings related to trace")
   (which-key-add-keymap-based-replacements madmacs-sly-trace-keys
-    "t" '("toggle" . sly-toggle-trace-fdefinition)
-    "T" '("toggle (fancy)" . sly-toggle-fancy-trace)
-    "u" '("untrace all" . sly-untrace-all))
+    "t" '("toggle" . sly-trace-dialog-toggle-trace)
+    "T" '("toggle (complex)" . sly-trace-dialog-toggle-complex-trace)
+    "d" '("dialog" . sly-trace-dialog)
+    "u" '("untrace all" . sly-trace-dialog-untrace-all))
   
   (which-key-add-keymap-based-replacements madmacs-sly-local-leader-keys
     "," '("Sly" . madmacs--open-repl)

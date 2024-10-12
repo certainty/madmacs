@@ -4,4 +4,5 @@
 
 ;; Tweak some very basic settings
 ;(setopt madmacs-debug t)
+(madmacs--setup-env)
 (madmacs--boot-early)

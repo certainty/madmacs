@@ -4,3 +4,4 @@ flycheck_*
 /.cache/
 /fontaine-latest-state.eld
 /tabsession.el
+madmacs.env

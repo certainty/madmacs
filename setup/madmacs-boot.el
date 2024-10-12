@@ -41,6 +41,24 @@
    (dolist (file files)
      (require file nil (not madmacs-debug)))))
 
+(defun madmacs--setup-env ()
+  "Loads the environment variables from the madmacs.env if it exists"
+  (let ((env-file (expand-file-name "madmacs.env" user-emacs-directory)))
+    (when (file-exists-p env-file)
+      (message ";; Loading environment variables from %s" env-file)
+      (with-temp-buffer
+        (insert-file-contents env-file)
+        (while (not (eobp))
+          (let ((line (buffer-substring (line-beginning-position) (line-end-position))))
+            (when (string-match "^\\([^=]+\\)=\"\\(.*\\)\"$" line)
+              (let ((variable (match-string 1 line))
+                    (value (match-string 2 line)))
+                (message ";; Setting env var %s to %s" variable value)
+                (setenv variable value)
+                (when (string= variable "PATH")
+                  (setq exec-path (append exec-path (list value))))))
+            (forward-line 1)))))))
+
 (defun madmacs--boot-early ()
     "Run the early boot process"
     (message ";; We are all mad here .....")

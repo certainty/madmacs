@@ -41,7 +41,10 @@
   :ensure t)
 
 (use-package evil-surround
-  :ensure t)
+  :ensure t
+  :after evil
+  :init
+  (global-evil-surround-mode 1))
 
 (use-package evil-indent-plus
   :ensure t)

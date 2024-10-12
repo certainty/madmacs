@@ -7,30 +7,38 @@
 ;;   :custom
 ;;   (evil-cleverparens-use-additional-bindings t))
 
+(use-package lispy
+  :ensure t
+  :hook (lisp-mode emacs-lisp-mode scheme-mode))
+
 (use-package lispyville
   :ensure t
   :if (eql madmacs-modal-approach 'evil)
   :hook (lisp-mode emacs-lisp-mode scheme-mode)
-  :config
-  (lispyville-set-key-theme
-    '(operator
-       normal
-       c-w
-       c-u
-       prettify
-       text-objects
-       (atom-motions (atom-movement t))
-       (additional-motions additional-movement)
-       commentary
-       slurp/barf-lispy
-       wrap
-       additional
-       additional-insert
-       additional-wrap
-       insert
-       escape
-     ;;  mark-special
-       mark-toggle)))
+  :init
+  (with-eval-after-load 'lispyville
+    (lispyville-set-key-theme
+      '(operator
+         normal
+         c-w
+         c-u
+         prettify
+         text-objects
+         (atom-motions (atom-movement t))
+         additional-motions
+         commentary
+         slurp/barf-lispy
+         wrap
+         additional
+         additional-insert
+         additional-wrap
+         (escape insert emacs)
+         ;;  mark-special
+         mark-toggle))
+    :config
+    ;; enter special mode after motion
+    (setopt lispyville-motions-put-into-special t)
+    (diminish 'lispyville-mode (lispyville-mode-line-string " λ•" " λ"))))
 
 (use-package emacs-lisp-mode
   :ensure nil

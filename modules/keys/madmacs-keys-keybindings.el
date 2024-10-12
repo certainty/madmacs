@@ -302,6 +302,8 @@
     "v" '("Verify" . flycheck-verify-setup)
     "." '("Explain" . flycheck-explain-error-at-point)
     "," '("Help" . flycheck-display-error-at-point)
+    "n" '("Next" . flycheck-next-error)
+    "p" '("Previous" . flycheck-previous-error)
     "l" '("List" . flycheck-list-errors)
     "C" '("Clear" . flycheck-clear))
 
