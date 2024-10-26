@@ -41,7 +41,11 @@
     "d" '("Close" . delete-window)
     "D" '("Close all others" . delete-other-windows)
     "x" '("Swap" . ace-swap-window)
-    "m" '("Maximize" . ace-maximize-window))
+    "m" '("Maximize" . ace-maximize-window)
+    "f" '("Flip" . flip-frame)
+    "F" '("Flop" . flop-frame)
+    "r" '("Rotate" . rotate-frame-clockwise)
+    "t" '("Transpose" . transpose-frame))
 
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
@@ -318,17 +322,13 @@
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
     "x" '("abort" . gptel-abort))
   
-  (defvar-keymap madmacs-chatgpt-shell-keys :doc "Keys for ChatGPT shell related functionality")
-  (which-key-add-keymap-based-replacements madmacs-chatgpt-shell-keys 
-    "s" '("ChatGPT shell" . chatgpt-shell))
-
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
-    "?" '("GPTel quick" . gptel-quick)
-    "." '("GPTel send" . gptel-send)
-    "," '("GPTel menu" . gptel-menu)
-    "g" `("GPTel" . ,madmacs-gptel-keys)
-    "s" `("ChatGPT shell" . ,madmacs-chatgpt-shell-keys))
+    "." '("GPTel quick" . gptel-quick)
+    "a" '("GPTel send" . gptel-send)
+    "A" '("GPTel menu" . gptel-menu)
+    "c" '("GPTel session" . gptel)
+    "g" `("GPTel" . ,madmacs-gptel-keys))
   
   (defvar-keymap madmacs-tools-keys :doc "Access various tools")
   (which-key-add-keymap-based-replacements madmacs-tools-keys

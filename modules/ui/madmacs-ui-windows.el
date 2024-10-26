@@ -24,6 +24,9 @@
   :config
   (winner-mode 1))
 
+(use-package transpose-frame
+  :ensure t)
+
 (use-package posframe
   :ensure t)
 

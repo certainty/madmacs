@@ -159,14 +159,9 @@
 
 ;; use org-modern
 (use-package org-modern
-  :ensure t
-  :after org
+  :straight (org-modern :host github :repo "minad/org-modern")
   :hook
   ((org-mode . org-modern-mode)
-   (org-agenda-finalize . org-modern-agenda))
-
-  :custom
-  (org-modern-label-border 0.1)
-  (org-modern-block-fringe 1))
+   (org-agenda-finalize . org-modern-agenda)))
 
 (provide 'madmacs-org-essentials)
