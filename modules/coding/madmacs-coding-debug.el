@@ -13,9 +13,6 @@
   :hook (dap-ui-mode . dap-ui-controls-mode))
 
 ;; TODO: does it have any consequences if I don't load this? 
-;; (use-package posframe
-;;   :ensure t)
-
 ;; (use-package realgud
 ;;   :ensure t)
 

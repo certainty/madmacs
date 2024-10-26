@@ -24,4 +24,7 @@
   :config
   (winner-mode 1))
 
+(use-package posframe
+  :ensure t)
+
 (provide 'madmacs-ui-windows)

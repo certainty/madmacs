@@ -37,43 +37,47 @@
 
 (setopt madmacs-after-startup-features
         '(
-          madmacs-coding-treesitter
-          ;madmacs-files-treemacs
+           madmacs-coding-treesitter
+                                        ;madmacs-files-treemacs
 
-          madmacs-writing-checkers
-          madmacs-writing-essentials
+           madmacs-writing-checkers
+           madmacs-writing-essentials
 
-          madmacs-tools-terminal
-          madmacs-tools-vcs
+           madmacs-tools-terminal
+           madmacs-tools-vcs
 
-          madmacs-coding-essentials
+           madmacs-coding-essentials
 
-          madmacs-coding-version-manager
-          madmacs-coding-checkers
-          madmacs-coding-lsp
-          madmacs-coding-debug
-          madmacs-coding-scala
-          madmacs-coding-ruby
-          madmacs-coding-golang
-          madmacs-coding-typescript
-          madmacs-coding-web
-          madmacs-coding-terraform
-          madmacs-coding-lisp
-          madmacs-coding-common-lisp
-          madmacs-coding-prolog
-          madmacs-coding-elixir
-          madmacs-coding-elm
-          madmacs-coding-graphql
-          madmacs-coding-copilot
-          madmacs-coding-configurations
+           madmacs-coding-version-manager
+           madmacs-coding-checkers
+           madmacs-coding-lsp
+           madmacs-coding-debug
+           madmacs-coding-scala
+           madmacs-coding-ruby
+           madmacs-coding-golang
+           madmacs-coding-typescript
+           madmacs-coding-web
+           madmacs-coding-terraform
+           madmacs-coding-lisp
+           madmacs-coding-common-lisp
+           madmacs-coding-prolog
+           madmacs-coding-elixir
+           madmacs-coding-elm
+           madmacs-coding-graphql
+           madmacs-coding-copilot
+           madmacs-coding-configurations
 
-          madmacs-tools-docker
-          madmacs-tools-calc
+           madmacs-tools-docker
+           madmacs-tools-calc
+           madmacs-tools-pass
+           madmacs-tools-ai
+           madmacs-tools-translate
 
-          madmacs-org-essentials
 
-          madmacs-games-chess
-          madmacs-keys-keybindings
-          ))
+           madmacs-org-essentials
+
+           madmacs-games-chess
+
+           madmacs-keys-keybindings))
 
 (madmacs--boot)

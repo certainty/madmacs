@@ -5,3 +5,5 @@ flycheck_*
 /fontaine-latest-state.eld
 /tabsession.el
 madmacs.env
+/.chatgpt-shell.el
+/chatgpt/

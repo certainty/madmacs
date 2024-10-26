@@ -312,6 +312,29 @@
     "b" '("Buffers" . ibuffer)
     "m" '("Bookmarks" . list-bookmarks))
 
+
+	(defvar-keymap madmacs-gptel-keys :doc "Keys for GPTel related functionality")
+  ;; TODO: add commands to use specific models and prompts 
+  (which-key-add-keymap-based-replacements madmacs-gptel-keys
+    "x" '("abort" . gptel-abort))
+  
+  (defvar-keymap madmacs-chatgpt-shell-keys :doc "Keys for ChatGPT shell related functionality")
+  (which-key-add-keymap-based-replacements madmacs-chatgpt-shell-keys 
+    "s" '("ChatGPT shell" . chatgpt-shell))
+
+  (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
+  (which-key-add-keymap-based-replacements madmacs-ai-keys
+    "?" '("GPTel quick" . gptel-quick)
+    "." '("GPTel send" . gptel-send)
+    "," '("GPTel menu" . gptel-menu)
+    "g" `("GPTel" . ,madmacs-gptel-keys)
+    "s" `("ChatGPT shell" . ,madmacs-chatgpt-shell-keys))
+  
+  (defvar-keymap madmacs-tools-keys :doc "Access various tools")
+  (which-key-add-keymap-based-replacements madmacs-tools-keys
+    "c" '("Calculator" . calc)
+    "p" '("Pass" . pass))
+  
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
 
   (which-key-add-keymap-based-replacements madmacs-leader-keys
@@ -324,6 +347,7 @@
     "/" '("Avy(t)" . casual-avy-tmenu)
     "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
+    "a" `("AI" . ,madmacs-ai-keys)
     "e" `("Filetree" . dirvish-side)
     "E" `("Filetree Dwim" . dirvish-dwim)
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
@@ -339,6 +363,7 @@
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "s" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
+    "T" `("  Tools " . ,madmacs-tools-keys)
     "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
 
