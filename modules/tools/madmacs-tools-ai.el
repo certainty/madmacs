@@ -1,28 +1,39 @@
 ;; -*- lexical-binding: t; -*-
 
+;;; Code:
+
+(defun madmacs--make-key-function (secret-name)
+  "Return a function that memoizes the key for SECRET-NAME."
+  (let ((memoized-key nil))
+    (lambda (&optional force-refresh)
+      (when (or force-refresh (not memoized-key))
+        (setq memoized-key
+          (auth-source-pass-get 'secret secret-name)))
+      memoized-key)))
+
 (use-package gptel
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :init
   (setq gptel-expert-commands t)
 
-  :config
-	(defun make-key-function (secret-name)
-    "Return a function that memoizes the key for SECRET-NAME."
-    (let ((memoized-key nil))
-      (lambda (&optional force-refresh)
-        (when (or force-refresh (not memoized-key))
-          (setq memoized-key
-            (auth-source-pass-get 'secret secret-name)))
-        memoized-key)))
+  :custom
+  (gptel-model 'gpt-4o)
+  (gptel-default-mode 'org-mode)
+  (gptel-directives
+    '((default . "You are a large language model living in Emacs and a helpful assistant. You're an expert programmer and systems engineer. Respond concisely.")
+       (programming . "You are a large language model and a careful programmer. Provide code and only code as output without any additional text, prompt or note.")
+       (common-lisp . "You are a large language model and a careful programmer specialized in modern common lisp. Provide code and only code as output without any additional text, prompt or note.")
+       (writing . "You are a large language model and a writing assistant. Use simple and precise language. Respond concisely.")
+       (chat . "You are a large language model and a conversation partner. Use simple and precise language. Respond concisely.")))
   
+  :config
+ 
   (gptel-make-anthropic "Claude"
     :stream t
-    :key (make-key-function "anthropic.gptel"))
+    :key (madmacs--make-key-function "anthropic.gptel"))
   
-  (setq gptel-api-key (make-key-function "api.openai.com"))
-  (setq gptel-default-mode 'org-mode)
+  (setq gptel-api-key (madmacs--make-key-function "api.openai.com"))
 
-  (setq gptel-model 'gpt-4o) ;; default model
   (with-eval-after-load 'embark
     (keymap-set embark-general-map "g" #'gptel-send)
     (keymap-set embark-region-map "g" #'gptel-send)
@@ -41,5 +52,6 @@
   :custom
   (elysium-window-size 0.33)
   (elysium-window-style 'vertical))
+
 
 (provide 'madmacs-tools-ai)

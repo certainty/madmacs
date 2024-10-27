@@ -37,6 +37,7 @@
 (use-package smerge-mode
   :ensure nil
   :straight nil
+  :hook prog-mode
   :after hydra
   :config
   (when (eql madmacs-modal-approach 'evil)
