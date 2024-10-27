@@ -320,6 +320,10 @@
 	(defvar-keymap madmacs-gptel-keys :doc "Keys for GPTel related functionality")
   ;; TODO: add commands to use specific models and prompts 
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
+    "." '("quick" . gptel-quick)
+    "g" '("chat" . gptel)
+    "s" '("send" . gptel-send)
+    "m" '("menu" . gptel-menu)
     "x" '("abort" . gptel-abort))
 
   (defvar-keymap madmacs-copilot-keys :doc "Keys for Copilot related functionality")
@@ -328,15 +332,13 @@
     "."  '("complete" . copilot-complete)
     "x" '("log out" . copilot-logout)
     "l" '("log in" . copilot-login))
-
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
     "." '("GPTel quick" . gptel-quick)
+    "," '("Ellama menu" . ellama-transient-main-menu)
     "r" '("Replace with Elysium" . elysium-query)
-    "a" '("GPTel send" . gptel-send)
-    "A" '("GPTel menu" . gptel-menu)
-    "c" '("GPTel session" . gptel)
+    "R" '("Code review" . ellama-code-review)
     "g" `("GPTel" . ,madmacs-gptel-keys)
     "C" `("Copilot" . ,madmacs-copilot-keys))
   

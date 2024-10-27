@@ -2,12 +2,14 @@
 
 (use-package emacs
   :ensure nil
-  :custom
+  :init
   (add-to-list 'auth-sources "~/.config/authinfo.gpg" t))
 
 (use-package pass
   :ensure t
-  :after epa)
+  :after epa
+  :init
+  (auth-source-pass-enable))
 
 (use-package epa
   :ensure nil

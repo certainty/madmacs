@@ -7,3 +7,4 @@ flycheck_*
 madmacs.env
 /.chatgpt-shell.el
 /chatgpt/
+/ellama-sessions/
