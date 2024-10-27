@@ -105,6 +105,12 @@
   :commands (ellama-transient-main-menu)
   :bind
   (("C-c e" . ellama-transient-main-menu))
+
+  :custom
+  (ellama-user-nick "David")
+  (ellama-assistant-nick "Ellama")
+  (ellama-auto-scroll t)
+
   :config
   (setopt llm-warn-on-nonfree nil)
   (setopt ellama-language "German")
