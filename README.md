@@ -75,10 +75,7 @@ Please double check that you don't have any secrets in this file.
 
 <img src="https://github.com/certainty/madmacs/assets/338957/ad5a5eda-d22e-41e7-9be0-e667b3c1c8d3" width=400px>
 
-
 <img src="https://github.com/certainty/madmacs/assets/338957/77bc63dd-93dc-4f75-a81d-75327168c246" width=400px>
-
-
 
 <img src="https://github.com/certainty/madmacs/assets/338957/478b536b-28c6-4572-a203-5aa9f7bf030b" width=400px>
 
