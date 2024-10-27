@@ -321,14 +321,24 @@
   ;; TODO: add commands to use specific models and prompts 
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
     "x" '("abort" . gptel-abort))
+
+  (defvar-keymap madmacs-copilot-keys :doc "Keys for Copilot related functionality")
+  (which-key-add-keymap-based-replacements madmacs-copilot-keys
+    "t" '("toggle" . copilot-mode)
+    "."  '("complete" . copilot-complete)
+    "x" '("log out" . copilot-logout)
+    "l" '("log in" . copilot-login))
+
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
     "." '("GPTel quick" . gptel-quick)
+    "r" '("Replace with Elysium" . elysium-query)
     "a" '("GPTel send" . gptel-send)
     "A" '("GPTel menu" . gptel-menu)
     "c" '("GPTel session" . gptel)
-    "g" `("GPTel" . ,madmacs-gptel-keys))
+    "g" `("GPTel" . ,madmacs-gptel-keys)
+    "C" `("Copilot" . ,madmacs-copilot-keys))
   
   (defvar-keymap madmacs-tools-keys :doc "Access various tools")
   (which-key-add-keymap-based-replacements madmacs-tools-keys

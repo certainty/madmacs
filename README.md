@@ -42,6 +42,18 @@ Mode specific leader bindings are available (if they exist) under the local lead
 
 Use `M-o` in any mode that is supported by [casual suite](https://github.com/kickingvegas/casual-suite) to fire up the transient menu.
 
+
+## Usage of LLM / AI to assist programming
+
+I've enabled and configured GitHub Copilot and GPTel ready to be used from within emacs.
+In addition I've configured elysium as a quick way to refactor / rewrite a certain section providing a diff.
+Copilot is used for auto completion of code, while GPTel is made available to interact in any buffer.
+
+All AI related functionality is available via `SPC a` prefix.
+
+In addition there are `embark` actions available for `gptel` and `elysium` so you can use `C-.` to access them
+on the given context.
+
 ## Environment
 
 When you use the GUI Emacs on MacOS, which is me, you have to make sure that the environment is setup correctly.
