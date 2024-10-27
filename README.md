@@ -45,14 +45,17 @@ Use `M-o` in any mode that is supported by [casual suite](https://github.com/kic
 
 ## Usage of LLM / AI to assist programming
 
-I've enabled and configured GitHub Copilot and GPTel ready to be used from within emacs.
+I've enabled and configured GitHub Copilot, GPTel, Elysium and Ellama, ready to be used from within emacs.
 In addition I've configured elysium as a quick way to refactor / rewrite a certain section providing a diff.
 Copilot is used for auto completion of code, while GPTel is made available to interact in any buffer.
 
 All AI related functionality is available via `SPC a` prefix.
 
-In addition there are `embark` actions available for `gptel` and `elysium` so you can use `C-.` to access them
-on the given context.
+In addition there are `embark` actions available for `gptel` and `elysium` so you can use `C-.` to access them on the given context.
+
+I've setup **Ellama** to work with both local and remote models. 
+I rely on the transient menu as an easy way to access the functionality for now.
+`C-c e` opens the main Ellama transient menu.
 
 ## Environment
 

@@ -117,9 +117,9 @@
        (gpt4o . ,madmacs-llm-model-gpt4o)
        (claude-sonnet . ,madmacs-llm-model-claude-sonnet)))
 
-  ;; (setq ellama-provider madmacs-llm-model-llama3.2)
+  (setq ellama-provider madmacs-llm-model-llama3.2)
   ;; (setq ellama-provider madmacs-llm-model-zephyr)
-  (setq ellama-provider madmacs-llm-model-gpt4o)
+  ;; (setq ellama-provider madmacs-llm-model-gpt4o)
 
   (with-eval-after-load 'embark
     (keymap-set embark-general-map "y" #'ellama-transient-main-menu)))
