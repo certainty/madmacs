@@ -337,7 +337,7 @@
   (which-key-add-keymap-based-replacements madmacs-ai-keys
     "." '("GPTel quick" . gptel-quick)
     "," '("Ellama menu" . ellama-transient-main-menu)
-    "r" '("Replace with Elysium" . elysium-query)
+    "r" '("Query with Elysium" . elysium-query)
     "R" '("Code review" . ellama-code-review)
     "g" `("GPTel" . ,madmacs-gptel-keys)
     "C" `("Copilot" . ,madmacs-copilot-keys))

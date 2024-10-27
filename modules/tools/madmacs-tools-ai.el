@@ -103,6 +103,8 @@
   :after llm
   :defer t ;; defer is VERY important here, otherwise the interactive function to to get the password doesn't run properly and the API key is not set
   :commands (ellama-transient-main-menu)
+  :bind
+  (("C-c e" . ellama-transient-main-menu))
   :config
   (setopt llm-warn-on-nonfree nil)
   (setopt ellama-language "German")
