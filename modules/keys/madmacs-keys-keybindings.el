@@ -336,8 +336,9 @@
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
-    "." '("GPTel menu" . gptel-menu)
     "a" '("GPTel send" . gptel-send)
+    "A" '("GPTel add" . gptel-menu)
+    "c" '("GPTel chat" . gptel)
     "g" `("GPTel" . ,madmacs-gptel-keys)
     "C" `("Copilot" . ,madmacs-copilot-keys))
   
