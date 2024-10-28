@@ -2,8 +2,14 @@
 
 ;;; Code:
 
+;; I try to use gptel for most of my AI needs, but I also have llm and ellama setup for more specialized tasks.
+;; GPTel sets out to be unobstrusive and get out of the way, which I very much appreciate.
+
 (use-package gptel
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
+  :bind
+  (("C-c a" . gptel-menu)
+   ("C-c C-<return>" . gptel-send))
   :init
   (setq gptel-expert-commands t)
 
@@ -61,97 +67,5 @@
     (keymap-set embark-region-map "g" #'gptel-send)
     (keymap-set embark-general-map "G" #'gptel-menu)
     (keymap-set embark-region-map "G" #'gptel-menu)))
-
-(use-package gptel-quick
-  :straight (:host github :repo "karthink/gptel-quick" :files ("gptel-quick.el"))
-  :after gptel
-  :config
-  (with-eval-after-load 'embark
-    (keymap-set embark-general-map "?" #'gptel-quick)))
-
-(use-package elysium
-  :straight (:host github :repo "lanceberge/elysium" :files ("*.el"))
-  :custom
-  (elysium-window-size 0.33)
-  (elysium-window-style 'vertical))
-
-;; Ellama setup to use public models and also local ones
-
-(use-package llm
-  :straight (:host github :repo "ahyatt/llm" :files ("*.el"))
-  :config
-  (require 'llm-openai)
-  (require 'llm-claude)
-  (require 'llm-ollama)
-
-  (defvar madmacs-llm-model-gpt4o nil)
-  (defvar madmacs-llm-model-claude-sonnet nil)
-  (defvar madmacs-llm-model-llama3.2 nil)
-  (defvar madmacs-llm-model-zephyr nil)
-  (defvar madmacs-llm-model-codegemma nil)
-
-  (defun madmacs-llm-setup-models ()
-    (interactive)
-
-    (unless madmacs-llm-model-llama3.2
-      (setq madmacs-llm-model-llama3.2
-        (make-llm-ollama
-          :chat-model "llama3.2")))
-
-    (unless madmacs-llm-model-zephyr
-      (setq madmacs-llm-model-zephyr
-        (make-llm-ollama
-          :chat-model "zephyr")))
-
-    (unless madmacs-llm-model-codegemma
-      (setq madmacs-llm-model-codegemma
-        (make-llm-ollama
-          :chat-model "codegemma")))
-    
-    (unless madmacs-llm-model-gpt4o
-      (setq madmacs-llm-model-gpt4o
-        (make-llm-openai
-          :chat-model "gpt-4o"
-          :key (auth-source-pass-get 'secret "api.openai.com"))))
-
-    (unless madmacs-llm-model-claude-sonnet
-      (setq madmacs-llm-model-claude-sonnet
-        (make-llm-claude
-          :chat-model "claude-3-5-sonnet-latest"
-          :key (auth-source-pass-get 'secret "anthropic.gptel"))))))
-
-(use-package ellama
-  :after llm
-  :defer t ;; defer is VERY important here, otherwise the interactive function to to get the password doesn't run properly and the API key is not set
-  :commands (ellama-transient-main-menu)
-  :bind
-  (("C-c e" . ellama-transient-main-menu))
-
-  :custom
-  (ellama-user-nick "David")
-  (ellama-assistant-nick "Ellama")
-  (ellama-auto-scroll t)
-
-  :config
-  (setopt llm-warn-on-nonfree nil)
-  (setopt ellama-language "German")
-
-  (madmacs-llm-setup-models)
-
-  (setq ellama-providers
-    `((llama3.2 . ,madmacs-llm-model-llama3.2)
-       (zephyr . ,madmacs-llm-model-zephyr)
-       (codegemma . ,madmacs-llm-model-codegemma)
-       (gpt4o . ,madmacs-llm-model-gpt4o)
-       (claude-sonnet . ,madmacs-llm-model-claude-sonnet)))
-
-  ;; (setq ellama-provider madmacs-llm-model-zephyr)
-  ;; (setq ellama-provider madmacs-llm-model-gpt4o)
-
-  (setq ellama-provider madmacs-llm-model-codegemma)
-  (setq ellama-summarization-provider madmacs-llm-model-zephyr)
-
-  (with-eval-after-load 'embark
-    (keymap-set embark-general-map "y" #'ellama-transient-main-menu)))
 
 (provide 'madmacs-tools-ai)

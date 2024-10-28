@@ -5,7 +5,6 @@
   :straight nil
   :demand t
   :config
-  
   ;; Here I define the global keys and leader keys.
   ;; I put them in one place to find / correct / avoid conflicts easier.
   ;; For major modes I may still define the localleader bindings in the packages themselves,
@@ -320,10 +319,12 @@
 	(defvar-keymap madmacs-gptel-keys :doc "Keys for GPTel related functionality")
   ;; TODO: add commands to use specific models and prompts 
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
-    "." '("quick" . gptel-quick)
-    "g" '("chat" . gptel)
+    "a" '("add" . gptel-add)
+    "f" '("add file" . gptel-add-file)
+    "c" '("chat" . gptel)
     "s" '("send" . gptel-send)
     "m" '("menu" . gptel-menu)
+    "p" '("set prompt" . gptel-system-prompt)
     "x" '("abort" . gptel-abort))
 
   (defvar-keymap madmacs-copilot-keys :doc "Keys for Copilot related functionality")
@@ -335,10 +336,8 @@
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
-    "." '("GPTel quick" . gptel-quick)
-    "," '("Ellama menu" . ellama-transient-main-menu)
-    "r" '("Query with Elysium" . elysium-query)
-    "R" '("Code review" . ellama-code-review)
+    "." '("GPTel menu" . gptel-menu)
+    "a" '("GPTel send" . gptel-send)
     "g" `("GPTel" . ,madmacs-gptel-keys)
     "C" `("Copilot" . ,madmacs-copilot-keys))
   
