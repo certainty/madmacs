@@ -35,10 +35,25 @@
     "Retrieves the Anthropic API key from pass."
     (madmacs-auth-source-pass-get "anthropic.gptel"))
 
+  (defun madmacs-groq-key-fn ()
+    "Retrieves the Groq API key from pass."
+    (madmacs-auth-source-pass-get "api.groq.com"))
+
   (gptel-make-anthropic "Claude"
     :stream t
     :key (madmacs-anthropic-key-fn))
 
+  (gptel-make-ollama "Ollama"
+    :stream t
+    :models '(llama3.2:latest codegemma:latest zephyr:latest))
+
+  (gptel-make-openai "Groq"
+    :host "api.groq.com"
+    :endpoint "/openai/v1/chat/completions"
+    :stream t
+    :key (madmacs-groq-key-fn)
+    :models '(llama-3.1-70b-versatile gemma-7b-it mixtral-8x7b-32768))
+  
   (setq gptel-api-key (madmacs-open-ai-key-fn))
 
   (with-eval-after-load 'embark
@@ -73,6 +88,7 @@
   (defvar madmacs-llm-model-claude-sonnet nil)
   (defvar madmacs-llm-model-llama3.2 nil)
   (defvar madmacs-llm-model-zephyr nil)
+  (defvar madmacs-llm-model-codegemma nil)
 
   (defun madmacs-llm-setup-models ()
     (interactive)
@@ -86,6 +102,11 @@
       (setq madmacs-llm-model-zephyr
         (make-llm-ollama
           :chat-model "zephyr")))
+
+    (unless madmacs-llm-model-codegemma
+      (setq madmacs-llm-model-codegemma
+        (make-llm-ollama
+          :chat-model "codegemma")))
     
     (unless madmacs-llm-model-gpt4o
       (setq madmacs-llm-model-gpt4o
@@ -120,12 +141,15 @@
   (setq ellama-providers
     `((llama3.2 . ,madmacs-llm-model-llama3.2)
        (zephyr . ,madmacs-llm-model-zephyr)
+       (codegemma . ,madmacs-llm-model-codegemma)
        (gpt4o . ,madmacs-llm-model-gpt4o)
        (claude-sonnet . ,madmacs-llm-model-claude-sonnet)))
 
-  (setq ellama-provider madmacs-llm-model-llama3.2)
   ;; (setq ellama-provider madmacs-llm-model-zephyr)
   ;; (setq ellama-provider madmacs-llm-model-gpt4o)
+
+  (setq ellama-provider madmacs-llm-model-codegemma)
+  (setq ellama-summarization-provider madmacs-llm-model-zephyr)
 
   (with-eval-after-load 'embark
     (keymap-set embark-general-map "y" #'ellama-transient-main-menu)))
