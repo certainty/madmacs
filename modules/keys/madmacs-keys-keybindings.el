@@ -285,6 +285,7 @@
   (defvar-keymap madmacs-ux-keys :doc "Keys to control and toggle various aspects of the ux")
   
   (which-key-add-keymap-based-replacements madmacs-ux-keys
+    "c" '("Toggle Color Scheme (light/dark)" . madmacs-modus-theme-toggle)
     "f" '("Toggle Big Font" . madmacs-toggle-font)
     "g" '("Toggle golden ratio" . golden-ratio-mode)
     "G" '("Toggle golden ratio widescreen" . golden-ratio-toggle-widescreen)

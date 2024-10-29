@@ -38,18 +38,40 @@
    modus-themes-org-blocks 'tinted-background
    modus-themes-completions
    '((matches . (extrabold underline))
-     (selection . (semibold italic))))
-  (setq modus-themes-common-palette-overrides
-       (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
-                                   `((bg-main "#000000")
-                                     (bg-paren-match bg-magenta-intense)
-                                     (underline-paren-match fg-main)
-                                     (border-mode-line-active unspecified)
-                                     (border-mode-line-inactive unspecified)
-                                     (fg-line-number-active red-cooler)
-                                     (bg-line-number-inactive unspecified)
-                                     (bg-line-number-active unspecified)))
-       )
-  (load-theme 'modus-vivendi-tinted t))
+      (selection . (semibold italic))))
+
+  (defun madmacs-load-modus-theme (name &optional light)
+    (setq modus-themes-common-palette-overrides
+      (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
+        `(,(unless light '(bg-main "#000000"))
+           ,(unless light '(bg-paren-match bg-magenta-intense))
+           (underline-paren-match fg-main)
+           (border-mode-line-active unspecified)
+           (border-mode-line-inactive unspecified)
+           (fg-line-number-active red-cooler)
+           (bg-line-number-inactive unspecified)
+           (bg-line-number-active unspecified))))
+
+    (load-theme name t))
+
+	(defvar madmacs--modus-theme-light nil)
+
+  (defun madmacs-modus-light-theme ()
+    (interactive)
+    (setq madmacs--modus-theme-light t)
+    (madmacs-load-modus-theme 'modus-operandi t))
+
+  (defun madmacs-modus-dark-theme ()
+    (interactive)
+    (setq madmacs--modus-theme-light nil)
+    (madmacs-load-modus-theme 'modus-vivendi-tinted))
+
+  (defun madmacs-modus-theme-toggle ()
+    (interactive)
+    (if madmacs--modus-theme-light
+        (madmacs-modus-dark-theme)
+      (madmacs-modus-light-theme)))
+
+  (madmacs-modus-dark-theme))
 
 (provide 'madmacs-ui-theme)
