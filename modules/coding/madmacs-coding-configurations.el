@@ -17,5 +17,9 @@
   :hook
   (json-mode . madmacs--lsp))
 
+(use-package csv-mode
+  :defer t
+  :hook (csv-mode . csv-guess-set-separator) 
+  :mode "\\.csv\\'")
 
 (provide 'madmacs-coding-configurations)
