@@ -257,7 +257,7 @@
   (defvar-keymap madmacs-project-keys :doc "Keys related to interactions with the current project")
 
   (which-key-add-keymap-based-replacements madmacs-project-keys
-    ;"e"   '("Filetree add project and scope" . treemacs-add-and-display-current-project-exclusively)
+    "a"   '("GPTel" . madmacs-gptel-project)
     "r"   '("Query replace" . project-query-replace-regexp)
     "d"   '("Consult dir" . consult-dir)
     "R"   '("Remember project under" . project-remember-projects-under)
@@ -337,6 +337,8 @@
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
+    "." '("GPTel quick" . gptel-quick)
+    "," '("GPTel ask" . gptel-ask)
     "a" '("GPTel send" . gptel-send)
     "A" '("GPTel add" . gptel-menu)
     "c" '("GPTel chat" . gptel)

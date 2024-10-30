@@ -4,18 +4,33 @@
 
 (use-package gptel
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
+  :commands (gptel-send gptel-menu gptel)
   :bind
-  (("C-c a" . gptel-menu)
-    ("C-c C-<return>" . gptel-send))
+  (("C-c <return>" . gptel-send)
+    ("C-c C-<return>" . gptel-menu)
+    ("C-c ?" . gptel-ask))
+
   :init
   (setq gptel-expert-commands t)
 
   :custom
   (gptel-default-mode 'org-mode)
 
+  (gptel-directives
+    '((default . "To assist:  Be terse.  Do not offer unprompted advice or clarifications. Speak in specific,
+ topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak
+ directly and be willing to make creative guesses. Explain your reasoning. if you
+ don’t know, say you don’t know.
+
+ Remain neutral on all topics. Be willing to reference less reputable sources for
+ ideas.
+
+ Never apologize.  Ask questions when unsure.")
+       (emacser . "You are an Emacs maven.  Reply only with the most appropriate built-in Emacs command for the task I specify.  Do NOT generate any additional description or explanation.")))
+
   ;; we configure custom directives in the prompts file because this gives us completing reads which is easier to use
   (gptel-crowdsourced-prompts-file (expand-file-name "gptel/prompts.csv" user-emacs-directory))
-  
+
   :config
   (defun madmacs-auth-source-pass-get (secret)
     "Retrieves the secret from pass using the SECRET name and memoizes it so that repeated calls do not require a new pass lookup."
@@ -43,7 +58,7 @@
       :stream t
       :key (madmacs-anthropic-key-fn)))
 
-	(defvar madmacs-backend-ollama
+  (defvar madmacs-backend-ollama
     (gptel-make-ollama "Ollama"
       :stream t
       :models '(llama3.2:latest codegemma:latest zephyr:latest)))
@@ -60,7 +75,7 @@
   (setq gptel-backend madmacs-backend-ollama)
   (setq gptel-model 'codegemma:latest)
 
-	(when (file-exists-p gptel-crowdsourced-prompts-file)
+  (when (file-exists-p gptel-crowdsourced-prompts-file)
     ;; touch the file because gptel checks if it's older than 14 days and attempts to refetch.
     ;; I do not want that.
     (f-touch gptel-crowdsourced-prompts-file))
@@ -98,11 +113,86 @@ Return only the improved text formatted according to the specified markup langua
 The text is: ")))
 
   (setopt gptel-rewrite-directives-hook (list #'madmacs-gptel-rewrite-directive))
-  
+  (setf
+    (alist-get 'org-mode gptel-prompt-prefix-alist) "*Prompt*: "
+    (alist-get 'org-mode gptel-response-prefix-alist) "*Response*:\n")
+
+  (with-eval-after-load 'gptel-org
+    (setq-default gptel-org-branching-context t))
+
+  ;; GPTel ask stolen from karthink's emacs config
+  (defvar gptel-ask--buffer-name "*gptel-ask*" "Name for one-off queries.")
+
+  (defvar gptel-ask-display-buffer-action
+    '((display-buffer-reuse-window
+        display-buffer-in-side-window)
+       (side . right)
+       (slot . 10)
+       (window-width . 0.25)
+       (window-parameters (no-delete-other-windows . t))
+       (bump-use-time . t)))
+
+  (setf (alist-get gptel-ask--buffer-name display-buffer-alist nil nil #'equal) gptel-ask-display-buffer-action)
+
+  (defun gptel--prepare-ask-buffer ()
+    (unless (buffer-live-p gptel-ask--buffer-name)
+      (with-current-buffer (get-buffer-create gptel-ask--buffer-name)
+        (when (fboundp 'org-mode)
+          (org-mode))
+        (setq header-line-format
+          (list '(:eval (gptel-backend-name gptel-backend))
+            ": " gptel-ask--buffer-name))
+        (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll nil t)
+        (add-hook 'gptel-post-response-functions
+          (lambda (beg end)
+            (save-excursion
+              (gptel-end-of-response)
+              (goto-char end)
+              (insert "\n\n-----")))
+          nil t)))
+    (if-let ((win (get-buffer-window gptel-ask--buffer-name))
+              ((window-live-p win)))
+      (with-selected-window win
+        (goto-char (point-max))
+        (ensure-empty-lines 0))
+      (with-current-buffer (get-buffer gptel-ask--buffer-name)
+        (goto-char (point-max))
+        (ensure-empty-lines 0))))
+
+  (require 'gptel-transient)
+  (defun gptel-ask (&optional arg)
+    (interactive "P")
+    (gptel--prepare-ask-buffer)
+    (gptel--suffix-send (list "m" (if arg "e" (concat "b" gptel-ask--buffer-name))))))
+
+(use-package gptel-quick
+  :ensure t
+  :straight (:host github :repo "karthink/gptel-quick" :files ("*.el"))
+  :defer t
+  :custom
+  (gptel-quick-use-context t)
+  (gptel-quick-word-count 20)
+
+  :init
   (with-eval-after-load 'embark
-    (keymap-set embark-general-map "." #'gptel-send)
-    (keymap-set embark-region-map "." #'gptel-send)
-    (keymap-set embark-general-map "," #'gptel-menu)
-    (keymap-set embark-region-map "," #'gptel-menu)))
+    (keymap-set embark-general-map "?" #'gptel-quick)
+    (keymap-set embark-symbol-map "?" #'gptel-quick)
+    (keymap-set embark-region-map "?" #'gptel-quick)))
+
+(use-package project
+  :config
+  (setf (alist-get ".*chat.org$" display-buffer-alist nil nil #'equal)
+    `((display-buffer-in-side-window)
+       (window-height . 0.5)
+       (body-function . ,#'select-window)))
+
+  (defun madmacs-gptel-project ()
+    "Open the ChatGPT file for the current project."
+    (interactive)
+    (let ((default-directory (project-root (project-current))))
+      (find-file "chat.org")
+      (require 'gptel)
+      (unless gptel-mode
+        (gptel-mode 1)))))
 
 (provide 'madmacs-tools-ai)
