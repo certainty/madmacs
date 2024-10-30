@@ -231,8 +231,7 @@
       "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
       "S"  '("Symbols" . consult-lsp-file-symbols)
       "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
-      "w" `("Workspaces" . ,madmacs-lsp-workspace-keys)
-      ))
+      "w" `("Workspaces" . ,madmacs-lsp-workspace-keys)))
 
   (when (eq madmacs-lsp-client 'eglot)
     (which-key-add-keymap-based-replacements madmacs-lsp-keys
