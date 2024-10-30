@@ -8,3 +8,4 @@ madmacs.env
 /.chatgpt-shell.el
 /chatgpt/
 /ellama-sessions/
+/chat.org

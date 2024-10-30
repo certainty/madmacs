@@ -320,6 +320,7 @@
 	(defvar-keymap madmacs-gptel-keys :doc "Keys for GPTel related functionality")
   ;; TODO: add commands to use specific models and prompts 
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
+    "." '("project chat" . madmacs-gptel-project)
     "a" '("add" . gptel-add)
     "f" '("add file" . gptel-add-file)
     "c" '("chat" . gptel)

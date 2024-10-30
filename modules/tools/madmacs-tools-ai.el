@@ -1,4 +1,5 @@
-;; -*- lexical-binding: t; -*-
+;
+; -*- lexical-binding: t; -*-
 
 ;;; Code:
 
@@ -17,16 +18,9 @@
   (gptel-default-mode 'org-mode)
 
   (gptel-directives
-    '((default . "To assist:  Be terse.  Do not offer unprompted advice or clarifications. Speak in specific,
- topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak
- directly and be willing to make creative guesses. Explain your reasoning. if you
- don’t know, say you don’t know.
-
- Remain neutral on all topics. Be willing to reference less reputable sources for
- ideas.
-
- Never apologize.  Ask questions when unsure.")
-       (emacser . "You are an Emacs maven.  Reply only with the most appropriate built-in Emacs command for the task I specify.  Do NOT generate any additional description or explanation.")))
+    '((default . "To assist: Be terse.  Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize.  Ask questions when unsure.")
+       (emacser . "You are an Emacs maven.  Reply only with the most appropriate built-in Emacs command for the task I specify.  Do NOT generate any additional description or explanation.")
+       (elisp . "You are an Elisp expert.  Reply only with the most appropriate Elisp code for the task I specify.  Do NOT generate any additional description or explanation.")))
 
   ;; we configure custom directives in the prompts file because this gives us completing reads which is easier to use
   (gptel-crowdsourced-prompts-file (expand-file-name "gptel/prompts.csv" user-emacs-directory))
@@ -113,10 +107,6 @@ Return only the improved text formatted according to the specified markup langua
 The text is: ")))
 
   (setopt gptel-rewrite-directives-hook (list #'madmacs-gptel-rewrite-directive))
-  (setf
-    (alist-get 'org-mode gptel-prompt-prefix-alist) "*Prompt*: "
-    (alist-get 'org-mode gptel-response-prefix-alist) "*Response*:\n")
-
   (with-eval-after-load 'gptel-org
     (setq-default gptel-org-branching-context t))
 
@@ -182,8 +172,11 @@ The text is: ")))
 (use-package project
   :config
   (setf (alist-get ".*chat.org$" display-buffer-alist nil nil #'equal)
-    `((display-buffer-in-side-window)
-       (window-height . 0.5)
+    `((display-buffer-reuse-window display-buffer-in-side-window)
+       (side . right)
+       (slot . 10)
+       (window-height . 0.35)
+       (window-parameters (no-delete-other-windows . t))
        (body-function . ,#'select-window)))
 
   (defun madmacs-gptel-project ()
