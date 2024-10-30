@@ -384,6 +384,6 @@
         (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
 
     (when (eql madmacs-modal-approach 'meow)
-        (global-set-key (kbd "C-c") madmacs-leader-keys)))
+      (global-set-key (kbd "C-c") madmacs-leader-keys)))
 
 (provide 'madmacs-keys-keybindings)

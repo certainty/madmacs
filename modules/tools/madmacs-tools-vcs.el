@@ -34,6 +34,19 @@
 (use-package smerge-mode
   :ensure nil
   :straight nil
-  :hook prog-mode)
+  :init
+  (defun madmacs-smerge-try-smerge ()
+    (save-excursion
+      (goto-char (point-min))
+      (when (re-search-forward "^<<<<<<< " nil t)
+        (smerge-mode 1))))
+  (add-hook 'find-file-hook 'madmacs-smerge-try-smerge t)
+  (add-hook 'after-revert-hook 'madmacs-smerge-try-smerge t))
+
+;; add some embark actions to work on
+(use-package embark-vc
+  :ensure t
+  :defer t
+  :after embark)
 
 (provide 'madmacs-tools-vcs)
