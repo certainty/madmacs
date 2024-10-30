@@ -34,19 +34,32 @@
 (use-package smerge-mode
   :ensure nil
   :straight nil
-  :init
-  (defun madmacs-smerge-try-smerge ()
-    (save-excursion
-      (goto-char (point-min))
-      (when (re-search-forward "^<<<<<<< " nil t)
-        (smerge-mode 1))))
-  (add-hook 'find-file-hook 'madmacs-smerge-try-smerge t)
-  (add-hook 'after-revert-hook 'madmacs-smerge-try-smerge t))
+  :bind
+  (("C-c m m" . smerge-mode)
+    (:map smerge-mode-map
+      ("C-c m ." . smerge-keep-mine)
+      ("C-c m o" . smerge-keep-other)
+      ("C-c m b" . smerge-keep-base)
+      ("C-c m a" . smerge-keep-all)
+      ("C-c m c" . smerge-keep-current)
+      ("C-c m n" . smerge-next)
+      ("C-c m p" . smerge-prev)))
+
+ 	:init
+  (which-key-add-key-based-replacements "C-c m" "smerge"))
 
 ;; add some embark actions to work on
 (use-package embark-vc
   :ensure t
-  :defer t
   :after embark)
+
+(use-package ediff
+  :ensure nil
+  :straight nil
+  :config
+  (setopt ediff-diff-options "")
+  (setopt ediff-custom-diff-options "-u")
+  (setopt ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setopt ediff-split-window-function 'split-window-vertically))
 
 (provide 'madmacs-tools-vcs)

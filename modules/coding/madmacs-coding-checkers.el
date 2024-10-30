@@ -12,7 +12,8 @@
   (flycheck-highlighting-mode 'symbols)
   (flycheck-indication-mode nil)
   :config
-  (global-flycheck-mode))
+  (global-flycheck-mode)
+  (which-key-add-key-based-replacements "C-c !" "flycheck"))
 
 (customize-set-variable 'flymake-mode-line-counter-format '("" flymake-mode-line-error-counter flymake-mode-line-warning-counter flymake-mode-line-note-counter ""))
 (customize-set-variable 'flymake-mode-line-format '(" " flymake-mode-line-exception flymake-mode-line-counters))
