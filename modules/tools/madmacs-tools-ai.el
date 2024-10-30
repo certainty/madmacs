@@ -9,7 +9,9 @@
   :bind
   (("C-c <return>" . gptel-send)
     ("C-c C-<return>" . gptel-menu)
-    ("C-c ?" . gptel-ask))
+    ("C-c ?" . gptel-ask)
+    ("C-c ." . gptel-quick)
+    ("C-c r" . gptel-rewrite-menu))
 
   :init
   (setq gptel-expert-commands t)
@@ -67,7 +69,8 @@
 
   (setq gptel-api-key (madmacs-open-ai-key-fn))
   (setq gptel-backend madmacs-backend-ollama)
-  (setq gptel-model 'codegemma:latest)
+  ;; (setq gptel-model 'codegemma:latest)
+  (setq gptel-model 'llama3.2:latest)
 
   (when (file-exists-p gptel-crowdsourced-prompts-file)
     ;; touch the file because gptel checks if it's older than 14 days and attempts to refetch.
@@ -86,7 +89,7 @@
 - Optimizing performance where possible without sacrificing readability
 - Preserving any critical existing comments
 
-Provide only the refactored code with necessary comments. Do not explain your changes or provide any other text.
+Provide only the refactored code and only the refactored code.
 The code is:
 "
         (gptel--strip-mode-suffix major-mode)

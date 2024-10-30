@@ -8,9 +8,7 @@
 
 (use-package ace-window
   :ensure t
-  :demand t
-  :bind
-  ("M-o" . ace-window))
+  :demand t)
 
 (use-package windmove
   :straight nil
@@ -27,7 +25,7 @@
 (use-package transpose-frame
   :ensure t)
 
-(use-package posframe
-  :ensure t)
+;; (use-package posframe
+;;   :ensure t)
 
 (provide 'madmacs-ui-windows)

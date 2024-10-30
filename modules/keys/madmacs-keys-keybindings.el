@@ -316,18 +316,6 @@
     "m" '("Bookmarks" . list-bookmarks))
 
 
-	(defvar-keymap madmacs-gptel-keys :doc "Keys for GPTel related functionality")
-  ;; TODO: add commands to use specific models and prompts 
-  (which-key-add-keymap-based-replacements madmacs-gptel-keys
-    "." '("project chat" . madmacs-gptel-project)
-    "a" '("add" . gptel-add)
-    "f" '("add file" . gptel-add-file)
-    "c" '("chat" . gptel)
-    "s" '("send" . gptel-send)
-    "m" '("menu" . gptel-menu)
-    "p" '("set prompt" . gptel-system-prompt)
-    "x" '("abort" . gptel-abort))
-
   (defvar-keymap madmacs-copilot-keys :doc "Keys for Copilot related functionality")
   (which-key-add-keymap-based-replacements madmacs-copilot-keys
     "t" '("toggle" . copilot-mode)
@@ -337,12 +325,16 @@
   
   (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-ai-keys
-    "." '("GPTel quick" . gptel-quick)
-    "," '("GPTel ask" . gptel-ask)
-    "a" '("GPTel send" . gptel-send)
-    "A" '("GPTel add" . gptel-menu)
-    "c" '("GPTel chat" . gptel)
-    "g" `("GPTel" . ,madmacs-gptel-keys)
+    "." '("Quick" . gptel-quick)
+    "," '("Ask" . gptel-ask)
+    "<return>" '("Complete at point" . gptel-send)
+    "a" '("This buffer to context" . gptel-add)
+    "f" '("File to context" . gptel-add-file)
+    "r" '("Rewrite" . gptel-rewrite-menu)
+    "c" '("Chat" . gptel)
+    "p" '("Project chat" . madmacs-gptel-project)
+    "P" '("Set prompt" . gptel-system-prompt)
+    "q" '("Abort" . gptel-abort)
     "C" `("Copilot" . ,madmacs-copilot-keys))
   
   (defvar-keymap madmacs-tools-keys :doc "Access various tools")

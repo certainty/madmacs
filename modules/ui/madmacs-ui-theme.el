@@ -59,7 +59,7 @@
   (defun madmacs-modus-light-theme ()
     (interactive)
     (setq madmacs--modus-theme-light t)
-    (madmacs-load-modus-theme 'modus-operandi t))
+    (madmacs-load-modus-theme 'modus-operandi-tinted t))
 
   (defun madmacs-modus-dark-theme ()
     (interactive)
