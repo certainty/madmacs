@@ -59,6 +59,7 @@
            madmacs-coding-web
            madmacs-coding-terraform
            madmacs-coding-lisp
+           madmacs-coding-elisp
            madmacs-coding-common-lisp
            madmacs-coding-prolog
            madmacs-coding-elixir
