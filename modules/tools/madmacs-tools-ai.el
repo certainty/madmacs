@@ -28,31 +28,10 @@
   (gptel-crowdsourced-prompts-file (expand-file-name "gptel/prompts.csv" user-emacs-directory))
 
   :config
-  (defun madmacs-auth-source-pass-get (secret)
-    "Retrieves the secret from pass using the SECRET name and memoizes it so that repeated calls do not require a new pass lookup."
-    (let ((memoized-secret nil))
-      (lambda (&optional force-refresh)
-        (when (or force-refresh (not memoized-secret))
-          (setq memoized-secret
-            (auth-source-pass-get 'secret secret)))
-        memoized-secret)))
-
-  (defun madmacs-open-ai-key-fn ()
-    "Retrieves the OpenAI API key from pass."
-    (madmacs-auth-source-pass-get "api.openai.com"))
-
-  (defun madmacs-anthropic-key-fn ()
-    "Retrieves the Anthropic API key from pass."
-    (madmacs-auth-source-pass-get "anthropic.gptel"))
-
-  (defun madmacs-groq-key-fn ()
-    "Retrieves the Groq API key from pass."
-    (madmacs-auth-source-pass-get "api.groq.com"))
-
   (defvar madmacs-backend-claude
     (gptel-make-anthropic "Claude"
       :stream t
-      :key (madmacs-anthropic-key-fn)))
+      :key (auth-source-pass-get 'secret "anthropic.gptel")))
 
   (defvar madmacs-backend-ollama
     (gptel-make-ollama "Ollama"
@@ -64,10 +43,11 @@
       :host "api.groq.com"
       :endpoint "/openai/v1/chat/completions"
       :stream t
-      :key (madmacs-groq-key-fn)
+      :key (auth-source-pass-get 'secret "api.groq.com")
       :models '(llama-3.1-70b-versatile gemma-7b-it mixtral-8x7b-32768)))
 
-  (setq gptel-api-key (madmacs-open-ai-key-fn))
+  (setq gptel-api-key (auth-source-pass-get 'secret "api.openai.com"))
+
   (setq gptel-backend madmacs-backend-ollama)
   ;; (setq gptel-model 'codegemma:latest)
   (setq gptel-model 'llama3.2:latest)
