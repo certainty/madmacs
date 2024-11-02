@@ -12,7 +12,11 @@
 
 ;; expand region using treesitter
 (use-package expreg
-  :ensure t)
+  :ensure t
+  :bind
+  (:repeat-map madmacs-expreg-repeat-map
+    (">" . expreg-expand)
+    ("<" . expreg-contract)))
 
 (use-package symbol-overlay
   :ensure t)

@@ -174,17 +174,16 @@
 
   :bind
     (:map corfu-map
-        ("C-SPC" . corfu-insert-separator)
+      ("C-SPC" . corfu-insert-separator)
 
-        ("TAB" . nil)
-        ("<return>" . nil)
-        ("C-<TAB>" . corfu-insert)
+      ("TAB" . nil)
+      ("<return>" . nil)
+      ("C-<TAB>" . corfu-insert)
 
-        ("<escape>" . corfu-quit)
-        ("C-g" . corfu-quit)
-
-        ("C-j" . corfu-next)
-        ("C-k" . corfu-previous))
+      ("<escape>" . corfu-quit)
+      ("C-g" . corfu-quit)
+      ("C-j" . corfu-next)
+      ("C-k" . corfu-previous))
   :init
   (global-corfu-mode 1))
 

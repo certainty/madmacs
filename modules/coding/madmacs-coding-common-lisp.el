@@ -5,8 +5,8 @@
 
 (use-package sly
   :ensure t
-  ;:hook
-  ;(sly-mode . madmacs--setup-common-lisp)
+                                        ;:hook
+                                        ;(sly-mode . madmacs--setup-common-lisp)
 
   :custom
   (sly-lisp-implementation 'sbcl)
@@ -30,20 +30,20 @@
   
 
   (add-to-list 'display-buffer-alist
-                 '("^\\*sly-compilation"
-                   (display-buffer-reuse-window
-                    display-buffer-in-side-window)
-                   (side . bottom)
-                   (reusable-frames . visible)
-                   (window-height . 0.3)))
+    '("^\\*sly-compilation"
+       (display-buffer-reuse-window
+         display-buffer-in-side-window)
+       (side . bottom)
+       (reusable-frames . visible)
+       (window-height . 0.3)))
 
   (add-to-list 'display-buffer-alist
-               '("^\\*sly-mrepl"
-                 (display-buffer-reuse-window
-                  display-buffer-in-side-window)
-                 (side . right)
-                 (reusable-frames . visible)
-                 (window-height . 0.4)))
+    '("^\\*sly-mrepl"
+       (display-buffer-reuse-window
+         display-buffer-in-side-window)
+       (side . right)
+       (reusable-frames . visible)
+       (window-height . 0.4)))
 
 
   (defvar inferior-lisp-program "sbcl")
@@ -59,13 +59,13 @@
     (interactive)
     (require 'sly)
     (if (sly-connected-p)
-        (sly-mrepl)
+      (sly-mrepl)
       (sly nil nil t)
       (cl-labels ((recurse (attempt)
                     (sleep-for 1)
                     (cond ((sly-connected-p) (sly-mrepl))
-                          ((> attempt 5) (error "Failed to start Slynk process."))
-                          (t (recurse (1+ attempt))))))
+                      ((> attempt 5) (error "Failed to start Slynk process."))
+                      (t (recurse (1+ attempt))))))
         (recurse 1))))
 
   (defun madmacs--reload-project ()
@@ -75,18 +75,18 @@
     (cl-labels ((recurse (attempt)
                   (sleep-for 1)
                   (condition-case nil
-                      (sly-eval "PONG")
+                    (sly-eval "PONG")
                     (error (if (= 5 attempt)
-                               (error "Failed to reload Lisp project in 5 attempts.")
+                             (error "Failed to reload Lisp project in 5 attempts.")
                              (recurse (1+ attempt)))))))
       (recurse 1)
       (sly-asdf-load-system)))
 
   (defun madmacs--setup-common-lisp ()
     (if (file-exists-p "~/.local/share/quicklisp/log4sly-setup.el")
-        (progn
-          (load "~/.local/share/quicklisp/log4sly-setup.el")
-          (global-log4sly-mode 1))
+      (progn
+        (load "~/.local/share/quicklisp/log4sly-setup.el")
+        (global-log4sly-mode 1))
       (message "log4sly not found")))
 
   ;; keybindings
@@ -170,12 +170,14 @@
     "m" '("expand macro" . macrostep-expand)
     "x" `("Xref" . ,madmacs-sly-xref-keys))
 
-  (when (eql madmacs-modal-approach 'evil)
-    (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
-    (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
-
-  (when (eql madmacs-modal-approach 'meow)
-    (define-key sly-mode-map (kbd "C-,") madmacs-sly-local-leader-keys)))
+  (cl-case madmacs-modal-approach
+    (evil
+     (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
+     (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
+    (meow
+     (define-key sly-mode-map (kbd "C-,") madmacs-sly-local-leader-keys))
+    (boon
+      (define-key sly-mode-map (kbd "C-c ,") madmacs-sly-local-leader-keys))))
 
 
 (use-package sly-asdf

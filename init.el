@@ -1,44 +1,44 @@
 ;; -*- lexical-binding: t; -*-
 
-;; you can still configure madmacs before running the boot process
+;;
+                                        ;-; you can still configure madmacs before running the boot process
 ;; (setopt madmacs-debug t)
 
 (setopt  madmacs-init-features
-        '(
-          madmacs-keys-essentials
-          madmacs-edit-essentials
-          madmacs-ux-essentials
-          madmacs-ui-windows
-          madmacs-ui-frames
+  '(
+     madmacs-keys-essentials
+     madmacs-edit-essentials
+     madmacs-ux-essentials
+     madmacs-ui-windows
+     madmacs-ui-frames
 
-          madmacs-ui-theme
-          madmacs-ui-faces
-          madmacs-ui-fonts
+     madmacs-ui-theme
+     madmacs-ui-faces
+     madmacs-ui-fonts
 
-          madmacs-ux-osx
-          madmacs-ux-buffers
-          ))
+     madmacs-ux-osx
+     madmacs-ux-buffers
+     ))
 
 (setopt madmacs-after-init-features
         `(
-          ,(when (eql madmacs-modal-approach 'evil) 'madmacs-keys-evil)
-          ,(when (eql madmacs-modal-approach 'meow) 'madmacs-keys-meow)
+					 ,(cl-case madmacs-modal-approach
+              (evil 'madmacs-keys-evil)
+              (meow 'madmacs-keys-meow)
+              (boon 'madmacs-keys-boon))
+           madmacs-ux-completion
+           madmacs-ux-dashboard
+           madmacs-ui-modeline
+           madmacs-ux-repeat
 
-          madmacs-ux-completion
-          madmacs-ux-dashboard
-          madmacs-ui-modeline
-          madmacs-ux-repeat
-
-          madmacs-projects-essentials
-          madmacs-edit-actions
-          madmacs-files-dired
-          madmacs-ux-workspaces
-          ))
+           madmacs-projects-essentials
+           madmacs-edit-actions
+           madmacs-files-dired
+           madmacs-ux-workspaces))
 
 (setopt madmacs-after-startup-features
         '(
            madmacs-coding-treesitter
-                                        ;madmacs-files-treemacs
 
            madmacs-writing-checkers
            madmacs-writing-essentials

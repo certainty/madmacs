@@ -7,9 +7,14 @@
   :interpreter ("scala" . scala-mode)
   :hook (scala-ts-mode . madmacs--lsp)
   :config
-  (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys)
+  (cl-case madmacs-modal-approach
+    (evil (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
+    (meow (define-key scala-ts-mode-map (kbd "C-,") madmacs-scala-local-leader-keys))
+    (boon (define-key scala-ts-mode-map (kbd "C-c ,") madmacs-scala-local-leader-keys)))
+  
   (with-eval-after-load 'treemacs
     (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target")))
+  
   :init
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs '(scala-mode . ("metals")))

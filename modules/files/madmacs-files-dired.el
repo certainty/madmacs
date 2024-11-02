@@ -22,7 +22,7 @@
   (dirvish-override-dired-mode)
 
   :custom
-  (dirvish-quick-access-entris         ; It's a custom option, `setq' won't work
+  (dirvish-quick-access-entris          ; It's a custom option, `setq' won't work
     '(("h" "~/"                "Home")
        ("d" "~/Downloads/"      "Downloads")
        ("w" "~/NewWork/Code/"   "Work")
@@ -34,10 +34,10 @@
   (dirvish-use-header-line 'global)
   (dirvish-default-layout '(0 0.3 0.7))
   (dirvish-mode-line-format
-   '(:left (sort symlink) :right (omit yank index)))
+    '(:left (sort symlink) :right (omit yank index)))
 
   (dirvish-attributes
-   '(subtree-state collapse))
+    '(subtree-state collapse))
 
   :bind                                 ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
   (:map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
@@ -46,9 +46,10 @@
     ("y"   . dirvish-yank-menu)
     ("N"   . dirvish-narrow)
     ("^"   . dirvish-history-last)
-    ("h"   . dirvish-history-jump)       ; remapped `describe-mode'
-    ("s"   . dirvish-quicksort)          ; remapped `dired-sort-toggle-or-edit'
-    ("v"   . dirvish-vc-menu)            ; remapped `dired-view-file'
+    ("<tab>" . dirvish-toggle-subtree)
+    ("h"   . dirvish-history-jump)      ; remapped `describe-mode'
+    ("s"   . dirvish-quicksort)         ; remapped `dired-sort-toggle-or-edit'
+    ("v"   . dirvish-vc-menu)           ; remapped `dired-view-file'
     ("O"   . dired-omit-mode)
     ("M-f" . dirvish-history-go-forward)
     ("M-b" . dirvish-history-go-backward)
@@ -59,8 +60,9 @@
     ("M-j" . dirvish-fd-jump))
 
   :config
+  (when (eql madmacs-modal-approach 'evil)
   (evil-define-key 'normal dirvish-mode-map (kbd "TAB") 'dirvish-toggle-subtree)
-  (evil-define-key 'normal dirvish-mode-map (kbd "<tab>") 'dirvish-toggle-subtree))
+  (evil-define-key 'normal dirvish-mode-map (kbd "<tab>") 'dirvish-toggle-subtree)))
 
 (use-package casual-dired
   :ensure t

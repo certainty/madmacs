@@ -1,5 +1,4 @@
-;
-; -*- lexical-binding: t; -*-
+;;  -*- lexical-binding: t; -*-
 
 ;;; Code:
 
@@ -18,6 +17,7 @@
 
   :custom
   (gptel-default-mode 'org-mode)
+  (gptel-org-branching-context t)
 
   (gptel-directives
     '((default . "To assist: Be terse.  Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize.  Ask questions when unsure.")
@@ -90,10 +90,8 @@ Return only the improved text formatted according to the specified markup langua
 The text is: ")))
 
   (setopt gptel-rewrite-directives-hook (list #'madmacs-gptel-rewrite-directive))
-  (with-eval-after-load 'gptel-org
-    (setq-default gptel-org-branching-context t))
 
-  ;; GPTel ask stolen from karthink's emacs config
+    ;; GPTel ask stolen from karthink's emacs config
   (defvar gptel-ask--buffer-name "*gptel-ask*" "Name for one-off queries.")
 
   (defvar gptel-ask-display-buffer-action

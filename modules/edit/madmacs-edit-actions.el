@@ -118,26 +118,29 @@
 
 (use-package iedit
   :ensure t
+  :after embark
   :bind
   (("C-c '" . iedit-mode)
    ("C-c \"" . iedit-dwim))
   :config
+  (keymap-set embark-general-map "'" 'iedit-mode)
+  (keymap-set embark-general-map "\"" 'iedit-dwim)
+  
   (defun iedit-dwim (arg)
-  "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
-  (interactive "P")
-  (if arg
+    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+    (interactive "P")
+    (if arg
       (iedit-mode)
-    (save-excursion
-      (save-restriction
-        (widen)
-        ;; this function determines the scope of `iedit-start'.
-        (if iedit-mode
+      (save-excursion
+        (save-restriction
+          (widen)
+          ;; this function determines the scope of `iedit-start'.
+          (if iedit-mode
             (iedit-done)
-          ;; `current-word' can of course be replaced by other
-          ;; functions.
-          (narrow-to-defun)
-          (iedit-start (current-word) (point-min) (point-max)))))))
-)
+            ;; `current-word' can of course be replaced by other
+            ;; functions.
+            (narrow-to-defun)
+            (iedit-start (current-word) (point-min) (point-max))))))))
 
 
 (provide 'madmacs-edit-actions)

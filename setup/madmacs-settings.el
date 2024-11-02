@@ -61,10 +61,10 @@
     :options '(eglot lsp-mode)
     :group 'madmacs)
 
-(defcustom madmacs-modal-approach 'evil
+(defcustom madmacs-modal-approach 'boon
     "The modal approach to take for this lovely emacs"
     :type 'symbol
-    :options '(evil meow)
+    :options '(evil meow boon)
     :group 'madmacs)
 
 (defcustom madmacs-user-full-name ""

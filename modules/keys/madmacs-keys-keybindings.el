@@ -12,22 +12,28 @@
   ;;
   ;; I am careful not to occupy the local leader key here
   
-    (when (eql madmacs-modal-approach 'evil)
-        (evil-global-set-key 'normal "|" 'split-window-right)
-        (evil-global-set-key 'normal "\\" 'split-window-below)
-        (evil-global-set-key 'normal (kbd "M-h") 'evil-window-left)
-        (evil-global-set-key 'normal (kbd "M-l") 'evil-window-right)
-        (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
-        (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
-        (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
-        (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
+  (when (eql madmacs-modal-approach 'evil)
+    (evil-global-set-key 'normal "|" 'split-window-right)
+    (evil-global-set-key 'normal "\\" 'split-window-below)
+    (evil-global-set-key 'normal (kbd "M-h") 'evil-window-left)
+    (evil-global-set-key 'normal (kbd "M-l") 'evil-window-right)
+    (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
+    (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
+    (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
+    (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
 
-    (when (eql madmacs-modal-approach 'meow)
-        (global-unset-key (kbd "C-,")) ;; used as local leader
-        (global-set-key (kbd "C-c |") 'split-window-right)
-        (global-set-key (kbd "C-c \\") 'split-window-below)
-        (global-set-key (kbd "C-=") 'expreg-expand)
-        (global-set-key (kbd "M-=") 'expreg-contract))
+  (when (eql madmacs-modal-approach 'meow)
+    (global-unset-key (kbd "C-,")) ;; used as local leader
+    (global-set-key (kbd "C-c |") 'split-window-right)
+    (global-set-key (kbd "C-c \\") 'split-window-below)
+    (global-set-key (kbd "M-v") 'expreg-expand)
+    (global-set-key (kbd "M-V") 'expreg-contract))
+
+  (when (eql madmacs-modal-approach 'boon)
+    (global-set-key (kbd "C-c C-|") 'split-window-right)
+    (global-set-key (kbd "C-c C-\\") 'split-window-below)
+    (global-set-key (kbd "C-c >") 'expreg-expand)
+    (global-set-key (kbd "C-c <") 'expreg-contract))
 
   (defvar-keymap madmacs-windows-keys :doc "Window related commands and utilities")
   
@@ -49,13 +55,13 @@
   ;; Compiler / Build / Quickrun
   (defvar-keymap madmacs-compiler-keys :doc "Keys to build projects and interact with the compiler")
   (which-key-add-keymap-based-replacements madmacs-compiler-keys
-      "." '("Quickrun" . quickrun)
-      "," '("Quickrun region" . quickrun-region)
-      ":" '("Quickrun select" . quickrun-select)
-      "r" '("Project run" . project-compile)
-      "R" '("Project rerun" . project-recompile)
-      "c" '("Run" . compile)
-      "C" '("Rerun" . recompile))
+    "." '("Quickrun" . quickrun)
+    "," '("Quickrun region" . quickrun-region)
+    ":" '("Quickrun select" . quickrun-select)
+    "r" '("Project run" . project-compile)
+    "R" '("Project rerun" . project-recompile)
+    "c" '("Run" . compile)
+    "C" '("Rerun" . recompile))
 
   ;; Docs
   (defvar-keymap madmacs-docs-keys :doc "Keys to find help and documentation")
@@ -71,7 +77,6 @@
   (defvar-keymap madmacs-find-keys :doc "Keys which are related to finding and navigating things")
   
   (which-key-add-keymap-based-replacements madmacs-find-keys
-    "c" '("Find Char" . avy-goto-char-2)
     "f" '("Find Project File" . project-find-file)
     "." '("Find Project Things" . consult-project-extra-find)
     "b" '("Find Project Buffer" . consult-project-buffer)
@@ -343,16 +348,9 @@
     "p" '("Pass" . pass))
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
-
+  
   (which-key-add-keymap-based-replacements madmacs-leader-keys
     "!" `("Checkers" . ,madmacs-checker-keys)
-    ";" `("Toggle Comment" . comment-dwim)
-    "." `("Embark Act" . embark-act)
-    "," `("Embark Dwim" . embark-dwim)
-    "'" '("Iedit" . iedit-mode)
-    "\"" '("Iedit Dwim" . iedit-dwim)
-    "/" '("Avy(t)" . casual-avy-tmenu)
-    "SPC" `("Avy" . avy-goto-char-timer)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . dirvish-side)
     "E" `("Filetree Dwim" . dirvish-dwim)
@@ -373,11 +371,10 @@
     "T" `(" Tools " . ,madmacs-tools-keys)
     "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
-
-    (when (eql madmacs-modal-approach 'evil)
-        (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
-
-    (when (eql madmacs-modal-approach 'meow)
-      (global-set-key (kbd "C-c") madmacs-leader-keys)))
+  
+  (cl-case madmacs-modal-approach
+    (evil (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
+    (meow (global-set-key (kbd "C-c") madmacs-leader-keys))
+    (boon (global-set-key (kbd "C-SPC") madmacs-leader-keys))))
 
 (provide 'madmacs-keys-keybindings)

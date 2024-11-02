@@ -59,7 +59,7 @@
   :ensure nil
   :straight nil
   :custom
-  (display-line-numbers-type 'visual)
+  (display-line-numbers-type t)
   (display-line-numbers-width-start t))
 
 (use-package casual-isearch
