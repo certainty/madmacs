@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
+
 (use-package emacs
   :ensure nil
   :straight nil
@@ -23,6 +24,8 @@
     (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
 
   (when (eql madmacs-modal-approach 'meow)
+    (global-set-key (kbd"C-c o") 'other-window)
+    (global-set-key (kbd "C-c 0") 'delete-window)
     (global-unset-key (kbd "C-,")) ;; used as local leader
     (global-set-key (kbd "C-c |") 'split-window-right)
     (global-set-key (kbd "C-c \\") 'split-window-below)
@@ -256,7 +259,6 @@
   (which-key-add-keymap-based-replacements madmacs-debugger-keys
     "d" '("Dap hydra" . dap-hydra))
 
-
   ;; Project
   (defvar-keymap madmacs-project-keys :doc "Keys related to interactions with the current project")
 
@@ -371,10 +373,11 @@
     "T" `(" Tools " . ,madmacs-tools-keys)
     "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
-  
+
   (cl-case madmacs-modal-approach
     (evil (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
-    (meow (global-set-key (kbd "C-c") madmacs-leader-keys))
+    (meow (global-set-key (kbd "C-SPC") madmacs-leader-keys))
     (boon (global-set-key (kbd "C-SPC") madmacs-leader-keys))))
 
 (provide 'madmacs-keys-keybindings)
+

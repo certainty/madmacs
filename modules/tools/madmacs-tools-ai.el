@@ -7,7 +7,9 @@
   :commands (gptel-send gptel-menu gptel)
   :bind
   (("C-c <return>" . gptel-send)
+    ("C-c a" . gptel-send)
     ("C-c C-<return>" . gptel-menu)
+    ("C-c A" . gptel-menu)
     ("C-c ?" . gptel-ask)
     ("C-c ." . gptel-quick)
     ("C-c r" . gptel-rewrite-menu))

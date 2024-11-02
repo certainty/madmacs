@@ -175,9 +175,11 @@
      (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
      (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
     (meow
-     (define-key sly-mode-map (kbd "C-,") madmacs-sly-local-leader-keys))
+      (which-key-add-keymap-based-replacements sly-mode-map
+        "C-c ," `("Local Leader" . ,madmacs-sly-local-leader-keys)))
     (boon
-      (define-key sly-mode-map (kbd "C-c ,") madmacs-sly-local-leader-keys))))
+      (which-key-add-keymap-based-replacements sly-mode-map
+        "C-c ," `("Local Leader" . ,madmacs-sly-local-leader-keys)))))
 
 
 (use-package sly-asdf

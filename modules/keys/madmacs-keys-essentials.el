@@ -12,6 +12,7 @@
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-max-display-columns 10)
   (which-key-show-early-on-C-h t)
+  (which-key-show-prefix nil)
   (which-key-idle-delay .75)
   (which-key-idle-secondary-delay 0.05)
   (which-key-popup-type 'side-window)

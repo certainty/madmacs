@@ -96,7 +96,9 @@
   :ensure t
   :demand t
   :bind
-  (("C-h i" . consult-info))
+  (("C-h i" . consult-info)
+    ("C-c b" . consult-project-buffer)
+    ("C-c B" . consult-buffer))
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also

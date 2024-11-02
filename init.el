@@ -24,8 +24,8 @@
         `(
 					 ,(cl-case madmacs-modal-approach
               (evil 'madmacs-keys-evil)
-              (meow 'madmacs-keys-meow)
-              (boon 'madmacs-keys-boon))
+              (boon 'madmacs-keys-boon)
+              (t nil))
            madmacs-ux-completion
            madmacs-ux-dashboard
            madmacs-ui-modeline
@@ -37,7 +37,7 @@
            madmacs-ux-workspaces))
 
 (setopt madmacs-after-startup-features
-        '(
+        `(
            madmacs-coding-treesitter
 
            madmacs-writing-checkers
@@ -78,7 +78,7 @@
            madmacs-org-essentials
 
            madmacs-games-chess
-
+           ,(when (eql madmacs-modal-approach 'meow) 'madmacs-keys-meow)
            madmacs-keys-keybindings))
 
 (madmacs--boot)
