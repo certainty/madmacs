@@ -1,5 +1,13 @@
 ;; -*- lexical-binding: t; -*-
 
+
+(use-package embrace
+  :ensure t
+  :bind
+  (("C-c ca" . embrace-add)
+    ("C-c cc" . embrace-change )
+    ("C-c cd" . embrace-delete)))
+
 (defun meow-setup ()
   "Setup meow keys"
   (interactive)
@@ -7,8 +15,6 @@
   (meow-thing-register 'angle
     '(pair (";") (":"))
     '(pair (";") (":")))
-  
-  
   
   (meow-motion-overwrite-define-key
     '("j" . meow-next)
@@ -44,7 +50,7 @@
     '("]" . meow-end-of-thing)
     
     '(":" . meow-goto-line)
-    '("`" . capitalize-dwim)
+    '("^" . capitalize-dwim)
     
     '("=" . indent-according-to-mode)
     '("&" . meow-query-replace-regexp)
@@ -55,6 +61,9 @@
     `("X" . "M-x")
 
     '("C-m" . meow-motion-mode)
+    '("` `" . embrace-add)
+    '("` c" . embrace-change)
+    '("` d" . embrace-delete)
     
     '("a" . meow-append)
     '("A" . meow-open-below)

@@ -77,6 +77,9 @@
 
 (use-package emacs
   :ensure nil
+  :bind
+  (:map global-map ("C-x f" . find-file))                   ; I don't want a short way to set the fill column. I want a short way to find a file
+  
   :custom
   (sentence-end-double-space nil)
   (tab-width 2)

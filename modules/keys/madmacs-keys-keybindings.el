@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
 (use-package emacs
   :ensure nil
   :straight nil
@@ -349,13 +348,13 @@
     "!" `("Checkers" . ,madmacs-checker-keys)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . dirvish-side)
-    "g" `("Git status". magit-status)
+    "v" `("Git status". magit-status)
     "a" `(" AI" . ,madmacs-ai-keys)
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
     "f" `("  Find" . ,madmacs-find-keys)
-    "G" `("󰊢  Git" . ,madmacs-git-keys)
+    "V" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
     "L" `("  List" . ,madmacs-list-keys)
     "R" `("󰑮  Run" . ,madmacs-compiler-keys)
