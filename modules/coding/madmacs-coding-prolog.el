@@ -67,11 +67,9 @@
       (evil-define-key 'normal sweeprolog-mode-map (kbd ",") madmacs-prolog-local-leader-keys)
       (evil-define-key 'visual sweeprolog-mode-map (kbd ",") madmacs-prolog-local-leader-keys))
     (meow
-      (define-key sweeprolog-mode-map (kbd "C-,") madmacs-prolog-local-leader-keys))
+      (define-key sweeprolog-mode-map (kbd "C-SPC") madmacs-prolog-local-leader-keys))
     (boon
-      (define-key sweeprolog-mode-map (kbd "C-c ,") madmacs-prolog-local-leader-keys)))
-  
-  )
+      (define-key sweeprolog-mode-map (kbd "C-c ,") madmacs-prolog-local-leader-keys))))
 
 
 (provide 'madmacs-coding-prolog)

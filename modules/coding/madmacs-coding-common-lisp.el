@@ -176,7 +176,7 @@
      (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
     (meow
       (which-key-add-keymap-based-replacements sly-mode-map
-        "C-c ," `("Local Leader" . ,madmacs-sly-local-leader-keys)))
+        "C-SPC" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
     (boon
       (which-key-add-keymap-based-replacements sly-mode-map
         "C-c ," `("Local Leader" . ,madmacs-sly-local-leader-keys)))))

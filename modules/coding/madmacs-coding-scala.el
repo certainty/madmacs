@@ -9,7 +9,7 @@
   :config
   (cl-case madmacs-modal-approach
     (evil (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
-    (meow (define-key scala-ts-mode-map (kbd "C-,") madmacs-scala-local-leader-keys))
+    (meow (define-key scala-ts-mode-map (kbd "C-SPC") madmacs-scala-local-leader-keys))
     (boon (define-key scala-ts-mode-map (kbd "C-c ,") madmacs-scala-local-leader-keys)))
   
   (with-eval-after-load 'treemacs

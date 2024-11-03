@@ -13,10 +13,17 @@
   
   (require 'boon-qwerty-hjkl)
   
+  (define-key boon-goto-map ":" 'avy-goto-char)
+  (define-key boon-goto-map "'" 'avy-goto-char-2)
+  (define-key boon-goto-map "f" 'avy-goto-line)
+  (define-key boon-goto-map "w" 'avy-goto-word-1)
+  (define-key boon-goto-map "e" 'avy-goto-word-0)
+  
   (define-key boon-command-map "=" 'indent-according-to-mode)
+  (define-key boon-command-map "\"" boon-quote-character)
   (define-key boon-goto-map "l" 'consult-line)
 
-  (global-set-key (kbd "M-o") 'pop-global-mark)
+  (global-set-key (kbd "C-o") 'pop-global-mark)
 
   (defun madmacs-boon-reset ()
     "Reset boon to default state."

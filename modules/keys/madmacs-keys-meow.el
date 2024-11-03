@@ -8,20 +8,7 @@
     '(pair (";") (":"))
     '(pair (";") (":")))
   
-  (meow-leader-define-key
-    ;; Use SPC (0-9) for digit arguments.
-    '("1" . meow-digit-argument)
-    '("2" . meow-digit-argument)
-    '("3" . meow-digit-argument)
-    '("4" . meow-digit-argument)
-    '("5" . meow-digit-argument)
-    '("6" . meow-digit-argument)
-    '("7" . meow-digit-argument)
-    '("8" . meow-digit-argument)
-    '("9" . meow-digit-argument)
-    '("0" . meow-digit-argument)
-    '("-" . meow-keypad-describe-key)
-    '("_" . meow-cheatsheet))
+  
   
   (meow-motion-overwrite-define-key
     '("j" . meow-next)
@@ -32,7 +19,7 @@
     '("<escape>" . ignore))
 
   (meow-define-keys 'motion
-    '("C-M-s-^" . meow-normal-mode))
+    '("C-c n" . meow-normal-mode))
 
   (meow-normal-define-key
     '("0" . meow-expand-0)
@@ -48,22 +35,32 @@
     
     '(">" . xref-find-definitions)
     '("<" . xref-find-references)
-    '("^" . meow-motion-mode)
-    '("-" . negative-argument)
+    '("~" . negative-argument)
+    '("|" . shell-command-on-region)
     '(";" . meow-reverse)
     '("," . meow-inner-of-thing)
     '("." . meow-bounds-of-thing)
     '("[" . meow-beginning-of-thing)
     '("]" . meow-end-of-thing)
-    '(":" . consult-goto-line)
+    
+    '(":" . meow-goto-line)
     '("`" . capitalize-dwim)
+    
+    '("=" . indent-according-to-mode)
+    '("&" . meow-query-replace-regexp)
+    '("%" . meow-query-replace)
+
+    ;; quick access to ctrl-x
+    `("x" . ,ctl-x-map)
+    `("X" . "M-x")
+
+    '("C-m" . meow-motion-mode)
     
     '("a" . meow-append)
     '("A" . meow-open-below)
     '("b" . meow-back-word)
     '("B" . meow-back-symbol)
-    `("c" . ,mode-specific-map)
-    '("C" . meow-change)
+    '("c" . meow-change)
     '("d" . meow-delete)
     '("D" . meow-backward-delete)
     '("e" . meow-next-word)
@@ -83,8 +80,12 @@
     '("L" . meow-right-expand)
     '("m" . pop-global-mark)
     '("M" . meow-join)
-    '("n" . avy-goto-char-timer)
-    '("N".  avy-goto-char)
+    
+    '("nC" . avy-goto-char-timer)
+    '("nc" . avy-goto-char)
+    '("nr" . meow-search)
+    '("nn" . meow-visit)
+    
     '("o" . meow-block)
     '("O" . meow-to-block)
     '("p" . meow-yank)
@@ -93,25 +94,21 @@
     '("s" . meow-kill)
     '("t" . meow-till)
     '("u" . meow-undo)
-    '("U" . meow-undo-in-selection)
-    '("v" . expreg-expand)              ; enter rectangle mark mode
+    '("U" . meow-undo-in-slection)
+    '("v" . expreg-expand)
     '("V" . expreg-contract)
     '("w" . meow-mark-word)
-    `("x" . ,ctl-x-map)
     '("W" . meow-mark-symbol)
     '("y" . meow-save)
     '("Y" . meow-sync-grab)
     '("'" . meow-pop-selection)
-    '("z" . meow-repeat)
-    '("&" . meow-query-replace-regexp)
-    '("%" . meow-query-replace)
-    '("/" . meow-visit)
+    '("z" . repeat)
+    '("Z" . meow-rrepeat)
     '("<escape>" . meow-cancel-selection)))
 
 ;;;; Meow
 (use-package meow
   :ensure t
-  :after (which-key moody)
   :custom
   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
@@ -120,7 +117,6 @@
   (meow-goto-line-function 'consult-goto-line)
 
   :config
-  (add-to-list 'meow-char-thing-table '(?a . angle))
   
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
@@ -134,6 +130,7 @@
     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
 
   (meow-setup)
+  ;; (meow-setup-indicator)
   (meow-global-mode 1))
 
 (provide 'madmacs-keys-meow)

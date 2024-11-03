@@ -24,13 +24,7 @@
     (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
 
   (when (eql madmacs-modal-approach 'meow)
-    (global-set-key (kbd"C-c o") 'other-window)
-    (global-set-key (kbd "C-c 0") 'delete-window)
-    (global-unset-key (kbd "C-,")) ;; used as local leader
-    (global-set-key (kbd "C-c |") 'split-window-right)
-    (global-set-key (kbd "C-c \\") 'split-window-below)
-    (global-set-key (kbd "M-v") 'expreg-expand)
-    (global-set-key (kbd "M-V") 'expreg-contract))
+    (global-unset-key (kbd "C-,"))) ;; used as local leader
 
   (when (eql madmacs-modal-approach 'boon)
     (global-set-key (kbd "C-c C-|") 'split-window-right)
@@ -351,32 +345,32 @@
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
   
-  (which-key-add-keymap-based-replacements madmacs-leader-keys
+  (which-key-add-keymap-based-replacements mode-specific-map
     "!" `("Checkers" . ,madmacs-checker-keys)
     "x" `("M-x" . execute-extended-command)
     "e" `("Filetree" . dirvish-side)
-    "E" `("Filetree Dwim" . dirvish-dwim)
+    "g" `("Git status". magit-status)
     "a" `(" AI" . ,madmacs-ai-keys)
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
     "f" `("  Find" . ,madmacs-find-keys)
-    "g" `("󰊢  Git" . ,madmacs-git-keys)
+    "G" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
     "L" `("  List" . ,madmacs-list-keys)
-    "r" `("󰑮  Run" . ,madmacs-compiler-keys)
+    "R" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "s" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `(" Tools " . ,madmacs-tools-keys)
-    "u" '("󰁕 Universal Argument" . universal-argument) 
     "U" `("  UX" . ,madmacs-ux-keys))
 
   (cl-case madmacs-modal-approach
     (evil (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
-    (meow (global-set-key (kbd "C-SPC") madmacs-leader-keys))
+    (meow
+      (global-set-key (kbd "C-SPC") madmacs-leader-keys))
     (boon (global-set-key (kbd "C-SPC") madmacs-leader-keys))))
 
 (provide 'madmacs-keys-keybindings)
