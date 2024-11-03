@@ -40,21 +40,6 @@
     
     '(">" . xref-find-definitions)
     '("<" . xref-find-references)
-    '("~" . negative-argument)
-    '("|" . shell-command-on-region)
-    '(";" . meow-reverse)
-    '("," . meow-inner-of-thing)
-    '("." . meow-bounds-of-thing)
-    '("[" . meow-beginning-of-thing)
-    '("]" . meow-end-of-thing)
-    
-    '(":" . meow-goto-line)
-    '("^" . capitalize-dwim)
-    
-    '("=" . indent-according-to-mode)
-    '("&" . meow-query-replace-regexp)
-    '("%" . meow-query-replace)
-
     ;; quick access to ctrl-x
     `("x" . ,ctl-x-map)
     `("X" . "M-x")
@@ -63,7 +48,29 @@
     '("` `" . embrace-add)
     '("` c" . embrace-change)
     '("` d" . embrace-delete)
+
+    '("!j" . flycheck-next-error)
+    '("!k" . flycheck-previous-error)
+    '("!," . flycheck-display-error-at-point)
+    '("!." . flycheck-explain-error-at-point)
+
+    '("|" . shell-command-on-region)
     
+    '("~" . negative-argument)
+    '(";" . meow-reverse)
+    '("," . meow-inner-of-thing)
+    '("." . meow-bounds-of-thing)
+    '("[" . meow-beginning-of-thing)
+    '("]" . meow-end-of-thing)
+
+
+    '(":" . meow-goto-line)
+    '("^" . capitalize-dwim)
+    
+    '("=" . indent-according-to-mode)
+    '("&" . meow-query-replace-regexp)
+    '("%" . meow-query-replace)
+
     '("a" . meow-append)
     '("A" . meow-open-below)
     '("b" . meow-back-word)
@@ -93,6 +100,7 @@
     '("nc" . avy-goto-char)
     '("nr" . meow-search)
     '("nn" . meow-visit)
+    
     
     '("o" . meow-block)
     '("O" . meow-to-block)

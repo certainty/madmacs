@@ -15,15 +15,15 @@
 * Configuration in plain emacs lisp
   * `use-package` with straight
   * simple boot approach that's easy to follow and modify
-* Evil emacs (I just can't get out of modal editing)
-  * Consistent keybinding scheme using `SPC` as prefix
-  * `,` is mode specific prefix
+* Meow for modal editing
+  * Consistent keybinding scheme using `SPC` / `C-c` as prefix
+  * `C-SPC` is mode specific prefix
 * Useful power-ups
   * Avy + Embark
-  * Transient menues via casual (suite)
+  * Transient menus via casual (suite)
   * Vetico + Corfu + Marginalia & the gang
   * expand-region
-  * iedit for multiple cursor edit
+  * gptel
 * Fairly fast startup
   * I don't obsess over it. I don't know about you, but I do not restart my emacs all the time.
 
@@ -36,12 +36,15 @@
 
 ## Keybindings
 
-The global keybinds are available in the leader map via `SPC`.
+There are a couple of very basic conventions that I have applied.
 
-Mode specific leader bindings are available (if they exist) under the local leader `,`.
+1. Global actions, actions that don't work on text or region are bound in the leader map under `SPC` or `C-c`. You'll fine a mnemonic grouping.
+2. Mode specific global actions are made available under the local leader map `C-SPC`.
+3. Context specific actions (on point, or region, etc.) are usually made available via embark actions. 
+
+**Transient menus where possible**
 
 Use `M-o` in any mode that is supported by [casual suite](https://github.com/kickingvegas/casual-suite) to fire up the transient menu.
-
 
 ## Usage of LLM / AI to assist programming
 
