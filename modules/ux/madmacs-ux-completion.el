@@ -170,7 +170,7 @@
   :ensure t
   :custom
   (corfu-cycle t)
-  (corfu-auto nil)
+  (corfu-auto t)
   (corfu-bar-width 0.5)
   (corfu-count 7)
 

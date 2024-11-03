@@ -15,7 +15,6 @@
     ("C-n" . copilot-next-completion))
 
   :config
-  (setopt copilot-idle-delay 100)
 
   (setq warning-suppress-log-types '((copilot copilot-no-mode-indent))))
 
