@@ -2,10 +2,17 @@
 
 (use-package embrace
   :ensure t
+  :demand t
   :bind
   (("C-c ca" . embrace-add)
     ("C-c cc" . embrace-change )
-    ("C-c cd" . embrace-delete)))
+    ("C-c cd" . embrace-delete))
+  :init
+  (add-hook 'markdown-mode-hook
+    (lambda ()
+      (embrace-add-pair ?_ "_" "_")
+      (embrace-add-pair ?i "*" "*")
+      (embrace-add-pair ?b "**" "**"))))
 
 (defun meow-setup ()
   "Setup meow keys"

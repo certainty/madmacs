@@ -46,6 +46,10 @@ There are a couple of very basic conventions that I have applied.
 
 Use `M-o` in any mode that is supported by [casual suite](https://github.com/kickingvegas/casual-suite) to fire up the transient menu.
 
+**The rest is just Emacs**
+
+For the rest just use the normal emacs keybindings.
+
 ## Usage of LLM / AI to assist programming
 
 I've enabled and configured GitHub Copilot and GPTel, ready to be used from within Emacs. Copilot is used for auto-completion of code, while GPTel is made available to interact in any buffer.
