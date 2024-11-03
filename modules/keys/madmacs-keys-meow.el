@@ -3,11 +3,32 @@
 (defun meow-setup ()
   "Setup meow keys"
   (interactive)
+  
+  (meow-thing-register 'angle
+    '(pair (";") (":"))
+    '(pair (";") (":")))
+  
+  (meow-leader-define-key
+    ;; Use SPC (0-9) for digit arguments.
+    '("1" . meow-digit-argument)
+    '("2" . meow-digit-argument)
+    '("3" . meow-digit-argument)
+    '("4" . meow-digit-argument)
+    '("5" . meow-digit-argument)
+    '("6" . meow-digit-argument)
+    '("7" . meow-digit-argument)
+    '("8" . meow-digit-argument)
+    '("9" . meow-digit-argument)
+    '("0" . meow-digit-argument)
+    '("-" . meow-keypad-describe-key)
+    '("_" . meow-cheatsheet))
+  
   (meow-motion-overwrite-define-key
     '("j" . meow-next)
     '("k" . meow-prev)
     '("h" . meow-left)
     '("l" . meow-right)
+    '("`" . capitalize-dwim)
     '("<escape>" . ignore))
 
   (meow-define-keys 'motion
@@ -24,6 +45,7 @@
     '("3" . meow-expand-3)
     '("2" . meow-expand-2)
     '("1" . meow-expand-1)
+    
     '(">" . xref-find-definitions)
     '("<" . xref-find-references)
     '("^" . meow-motion-mode)
@@ -33,17 +55,21 @@
     '("." . meow-bounds-of-thing)
     '("[" . meow-beginning-of-thing)
     '("]" . meow-end-of-thing)
+    '(":" . consult-goto-line)
+    '("`" . capitalize-dwim)
+    
     '("a" . meow-append)
     '("A" . meow-open-below)
     '("b" . meow-back-word)
     '("B" . meow-back-symbol)
-    '("c" . meow-change)
+    `("c" . ,mode-specific-map)
+    '("C" . meow-change)
     '("d" . meow-delete)
     '("D" . meow-backward-delete)
     '("e" . meow-next-word)
     '("E" . meow-next-symbol)
     '("f" . meow-find)
-    '("g" . meow-cancel-selection)
+    '("g" . meow-line)
     '("G" . meow-grab)
     '("h" . meow-left)
     '("H" . meow-left-expand)
@@ -55,8 +81,10 @@
     '("K" . meow-prev-expand)
     '("l" . meow-right)
     '("L" . meow-right-expand)
-    '("m" . meow-join)
-    '("n" . meow-search)
+    '("m" . pop-global-mark)
+    '("M" . meow-join)
+    '("n" . avy-goto-char-timer)
+    '("N".  avy-goto-char)
     '("o" . meow-block)
     '("O" . meow-to-block)
     '("p" . meow-yank)
@@ -69,13 +97,12 @@
     '("v" . expreg-expand)              ; enter rectangle mark mode
     '("V" . expreg-contract)
     '("w" . meow-mark-word)
+    `("x" . ,ctl-x-map)
     '("W" . meow-mark-symbol)
-    '("x" . meow-line)
-    '("X" . meow-goto-line)
     '("y" . meow-save)
     '("Y" . meow-sync-grab)
     '("'" . meow-pop-selection)
-    '("z" . repeat-complex-command)
+    '("z" . meow-repeat)
     '("&" . meow-query-replace-regexp)
     '("%" . meow-query-replace)
     '("/" . meow-visit)

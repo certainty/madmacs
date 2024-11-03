@@ -31,7 +31,7 @@
     :group 'madmacs)
 
 (defcustom madmacs-variable-pitch-font "Iosevka Aile"
-    "Variable pitch font to use"
+  "Variable pitch font to use"
   :type 'string
   :group 'madmacs)
 

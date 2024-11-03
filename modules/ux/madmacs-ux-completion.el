@@ -170,7 +170,7 @@
   :ensure t
   :custom
   (corfu-cycle t)
-  (corfu-auto t)
+  (corfu-auto nil)
   (corfu-bar-width 0.5)
   (corfu-count 7)
 
@@ -190,6 +190,7 @@
   (global-corfu-mode 1))
 
 ;; Part of corfu
+
 (use-package corfu-popupinfo
   :ensure nil
   :straight nil
