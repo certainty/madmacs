@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
 (use-package embrace
   :ensure t
   :bind
@@ -112,7 +111,7 @@
     '("Y" . meow-sync-grab)
     '("'" . meow-pop-selection)
     '("z" . repeat)
-    '("Z" . meow-rrepeat)
+    '("Z" . meow-repeat)
     '("<escape>" . meow-cancel-selection)))
 
 ;;;; Meow
