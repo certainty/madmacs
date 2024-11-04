@@ -332,10 +332,22 @@
     "f" '("File to context" . gptel-add-file)
     "r" '("Rewrite" . gptel-rewrite-menu)
     "c" '("Chat" . gptel)
-    "p" '("Project chat" . madmacs-gptel-project)
+    "p" '("Project chat" . madmas-gptel-project)
     "P" '("Set prompt" . gptel-system-prompt)
     "q" '("Abort" . gptel-abort)
     "C" `("Copilot" . ,madmacs-copilot-keys))
+
+  (defvar-keymap madmacs-copilot-chat-keys :doc "Keys for Copilot related functionality")
+  (which-key-add-keymap-based-replacements madmacs-copilot-chat-keys
+    "." '("Explain at point" . copilot-explain-symbol-at-point)
+    "," '("Ask and insert" . copilot-ask-and-insert)
+    "c" '("Chat display" . copilot-chat-display)
+    "e" '("Explain" . copilot-chat-explain)
+    "r" '("Review" . copilot-chat-review)
+    "f" '("Fix" . copilot-chat-fix)
+    "o" '("Optimize" . copilot-chat-optimize)
+    "d" '("Doc" . copilot-chat-doc)
+    "p"  '("Prompt" . copilot-chat-custom-prompt-selection))
   
   (defvar-keymap madmacs-tools-keys :doc "Access various tools")
   (which-key-add-keymap-based-replacements madmacs-tools-keys
@@ -347,6 +359,7 @@
   (which-key-add-keymap-based-replacements mode-specific-map
     "!" `("Checkers" . ,madmacs-checker-keys)
     "x" `("M-x" . execute-extended-command)
+    "." `("Copilot Chat" . ,madmacs-copilot-chat-keys)
     "e" `("Filetree" . dirvish-side)
     "v" `("Git status". magit-status)
     "a" `(" AI" . ,madmacs-ai-keys)

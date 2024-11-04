@@ -11,7 +11,7 @@
     ("C-c C-<return>" . gptel-menu)
     ("C-c A" . gptel-menu)
     ("C-c ?" . gptel-ask)
-    ("C-c ." . gptel-quick)
+    ("C-c ," . gptel-quick)
     ("C-c r" . gptel-rewrite-menu))
 
   :init
