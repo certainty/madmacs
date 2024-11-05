@@ -12,7 +12,15 @@
     (lambda ()
       (embrace-add-pair ?_ "_" "_")
       (embrace-add-pair ?i "*" "*")
-      (embrace-add-pair ?b "**" "**"))))
+      (embrace-add-pair ?b "**" "**")))
+  
+  (defun embrace-double-quotes ()
+    (interactive)
+    (embrace--add-internal (region-beginning) (region-end) ?\"))
+  
+  (defun embrace-single-quotes ()
+    (interactive)
+    (embrace--add-internal (region-beginning) (region-end) ?\')))
 
 (defun meow-setup ()
   "Setup meow keys"
@@ -44,17 +52,8 @@
     '("3" . meow-expand-3)
     '("2" . meow-expand-2)
     '("1" . meow-expand-1)
-    
-    '(">" . xref-find-definitions)
-    '("<" . xref-find-references)
-    ;; quick access to ctrl-x
-    `("x" . ,ctl-x-map)
-    `("X" . "M-x")
 
-    '("C-m" . meow-motion-mode)
-    '("` `" . embrace-add)
-    '("` c" . embrace-change)
-    '("` d" . embrace-delete)
+    `("X" . "M-x")
 
     '("!j" . flycheck-next-error)
     '("!k" . flycheck-previous-error)
@@ -70,10 +69,10 @@
     '("[" . meow-beginning-of-thing)
     '("]" . meow-end-of-thing)
 
+    '(":" . undefined)
+    '("`" . capitalize-dwim)
+    '("^^" . meow-motion-mode)
 
-    '(":" . meow-goto-line)
-    '("^" . capitalize-dwim)
-    
     '("=" . indent-according-to-mode)
     '("&" . meow-query-replace-regexp)
     '("%" . meow-query-replace)
@@ -88,7 +87,19 @@
     '("e" . meow-next-word)
     '("E" . meow-next-symbol)
     '("f" . meow-find)
-    '("g" . meow-line)
+
+    ;; g is the quick action key
+    '("gg" . meow-visit)
+    '("gl" . meow-goto-line)
+    '("gc" . avy-goto-char)
+    '("gC" . avy-goto-char-timer)
+    '("gm" . pop-global-mark)
+    '("gr" . xref-find-references)
+    '("gR" . xref-find-references-and-replace)
+    '("gd" . xref-find-definitions)
+    '("gD" . xref-find-definitions-other-window)
+    '("gs". meow-search)
+
     '("G" . meow-grab)
     '("h" . meow-left)
     '("H" . meow-left-expand)
@@ -100,15 +111,12 @@
     '("K" . meow-prev-expand)
     '("l" . meow-right)
     '("L" . meow-right-expand)
-    '("m" . pop-global-mark)
+    
     '("M" . meow-join)
-    
-    '("nC" . avy-goto-char-timer)
-    '("nc" . avy-goto-char)
-    '("nr" . meow-search)
-    '("nn" . meow-visit)
-    
-    
+    '("m" . expreg-expand)
+    '("n" . expreg-contract)
+
+
     '("o" . meow-block)
     '("O" . meow-to-block)
     '("p" . meow-yank)
@@ -118,10 +126,19 @@
     '("t" . meow-till)
     '("u" . meow-undo)
     '("U" . meow-undo-in-slection)
-    '("v" . expreg-expand)
-    '("V" . expreg-contract)
+
+    ;; quote
+    '("qa" . embrace-add)
+    '("qc" . embrace-change)
+    '("qd" . embrace-delete)
+    '("q\"" . embrace-double-quotes)
+    '("q'" .  embrace-single-quotes)
+    
+    '("v" . undefined)
+    
     '("w" . meow-mark-word)
     '("W" . meow-mark-symbol)
+    '("x" . meow-line)
     '("y" . meow-save)
     '("Y" . meow-sync-grab)
     '("'" . meow-pop-selection)

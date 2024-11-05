@@ -52,7 +52,8 @@
 
   (setq gptel-backend madmacs-backend-ollama)
   ;; (setq gptel-model 'codegemma:latest)
-  (setq gptel-model 'llama3.2:latest)
+  ;; (setq gptel-model 'llama3.2:latest)
+  (setq gptel-model 'gpt-4o)
 
   (when (file-exists-p gptel-crowdsourced-prompts-file)
     ;; touch the file because gptel checks if it's older than 14 days and attempts to refetch.
@@ -93,7 +94,7 @@ The text is: ")))
 
   (setopt gptel-rewrite-directives-hook (list #'madmacs-gptel-rewrite-directive))
 
-    ;; GPTel ask stolen from karthink's emacs config
+  ;; GPTel ask stolen from karthink's emacs config
   (defvar gptel-ask--buffer-name "*gptel-ask*" "Name for one-off queries.")
 
   (defvar gptel-ask-display-buffer-action
