@@ -16,24 +16,20 @@
 
   (defun embrace-double-quotes ()
     (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?\"))
+    (embrace--add-internal (region-beginning) (region-end) ?\" ))
 
   (defun embrace-single-quotes ()
     (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?\'))
-  
-  (defun embrace-brackets ()
-    (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?['))))
+    (embrace--add-internal (region-beginning) (region-end) ?\')))
 
 (defun meow-setup ()
   "Setup meow keys"
   (interactive)
-  
+
   (meow-thing-register 'angle
     '(pair (";") (":"))
     '(pair (";") (":")))
-  
+
   (meow-motion-overwrite-define-key
     '("j" . meow-next)
     '("k" . meow-prev)
@@ -65,11 +61,11 @@
     '("!." . flycheck-explain-error-at-point)
 
     '("|" . shell-command-on-region)
-    
+
     '("=" . indent-region)
     '(">" . indent-rigidly-right)
     '("<" . indent-rigidly-left)
-     
+
     '("~" . negative-argument)
     '(";" . meow-reverse)
     '("," . meow-inner-of-thing)
@@ -118,7 +114,7 @@
     '("K" . meow-prev-expand)
     '("l" . meow-right)
     '("L" . meow-right-expand)
-    
+
     '("M" . meow-join)
     '("m" . expreg-expand)
     '("n" . expreg-contract)
@@ -140,7 +136,6 @@
     '("qd" . embrace-delete)
     '("q\"" . embrace-double-quotes)
     '("q'" .  embrace-single-quotes)
-    '("q[" . embrace-add-bracket)
     '("v" . just-one-space)
     '("w" . meow-mark-word)
     '("W" . meow-mark-symbol)
@@ -163,7 +158,7 @@
   (meow-goto-line-function 'consult-goto-line)
 
   :config
-  
+
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
   (add-to-list 'meow-mode-state-list '(mu4e-headers-mode . motion))
