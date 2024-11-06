@@ -5,7 +5,7 @@
   :demand t
   :bind
   (("C-c ca" . embrace-add)
-    ("C-c cc" . embrace-change )
+    ("C-c cc" . embrace-change)
     ("C-c cd" . embrace-delete))
   :init
   (add-hook 'markdown-mode-hook
@@ -13,14 +13,18 @@
       (embrace-add-pair ?_ "_" "_")
       (embrace-add-pair ?i "*" "*")
       (embrace-add-pair ?b "**" "**")))
-  
+
   (defun embrace-double-quotes ()
     (interactive)
     (embrace--add-internal (region-beginning) (region-end) ?\"))
-  
+
   (defun embrace-single-quotes ()
     (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?\')))
+    (embrace--add-internal (region-beginning) (region-end) ?\'))
+  
+  (defun embrace-brackets ()
+    (interactive)
+    (embrace--add-internal (region-beginning) (region-end) ?['))))
 
 (defun meow-setup ()
   "Setup meow keys"
@@ -62,6 +66,10 @@
 
     '("|" . shell-command-on-region)
     
+    '("=" . indent-region)
+    '(">" . indent-rigidly-right)
+    '("<" . indent-rigidly-left)
+     
     '("~" . negative-argument)
     '(";" . meow-reverse)
     '("," . meow-inner-of-thing)
@@ -73,7 +81,6 @@
     '("`" . capitalize-dwim)
     '("^^" . meow-motion-mode)
 
-    '("=" . indent-according-to-mode)
     '("&" . meow-query-replace-regexp)
     '("%" . meow-query-replace)
 
@@ -133,9 +140,8 @@
     '("qd" . embrace-delete)
     '("q\"" . embrace-double-quotes)
     '("q'" .  embrace-single-quotes)
-    
-    '("v" . undefined)
-    
+    '("q[" . embrace-add-bracket)
+    '("v" . just-one-space)
     '("w" . meow-mark-word)
     '("W" . meow-mark-symbol)
     '("x" . meow-line)
