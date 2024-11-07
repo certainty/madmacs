@@ -50,7 +50,7 @@
 
   (setq gptel-api-key (auth-source-pass-get 'secret "api.openai.com"))
 
-  (setq gptel-backend madmacs-backend-ollama)
+  ;; (setq gptel-backend madmacs-backend-ollama)
   ;; (setq gptel-model 'codegemma:latest)
   ;; (setq gptel-model 'llama3.2:latest)
   (setq gptel-model 'gpt-4o)

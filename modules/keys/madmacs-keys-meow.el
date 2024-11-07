@@ -73,7 +73,9 @@
     '("[" . meow-beginning-of-thing)
     '("]" . meow-end-of-thing)
 
-    '(":" . undefined)
+    '(":." . point-to-register)
+    '(":," . jump-to-register)
+    
     '("`" . capitalize-dwim)
     '("^^" . meow-motion-mode)
 
@@ -97,6 +99,7 @@
     '("gc" . avy-goto-char)
     '("gC" . avy-goto-char-timer)
     '("gm" . pop-global-mark)
+    '("g:" . jump-to-register)
     '("gr" . xref-find-references)
     '("gR" . xref-find-references-and-replace)
     '("gd" . xref-find-definitions)
@@ -173,6 +176,13 @@
   (meow-setup)
   ;; (meow-setup-indicator)
   (meow-global-mode 1))
+
+(use-package meow-tree-sitter
+  :ensure t
+  :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
+  :after meow
+  :config
+  (meow-tree-sitter-register-defaults))
 
 (provide 'madmacs-keys-meow)
 
