@@ -15,7 +15,6 @@ I use meow for modal editing, eglot as my LSP client and I use modern power ups 
 * Copilot / Gptel to bring AI to my work
 
 
-```markdown
 ## My Emacs Configuration Approach
 
 I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-package` alongside `straight`. This setup provides a straightforward boot process that's easy to understand and modify.
@@ -23,7 +22,6 @@ I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-p
 For modal editing, I prefer Meow. It offers a consistent keybinding scheme, using `SPC` and `C-c` as prefixes, while `C-SPC` serves as a mode-specific prefix.
 
 While my setup starts fairly quickly, I don't focus heavily on startup time. Personally, I do not restart Emacs frequently, so startup speed isn't a primary concern for me.
-```
 
 ## Usage
 
