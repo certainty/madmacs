@@ -11,8 +11,7 @@
   (yaml-mode  . madmacs--lsp))
 
 (use-package json-mode
-  :ensure nil
-  :straight nil
+  :ensure t
   :mode "\\.json\\'"
   :hook
   (json-mode . madmacs--lsp))
