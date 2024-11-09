@@ -4,28 +4,29 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
-## Madmacs in a few bullet points
+## For programmers: Moew + Eglot + Copilot/Gptel + Modern Power Ups
 
-* Built on the shoulders of giants
-  * many parts are based on other configurations like doom, lambda-emacs, centaur-emacs, etc.
-  * it's slightly nuts that we have to go to that length to configure our editor
-* Optimized for software engineers
-  * I use this as my daily driver
-  * Uses eglot as LSP client
+This is my emacs configuration, made for me as a software engineer.
+I use meow for modal editing, eglot as my LSP client and I use modern power ups to support my workflow:
+
+* Vertico + Corfu + Marginalia for completion and choices
+* Embark for contextual actions
+* Dirvish for file management and project tree
+* Copilot / Gptel to bring AI to my work
+
+
+## My configuration approach
+
 * Configuration in plain emacs lisp
   * `use-package` with straight
   * simple boot approach that's easy to follow and modify
 * Meow for modal editing
   * Consistent keybinding scheme using `SPC` / `C-c` as prefix
   * `C-SPC` is mode specific prefix
-* Useful power-ups
-  * Avy + Embark
-  * Transient menus via casual (suite)
-  * Vetico + Corfu + Marginalia & the gang
-  * expand-region
-  * gptel
 * Fairly fast startup
   * I don't obsess over it. I don't know about you, but I do not restart my emacs all the time.
+
+
 
 
 ## Usage
