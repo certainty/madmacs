@@ -24,11 +24,7 @@
 
   (which-key-add-keymap-based-replacements madmacs-elisp-local-leader-keys
     "e" `("eval" . ,madmacs-elisp-eval-keys) 
-    "t" `("test" . ,madmacs-elisp-test-keys))
-  
-  (when (eql madmacs-modal-approach 'evil)
-    (evil-define-key 'normal emacs-lisp-mode-map (kbd "<localleader>") madmacs-elisp-local-leader-keys)
-    (evil-define-key 'visual emacs-lisp-mode-map (kbd "<localleader>") madmacs-elisp-local-leader-keys)))
+    "t" `("test" . ,madmacs-elisp-test-keys)))
 
 (use-package eldoc
   :ensure nil

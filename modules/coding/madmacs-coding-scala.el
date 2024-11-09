@@ -7,10 +7,8 @@
   :interpreter ("scala" . scala-mode)
   :hook (scala-ts-mode . madmacs--lsp)
   :config
-  (cl-case madmacs-modal-approach
-    (evil (evil-define-key 'normal scala-ts-mode-map (kbd "<localleader>") madmacs-scala-local-leader-keys))
-    (meow (define-key scala-ts-mode-map (kbd "C-SPC") madmacs-scala-local-leader-keys))
-    (boon (define-key scala-ts-mode-map (kbd "C-c ,") madmacs-scala-local-leader-keys)))
+  (define-key scala-ts-mode-map (kbd "C-SPC") madmacs-scala-local-leader-keys)
+  
   
   (with-eval-after-load 'treemacs
     (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target")))

@@ -95,10 +95,14 @@
 
     ;; g is the quick action key
     '("gg" . meow-visit)
+    
+    '("gb" . meow-pop-to-mark)
+    '("gf" . meow-unpop-to-mark)
+    '("gF" . pop-global-mark)
+    
     '("gl" . meow-goto-line)
     '("gc" . avy-goto-char)
     '("gC" . avy-goto-char-timer)
-    '("gm" . pop-global-mark)
     '("g:" . jump-to-register)
     '("gr" . xref-find-references)
     '("gR" . xref-find-references-and-replace)

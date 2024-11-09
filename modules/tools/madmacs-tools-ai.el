@@ -6,9 +6,7 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :commands (gptel-send gptel-menu gptel)
   :bind
-  (("C-c <return>" . gptel-send)
-    ("C-c a" . gptel-send)
-    ("C-c C-<return>" . gptel-menu)
+  (("C-c a" . gptel-send)
     ("C-c A" . gptel-menu)
     ("C-c ?" . gptel-ask)
     ("C-c ," . gptel-quick)
@@ -71,6 +69,8 @@
 - Keeping variable/function names consistent with the original unless clarity can be improved
 - Optimizing performance where possible without sacrificing readability
 - Preserving any critical existing comments
+- For comments make sure that they only explain why the code is written the way it is, not what it does. Don't repeat what's in the signature. Don't explain the obvious.
+- For comments try to identify invariants and assumptions that are not obvious
 
 Provide only the refactored code and only the refactored code.
 The code is:

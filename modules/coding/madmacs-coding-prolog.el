@@ -61,15 +61,8 @@
     "t" `("Term" . ,madmacs-sweeprolog-term-keys)
     "l" `("Listener" . ,madmacs-sweeprolog-listener-keys)
     "o" `("Holes" . ,madmacs-sweeprolog-holes-keys))
-
-  (cl-case madmacs-modal-approach
-    (evil
-      (evil-define-key 'normal sweeprolog-mode-map (kbd ",") madmacs-prolog-local-leader-keys)
-      (evil-define-key 'visual sweeprolog-mode-map (kbd ",") madmacs-prolog-local-leader-keys))
-    (meow
-      (define-key sweeprolog-mode-map (kbd "C-SPC") madmacs-prolog-local-leader-keys))
-    (boon
-      (define-key sweeprolog-mode-map (kbd "C-c ,") madmacs-prolog-local-leader-keys))))
+  
+  (define-key sweeprolog-mode-map (kbd "C-SPC") madmacs-prolog-local-leader-keys))
 
 
 (provide 'madmacs-coding-prolog)

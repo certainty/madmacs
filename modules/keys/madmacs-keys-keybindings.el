@@ -12,25 +12,8 @@
   ;;
   ;; I am careful not to occupy the local leader key here
   
-  (when (eql madmacs-modal-approach 'evil)
-    (evil-global-set-key 'normal "|" 'split-window-right)
-    (evil-global-set-key 'normal "\\" 'split-window-below)
-    (evil-global-set-key 'normal (kbd "M-h") 'evil-window-left)
-    (evil-global-set-key 'normal (kbd "M-l") 'evil-window-right)
-    (evil-global-set-key 'normal (kbd "M-j") 'evil-window-down)
-    (evil-global-set-key 'normal (kbd "M-k") 'evil-window-up)
-    (evil-global-set-key 'visual (kbd "v") 'expreg-expand)
-    (evil-global-set-key 'visual (kbd "V") 'expreg-contract))
-
-  (when (eql madmacs-modal-approach 'meow)
-    (global-unset-key (kbd "C-,"))) ;; used as local leader
-
-  (when (eql madmacs-modal-approach 'boon)
-    (global-set-key (kbd "C-c C-|") 'split-window-right)
-    (global-set-key (kbd "C-c C-\\") 'split-window-below)
-    (global-set-key (kbd "C-c >") 'expreg-expand)
-    (global-set-key (kbd "C-c <") 'expreg-contract))
-
+  (global-unset-key (kbd "C-,"))
+  
   (defvar-keymap madmacs-windows-keys :doc "Window related commands and utilities")
   
   (which-key-add-keymap-based-replacements madmacs-windows-keys
@@ -105,146 +88,68 @@
 
   (defvar-keymap madmacs-lsp-workspace-keys :doc "LSP prefix map")
 
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-workspace-keys
-      "D" `("Disconnect" .  lsp-disconnect)
-      "d" `("Describe" . lsp-describe-session)
-      "q" `("Shutdown Server" . lsp-workspace-shutdown)
-      "r" `("Restart Server" .  lsp-workspace-restart)
-      "s" `("Start Server" . lsp)))
   
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-workspace-keys
-      "q" `("Shutdown Server" . eglot-shutdown)
-      "Q" `("Shutdown All" . eglot-shutdown-all)
-      "r" `("Reconnect Server" . eglot-connect)
-      "u" `("Update Server" . eglot-upgrade-eglot)
-      "s" `("Start Server" . eglot)
-      "c" `("Show configuration" . eglot-show-workspace-configuration)))
-
-  (defvar-keymap madmacs-lsp-folders-keys :doc "LSP prefix map")
-
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-folders-keys
-      "a" `("Add" . lsp-workspace-folders-add)
-      "b" `("un-blocklist folder" . lsp-workspace-blocklist-remove)
-      "r" `("remove folder" . lsp-workspace-folders-remove)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-workspace-keys
+    "q" `("Shutdown Server" . eglot-shutdown)
+    "Q" `("Shutdown All" . eglot-shutdown-all)
+    "r" `("Reconnect Server" . eglot-connect)
+    "u" `("Update Server" . eglot-upgrade-eglot)
+    "s" `("Start Server" . eglot)
+    "c" `("Show configuration" . eglot-show-workspace-configuration))
+  
 
   (defvar-keymap madmacs-lsp-formatting-keys :doc "LSP prefix map")
+  (which-key-add-keymap-based-replacements madmacs-lsp-formatting-keys
+    "b" `("Buffer" . eglot-format-buffer)
+    "f" `("Region" . eglot-format))
 
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-formatting-keys
-      "b" `("Buffer" . lsp-format-buffer)
-      "r" `("Region" . lsp-format-region)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-formatting-keys
-      "b" `("Buffer" . eglot-format-buffer)
-      "f" `("Region" . eglot-format)))
 
   (defvar-keymap madmacs-lsp-toggle-keys :doc "LSP prefix map")
-
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-toggle-keys
-      "D" `("Toggle modeline diagnostics" . lsp-modeline-diagnostics-mode)
-      "L" `("Toggle log io" . lsp-toggle-trace-io)
-      "l" `("Toggle lenses" . lsp-lens-mode)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-toggle-keys
-      "h" `("Toggle inlay hinds" . eglot-inlay-hints-mode)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-toggle-keys
+    "h" `("Toggle inlay hinds" . eglot-inlay-hints-mode))
 
   (defvar-keymap madmacs-lsp-goto-keys :doc "LSP prefix map")
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-goto-keys
-      "a" `("Find symbol in workspace" . xref-find-apropos)
-      "D" `("Find declaration" . lsp-find-declaration)
-      "d" `("Find definition" . lsp-find-definition)
-      "i" `("Find implementation" . lsp-find-implementation)
-      "r" `("Find references" . lsp-find-references)
-      "t" `("Find type definition" . lsp-find-type-definition)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-goto-keys
-      "a" `("Find symbol in workspace" . xref-find-apropos)
-      "D" `("Find declaration" . eglot-find-declaration)
-      "d" `("Find definition" . xref-find-definitions)
-      "i" `("Find implementation" . eglot-find-implementation)
-      "r" `("Find references" . xref-find-references)
-      "t" `("Find type definition" . eglot-find-typeDefinition)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-goto-keys
+    "a" `("Find symbol in workspace" . xref-find-apropos)
+    "D" `("Find declaration" . eglot-find-declaration)
+    "d" `("Find definition" . xref-find-definitions)
+    "i" `("Find implementation" . eglot-find-implementation)
+    "r" `("Find references" . xref-find-references)
+    "t" `("Find type definition" . eglot-find-typeDefinition))
+  
 
   (defvar-keymap madmacs-lsp-help-keys :doc "LSP prefix map")
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-help-keys
-      "g" `("Glance Symbol" . lsp-ui-doc-glance)
-      "." `("Describe thing" . lsp-describe-thing-at-point)
-      "s" `("Signature" . lsp-signature-activate)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-help-keys
-      "d" `("Describe thing" . helpful-at-point)
-      "." `("Help for thing" . display-local-help)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-help-keys
+    "d" `("Describe thing" . helpful-at-point)
+    "." `("Help for thing" . display-local-help))
+  
 
   (defvar-keymap madmacs-lsp-refactor-keys :doc "LSP prefix map")
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-refactor-keys
-      "o" `("Optimize Imports" . lsp-organize-imports)
-      "r" `("Rename" . lsp-renam)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-refactor-keys
-      "o" `("Optimize Imports" . eglot-code-action-organize-imports)
-      "r" `("Rename" . eglot-rename)
-      "i" `("Inline" . eglot-code-action-inline)
-      "e" `("Extract" . eglot-code-action-extract)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-refactor-keys
+    "o" `("Optimize Imports" . eglot-code-action-organize-imports)
+    "r" `("Rename" . eglot-rename)
+    "i" `("Inline" . eglot-code-action-inline)
+    "e" `("Extract" . eglot-code-action-extract))
+  
 
   (defvar-keymap madmacs-lsp-actions-keys :doc "LSP prefix map")
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
-      "a" `("Execute" . lsp-execute-code-action)
-      "h" `("Highlight symbol" . lsp-document-highlight)
-      "l" `("Avy lens" . lsp-avy-lens)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
-      "a" `("Execute" . eglot-code-actions)
-      "f" `("Fix" . eglot-code-action-quickfix)))
-
-  (defvar-keymap madmacs-lsp-peek-keys :doc "LSP prefix map")
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-peek-keys
-      "d" `("Peek definitions" . lsp-ui-peek-find-definitions)
-      "i" `("Peek implementations" . lsp-ui-peek-find-implementation)
-      "r" `("Peek references" . lsp-ui-peek-find-references)
-      "s" `("Peek workspace symbol" . lsp-ui-peek-find-workspace-symbol)))
-
-
-  (when (eq madmacs-lsp-client 'lsp-mode)
-    (which-key-add-keymap-based-replacements madmacs-lsp-keys
-      "!"  '("Diagnostics" . consult-lsp-diagnostics)
-      "a" `("Code actions" . ,madmacs-lsp-actions-keys)
-      "f" `("Formatting" . ,madmacs-lsp-formatting-keys)
-      "F" `("Folders" . ,madmacs-lsp-folders-keys)
-      "g" `("Goto" . ,madmacs-lsp-goto-keys)
-      "G" `("Peek" . ,madmacs-lsp-peek-keys)
-      "h" `("Help" . ,madmacs-lsp-help-keys)
-      "l" '("IMenu" . consult-imenu)
-      "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
-      "S"  '("Symbols" . consult-lsp-file-symbols)
-      "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
-      "w" `("Workspaces" . ,madmacs-lsp-workspace-keys)))
-
-  (when (eq madmacs-lsp-client 'eglot)
-    (which-key-add-keymap-based-replacements madmacs-lsp-keys
-      "!" '("Diagnostics" . flymake-show-buffer-diagnostics)
-      "a" `("Code actions" . ,madmacs-lsp-actions-keys)
-      "f" `("Formatting" . ,madmacs-lsp-formatting-keys)
-      "g" `("Goto" . ,madmacs-lsp-goto-keys)
-      "h" `("Help" . ,madmacs-lsp-help-keys)
-      "l" '("IMenu" . consult-imenu)
-      "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
-      "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
-      "w" `("Workspaces" . ,madmacs-lsp-workspace-keys)))
+  (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
+    "a" `("Execute" . eglot-code-actions)
+    "f" `("Fix" . eglot-code-action-quickfix))
+  
+  
+  
+  (which-key-add-keymap-based-replacements madmacs-lsp-keys
+    "!" '("Diagnostics" . flymake-show-buffer-diagnostics)
+    "a" `("Code actions" . ,madmacs-lsp-actions-keys)
+    "f" `("Formatting" . ,madmacs-lsp-formatting-keys)
+    "g" `("Goto" . ,madmacs-lsp-goto-keys)
+    "h" `("Help" . ,madmacs-lsp-help-keys)
+    "l" '("IMenu" . consult-imenu)
+    "r" `("Refactor" . ,madmacs-lsp-refactor-keys)
+    "T" `("Toggle" . ,madmacs-lsp-toggle-keys)
+    "w" `("Workspaces" . ,madmacs-lsp-workspace-keys))
+  
 
   ;; Debugger
   (defvar-keymap madmacs-debugger-keys :doc "Keys related to debugging")
@@ -378,12 +283,8 @@
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `(" Tools " . ,madmacs-tools-keys)
     "U" `("  UX" . ,madmacs-ux-keys))
-
-  (cl-case madmacs-modal-approach
-    (evil (evil-define-key 'normal 'global (kbd "<leader>") madmacs-leader-keys))
-    (meow
-      (global-set-key (kbd "C-SPC") madmacs-leader-keys))
-    (boon (global-set-key (kbd "C-SPC") madmacs-leader-keys))))
+  
+  (global-set-key (kbd "C-SPC") madmacs-leader-keys))
 
 (provide 'madmacs-keys-keybindings)
 

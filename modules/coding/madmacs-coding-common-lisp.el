@@ -169,17 +169,9 @@
     "t" `("Trace" . ,madmacs-sly-trace-keys)
     "m" '("expand macro" . macrostep-expand)
     "x" `("Xref" . ,madmacs-sly-xref-keys))
-
-  (cl-case madmacs-modal-approach
-    (evil
-     (evil-define-key 'normal sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys)
-     (evil-define-key 'visual sly-mode-map (kbd "<localleader>") madmacs-sly-local-leader-keys))
-    (meow
-      (which-key-add-keymap-based-replacements sly-mode-map
-        "C-SPC" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
-    (boon
-      (which-key-add-keymap-based-replacements sly-mode-map
-        "C-c ," `("Local Leader" . ,madmacs-sly-local-leader-keys)))))
+  
+  (which-key-add-keymap-based-replacements sly-mode-map
+    "C-SPC" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
 
 
 (use-package sly-asdf

@@ -57,12 +57,7 @@
     ("M-m" . dirvish-mark-menu)
     ("M-t" . dirvish-layout-toggle)
     ("M-s" . dirvish-setup-menu)
-    ("M-j" . dirvish-fd-jump))
-
-  :config
-  (when (eql madmacs-modal-approach 'evil)
-  (evil-define-key 'normal dirvish-mode-map (kbd "TAB") 'dirvish-toggle-subtree)
-  (evil-define-key 'normal dirvish-mode-map (kbd "<tab>") 'dirvish-toggle-subtree)))
+    ("M-j" . dirvish-fd-jump)))
 
 (use-package casual-dired
   :ensure t
