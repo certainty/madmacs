@@ -97,7 +97,7 @@
     
     '("gb" . meow-pop-to-mark)
     '("gf" . meow-unpop-to-mark)
-    '("gF" . pop-global-mark)
+    '("gB" . pop-global-mark)
     
     '("gl" . meow-goto-line)
     '("gc" . avy-goto-char)
