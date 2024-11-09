@@ -63,9 +63,8 @@
     '("|" . shell-command-on-region)
 
     '("=" . indent-region)
-    '(">" . indent-rigidly-right)
-    '("<" . indent-rigidly-left)
-
+    '("\\" . indent-rigidly)
+    
     '("~" . negative-argument)
     '(";" . meow-reverse)
     '("," . meow-inner-of-thing)
