@@ -15,19 +15,15 @@ I use meow for modal editing, eglot as my LSP client and I use modern power ups 
 * Copilot / Gptel to bring AI to my work
 
 
-## My configuration approach
+```markdown
+## My Emacs Configuration Approach
 
-* Configuration in plain emacs lisp
-  * `use-package` with straight
-  * simple boot approach that's easy to follow and modify
-* Meow for modal editing
-  * Consistent keybinding scheme using `SPC` / `C-c` as prefix
-  * `C-SPC` is mode specific prefix
-* Fairly fast startup
-  * I don't obsess over it. I don't know about you, but I do not restart my emacs all the time.
+I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-package` alongside `straight`. This setup provides a straightforward boot process that's easy to understand and modify.
 
+For modal editing, I prefer Meow. It offers a consistent keybinding scheme, using `SPC` and `C-c` as prefixes, while `C-SPC` serves as a mode-specific prefix.
 
-
+While my setup starts fairly quickly, I don't focus heavily on startup time. Personally, I do not restart Emacs frequently, so startup speed isn't a primary concern for me.
+```
 
 ## Usage
 
@@ -42,6 +38,8 @@ There are a couple of very basic conventions that I have applied.
 1. Global actions, actions that don't work on text or region are bound in the leader map under `SPC` or `C-c`. You'll fine a mnemonic grouping.
 2. Mode specific global actions are made available under the local leader map `C-SPC`.
 3. Context specific actions (on point, or region, etc.) are usually made available via embark actions. 
+4. Meow is setup to make quick actions available under the `g` prefix. For example `gd` finds the definition of the symbol that's selected. See [madmacs-keys-meow.el](./modules/keys/madmacs-keys-meow.el)
+
 
 **Transient menus where possible**
 
