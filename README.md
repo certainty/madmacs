@@ -4,6 +4,8 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
+**Note:** I'm currently doing most of my config on the [meow branch](https://github.com/certainty/madmacs/tree/meow), which I think will eventually become the main branch.
+
 ## Madmacs in a few bullet points
 
 * Built on the shoulders of giants
