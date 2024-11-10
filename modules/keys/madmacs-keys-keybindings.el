@@ -228,11 +228,11 @@
     "x" '("log out" . copilot-logout)
     "l" '("log in" . copilot-login))
   
-  (defvar-keymap madmacs-ai-keys :doc "Keys for AI related functionality")
-  (which-key-add-keymap-based-replacements madmacs-ai-keys
+  (defvar-keymap madmacs-gptel-keys :doc "Keys for AI related functionality")
+  (which-key-add-keymap-based-replacements madmacs-gptel-keys
     "." '("Quick" . gptel-quick)
-    "," '("Ask" . gptel-ask)
-    "<return>" '("Complete at point" . gptel-send)
+    "?" '("Ask" . gptel-ask)
+    "," '("Complete at point" . gptel-send)
     "a" '("This buffer to context" . gptel-add)
     "f" '("File to context" . gptel-add-file)
     "r" '("Rewrite" . gptel-rewrite-menu)
@@ -244,15 +244,18 @@
 
   (defvar-keymap madmacs-copilot-chat-keys :doc "Keys for Copilot related functionality")
   (which-key-add-keymap-based-replacements madmacs-copilot-chat-keys
-    "." '("Explain at point" . copilot-explain-symbol-at-point)
-    "," '("Ask and insert" . copilot-ask-and-insert)
+    "." '("Ask and insert" . copilot-ask-and-insert)
+    "b" '("Add current buffer" . copilot-chat-add-current-buffer)
+    "B" '("Del current buffer" . copilot-chat-del-current-buffer)
     "c" '("Chat display" . copilot-chat-display)
     "e" '("Explain" . copilot-chat-explain)
     "r" '("Review" . copilot-chat-review)
     "f" '("Fix" . copilot-chat-fix)
     "o" '("Optimize" . copilot-chat-optimize)
     "d" '("Doc" . copilot-chat-doc)
-    "p"  '("Prompt" . copilot-chat-custom-prompt-selection))
+    "t" '("Test" . copilot-chat-test)
+    "p"  '("Prompt" . copilot-chat-custom-prompt-selection)
+    "x" '("Reset" . copilot-chat-reset))
   
   (defvar-keymap madmacs-tools-keys :doc "Access various tools")
   (which-key-add-keymap-based-replacements madmacs-tools-keys
@@ -264,10 +267,10 @@
   (which-key-add-keymap-based-replacements mode-specific-map
     "!" `("Checkers" . ,madmacs-checker-keys)
     "x" `("M-x" . execute-extended-command)
-    "." `("Copilot Chat" . ,madmacs-copilot-chat-keys)
+    "." `("  Copilot Chat" . ,madmacs-copilot-chat-keys)
+    "," `("  Gptel" . ,madmacs-gptel-keys)
     "e" `("Filetree" . dirvish-side)
     "v" `("Git status". magit-status)
-    "a" `(" AI" . ,madmacs-ai-keys)
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)

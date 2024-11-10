@@ -27,7 +27,7 @@
     ("C-c C-c" . copilot-chat-prompt-send))
   :custom
   (copilot-chat-backend 'curl)
-  (copilot-chat-frontend 'org))
+  (copilot-chat-frontend 'markdown))
 
 
 (provide 'madmacs-coding-copilot)

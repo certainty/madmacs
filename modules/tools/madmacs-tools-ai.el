@@ -6,11 +6,11 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :commands (gptel-send gptel-menu gptel)
   :bind
-  (("C-c a" . gptel-send)
-    ("C-c A" . gptel-menu)
-    ("C-c ?" . gptel-ask)
-    ("C-c ," . gptel-quick)
-    ("C-c r" . gptel-rewrite-menu))
+  (("C-c ,," . gptel-send)
+    ("C-c ,m" . gptel-menu)
+    ("C-c ,?" . gptel-ask)
+    ("C-c ,." . gptel-quick)
+    ("C-c ,r" . gptel-rewrite-menu))
 
   :init
   (setq gptel-expert-commands t)
