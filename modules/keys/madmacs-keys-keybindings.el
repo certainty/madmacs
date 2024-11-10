@@ -248,6 +248,7 @@
     "b" '("Add current buffer" . copilot-chat-add-current-buffer)
     "B" '("Del current buffer" . copilot-chat-del-current-buffer)
     "c" '("Chat display" . copilot-chat-display)
+    "v" '("Commit Message" . copilot-chat-insert-commit-message)
     "e" '("Explain" . copilot-chat-explain)
     "r" '("Review" . copilot-chat-review)
     "f" '("Fix" . copilot-chat-fix)
