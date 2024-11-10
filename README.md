@@ -51,7 +51,7 @@ For the rest just use the normal emacs keybindings.
 
 I've enabled and configured GitHub Copilot and GPTel, ready to be used from within Emacs. Copilot is used for auto-completion of code, while GPTel is made available to interact in any buffer.
 
-All AI related functionality is available via `SPC a` prefix.
+All AI related functionality is available via `SPC ,` and `SPC .` prefixes.
 
 In addition, there are `embark` actions available for `gptel`, so you can use `C-.` to access them in the given context.
 
