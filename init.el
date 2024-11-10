@@ -55,6 +55,7 @@
      madmacs-coding-lisp
      madmacs-coding-elisp
      madmacs-coding-common-lisp
+     madmacs-coding-racket
      madmacs-coding-prolog
      madmacs-coding-elixir
      madmacs-coding-elm

@@ -3,7 +3,7 @@
 
 (use-package lispy
   :ensure t
-  :hook (lisp-mode emacs-lisp-mode scheme-mode))
+  :hook (lisp-mode emacs-lisp-mode scheme-mode racket-mode))
 
 ;; Show matching parens
 (use-package paren
