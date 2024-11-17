@@ -26,9 +26,74 @@
   "Setup meow keys"
   (interactive)
 
-  (meow-thing-register 'angle
-    '(pair (";") (":"))
-    '(pair (";") (":")))
+  (defvar-keymap meow-sexp-map :doc "Keymap for meow sexp state")
+  
+  (meow-define-state sexp
+    "meow state for interacting with sexps"
+    :lighter " [S]"
+    :keymap meow-sexp-map)
+
+  (setq meow-cursor-type-sexp 'hollow)
+
+  ;; (meow-define-keys 'sexp
+  ;;   '("<escape>" . meow-normal-mode)
+  ;;   '("l" . sp-forward-sexp)
+  ;;   '("h" . sp-backward-sexp)
+  ;;   '("j" . sp-down-sexp)
+  ;;   '("k" . sp-up-sexp)
+  ;;   '("N" . sp-backward-slurp-sexp)
+  ;;   '("n" . sp-forward-slurp-sexp)
+  ;;   '("b" . sp-forward-barf-sexp)
+  ;;   '("B" . sp-backward-barf-sexp)
+  ;;   '("u" . meow-undo))
+
+  (defmacro define-paredit-with-selection (original-cmd new-cmd)
+    "Create a new command NEW-CMD that runs ORIGINAL-CMD, extending the selection if not active."
+    `(defun ,new-cmd ()
+       (interactive)
+       (if (region-active-p)
+         (call-interactively #',original-cmd)
+         (set-mark-command nil)
+         (call-interactively #',original-cmd))))
+
+
+  (define-paredit-with-selection paredit-forward paredit-forward-w-selection)
+  (define-paredit-with-selection paredit-forward-down paredit-forward-down-w-selection)
+  (define-paredit-with-selection paredit-backward paredit-backward-w-selection)
+  (define-paredit-with-selection paredit-backward-up paredit-backward-up-w-selection)
+  
+  (defun ensure-meow-normal-mode ()
+    "Ensure Meow is in normal mode. If not, switch to it."
+    (interactive)
+    (unless (eq meow--current-state 'normal)
+      (meow-normal-mode)))
+
+  (meow-define-keys 'sexp
+    '("<escape>" . ensure-meow-normal-mode)
+    '("/" . paredit-reindent-defun)
+    '("|" . paredit-split-sexp)
+    '(">" . paredit-splice-sexp)
+    '("<" . paredit-convolute-sexp)
+    '(";" . paredit-comment-dwim)
+    '("." . paredit-focus-on-defun)
+    '("l" . paredit-forward-w-selection)
+    '("L" . paredit-forward-down-w-selection)
+    '("h" . paredit-backward-w-selection)
+    '("H" . paredit-backward-up-w-selection)
+    '("j" . meow-next)
+    '("k" . meow-prev)
+    '("N" . paredit-backward-slurp-sexp)
+    '("n" . paredit-forward-slurp-sexp)
+    '("b" . paredit-forward-barf-sexp)
+    '("B" . paredit-backward-barf-sexp)
+    '("s" . paredit-kill-region)
+    '("S" . paredit-kill)
+    '("d" . paredit-delete-char)
+    '("D" . paredit-backward-delete)
+    '("M" . paredit-join-sexps)
+    '("R" . paredit-raise-sexp)
+    '("U" . paredit-unescape-string)
+    '("u" . meow-undo))
 
   (meow-motion-overwrite-define-key
     '("j" . meow-next)
@@ -71,6 +136,8 @@
     '("." . meow-bounds-of-thing)
     '("[" . meow-beginning-of-thing)
     '("]" . meow-end-of-thing)
+    '("(" . meow-sexp-mode)
+    '(")" . meow-sexp-mode)
 
     '(":." . point-to-register)
     '(":," . jump-to-register)

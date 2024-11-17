@@ -1,9 +1,20 @@
 ;; -*- lexical-binding: t; -*-
 
 
-(use-package lispy
+;; (use-package lispy
+;;   :ensure t
+;;   :hook (lisp-mode emacs-lisp-mode scheme-mode racket-mode))
+
+(use-package paredit
   :ensure t
-  :hook (lisp-mode emacs-lisp-mode scheme-mode racket-mode))
+  :hook (emacs-lisp-mode lisp-mode scheme-mode racket-mode))
+
+;; (use-package smartparens
+;;   :ensure smartparens  ;; install the package
+;;   :hook ((prog-mode text-mode markdown-mode) . smartparens-strict-mode) ;; add `smartparens-mode` to these hooks
+;;   :config
+;;   ;; load default config
+;;   (require 'smartparens-config))
 
 ;; Show matching parens
 (use-package paren
