@@ -35,18 +35,6 @@
 
   (setq meow-cursor-type-sexp 'hollow)
 
-  ;; (meow-define-keys 'sexp
-  ;;   '("<escape>" . meow-normal-mode)
-  ;;   '("l" . sp-forward-sexp)
-  ;;   '("h" . sp-backward-sexp)
-  ;;   '("j" . sp-down-sexp)
-  ;;   '("k" . sp-up-sexp)
-  ;;   '("N" . sp-backward-slurp-sexp)
-  ;;   '("n" . sp-forward-slurp-sexp)
-  ;;   '("b" . sp-forward-barf-sexp)
-  ;;   '("B" . sp-backward-barf-sexp)
-  ;;   '("u" . meow-undo))
-
   (defmacro define-paredit-with-selection (original-cmd new-cmd)
     "Create a new command NEW-CMD that runs ORIGINAL-CMD, extending the selection if not active."
     `(defun ,new-cmd ()
@@ -75,10 +63,12 @@
     '("<" . paredit-convolute-sexp)
     '(";" . paredit-comment-dwim)
     '("." . paredit-focus-on-defun)
+    '("a" . meow-append)
     '("l" . paredit-forward-w-selection)
     '("L" . paredit-forward-down-w-selection)
     '("h" . paredit-backward-w-selection)
     '("H" . paredit-backward-up-w-selection)
+    '("i" . meow-insert)
     '("j" . meow-next)
     '("k" . meow-prev)
     '("N" . paredit-backward-slurp-sexp)
