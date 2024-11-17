@@ -4,7 +4,7 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
-## For programmers: Moew + Eglot + Copilot/Gptel + Modern Power Ups
+## For programmers: Meow + Eglot + Copilot/Gptel + Modern Power Ups
 
 This is my emacs configuration, made for me as a software engineer.
 I use meow for modal editing, eglot as my LSP client and I use modern power ups to support my workflow:
