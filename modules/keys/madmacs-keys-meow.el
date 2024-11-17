@@ -56,7 +56,6 @@
          (set-mark-command nil)
          (call-interactively #',original-cmd))))
 
-
   (define-paredit-with-selection paredit-forward paredit-forward-w-selection)
   (define-paredit-with-selection paredit-forward-down paredit-forward-down-w-selection)
   (define-paredit-with-selection paredit-backward paredit-backward-w-selection)
