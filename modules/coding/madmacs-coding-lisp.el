@@ -7,7 +7,15 @@
 
 (use-package paredit
   :ensure t
-  :hook (emacs-lisp-mode lisp-mode scheme-mode racket-mode))
+  :hook (emacs-lisp-mode lisp-mode scheme-mode racket-mode)
+  :bind
+  (:map paredit-mode-map
+    ("M->" . paredit-forward-slurp-sexp)
+    ("M-<" . paredit-forward-barf-sexp))
+  
+  (:repeat-map paredit-repeat-map
+    (">" . paredit-forward-slurp-sexp)
+    ("<" . paredit-forward-barf-sexp)))
 
 ;; (use-package smartparens
 ;;   :ensure smartparens  ;; install the package

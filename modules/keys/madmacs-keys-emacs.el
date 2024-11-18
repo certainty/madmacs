@@ -23,6 +23,7 @@
     ("d" . kill-word)
     ("DEL" . backward-kill-word))
 
+  
   (:repeat-map madmacs-sentence-repeat-map
     ("f" . forward-sentence)
     ("b" . backward-sentence)
@@ -69,9 +70,7 @@
       (lambda (_key cmd)
         (when (symbolp cmd)
           (put cmd 'repeat-map keymap)))
-      (symbol-value keymap)))
-
-  )
+      (symbol-value keymap))))
 
 
 (use-package embrace
