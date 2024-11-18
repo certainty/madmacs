@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
-
 ;;; This adds vanilla emacs key support
 ;;; While you may think there is not much to do there are just a couple of things that make
 ;;; the vanilla emacs keybindings a bit more comfortable and easier to use.
@@ -11,18 +9,42 @@
   :ensure t
   :straight nil
   :bind
-
-  (:repeat-map madmacs-motion-repeat-map
+  
+  ;; Object-specific Motion Repeat Maps
+  (:repeat-map madmacs-char-repeat-map
     ("f" . forward-char)
     ("b" . backward-char)
-    
-    ("n" . next-line)
-    ("p" . previous-line))
+    ("d" . delete-char)
+    ("k" . kill-line))
+
+  (:repeat-map madmacs-word-repeat-map
+    ("f" . forward-word)
+    ("b" . backward-word)
+    ("d" . kill-word)
+    ("DEL" . backward-kill-word))
+
+  (:repeat-map madmacs-sentence-repeat-map
+    ("f" . forward-sentence)
+    ("b" . backward-sentence)
+    ("d" . kill-sentence))
+
+  (:repeat-map madmacs-sexp-repeat-map
+    ("f" . forward-sexp)
+    ("b" . backward-sexp)
+    ("k" . kill-sexp))
   
-  (:repeat-map madmacs-kill-repeat-map
-    ("k" . kill-whole-line)
-    ("b" . backward-kill-word)
-    ("d" . delete-char))
+  (:repeat-map madmacs-line-repeat-map
+    ("n" . next-line)
+    ("p" . previous-line)
+    ("k" . kill-line)
+    ("a" . beginning-of-line)
+    ("e" . end-of-line)
+    ("^" . join-line))
+
+  (:repeat-map madmacs-paragraph-repeat-map
+    ("}" . forward-paragraph)
+    ("{" . backward-paragraph)
+    ("k" . kill-paragraph))
   
   (:repeat-map madmacs-undo-repeat-map
     ("u" . undo))
@@ -30,9 +52,16 @@
   (:repeat-map madmacs-search-repeat-map
     ("s" . isearch-forward)
     ("r" . isearch-backward))
+
+  (:repeat-map madmacs-scroll-repeat-map
+    ("v" . scroll-up-command)
+    ("M-v" . scroll-down-command)
+    ("l" . recenter-top-bottom))
+
+  (:repeat-map madmacs-windows-repeat-map
+    ("o" . other-window))
   
   :init
-
   (defun madmacs--repeatize (keymap)
     "Add `repeat-mode' support to an existing KEYMAP.
     If you define the keymap new via defvar-keymap use the :repeat property instead"

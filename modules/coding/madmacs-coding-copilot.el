@@ -7,13 +7,10 @@
   :bind
   (:map prog-mode-map
     ("C-o" . copilot-complete))
-  (:map copilot-completion-map
-    ("C-l" . copilot-accept-completion-by-line)
-    ("C-y" . copilot-accept-completion)
-    ("M-y" . copilot-accept-completion-by-word)
-    ("C-p" . copilot-previous-completion)
-    ("C-n" . copilot-next-completion))
 
+  (:map copilot-completion-map
+    ("<tab>" . copilot-accept-completion))
+  
   :config
 
   (setq warning-suppress-log-types '((copilot copilot-no-mode-indent))))

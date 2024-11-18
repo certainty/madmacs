@@ -5,10 +5,8 @@
   :straight nil
   :init
   ;; This is what I usually want
-  ("M-z" . zap-up-to-char)
-  (:repeat-map madmacs-zap-repeat-map
-    ("z" . zap-up-to-char)
-    ("Z" . zap-to-char)))
+  :bind
+  ("M-z" . zap-up-to-char))
 
 (use-package expand-region
   :ensure t)
