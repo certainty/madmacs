@@ -15,8 +15,10 @@
 
      madmacs-ux-osx
      madmacs-ux-buffers
-     madmacs-keys-meow
+    ;madmacs-keys-meow
+     
      madmacs-keys-essentials            ;; it is important to load this after meow, to make sure the leader map works correctly and is correctly displayed
+    madmacs-keys-emacs
      ))
 
 (setopt madmacs-after-init-features

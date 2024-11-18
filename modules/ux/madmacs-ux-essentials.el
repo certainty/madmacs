@@ -53,6 +53,7 @@
   :straight nil
   :hook (after-init . global-visual-line-mode)
   :custom
+  (kill-whole-line t)
   (line-move-visual t))
 
 (use-package display-line-numbers

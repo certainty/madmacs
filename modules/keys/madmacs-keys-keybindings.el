@@ -288,7 +288,8 @@
     "T" `(" Tools " . ,madmacs-tools-keys)
     "U" `("  UX" . ,madmacs-ux-keys))
   
-  (global-set-key (kbd "C-SPC") madmacs-leader-keys))
+  ;(global-set-key (kbd "C-SPC") madmacs-leader-keys)
+  )
 
 (provide 'madmacs-keys-keybindings)
 
