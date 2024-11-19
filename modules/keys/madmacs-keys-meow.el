@@ -132,7 +132,6 @@
     '(":," . jump-to-register)
     
     '("`" . capitalize-dwim)
-    '("^^" . meow-motion-mode)
 
     '("&" . meow-query-replace-regexp)
     '("%" . meow-query-replace)
@@ -156,8 +155,9 @@
     '("gB" . pop-global-mark)
     
     '("gl" . meow-goto-line)
-    '("gc" . avy-goto-char)
-    '("gC" . avy-goto-char-timer)
+    '("gL" . avy-goto-line)
+    '("gc" . avy-goto-char-timer)
+    '("gC" . avy-goto-char)
     '("g:" . jump-to-register)
     '("gr" . xref-find-references)
     '("gR" . xref-find-references-and-replace)
@@ -177,9 +177,9 @@
     '("l" . meow-right)
     '("L" . meow-right-expand)
 
-    '("M" . meow-join)
+    '("^" . meow-join)
     '("m" . expreg-expand)
-    '("n" . expreg-contract)
+    '("M" . expreg-contract)
 
 
     '("o" . meow-block)
