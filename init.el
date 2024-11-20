@@ -6,15 +6,11 @@
   `(
      madmacs-edit-essentials
      madmacs-ux-essentials
-     madmacs-ui-windows
-     madmacs-ui-frames
+     madmacs-ux-display-elements
 
-     madmacs-ui-theme
-     madmacs-ui-faces
-     madmacs-ui-fonts
+     madmacs-ui-look
 
      madmacs-ux-osx
-     madmacs-ux-buffers
      madmacs-keys-meow
      madmacs-keys-essentials            ;; it is important to load this after meow, to make sure the leader map works correctly and is correctly displayed
      ))

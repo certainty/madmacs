@@ -286,9 +286,7 @@
     "s" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `(" Tools " . ,madmacs-tools-keys)
-    "U" `("  UX" . ,madmacs-ux-keys))
-  
-  (global-set-key (kbd "C-SPC") madmacs-leader-keys))
+    "U" `("  UX" . ,madmacs-ux-keys)))
 
 (provide 'madmacs-keys-keybindings)
 
