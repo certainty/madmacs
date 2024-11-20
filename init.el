@@ -4,13 +4,12 @@
 
 (setopt  madmacs-init-features
   `(
-     madmacs-edit-essentials
-     madmacs-ux-essentials
      madmacs-ux-display-elements
-
      madmacs-ui-look
-
-     madmacs-ux-osx
+     madmacs-ui-modeline
+     
+     madmacs-edit-essentials
+     
      madmacs-keys-meow
      madmacs-keys-essentials            ;; it is important to load this after meow, to make sure the leader map works correctly and is correctly displayed
      ))
@@ -19,13 +18,15 @@
   '(
      madmacs-ux-completion
      madmacs-ux-dashboard
-     madmacs-ui-modeline
      madmacs-ux-repeat
-
-     madmacs-projects-essentials
+     
      madmacs-edit-actions
+
+     madmacs-files-essentials
      madmacs-files-dired
-     madmacs-ux-workspaces))
+     
+     madmacs-ux-workspaces
+     ))
 
 (setopt madmacs-after-startup-features
   '(
@@ -36,6 +37,7 @@
      madmacs-tools-terminal
      madmacs-tools-vcs
 
+     ;; code support
      madmacs-coding-essentials
 
      madmacs-coding-version-manager
@@ -59,16 +61,20 @@
      madmacs-coding-copilot
      madmacs-coding-configurations
 
+     ;; useful tools
      madmacs-tools-docker
      madmacs-tools-calc
      madmacs-tools-pass
      madmacs-tools-ai
      madmacs-tools-translate
 
+     ;; add-ons
      madmacs-org-essentials
 
      madmacs-games-chess
 
-     madmacs-keys-keybindings))
+     ;; optional consistent keybindings
+     madmacs-keys-keybindings
+     ))
 
 (madmacs--boot)

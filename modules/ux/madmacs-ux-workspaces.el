@@ -1,23 +1,56 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package project
+  :ensure nil
+  :straight nil
+  :custom
+  (project-switch-commands '((project-find-file "Find file")
+                             (project-find-regexp "Find regexp")
+                             (project-find-dir "Find directory")
+                             (project-vc-dir "VC-Dir")
+                             (project-magit-dir "Magit status")))
+
+  (project-vc-extra-root-markers '(".project" "package.json" "autogen.sh" ".projectile" "go.mod")))
+
+;; (use-package direnv
+;;   :ensure t
+;;   :config
+;;   (direnv-mode))
+
+(use-package dotenv
+  :ensure t
+  :straight (dotenv :type git :host github :repo "pkulev/dotenv.el")
+  :after project
+  ;; TODO: verify that this works
+  :hook (project-switch-project . madmacs--dotenv-project-hook)
+  :config
+
+  (defun madmacs--dotenv-project-hook ()
+    "Update project environment variables."
+    (interactive)
+    (message "Updating project environment variables...")
+    (when (project-root)
+      (dotenv-update-project-env
+       (project-root)))))
+
 (use-package desktop
   :ensure nil
   :straight nil
   :commands (desktop-save-mode)
   :custom
   (desktop-dirname (madmacs--ensure-cache-dir "desktops"))
-    (desktop-base-file-name "emacs.desktop")
-    (desktop-base-lock-name "lock")
-    (desktop-path (list desktop-dirname))
-    (desktop-save 'ask-if-new)
-    (desktop-files-not-to-save  (concat "^$" ".*magit$"))
-    (desktop-restore-eager 4)
-    (desktop-load-locked-desktop t)
-    (desktop-buffers-not-to-save
-     (concat "\\("
-             "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
-             "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
-             "\\)$")))
+  (desktop-base-file-name "emacs.desktop")
+  (desktop-base-lock-name "lock")
+  (desktop-path (list desktop-dirname))
+  (desktop-save 'ask-if-new)
+  (desktop-files-not-to-save  (concat "^$" ".*magit$"))
+  (desktop-restore-eager 4)
+  (desktop-load-locked-desktop t)
+  (desktop-buffers-not-to-save
+    (concat "\\("
+      "^nn\\.a[0-9]+\\|\\.log\\|(ftp)\\|^tags\\|^TAGS"
+      "\\|\\.emacs.*\\|\\.diary\\|\\.newsrc-dribble\\|\\.bbdb"
+      "\\)$")))
 
 (use-package multisession
   :ensure nil
