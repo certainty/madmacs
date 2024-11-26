@@ -159,6 +159,7 @@
     '("gc" . avy-goto-char-timer)
     '("gC" . avy-goto-char)
     '("g:" . jump-to-register)
+    '("gi" . consult-imenu)
     '("gr" . xref-find-references)
     '("gR" . xref-find-references-and-replace)
     '("gd" . xref-find-definitions)
