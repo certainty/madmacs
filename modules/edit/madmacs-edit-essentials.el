@@ -25,11 +25,16 @@
 (use-package symbol-overlay
   :ensure t)
 
-;
 (use-package casual-symbol-overlay
   :ensure t
   :straight (casual-symbol-overlay :type git :host github :repo "kickingvegas/casual-symbol-overlay")
   :after symbol-overlay
   :bind (:map symbol-overlay-map ("M-o" . casual-symbol-overlay-tmenu)))
+
+(use-package simple
+  :ensure nil
+  :straight nil
+  :init
+  (setopt kill-whole-line t))
 
 (provide 'madmacs-edit-essentials)
