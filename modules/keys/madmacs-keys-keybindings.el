@@ -12,8 +12,6 @@
   ;;
   ;; I am careful not to occupy the local leader key here
   
-  (global-unset-key (kbd "C-,"))
-  
   (defvar-keymap madmacs-windows-keys :doc "Window related commands and utilities")
   
   (which-key-add-keymap-based-replacements madmacs-windows-keys

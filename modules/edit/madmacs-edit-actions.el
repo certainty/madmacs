@@ -33,6 +33,11 @@
 
 (use-package avy
   :ensure t
+  :bind
+  (("C-, ," . avy-goto-char-timer)
+    ("C-, c" . avy-goto-char)
+    ("C-, l" . avy-goto-line))
+
   :config
   ;; https://karthinks.com/software/avy-can-do-anything/
   (defun avy-action-embark (pt)

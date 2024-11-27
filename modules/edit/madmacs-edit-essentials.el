@@ -3,6 +3,8 @@
 (use-package emacs
   :ensure nil
   :straight nil
+  :custom
+  (next-line-add-newlines t)
   :init
   ;; This is what I usually want
   :bind

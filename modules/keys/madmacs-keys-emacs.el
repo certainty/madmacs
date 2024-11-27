@@ -14,20 +14,17 @@
   (:repeat-map madmacs-char-repeat-map
     ("f" . forward-char)
     ("b" . backward-char)
-    ("d" . delete-char)
-    ("k" . kill-line))
+    ("d" . delete-char))
 
   (:repeat-map madmacs-word-repeat-map
     ("f" . forward-word)
     ("b" . backward-word)
     ("d" . kill-word)
     ("DEL" . backward-kill-word))
-
   
   (:repeat-map madmacs-sentence-repeat-map
     ("f" . forward-sentence)
-    ("b" . backward-sentence)
-    ("d" . kill-sentence))
+    ("b" . backward-sentence))
 
   (:repeat-map madmacs-sexp-repeat-map
     ("f" . forward-sexp)
@@ -37,22 +34,16 @@
   (:repeat-map madmacs-line-repeat-map
     ("n" . next-line)
     ("p" . previous-line)
-    ("k" . kill-line)
     ("a" . beginning-of-line)
     ("e" . end-of-line)
     ("^" . join-line))
 
   (:repeat-map madmacs-paragraph-repeat-map
     ("}" . forward-paragraph)
-    ("{" . backward-paragraph)
-    ("k" . kill-paragraph))
+    ("{" . backward-paragraph))
   
   (:repeat-map madmacs-undo-repeat-map
     ("u" . undo))
-
-  (:repeat-map madmacs-search-repeat-map
-    ("s" . isearch-forward)
-    ("r" . isearch-backward))
 
   (:repeat-map madmacs-scroll-repeat-map
     ("v" . scroll-up-command)

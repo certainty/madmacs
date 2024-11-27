@@ -55,10 +55,8 @@
 (use-package vertico
   :ensure t
   :bind (:map vertico-map
-              ("C-j" . vertico-next)
-              ("C-k" . vertico-previous)
-              ("C-g" . #'vertico-exit)
-              ("M-RET"    . #'vertico-exit))
+          ("C-g" . #'vertico-exit)
+          ("M-RET" . #'vertico-exit))
   :custom
   (vertico-cycle t)
   (vertico-resize nil)
@@ -177,7 +175,7 @@
   :bind
     (:map corfu-map
       ("C-SPC" . corfu-insert-separator)
-
+      
       ("TAB" . nil)
       ("<return>" . nil)
       ("C-<TAB>" . corfu-insert)

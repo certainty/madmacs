@@ -15,7 +15,9 @@
   
   (:repeat-map paredit-repeat-map
     (">" . paredit-forward-slurp-sexp)
-    ("<" . paredit-forward-barf-sexp)))
+    ("<" . paredit-forward-barf-sexp)
+    ("u" . paredit-backward-up)
+    ("d" . paredit-forward-down)))
 
 ;; (use-package smartparens
 ;;   :ensure smartparens  ;; install the package
