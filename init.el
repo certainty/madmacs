@@ -36,6 +36,7 @@
      madmacs-tools-vcs
 
      ;; code support
+     madmacs-structured-editing
      madmacs-coding-essentials
 
      madmacs-coding-version-manager

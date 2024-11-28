@@ -8,6 +8,13 @@
 (use-package repeat
   :ensure t
   :straight nil
+  :custom
+  (repeat-exit-timeout 3)
+
+  :config
+  (dolist (command '(next-error previous-error))
+    (put command 'repeat-exit-timeout 'no))
+  
   :bind
   
   ;; Object-specific Motion Repeat Maps
@@ -41,7 +48,6 @@
   (:repeat-map madmacs-paragraph-repeat-map
     ("}" . forward-paragraph)
     ("{" . backward-paragraph))
-  
   (:repeat-map madmacs-undo-repeat-map
     ("u" . undo))
 

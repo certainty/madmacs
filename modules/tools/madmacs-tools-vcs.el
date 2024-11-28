@@ -41,7 +41,7 @@
       ("C-c m n" . smerge-next)
       ("C-c m p" . smerge-prev)))
 
- 	:init
+  :init
   (which-key-add-key-based-replacements "C-c m" "smerge"))
 
 ;; add some embark actions to work on

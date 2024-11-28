@@ -116,8 +116,7 @@
 
 (use-package casual-avy
   :ensure t
-  :after avy
-  :bind ("M-g" . casual-avy-tmenu))
+  :after avy)
 
 ;; iedit / edit multiple regions
 

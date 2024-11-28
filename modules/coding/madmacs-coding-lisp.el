@@ -9,13 +9,10 @@
   :ensure t
   :hook (emacs-lisp-mode lisp-mode scheme-mode racket-mode)
   :bind
-  (:map paredit-mode-map
-    ("M->" . paredit-forward-slurp-sexp)
-    ("M-<" . paredit-forward-barf-sexp))
   
   (:repeat-map paredit-repeat-map
-    (">" . paredit-forward-slurp-sexp)
-    ("<" . paredit-forward-barf-sexp)
+    (")" . paredit-forward-slurp-sexp)
+    ("{" . paredit-forward-barf-sexp)
     ("u" . paredit-backward-up)
     ("d" . paredit-forward-down)))
 

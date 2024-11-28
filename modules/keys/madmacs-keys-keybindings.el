@@ -265,7 +265,6 @@
   
   (which-key-add-keymap-based-replacements mode-specific-map
     "!" `("Checkers" . ,madmacs-checker-keys)
-    "x" `("M-x" . execute-extended-command)
     "." `("  Copilot Chat" . ,madmacs-copilot-chat-keys)
     "," `("  Gptel" . ,madmacs-gptel-keys)
     "e" `("Filetree" . dirvish-side)
