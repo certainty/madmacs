@@ -36,7 +36,7 @@
     "z" `("repl" . racket-edit-switch-to-repl))
 
   (which-key-add-keymap-based-replacements racket-mode-map
-    "C-SPC" `("Local Leader" . ,madmacs-racket-local-leader-keys)
+    "C-c m" `("Local Leader" . ,madmacs-racket-local-leader-keys)
     ))
   
   (provide 'madmacs-coding-racket)

@@ -7,7 +7,7 @@
   :interpreter ("scala" . scala-mode)
   :hook (scala-ts-mode . madmacs--lsp)
   :config
-  (define-key scala-ts-mode-map (kbd "C-SPC") madmacs-scala-local-leader-keys)
+  (define-key scala-ts-mode-map (kbd "C-c m") madmacs-scala-local-leader-keys)
   
   
   (with-eval-after-load 'treemacs

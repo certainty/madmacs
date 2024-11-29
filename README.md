@@ -4,7 +4,7 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
-## For programmers: Meow + Eglot + Copilot/Gptel + Modern Power Ups
+## For programmers: Eglot + Copilot/Gptel + Modern Power Ups
 
 This is my emacs configuration, made for me as a software engineer.
 I use meow for modal editing, eglot as my LSP client and I use modern power ups to support my workflow:
@@ -19,7 +19,7 @@ I use meow for modal editing, eglot as my LSP client and I use modern power ups 
 
 I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-package` alongside `straight`. This setup provides a straightforward boot process that's easy to understand and modify.
 
-For modal editing, I prefer Meow. It offers a consistent keybinding scheme, using `SPC` and `C-c` as prefixes, while `C-SPC` serves as a mode-specific prefix.
+For modal editing, I prefer Meow. It offers a consistent keybinding scheme `C-c` as prefixes, while `C-c m` serves as a mode-specific prefix.
 
 While my setup starts fairly quickly, I don't focus heavily on startup time. Personally, I do not restart Emacs frequently, so startup speed isn't a primary concern for me.
 
@@ -33,10 +33,9 @@ While my setup starts fairly quickly, I don't focus heavily on startup time. Per
 
 There are a couple of very basic conventions that I have applied.
 
-1. Global actions, actions that don't work on text or region are bound in the leader map under `SPC` or `C-c`. You'll fine a mnemonic grouping.
-2. Mode specific global actions are made available under the local leader map `C-SPC`.
+1. Global actions, actions that don't work on text or region are bound in the leader map under `C-c`. You'll fine a mnemonic grouping.
+2. Mode specific global actions are made available under the local leader map `C-c m`
 3. Context specific actions (on point, or region, etc.) are usually made available via embark actions. 
-4. Meow is setup to make quick actions available under the `g` prefix. For example `gd` finds the definition of the symbol that's selected. See [madmacs-keys-meow.el](./modules/keys/madmacs-keys-meow.el)
 
 
 **Transient menus where possible**
@@ -51,7 +50,7 @@ For the rest just use the normal emacs keybindings.
 
 I've enabled and configured GitHub Copilot and GPTel, ready to be used from within Emacs. Copilot is used for auto-completion of code, while GPTel is made available to interact in any buffer.
 
-All AI related functionality is available via `SPC ,` and `SPC .` prefixes.
+All AI related functionality is available via `C-c ,` and `C-c .` prefixes.
 
 In addition, there are `embark` actions available for `gptel`, so you can use `C-.` to access them in the given context.
 

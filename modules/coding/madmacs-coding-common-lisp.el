@@ -171,7 +171,7 @@
     "x" `("Xref" . ,madmacs-sly-xref-keys))
   
   (which-key-add-keymap-based-replacements sly-mode-map
-    "C-SPC" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
+    "C-c m" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
 
 
 (use-package sly-asdf

@@ -31,15 +31,15 @@
   :ensure nil
   :straight nil
   :bind
-  (("C-c m m" . smerge-mode)
+  (("C-c M m" . smerge-mode)
     (:map smerge-mode-map
-      ("C-c m ." . smerge-keep-mine)
-      ("C-c m o" . smerge-keep-other)
-      ("C-c m b" . smerge-keep-base)
-      ("C-c m a" . smerge-keep-all)
-      ("C-c m c" . smerge-keep-current)
-      ("C-c m n" . smerge-next)
-      ("C-c m p" . smerge-prev)))
+      ("C-c M ." . smerge-keep-mine)
+      ("C-c M o" . smerge-keep-other)
+      ("C-c M b" . smerge-keep-base)
+      ("C-c M a" . smerge-keep-all)
+      ("C-c M c" . smerge-keep-current)
+      ("C-c M n" . smerge-next)
+      ("C-c M p" . smerge-prev)))
 
   :init
   (which-key-add-key-based-replacements "C-c m" "smerge"))

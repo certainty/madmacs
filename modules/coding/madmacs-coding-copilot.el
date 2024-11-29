@@ -9,7 +9,7 @@
     ("C-o" . copilot-complete))
 
   (:map copilot-completion-map
-    ("<tab>" . copilot-accept-completion)
+    ("C-y" . copilot-accept-completion)
     ("M-<tab>" . copilot-next-completion))
   
   :config

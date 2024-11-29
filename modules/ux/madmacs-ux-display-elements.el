@@ -26,6 +26,9 @@
 (use-package window
   :straight nil
   :ensure nil
+  :bind
+  ("M-o" . other-window)
+  
   :custom
   (display-buffer-base-action nil))
 
@@ -58,6 +61,7 @@
     '("\\*Messages\\*"
        "Output\\*$"
        "\\*Async Shell Command\\*"
+       copilot-chat-mode
        sly-mrepl-mode
        help-mode
        compilation-mode))
