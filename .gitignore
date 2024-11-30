@@ -12,3 +12,4 @@ madmacs.env
 /copilot-chat/
 /projects
 *.elc
+/elpa/
