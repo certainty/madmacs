@@ -28,15 +28,15 @@
 
 (use-package embark-consult
   :hook (embark-collect-mode . consult-preview-at-point-mode)
-  :after consult
+  :after (consult embark)
   :ensure t)
 
 (use-package avy
   :ensure t
   :bind
   (("C-, ," . avy-goto-char-timer)
-    ("C-, c" . avy-goto-char)
-    ("C-, l" . avy-goto-line))
+   ("C-, c" . avy-goto-char)
+   ("C-, l" . avy-goto-line))
 
   :config
   ;; https://karthinks.com/software/avy-can-do-anything/
@@ -114,21 +114,14 @@
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
-(use-package casual-avy
-  :ensure t
-  :after avy)
+
 
 ;; iedit / edit multiple regions
-
 (use-package iedit
   :ensure t
-  :after embark
-  :bind
-  (("C-c '" . iedit-mode)
-   ("C-c \"" . iedit-dwim))
   :config
-  (keymap-set embark-general-map "'" 'iedit-mode)
-  (keymap-set embark-general-map "\"" 'iedit-dwim)
+  (global-set-key (kbd "C-c '") 'iedit-mode)
+  (global-set-key (kbd "C-c \"") 'iedit-dwim)
   
   (defun iedit-dwim (arg)
     "Starts iedit but uses \\[narrow-to-defun] to limit its scope."

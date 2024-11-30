@@ -219,13 +219,6 @@
     "m" '("Bookmarks" . list-bookmarks))
 
 
-  (defvar-keymap madmacs-copilot-keys :doc "Keys for Copilot related functionality")
-  (which-key-add-keymap-based-replacements madmacs-copilot-keys
-    "t" '("toggle" . copilot-mode)
-    "."  '("complete" . copilot-complete)
-    "x" '("log out" . copilot-logout)
-    "l" '("log in" . copilot-login))
-  
   (defvar-keymap madmacs-gptel-keys :doc "Keys for AI related functionality")
   (which-key-add-keymap-based-replacements madmacs-gptel-keys
     "." '("Quick" . gptel-quick)
@@ -237,8 +230,7 @@
     "c" '("Chat" . gptel)
     "p" '("Project chat" . madmas-gptel-project)
     "P" '("Set prompt" . gptel-system-prompt)
-    "q" '("Abort" . gptel-abort)
-    "C" `("Copilot" . ,madmacs-copilot-keys))
+    "q" '("Abort" . gptel-abort))
 
   (defvar-keymap madmacs-copilot-chat-keys :doc "Keys for Copilot related functionality")
   (which-key-add-keymap-based-replacements madmacs-copilot-chat-keys
@@ -253,6 +245,10 @@
     "o" '("Optimize" . copilot-chat-optimize)
     "d" '("Doc" . copilot-chat-doc)
     "t" '("Test" . copilot-chat-test)
+    "T" '("Toggle" . copilot-toggle)
+    "m" '("Toggle manual" . madmacs/copilot-manual-completion-toggle)
+    "X" '("Log out" . copilot-logout)
+    "l" '("Log in" . copilot-login)
     "p"  '("Prompt" . copilot-chat-custom-prompt-selection)
     "x" '("Reset" . copilot-chat-reset))
   
@@ -265,7 +261,7 @@
   
   (which-key-add-keymap-based-replacements mode-specific-map
     "!" `("Checkers" . ,madmacs-checker-keys)
-    "." `("  Copilot Chat" . ,madmacs-copilot-chat-keys)
+    "." `("  Copilot" . ,madmacs-copilot-chat-keys)
     "," `("  Gptel" . ,madmacs-gptel-keys)
     "e" `("Filetree" . dirvish-side)
     "v" `("Git status". magit-status)

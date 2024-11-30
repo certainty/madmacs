@@ -11,3 +11,4 @@ madmacs.env
 /chat.org
 /copilot-chat/
 /projects
+*.elc
