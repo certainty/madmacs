@@ -4,6 +4,7 @@
 
 (setopt  madmacs-init-features
   `(
+     madmacs-ux-minor-mode
      madmacs-ux-display-elements
      madmacs-ui-look
      madmacs-ui-modeline
@@ -17,12 +18,12 @@
      madmacs-ux-completion
      madmacs-ux-dashboard
      madmacs-ux-repeat
-     
+
      madmacs-edit-actions
 
      madmacs-files-essentials
      madmacs-files-dired
-     
+
      madmacs-ux-workspaces
      ))
 
@@ -36,7 +37,6 @@
      madmacs-tools-vcs
 
      ;; code support
-     madmacs-structured-editing
      madmacs-coding-essentials
 
      madmacs-coding-version-manager
@@ -49,7 +49,6 @@
      madmacs-coding-typescript
      madmacs-coding-web
      madmacs-coding-terraform
-     madmacs-coding-lisp
      madmacs-coding-elisp
      madmacs-coding-common-lisp
      madmacs-coding-racket

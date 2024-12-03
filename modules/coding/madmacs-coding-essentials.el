@@ -1,5 +1,35 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package paren
+  :ensure nil
+  :straight nil
+  :hook (prog-mode . show-paren-mode)
+  :custom
+  (show-paren-delay 0))
+
+(use-package highlight-parentheses
+  :ensure t
+  :hook prog-mode)
+
+(use-package electric-pair
+  :ensure nil
+  :straight nil
+  :hook prog-mode)
+
+(use-package smartparens
+  :ensure t
+  :hook ((prog-mode . smartparens-strict-mode) text-mode markdown-mode)
+  :bind
+  (:map smartparens-mode-map
+    ("C-M-(" . sp-forward-slurp-sexp)
+    ("C-M-)" . sp-backward-slurp-sexp)
+    ("C-M-<" . sp-forward-barf-sexp)
+    ("C-M->" . sp-backward-barf-sexp))
+  
+  :config
+  (require 'smartparens-config))
+
+
 (use-package svg-tag-mode
   :ensure t
   :when (image-type-available-p 'svg)
@@ -7,11 +37,11 @@
   :config
   (setq svg-tag-tags
     '(
-      ("DONE:"  . ((lambda (tag) (svg-tag-make "DONE:"  :face 'fringe  :inverse t ))))
-      ("FIXME:" . ((lambda (tag) (svg-tag-make "FIXME:" :face 'error   :inverse t))))
-      ("HACK:"  . ((lambda (tag) (svg-tag-make "HACK:"  :face 'warning :inverse t))))
-      ("NOTE:"  . ((lambda (tag) (svg-tag-make "NOTE:"  :face 'info :inverse t))))
-      ("TODO:"  . ((lambda (tag) (svg-tag-make "TODO:"  :face 'warning :inverse t)))))))
+       ("DONE:"  . ((lambda (tag) (svg-tag-make "DONE:"  :face 'fringe  :inverse t ))))
+       ("FIXME:" . ((lambda (tag) (svg-tag-make "FIXME:" :face 'error   :inverse t))))
+       ("HACK:"  . ((lambda (tag) (svg-tag-make "HACK:"  :face 'warning :inverse t))))
+       ("NOTE:"  . ((lambda (tag) (svg-tag-make "NOTE:"  :face 'info :inverse t))))
+       ("TODO:"  . ((lambda (tag) (svg-tag-make "TODO:"  :face 'warning :inverse t)))))))
 
 (use-package quickrun
   :ensure t)

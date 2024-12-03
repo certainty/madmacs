@@ -50,26 +50,40 @@
     "k" '("Describe Key" . describe-key)
     "K" '("Describe Keymap" . describe-keymap))
   
-  ;; Find
-  (defvar-keymap madmacs-find-keys :doc "Keys which are related to finding and navigating things")
-  
-  (which-key-add-keymap-based-replacements madmacs-find-keys
-    "f" '("Find Project File" . project-find-file)
-    "." '("Find Project Things" . consult-project-extra-find)
-    "b" '("Find Project Buffer" . consult-project-buffer)
-    "B" '("Find Buffer" .  consult-buffer)
-    "i" `("Find Imenu" . consult-imenu)
-    "g" '("Find Word in Project" . consult-ripgrep)
-    "L" '("Find and goto line" .  consult-goto-line)
-    "l" '("Find line" . consult-line)
-    "o" '("Find recent file" . consult-recent-file)
-    "m" '("Find bookmark" . consult-bookmark)
+  ;; Goto
+  (which-key-add-keymap-based-replacements goto-map
+    "f" '("Project File" . project-find-file)
+    "." '("Project Things" . consult-project-extra-find)
+    "," '("Global Mark" . consult-global-mark)
+    "c" '("Char" . avy-goto-char)
+    "d" '("Filetree" . dirvish-side)
+    "e" '("Isearch Hist" . consult-isearch-history)
+    "E" '("Error" . consult-compile-error)
+    "!" '("Check" . consult-flymake)
+    "b" '("Project Buffer" . consult-project-buffer)
+    "B" '("Buffer" .  consult-buffer)
+    "i" `("Imenu" . consult-imenu)
+    "I" '("Imenu multi" . consult-imenu-multi)
+    "g" '("Line" . consult-goto-line)
+    "r" '("Recent file" . consult-recent-file)
+    "m" '("Mark" . consult-mark)
+    "k" '("Global Mark" . consult-global-mark)
     "a" '("Find apropos" .  consult-apropos)
-    "R" '("Find and replace" . query-replace)
-    "R" '("Find and replace in project" . project-query-replace-regexp)
-    "y" '("Find yank" .  consult-yank-pop)
+    "o" '("Outline" . consult-outline)
     "p" '("Find project and session" . tabspaces-open-or-create-project-and-workspace)
-    "P" '("Find Project" . project-switch-project))
+    "P" '("Find Project" . project-switch-project)
+    "w" '("Window" . ace-window)
+    "t" '("Terminal" . vterm-toggle)
+    "#" '("Register" . consult-register))
+
+  ;; search
+  (which-key-add-keymap-based-replacements search-map
+    "p" '("Ripgrep" . consult-ripgrep)
+    "l" '("Line" . consult-line)
+    "g" '("Grep" . consult-grep)
+    "G" '("Git grep" . consult-git-grep)
+    "u" '("Focus line" . consult-focus-lines)
+    "R" '("Find and replace in Project" . project-query-replace-regexp))
 
   ;; Git
   (defvar-keymap madmacs-git-keys :doc "Keys to interact with git")
@@ -85,8 +99,6 @@
   (defvar-keymap madmacs-lsp-keys :doc "LSP keys that are the same for all languages")
 
   (defvar-keymap madmacs-lsp-workspace-keys :doc "LSP prefix map")
-
-  
   (which-key-add-keymap-based-replacements madmacs-lsp-workspace-keys
     "q" `("Shutdown Server" . eglot-shutdown)
     "Q" `("Shutdown All" . eglot-shutdown-all)
@@ -134,7 +146,6 @@
   (which-key-add-keymap-based-replacements madmacs-lsp-actions-keys
     "a" `("Execute" . eglot-code-actions)
     "f" `("Fix" . eglot-code-action-quickfix))
-  
   
   
   (which-key-add-keymap-based-replacements madmacs-lsp-keys
@@ -259,7 +270,7 @@
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
   
-  (which-key-add-keymap-based-replacements mode-specific-map
+  (which-key-add-keymap-based-replacements madmacs-leader-keys
     "!" `("Checkers" . ,madmacs-checker-keys)
     "." `("  Copilot" . ,madmacs-copilot-chat-keys)
     "," `("  Gptel" . ,madmacs-gptel-keys)
@@ -268,7 +279,8 @@
     "w" `("󰓩  Windows" . ,madmacs-windows-keys)
     "D"  `("  Docs" . ,madmacs-docs-keys)
     "d"  `("  Debugger" . ,madmacs-debugger-keys)
-    "f" `("  Find" . ,madmacs-find-keys)
+    "s" `("  Search" . ,search-map)
+    "g" `("󰵉 Goto" . ,goto-map)
     "V" `("󰊢  Git" . ,madmacs-git-keys)
     "l" `("  LSP" . ,madmacs-lsp-keys)
     "L" `("  List" . ,madmacs-list-keys)
@@ -276,10 +288,14 @@
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
-    "s" `("  Session" . ,madmacs-session-keys)
+    "S" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `(" Tools " . ,madmacs-tools-keys)
-    "U" `("  UX" . ,madmacs-ux-keys)))
+    "U" `("  UX" . ,madmacs-ux-keys))
+
+  (keymap-set madmacs-mode-map "C-j" madmacs-leader-keys)
+  (global-set-key (kbd "C-c") madmacs-leader-keys))
+
 
 (provide 'madmacs-keys-keybindings)
 

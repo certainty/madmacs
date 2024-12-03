@@ -4,14 +4,21 @@
 (use-package eglot
   :ensure nil
   :straight nil
-  :after project
+  :after (project embark)
   :custom
   (eglot-report-progress t)
   (eglot-extend-to-xref t)
   (eglot-autoreconnect 5)
 
+  :bind
+  ((:map embark-identifier-map
+     ("R" . eglot-rename)))
+
   :config
-  (setopt eldoc-echo-area-use-multiline-p 1))
+  (setopt eldoc-echo-area-use-multiline-p 1)
+  (with-eval-after-load 'embark
+    (push 'embark--allow-edit
+      (alist-get 'eglot-rename embark-target-injection-hooks))))
 
 (defun madmacs--lsp (&rest args)
   "If LSP is eglot, call eglot-ensure, otherwise call lsp-deferred."

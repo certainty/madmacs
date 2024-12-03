@@ -13,6 +13,9 @@
   (setq prefix-help-command #'embark-prefix-help-command)
 
   :config
+  (with-eval-after-load 'consult
+    (require 'embark-consult))
+  
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -24,12 +27,12 @@
 
   (setq embark-indicators
         '(embark-highlight-indicator
-          embark-isearch-highlight-indicator)))
+           embark-isearch-highlight-indicator)))
 
 (use-package embark-consult
-  :hook (embark-collect-mode . consult-preview-at-point-mode)
-  :after (consult embark)
-  :ensure t)
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package avy
   :ensure t
@@ -115,29 +118,28 @@
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
 
-
 ;; iedit / edit multiple regions
-(use-package iedit
-  :ensure t
-  :config
-  (global-set-key (kbd "C-c '") 'iedit-mode)
-  (global-set-key (kbd "C-c \"") 'iedit-dwim)
+;; (use-package iedit
+;;   :ensure t
+;;   :config
+;;   (global-set-key (kbd "C-c '") 'iedit-mode)
+;;   (global-set-key (kbd "C-c \"") 'iedit-dwim)
   
-  (defun iedit-dwim (arg)
-    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
-    (interactive "P")
-    (if arg
-      (iedit-mode)
-      (save-excursion
-        (save-restriction
-          (widen)
-          ;; this function determines the scope of `iedit-start'.
-          (if iedit-mode
-            (iedit-done)
-            ;; `current-word' can of course be replaced by other
-            ;; functions.
-            (narrow-to-defun)
-            (iedit-start (current-word) (point-min) (point-max))))))))
+;;   (defun iedit-dwim (arg)
+;;     "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+;;     (interactive "P")
+;;     (if arg
+;;       (iedit-mode)
+;;       (save-excursion
+;;         (save-restriction
+;;           (widen)
+;;           ;; this function determines the scope of `iedit-start'.
+;;           (if iedit-mode
+;;             (iedit-done)
+;;             ;; `current-word' can of course be replaced by other
+;;             ;; functions.
+;;             (narrow-to-defun)
+;;             (iedit-start (current-word) (point-min) (point-max))))))))
 
 
 (provide 'madmacs-edit-actions)
