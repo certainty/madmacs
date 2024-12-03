@@ -55,6 +55,7 @@
     "f" '("Project File" . project-find-file)
     "." '("Project Things" . consult-project-extra-find)
     "," '("Global Mark" . consult-global-mark)
+    "a" '("Org Agenda" . consult-org-agenda)
     "c" '("Char" . avy-goto-char)
     "d" '("Filetree" . dirvish-side)
     "e" '("Isearch Hist" . consult-isearch-history)
@@ -68,7 +69,6 @@
     "r" '("Recent file" . consult-recent-file)
     "m" '("Mark" . consult-mark)
     "k" '("Global Mark" . consult-global-mark)
-    "a" '("Find apropos" .  consult-apropos)
     "o" '("Outline" . consult-outline)
     "p" '("Find project and session" . tabspaces-open-or-create-project-and-workspace)
     "P" '("Find Project" . project-switch-project)
@@ -267,9 +267,13 @@
   (which-key-add-keymap-based-replacements madmacs-tools-keys
     "c" '("Calculator" . calc)
     "p" '("Pass" . pass))
+
+  (defvar-keymap madmacs-org-keys :doc "Org related keys")
+  (which-key-add-keymap-based-replacements madmacs-org-keys
+    "o" '("Capture" . org-capture)
+    "a" '("Agenda" . org-agenda-list))
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
-  
   (which-key-add-keymap-based-replacements madmacs-leader-keys
     "!" `("Checkers" . ,madmacs-checker-keys)
     "." `("  Copilot" . ,madmacs-copilot-chat-keys)
@@ -286,15 +290,14 @@
     "L" `("  List" . ,madmacs-list-keys)
     "R" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
+    "o" `(" Org" . ,madmacs-org-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "S" `("  Session" . ,madmacs-session-keys)
     "t" `(" Terminal" . ,madmacs-terminal-keys)
     "T" `(" Tools " . ,madmacs-tools-keys)
     "U" `("  UX" . ,madmacs-ux-keys))
-
-  (keymap-set madmacs-mode-map "C-j" madmacs-leader-keys)
-  (global-set-key (kbd "C-c") madmacs-leader-keys))
+  (keymap-set madmacs-mode-map "C-j" madmacs-leader-keys))
 
 
 (provide 'madmacs-keys-keybindings)

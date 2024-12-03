@@ -12,7 +12,10 @@
 
   :bind
   ((:map embark-identifier-map
-     ("R" . eglot-rename)))
+     ("^" . helpful-at-point)
+     ("l r" . eglot-rename)
+     ("l i" . eglot-find-implementation)
+     ("l d" . eglot-find-declaration)))
 
   :config
   (setopt eldoc-echo-area-use-multiline-p 1)

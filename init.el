@@ -68,6 +68,7 @@
 
      ;; add-ons
      madmacs-org-essentials
+     madmacs-org-personal
 
      madmacs-games-chess
 

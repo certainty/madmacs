@@ -94,6 +94,10 @@
     "Merge overrides into defaults. Overriding any defaults."
     (append (cl-remove-if (lambda (x) (member (car x) (mapcar 'car overrides))) defaults) overrides))
 
+(defun madmacs-bind-local-leader-map (mode-keymap target-keymap)
+  (which-key-add-keymap-based-replacements mode-keymap
+    "M-j" `("Mode" . ,target-keymap)))
+
 (use-package emacs
     :custom
     (user-full-name madmacs-user-full-name)

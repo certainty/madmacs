@@ -169,9 +169,8 @@
     "t" `("Trace" . ,madmacs-sly-trace-keys)
     "m" '("expand macro" . macrostep-expand)
     "x" `("Xref" . ,madmacs-sly-xref-keys))
-  
-  (which-key-add-keymap-based-replacements sly-mode-map
-    "C-c m" `("Local Leader" . ,madmacs-sly-local-leader-keys)))
+
+  (madmacs-bind-local-leader-map sly-mode-map madmacs-sly-local-leader-keys))
 
 
 (use-package sly-asdf

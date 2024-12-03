@@ -7,18 +7,7 @@
   :straight nil
   :commands (org-mode)
   :mode (("\\.org$" . org-mode))
-  ;:hook (org-mode . madmacs--nicer-org)
-  :bind
-  (:map org-mode-map
-        ("C-M-k" . org-metaup)
-        ("C-M-j" . org-metadown)
-        ("C-M-l" . org-metaright)
-        ("C-M-h" . org-metaleft)
-        ("M-J" . org-shiftdown)
-        ("M-K" . org-shiftup)
-        ("M-L" . org-shiftright)
-        ("M-H" . org-shiftleft))
-
+   
   :init
   ;; Org-Emphasis-Regex settings. Set regex boundaries for emphasis.
   ;; Load this before org-mode is loaded.
@@ -45,8 +34,8 @@
   (org-pretty-entities t)       ;; make latex look good, etc.
   (org-pretty-entities-include-sub-superscripts t) ;; prettify sub/superscripts
   (org-read-date-prefer-future 'time) ;; Incomplete dates refer to future dates & times
-  (org-startup-folded nil)            ;; Don't start org in outline
-  (org-tags-column 0) ;; place tags directly next to headline text
+  (org-startup-folded t)
+  
 
   ;; Footnotes
   (org-footnote-section nil)   ;; place footnotes locally
@@ -96,28 +85,25 @@
   (org-enforce-todo-dependencies t)
   (org-enforce-todo-checkbox-dependencies t)
 
+  ;; Images
+  (org-display-inline-images t)
+
+  ;; Agenda
+  (org-agenda-current-time-string
+    "◀── now ─────────────────────────────────────────────────")
+
   :config
-  (defun madmacs--nicer-org ()
-    (interactive)
 
-    (org-modern-mode 1)
+  (hl-line-mode -1)
+  (display-line-numbers-mode -1)
 
-    (hl-line-mode -1)
-    (display-line-numbers-mode -1)
+  (flycheck-mode -1)
 
-    (flycheck-mode -1)
-    (org-indent-mode t)
-
-    (setq visual-fill-column-width 250)
-    (setq visual-fill-column-center-text t)
-
-    (visual-line-mode 1))
-
+  (setq visual-fill-column-center-text t)
+  (setq visual-fill-column-width 250)
+  (visual-line-mode 1)
   (setopt org-directory madmacs-org-directory)
   (setopt org-attach-id-dir (concat madmacs-org-directory "/.attachments"))
-
-  (setopt org-hide-emphasis-markers t)
-  (setopt org-display-inline-images t)
 
   (require 'org-faces)
   (dolist (face '((org-level-1 . 1.2)
@@ -130,18 +116,19 @@
                   (org-level-8 . 1.1)))
     (set-face-attribute (car face) nil :font madmacs-variable-pitch-font :weight 'medium :height (cdr face)))
 
-  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+  ;; (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  ;; (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  ;; (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+  ;; (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  ;; (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  ;; (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  ;; (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  ;; (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
 
   (setq org-refile-targets '((nil :maxlevel . 5)
-                             (org-agenda-files :maxlevel . 5)))
+                              (org-agenda-files :maxlevel . 5)))
+  
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-use-outline-path t))
 
@@ -160,8 +147,12 @@
 ;; use org-modern
 (use-package org-modern
   :straight (org-modern :host github :repo "minad/org-modern")
+  :custom
+  (org-modern-fold-stars '(("◉" . "◉") ("○" . "○") ("◈" . "◈") ("◇" . "◇") ("✳" . "✳")))
   :hook
   ((org-mode . org-modern-mode)
-   (org-agenda-finalize . org-modern-agenda)))
+    (org-agenda-finalize . org-modern-agenda))
+  :config
+  (org-indent-mode t))
 
 (provide 'madmacs-org-essentials)
