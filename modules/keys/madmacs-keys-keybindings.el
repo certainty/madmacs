@@ -283,7 +283,7 @@
   (which-key-add-keymap-based-replacements madmacs-notes-keys
     "n" '("Capture daily" . org-roam-dailies-capture-today)
     "N" '("Capture daily (date)" . org-roam-dailies-capture-date)
-    "c" '("Capture" . org-roam-dailies-capture)
+    "c" '("Capture" . org-roam-capture)
     "s" '("Find" . org-roam-node-find)
     "d" '("Goto Today" . madmacs-org-roam-dailies-goto-today)
     "D" '("Goto Date" . madmacs-org-roam-dailies-goto-date)
