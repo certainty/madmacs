@@ -35,9 +35,10 @@
   (setq org-agenda-files
     (list madmacs-org-areas madmacs-org-projects madmacs-org-references madmacs-org-calendar madmacs-org-inbox))
 
-  ;; embark
-  (keymap-set embark-org-heading-map
-    "i" #'org-id-get-create)
+   ;; embark
+  (with-eval-after-load 'embark
+    (keymap-set embark-org-heading-map
+      "i" #'org-id-get-create))
   
   ;; capture templates
   (setq org-capture-templates
@@ -117,7 +118,8 @@
             (created (plist-get props :created)))
       `(or
          ,@(when id
-             `((link :target ,(concat "id:" id)))) ; back links
+             ;; TODO: add backlinks via traditional org-links
+             `((link :target ,(concat "id:" id)))) ; back links via id
 
          ,@(when created
              `((and
@@ -130,7 +132,12 @@
          
   (defun madmacs-org-related-nodes ()
     (interactive)
-    (org-sidebar-ql (org-agenda-files) (madmacs-org-related-nodes-query (org-element-at-point)) :title "Related nodes")))
+    (org-sidebar-ql (org-agenda-files) (madmacs-org-related-nodes-query (org-element-at-point)) :title "Related nodes"))
+
+  (which-key-add-keymap-based-replacements madmacs-org-mode-keys
+    "<" '("Backlinks" . org-sidebar-backlinks)
+    "s" '("Sidebar" . org-sidebar)
+    "r" '("Relevant" . madmacs-org-related-nodes)))
 
 (use-package org-tidy
   :ensure t
