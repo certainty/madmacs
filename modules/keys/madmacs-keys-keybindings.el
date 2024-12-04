@@ -281,14 +281,16 @@
 
   (defvar-keymap madmacs-notes-keys :doc "Note related keys")
   (which-key-add-keymap-based-replacements madmacs-notes-keys
-    "n" '("Capture" . org-roam-capture)
-    "j" '("Capture daily" . org-roam-dailies-capture-today) 
-    "J" '("Capture daily (date)" . org-roam-dailies-capture-date)
-    "d" '("Today" . madmacs-org-roam-dailies-goto-today)
-    "D" '("Date" . madmacs-org-roam-dailies-goto-date)
-    "y" '("Yesterday" . madmacs-org-roam-dailies-goto-yesterday)
-    "a" '("Agenda" . org-agenda-list))
-  
+    "n" '("Capture daily" . org-roam-dailies-capture-today)
+    "N" '("Capture daily (date)" . org-roam-dailies-capture-date)
+    "c" '("Capture" . org-roam-dailies-capture)
+    "s" '("Find" . org-roam-node-find)
+    "d" '("Goto Today" . madmacs-org-roam-dailies-goto-today)
+    "D" '("Goto Date" . madmacs-org-roam-dailies-goto-date)
+    "y" '("Goto Yesterday" . madmacs-org-roam-dailies-goto-yesterday)
+    "a" '("Agenda" . (lambda () (interactive) (org-agenda nil "t")))
+    "A" '("Agenda" . org-agenda))
+
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
   (which-key-add-keymap-based-replacements madmacs-leader-keys
     "!" `("Checkers" . ,madmacs-checker-keys)

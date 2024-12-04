@@ -75,6 +75,18 @@
     (keymap-set embark-org-heading-map
       "i" #'org-id-get-create))
   
+  (add-to-list 'popper-reference-buffers 'org-agenda-mode)
+  (add-to-list 'popper-reference-buffers "\\*Org Agenda\\*")
+
+  (add-to-list 'display-buffer-alist
+             '("\\*Org Agenda\\*"
+                (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+               (side . right)
+               (slot . 0)
+                (window-width . 0.33)
+                (reusable-frames . visible)))
+  
   ;; capture templates
   (madmacs-bind-local-leader-map org-mode-map madmacs-org-mode-keys))
 
@@ -166,7 +178,9 @@
                (slot . 0)
                (window-width . 0.33)
                (window-parameters . ((no-other-window . t)
-                                      (no-delete-other-windows . t))))))
+                                      (no-delete-other-windows . t)))))
+
+  )
 
 (use-package org-ql
   :ensure t
