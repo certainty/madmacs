@@ -85,6 +85,7 @@
 
   ;; search
   (which-key-add-keymap-based-replacements search-map
+    "n" '("Note" . org-roam-node-find)
     "p" '("Ripgrep" . consult-ripgrep)
     "l" '("Line" . consult-line)
     "g" '("Grep" . consult-grep)
@@ -280,11 +281,12 @@
 
   (defvar-keymap madmacs-notes-keys :doc "Note related keys")
   (which-key-add-keymap-based-replacements madmacs-notes-keys
-    "n" '("Capture" . org-roam-dailies-capture-today)
-    "N" '("Capture date" . org-roam-dailies-capture-date)
-    "d" '("Today" . org-roam-dailies-goto-today)
-    "D" '("Date" . org-roam-dailies-goto-date)
-    "y" '("Yesterday" . org-roam-dailies-goto-yesterday)
+    "n" '("Capture" . org-roam-capture)
+    "j" '("Capture daily" . org-roam-dailies-capture-today) 
+    "J" '("Capture daily (date)" . org-roam-dailies-capture-date)
+    "d" '("Today" . madmacs-org-roam-dailies-goto-today)
+    "D" '("Date" . madmacs-org-roam-dailies-goto-date)
+    "y" '("Yesterday" . madmacs-org-roam-dailies-goto-yesterday)
     "a" '("Agenda" . org-agenda-list))
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
@@ -304,7 +306,7 @@
     "L" `("  List" . ,madmacs-list-keys)
     "R" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
-    "o" `(" Org" . ,madmacs-notes-keys)
+    "n" `(" Org" . ,madmacs-notes-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "S" `("  Session" . ,madmacs-session-keys)

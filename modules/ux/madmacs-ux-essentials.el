@@ -34,13 +34,12 @@
   :bind (:map bookmark-bmenu-mode-map ("M-o" . casual-bookmarks-tmenu)))
 
 (use-package emacs
-  :ensure nil
+  :ensure t
+  :straight nil
   :bind
   (:map global-map ("C-x f" . find-file))                   ; I don't want a short way to set the fill column. I want a short way to find a file
   
-  
   :custom
-  
   (sentence-end-double-space nil)
   (tab-width 2)
   (fill-column 150)
@@ -81,8 +80,10 @@ The DWIM behaviour of this command is as follows:
    ((> (minibuffer-depth) 0)
     (abort-recursive-edit))
    (t
-    (keyboard-quit))))
+     (keyboard-quit))))
 
-  (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim))
+  :init
+  (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
+  )
 
 (provide 'madmacs-ux-essentials)

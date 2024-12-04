@@ -16,6 +16,13 @@
     (put command 'repeat-exit-timeout 'no))
   
   :bind
+  (:map goto-map
+    ("C-n" . next-buffer)
+    ("C-p" . previous-buffer))
+
+  (:repeat-map madmacs-buffer-repeat-map
+    ("n" . next-buffer)
+    ("p" . previous-buffer))
   
   ;; Object-specific Motion Repeat Maps
   (:repeat-map madmacs-char-repeat-map

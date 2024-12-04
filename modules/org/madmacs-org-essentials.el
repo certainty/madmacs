@@ -26,7 +26,7 @@
   (org-auto-align-tags nil)              ;; don't auto-align tags
   (org-catch-invisible-edits 'smart)     ;; prevent editing invisible area
   (org-cycle-separator-lines 0)          ;; no empty lines in collapsed view
-  (org-ellipsis "…")                     ;; nicer elipses "↷" "↴" "▼"
+  (org-ellipsis "…");; nicer elipses "↷" "↴" "▼"
   (org-fontify-quote-and-verse-blocks t) ;; make quotes stand out
   (org-hide-emphasis-markers t)          ;; hide emph markers
   (org-hide-leading-stars t)             ;; hide leading stars
