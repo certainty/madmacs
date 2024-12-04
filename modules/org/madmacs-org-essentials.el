@@ -67,7 +67,7 @@
 
   ;; Movement
   (org-return-follows-link t) ;; make RET follow links
-  (org-special-ctrl-a/e t)    ;; better movement in headers
+  (org-special-ctrl-a/e nil)  
 
   ;; Searching
   (org-imenu-depth 8)   ;; scan to depth 8 w/imenu
@@ -103,7 +103,7 @@
   (setq visual-fill-column-width 250)
   (visual-line-mode 1)
   (setopt org-directory madmacs-org-directory)
-  (setopt org-attach-id-dir (concat madmacs-org-directory "/.attachments"))
+  (setopt org-attach-id-dir (concat madmacs-org-directory "~/org/.attachments"))
 
   (require 'org-faces)
   (dolist (face '((org-level-1 . 1.2)
@@ -154,5 +154,5 @@
     (org-agenda-finalize . org-modern-agenda))
   :config
   (org-indent-mode t))
-
+ 
 (provide 'madmacs-org-essentials)

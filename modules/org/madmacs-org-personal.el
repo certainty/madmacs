@@ -2,149 +2,95 @@
 
 (defvar-keymap madmacs-org-mode-keys :doc "Keys for org mode interactions")
 
+;; we use this as a very barebones org setup and all the rest is configured in the org-roam section
 (use-package org
   :ensure nil
-  :straight nil
   :bind
   (:map goto-map
     ("o" . consult-org-heading)
     ("O" . consult-org-agenda)
-    ("A" . org-agenda))
-  :config
+    ("a" . org-agenda))
 
-  ;; general settings
-  (setq org-directory "~/org")
-
-  ;; tags
-  (setq org-tag-alist '(("@proj" . ?p) ("@area" . ?a) ("@ref" . ?r) ("@gtd" . ?g) ("@cal" . ?c)))
-
-  ;; states
-  (setq org-todo-keywords
+  :custom
+  (org-directory "~/org")
+  (org-tag-alist '(("@proj" . ?p) ("@area" . ?a) ("@ref" . ?r) ("@gtd" . ?g) ("@cal" . ?c) )
+  (org-todo-keywords
     '((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)")
-      (sequence "PROJ(p)" "IN PROGRESS(i)" "|" "DONE(d)")
-      (sequence "|" "CANCELED(c)")
-      (sequence "|" "KILL(c)")))
-
-  ;; Agenda
-  (setq madmacs-org-areas "~/org/areas.org")
-  (setq madmacs-org-projects "~/org/projects.org")
-  (setq madmacs-org-references "~/org/references.org")
-  (setq madmacs-org-calendar "~/org/calendar.org")
-  (setq madmacs-org-inbox "~/org/inbox.org")
+       (sequence "PROJ(p)" "IN PROGRESS(i)" "|" "DONE(d)")
+       (sequence "MEETING(m)" "|" "DONE(d)")
+       (sequence "|" "CANCELED(c)")
+       (sequence "|" "KILL(k)")))
   
-  (setq org-agenda-files
-    (list madmacs-org-areas madmacs-org-projects madmacs-org-references madmacs-org-calendar madmacs-org-inbox))
-
-   ;; embark
+  :config
+  ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map
       "i" #'org-id-get-create))
   
   ;; capture templates
-  (setq org-capture-templates
-    `(("e" "Jot" entry
-        (file+olp+datetree  ,madmacs-org-calendar)
-        "* %?"
-        :tree-type week)
-       
-       ("t" "Task" entry
-         (file+olp+datetree  ,madmacs-org-calendar)
-         "* TODO %?
-:properties:
-:created: %T
-:end:
-"
-         :tree-type week
-         :prepend t
-         :prepare-finalize (lambda () (org-id-get-create))
-         )
-       
-       ("p" "Project" entry
-         (file ,madmacs-org-projects)
-         "* PROJ %?
-:properties:
-:created: %t
-:end:
-"
-         :prepare-finalize (lambda () (org-id-get-create)))
-       
-       ("a" "Area" entry
-         (file ,madmacs-org-areas)
-         "* %?"
-         :prepare-finalize (lambda () (org-id-get-create)))
-       
-       ("r" "Ref" entry
-         (file ,madmacs-org-references)
-         "* %?
-:properties:
-:created: %t
-:end:
-"
-         :prepare-finalize (lambda () (org-id-get-create)))
-       )
-    )
-  
   (madmacs-bind-local-leader-map org-mode-map madmacs-org-mode-keys))
 
-(use-package org-ql
-  :ensure t)
-
-(use-package org-sidebar
+(use-package org-roam
   :ensure t
-  :after org-ql
+  :custom
+  (org-roam-directory (file-truename "~/org/life"))
+  (org-roam-dailies-directory "calendar/")
+  (org-roam-database-connector 'sqlite-builtin)
+  (org-roam-db-update-on-save t)
+  (org-roam-completion-everywhere t)
+  (org-roam-mode-sections
+    '((org-roam-backlinks-section :unique t)
+       org-roam-reflinks-section))
+
+  (org-roam-capture-templates
+    `(("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
+         :target (file+head "areas/${slug}.org" "")
+        :unnarrowed t)
+       ("p" "project" plain (file ,(concat org-roam-directory "/templates/project.org"))
+         :target (file+head "projects/${slug}.org" "")
+         :unnarrowed t)
+       ("r" "reference" plain (file ,(concat org-roam-directory "/templates/reference.org"))
+         :target (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "")
+         :unnarrowed t)))
+
+  (org-roam-dailies-capture-templates
+    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>"))
+       ("t" "task" entry "* TODO %?" :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>"))
+       ("m" "meeting" entry (file ,(concat org-roam-directory "/templates/meeting.org"))
+         :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>"))
+       ))
+
+  :bind
+  (:map org-mode-map
+    ("C-M-i" . org-roam-complete-link-at-point))
+
+  :init
+  (org-roam-db-autosync-mode)
+
   :config
-  (defun madmacs-parse-org-timestamp (timestamp)
-    (let* ((parsed-time (parse-time-string timestamp))
-            (d (decoded-time-day parsed-time))
-            (m (decoded-time-month parsed-time))
-            (y (decoded-time-year parsed-time)))
-      (encode-time 0 0 0 d m y)))
-       
-  (defun madmacs-org-current-node-info (node)
-    "Retrieve information about the current Org node."
-    (interactive)
-    (let* ((element (or node (org-element-at-point)))
-            (headline (org-element-property :raw-value element))
-            (tags (org-get-tags element))
-            (properties (org-entry-properties element 'standard))
-            (created (assoc "CREATED" properties))
-            (id (assoc "ID" properties)))
-      (list :headline headline :tags tags :created (and created (madmacs-parse-org-timestamp (cdr created))) :id (cdr id))))
+  (setopt org-agenda-files
+    (mapcar (lambda (n) (concat org-roam-directory n))
+      '("/projects" "/calendar" "/areas" "inbox.org")))
   
-  (defun madmacs-org-related-nodes-query (node)
-    (interactive)
-    (let* ((props (madmacs-org-current-node-info node))
-            (id (plist-get props :id))
-            (created (plist-get props :created)))
-      `(or
-         ,@(when id
-             ;; TODO: add backlinks via traditional org-links
-             `((link :target ,(concat "id:" id)))) ; back links via id
+  (setopt org-agenda-regexp-filter ".+\.org$")
+  
+  (add-to-list 'display-buffer-alist
+             '("\\*org-roam\\*"
+               (display-buffer-in-side-window)
+               (side . right)
+               (slot . 0)
+               (window-width . 0.33)
+               (window-parameters . ((no-other-window . t)
+                                      (no-delete-other-windows . t))))))
 
-         ,@(when created
-             `((and
-                 (tags "@cal")
-                 (or
-                   (heading ,(format-time-string "%Y-W%g" created))
-                   (heading ,(format-time-string "%Y-%m-%d %A" created))))))
-         
-         (tags-local ,@(plist-get props :tags)))))
-         
-  (defun madmacs-org-related-nodes ()
-    (interactive)
-    (org-sidebar-ql (org-agenda-files) (madmacs-org-related-nodes-query (org-element-at-point)) :title "Related nodes"))
-
-  (which-key-add-keymap-based-replacements madmacs-org-mode-keys
-    "<" '("Backlinks" . org-sidebar-backlinks)
-    "s" '("Sidebar" . org-sidebar)
-    "r" '("Relevant" . madmacs-org-related-nodes)))
-
-(use-package org-tidy
+(use-package org-ql
   :ensure t
-  :hook (org-mode . org-tidy-mode)
-  :config
-  (which-key-add-keymap-based-replacements madmacs-org-mode-keys
-    "c" '("Tidy toggle" . org-tidy-toggle)))
+  :after org)
 
+(use-package org-rich-yank
+  :ensure t
+  :after org
+  :bind (:map org-mode-map
+              ("C-M-y" . org-rich-yank)))
 
 (provide 'madmacs-org-personal)

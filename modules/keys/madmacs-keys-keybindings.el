@@ -1,5 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
+
+;; TODO: rethink this approach
+;; * global keybindings under a certain prefix
+;; * M-g is prefix for goto (mode specific overwrites may apply)
+;; * M-s is prefix for search
+;; * C-c is for mode specific overwrites (place these overwrites in the corresponding mode-maps)
+;;
 (use-package emacs
   :ensure nil
   :straight nil
@@ -95,7 +102,10 @@
     "l" '("Log" . magit-log)
     "t" '("Toggle timemachine" . git-timemachine-toggle))
   
-  ;; LSP 
+  ;; LSP
+  ;; TODO:
+  ;; only place enable / disable eglot in the global keymap
+  ;; put everything else in the eglot-keymap 
   (defvar-keymap madmacs-lsp-keys :doc "LSP keys that are the same for all languages")
 
   (defvar-keymap madmacs-lsp-workspace-keys :doc "LSP prefix map")
@@ -268,9 +278,13 @@
     "c" '("Calculator" . calc)
     "p" '("Pass" . pass))
 
-  (defvar-keymap madmacs-org-keys :doc "Org related keys")
-  (which-key-add-keymap-based-replacements madmacs-org-keys
-    "o" '("Capture" . org-capture)
+  (defvar-keymap madmacs-notes-keys :doc "Note related keys")
+  (which-key-add-keymap-based-replacements madmacs-notes-keys
+    "n" '("Capture" . org-roam-dailies-capture-today)
+    "N" '("Capture date" . org-roam-dailies-capture-date)
+    "d" '("Today" . org-roam-dailies-goto-today)
+    "D" '("Date" . org-roam-dailies-goto-date)
+    "y" '("Yesterday" . org-roam-dailies-goto-yesterday)
     "a" '("Agenda" . org-agenda-list))
   
   (defvar-keymap madmacs-leader-keys :doc "Everything you need fast under your finger tips")
@@ -290,7 +304,7 @@
     "L" `("  List" . ,madmacs-list-keys)
     "R" `("󰑮  Run" . ,madmacs-compiler-keys)
     "M" `("  Madmacs" . ,madmacs-madmacs-keys)
-    "o" `(" Org" . ,madmacs-org-keys)
+    "o" `(" Org" . ,madmacs-notes-keys)
     "P" `("󰏖  Packages" . ,madmacs-packages-keys)
     "p" `("󱂬  Project" . ,madmacs-project-keys)
     "S" `("  Session" . ,madmacs-session-keys)
