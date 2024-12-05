@@ -53,7 +53,7 @@
               (org-tags-match-list-sublevels nil)
               (org-agenda-show-inherited-tags t)
               (org-agenda-prefix-format "  %?-2i %s ")
-              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done ))
               (org-agenda-todo-keyword-format "")))
           
           (agenda ""
@@ -149,7 +149,7 @@
 
   (org-roam-capture-templates
     `(("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
-         :target (file+head "areas/${slug}.org" "")
+        :target (file+head "areas/${slug}.org" "")
         :unnarrowed t)
        ("p" "project" plain (file ,(concat org-roam-directory "/templates/project.org"))
          :target (file+head "projects/${slug}.org" "")
