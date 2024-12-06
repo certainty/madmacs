@@ -61,8 +61,8 @@
     "t" `("Term" . ,madmacs-sweeprolog-term-keys)
     "l" `("Listener" . ,madmacs-sweeprolog-listener-keys)
     "o" `("Holes" . ,madmacs-sweeprolog-holes-keys))
-  
-  (madmacs-bind-local-leader-map sweeprolog-mode-map madmacs-prolog-local-leader-keys))
+
+  (keymap-set sweeprolog-mode-map madmacs-prolog-local-leader-keys))
 
 
 (provide 'madmacs-coding-prolog)

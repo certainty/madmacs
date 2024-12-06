@@ -170,7 +170,7 @@
     "m" '("expand macro" . macrostep-expand)
     "x" `("Xref" . ,madmacs-sly-xref-keys))
 
-  (madmacs-bind-local-leader-map sly-mode-map madmacs-sly-local-leader-keys))
+  (keymap-set sly-mode-map "C-c" madmacs-sly-local-leader-keys))
 
 
 (use-package sly-asdf

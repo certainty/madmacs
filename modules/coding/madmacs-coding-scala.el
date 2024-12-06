@@ -52,8 +52,8 @@
     "b" `("Metals Build" . ,madmacs-metals-build-keys)
     "c" `("Metals Compile" . ,madmacs-metals-compile-keys)
     "t" `("Metals Test" . ,madmacs-metals-test-keys))
-
-  (madmacs-bind-local-leader-map scala-mode-map madmacs-scala-local-leader-keys))
+  
+  (keymap-set scala-mode-map "C-c" madmacs-scala-local-leader-keys))
 
 (use-package sbt-mode
   :ensure t
