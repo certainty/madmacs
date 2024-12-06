@@ -31,11 +31,11 @@ While my setup starts fairly quickly, I don't focus heavily on startup time. Per
 
 There are a couple of very basic conventions that I have applied.
 
-1. Global actions that are not already present via the standard `C-x map`, are made available via `C-j`. This is a prefix map that can dispatch to other semantic units
-2. Mode specific global actions are made available in the respective major mode map, under the `C-c <letter>` prefix.
-3. Going to places and things is handled via the `M-g` prefix (the goto map)
-4. Searching things is handled via the `M-s` prefix (the search map)
-5. Context specific actions (on point, or region, etc.) are usually made available via embark actions via `C-.` and `M-.` respectively.
+1. `C-j` for global actions that are not already present via the standard `C-x map`.
+2. `C-c <letter>` for mode specific global actions are made available in the respective major mode map.
+3. `M-g` for going to places and things.
+4. `M-s` for searching things and places.
+5. `C-.` and `M-.` for context specific actions (on point, or region, etc.) via embark
 6. When I don't use something often, it's not bound to a key necessarily, because I can always `M-x` it and be just fine.
 
 This follows Emacs standards to a greater extend while minimizing conflicts.
