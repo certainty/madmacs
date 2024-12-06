@@ -91,19 +91,55 @@
   :ensure t)
 
 (use-package consult
+;; we replace a lot of functionality with the consult counter parts since they provide usually the better UX(use-package consult
   :ensure t
   :demand t
+  :init
+  (unbind-key "M-g n") ; free some prefix keys we need
+  
   :bind
-  (:map isearch-mode-map
-    ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
-    ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
-    ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
-    ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+  (([remap Info-search] . consult-info)
+    ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+    ("C-x b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+    ("C-x B" . consult-buffer)
+    ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+    ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+    ("C-x t b" . consult-buffer-other-tab)    ;; orig. switch-to-buffer-other-tab
+    ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+
+    ;; Custom M-# bindings for fast register access
+    ("M-#" . consult-register-load)
+    ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+    ("C-M-#" . consult-register)
+    ;; Other custom bindings
+    ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+    
+    (:map goto-map
+      ("i" . consult-imenu)
+
+      ;; Notes relates
+      ("n h" . consult-outline)
+      ("n A" . consult-org-agenda)
+      ("g" . consult-goto-line)
+      ("M-g" . consult-goto-line)
+      ("r" . consult-recent-file))
+  
+    (:map search-map
+      ("g" . consult-ripgrep)
+      ("l" . consult-line)
+      ("v g" . consult-git-grep)
+      (""))
+    
+    (:map isearch-mode-map
+      ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+      ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+      ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+      ("M-s L" . consult-line-multi))            ;; needed by consult-line to detect isearch
 
     ;; Minibuffer history
-    :map minibuffer-local-map
-    ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-    ("M-r" . consult-history))
+    (:map minibuffer-local-map
+      ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+      ("M-r" . consult-history)))
   
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
@@ -113,6 +149,13 @@
   :init
   (fset 'multi-occur #'consult-multi-occur)
 
+  :custom
+  (consult-narrow-key "<")
+  (register-preview-delay 0.5)
+  (register-preview-function 'consult-register-format)
+  (xref-show-xrefs-function 'consult-xref)
+  (xref-show-definitions-function 'consult-xref)
+
   :config
   (consult-customize
    consult-ripgrep consult-git-grep consult-grep
@@ -121,17 +164,6 @@
    consult--source-project-recent-file consult-theme
     :preview-key '(:debounce 0.2 any))
 
-  (setopt consult-narrow-key "<")
-
-  ;; Configure the register formatting. This improves the register
-  ;; preview for `consult-register', `consult-register-load',
-  ;; `consult-register-store' and the Emacs built-ins.
-  (setopt register-preview-delay 0.5
-        register-preview-function #'consult-register-format)
-
-  ;; Use Consult to select xref locations with preview
-  (setopt xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
 
   (setq consult-ripgrep-args "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /   --smart-case --no-heading --with-filename --line-number --search-zip")
   (setq consult-async-min-input 2)
@@ -151,7 +183,7 @@
     "Search through completion info pages."
     (interactive)
     (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
-                  "corfu" "cape" "tempel")))
+      "corfu" "cape" "tempel")))
 
 (defun consult-line-symbol-at-point ()
   (interactive)
@@ -166,8 +198,16 @@
 
 (use-package consult-project-extra
   :ensure t
-  :after consult)
+  :after consult
+  :bind
+  (:map goto-map
+    ("*" . consult-project-extra-find)))
 
+(use-package embark-consult
+  :ensure t ; only need to install it, embark loads it after consult if found
+  :after embark
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 ;; ;;;
 ;; ;;; In buffer completion

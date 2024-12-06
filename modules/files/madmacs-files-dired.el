@@ -40,6 +40,8 @@
     '(subtree-state collapse))
 
   :bind                                 ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
+  ("C-x d" . dirvish-side)
+  
   (:map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
     ("a"   . dirvish-quick-access)
     ("f"   . dirvish-file-info-menu)

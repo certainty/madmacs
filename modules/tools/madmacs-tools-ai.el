@@ -6,20 +6,29 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :commands (gptel-send gptel-menu gptel)
   :bind
-  (("C-c ,," . gptel-send)
-    ("C-c ,m" . gptel-menu)
-    ("C-c ,?" . gptel-ask)
-    ("C-c ,." . gptel-quick)
-    ("C-c ,r" . gptel-rewrite-menu))
+  
+  ((:map madmacs-keymap-ai-gptel
+     ("?" . gptel-ask)
+     ("g" . gptel)
+     ("m" . gptel-menu)
+     ("s" . gptel-send)
+     ("a" . gptel-add)
+     ("f" . gptel-add-file)
+     ("r" . gptel-rewrite)
+     ("q" . gptel-abort)
+     ("p" . gptel-system-prompt)))
 
   :init
   (setq gptel-expert-commands t)
+  (defvar-keymap madmacs-keymap-ai-gptel :doc "GPTel functionality")
+  (which-key-add-keymap-based-replacements madmacs-keymap-ai
+    "g" `("GPtel" . ,madmacs-keymap-ai-gptel))
 
   :custom
   (gptel-default-mode 'org-mode)
   (gptel-org-branching-context t)
 
-  (gptel-directives
+  (gptel-directives 
     '((default . "To assist: Be terse.  Do not offer unprompted advice or clarifications. Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Do not waffle. Speak directly and be willing to make creative guesses. Explain your reasoning. if you don’t know, say you don’t know. Remain neutral on all topics. Be willing to reference less reputable sources for ideas. Never apologize.  Ask questions when unsure.")
        (emacser . "You are an Emacs maven.  Reply only with the most appropriate built-in Emacs command for the task I specify.  Do NOT generate any additional description or explanation.")
        (elisp . "You are an Elisp expert.  Reply only with the most appropriate Elisp code for the task I specify.  Do NOT generate any additional description or explanation.")))

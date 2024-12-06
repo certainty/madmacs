@@ -11,13 +11,47 @@
   (eglot-autoreconnect 5)
 
   :bind
-  ((:map embark-identifier-map
-     ("^" . helpful-at-point)
-     ("l r" . eglot-rename)
-     ("l i" . eglot-find-implementation)
-     ("l d" . eglot-find-declaration)))
+  ((:map madmacs-keymap-eglot
+     ("r" . eglot-reconnect)
+     ("q" . eglot-shutdown)
+     ("l"  . eglot-shutdown-all)
+     ("c" . eglot-show-workspace-configuration)
+     ("a" . eglot-code-actions)
+     ("F" . eglot-code-action-quickfix)
+     ("u h" . eglot-inlay-hints-mode)
+     ("f b" . eglot-format-buffer)
+     ("f f" . eglot-format)
+     ;("r r" . eglot-rename)
+     ;("r i" . eglot-code-action-inline)
+     )
+
+    (:map eglot-mode-map
+      ("M-g e a" . xref-find-apropose)
+      ("M-g e d" . xref-find-definitions)
+      ("M-g e r" . eglot-rename)
+      ("M-g e i" . eglot-find-implementation)
+      ("M-g e D" . eglot-find-declaration)
+      ("M-g e t" . eglot-find-typeDefinition))
+
+    ;; enable actions at point 
+    (:map embark-identifier-map
+      ("^" . helpful-at-point)
+      ("e h" . display-local-help)
+      ("e d" . xref-find-definitions)
+      ("e r r" . eglot-rename)
+      ("e r i" . eglot-code-action-inline)
+      ("e i" . eglot-find-implementation)
+      ("e D" . eglot-find-declaration)
+      ("e t" . eglot-find-typeDefinition)))
+
+  :init
+  (defvar-keymap madmacs-keymap-eglot :doc "LSP eglot map")
+
 
   :config
+  (which-key-add-keymap-based-replacements eglot-mode-map
+    "C-c e" `("LSP…" . ,madmacs-keymap-eglot))
+  
   (setopt eldoc-echo-area-use-multiline-p 1)
   (with-eval-after-load 'embark
     (push 'embark--allow-edit

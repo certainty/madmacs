@@ -9,8 +9,8 @@
   :ensure nil
   :bind
   (:map goto-map
-    ("o" . consult-org-heading)
-    ("O" . consult-org-agenda)
+    ("n a" . (lambda () (interactive) (org-agenda nil "t"))))
+  (:map madmacs-keymap-notes
     ("a" . org-agenda))
 
   :custom
@@ -137,6 +137,20 @@
 
 (use-package org-roam
   :ensure t
+  :bind
+  (:map goto-map
+    ("n n" . org-roam-node-find)
+    ("n t" . madmacs-org-roam-dailies-goto-today)
+    ("n d" . madmacs-org-roam-dailies-goto-date)
+    ("n y" . madmacs-org-roam-dailies-goto-yesterday))
+  (:map search-map
+    ("n" . org-roam-node-find))
+ 
+  (:map madmacs-keymap-notes
+    ("n" . org-roam-dailies-capture-today)
+    ("N" . org-roam-dailies-capture-date)
+    ("c" . org-roam-capture))
+  
   :custom
   (org-roam-directory (file-truename "~/org/life"))
   (org-roam-dailies-directory "calendar/")
@@ -170,8 +184,10 @@
        ))
 
   (org-roam-dailies-capture-templates
-    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))
-       ("t" "task" entry "* TODO %?" :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))
+    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+title: %<%Y-%m-%d>"))
+       ("t" "task" entry "* TODO %?
+SCHEDULED: %t
+" :target (file+head "%<%Y-%m-%d>.org" "n#+created: %U\n#+title: %<%Y-%m-%d>"))
        ("o" "1on1" entry (file ,(concat org-roam-directory "/templates/1on1.org"))
          :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))
        ("m" "meeting" entry (file ,(concat org-roam-directory "/templates/meeting.org"))
@@ -183,7 +199,7 @@
   :bind
   (:map org-mode-map
     ("C-M-i" . org-roam-complete-link-at-point))
-
+ 
   :init
   (org-roam-db-autosync-mode)
   

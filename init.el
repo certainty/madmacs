@@ -4,13 +4,13 @@
 
 (setopt  madmacs-init-features
   `(
+     madmacs-keys-essentials
      madmacs-ux-minor-mode
      madmacs-ux-display-elements
      madmacs-ui-look
      madmacs-ui-modeline
      madmacs-ux-essentials
      madmacs-edit-essentials
-     madmacs-keys-essentials            ;; it is important to load this after meow, to make sure the leader map works correctly and is correctly displayed
      madmacs-keys-emacs
     ))
 

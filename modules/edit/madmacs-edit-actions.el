@@ -4,6 +4,7 @@
 
 (use-package embark
   :ensure t
+  :demand t
   :bind
   (("C-." . embark-act)                 ; this is ok since it gives us xrefs as options
    ("M-." . embark-dwim)                ; this is also ok since it also gives us xrefs as options
@@ -13,9 +14,6 @@
   (setq prefix-help-command #'embark-prefix-help-command)
 
   :config
-  (with-eval-after-load 'consult
-    (require 'embark-consult))
-  
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
@@ -29,17 +27,14 @@
         '(embark-highlight-indicator
            embark-isearch-highlight-indicator)))
 
-(use-package embark-consult
-  :ensure t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package avy
   :ensure t
+  :demand t
   :bind
-  (("C-, ," . avy-goto-char-timer)
-   ("C-, c" . avy-goto-char)
-   ("C-, l" . avy-goto-line))
+  (:map goto-map
+    ("c" . avy-goto-char-time)
+    ("C" . avy-goto-char))
 
   :config
   ;; https://karthinks.com/software/avy-can-do-anything/

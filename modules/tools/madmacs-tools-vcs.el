@@ -2,6 +2,18 @@
 
 (use-package magit
   :ensure t
+
+  :bind
+  ((:map goto-map
+     ("v" . magit-status))
+    
+    (:map madmacs-keymap-vc
+      ("." . magit-file-dispatch)
+      ("," . magit-dispatch)
+      ("s" . magit-status)
+      ("b" . magit-blame)
+      ("l" . magit-log)))
+  
   :custom
   (git-commit-summary-max-length 80)
   (git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))
@@ -18,9 +30,11 @@
                 (display-buffer-same-window))))
 
 
-
 (use-package git-timemachine
-  :ensure t)
+  :ensure t
+  :bind
+  (:map madmacs-keymap-vc
+    ("t" . git-timemachine-toggle)))
 
 (use-package diff-hl
   :ensure t
@@ -31,18 +45,21 @@
   :ensure nil
   :straight nil
   :bind
-  (("C-c M m" . smerge-mode)
-    (:map smerge-mode-map
-      ("C-c M ." . smerge-keep-mine)
-      ("C-c M o" . smerge-keep-other)
-      ("C-c M b" . smerge-keep-base)
-      ("C-c M a" . smerge-keep-all)
-      ("C-c M c" . smerge-keep-current)
-      ("C-c M n" . smerge-next)
-      ("C-c M p" . smerge-prev)))
+  (:map madmacs-keymap-vc
+    ("m" . smerge-mode))
+  
+  ((:map smerge-mode-map
+     ("C-c v m m" . smerge-keep-mine)
+     ("C-c v m o" . smerge-keep-other)
+     ("C-c v m b" . smerge-keep-base)
+     ("C-c v m a" . smerge-keep-all)
+     ("C-c v m c" . smerge-keep-current)
+     ("C-c v m n" . smerge-next)
+     ("C-c v m p" . smerge-prev))
 
-  :init
-  (which-key-add-key-based-replacements "C-c m" "smerge"))
+    (:repeat-map smerge-repeat-map
+      ("n" . smerge-next)
+      ("p" . smerge-prev))))
 
 ;; add some embark actions to work on
 (use-package embark-vc

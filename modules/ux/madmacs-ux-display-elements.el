@@ -5,6 +5,10 @@
   :ensure nil
   :straight nil
   :hook (before-make-frame . window-divider-mode)
+  :bind
+  (:map madmacs-keymap-ux
+    ("W" . toggle-frame-fullscreen))
+  
   :custom
   (window-divider-default-right-width 1)
   (window-divider-default-bottom-width 1)
@@ -28,13 +32,19 @@
   :ensure nil
   :bind
   ("M-o" . other-window)
-  
   :custom
   (display-buffer-base-action nil))
 
 (use-package ace-window
   :ensure t
-  :demand t)
+  :demand t
+  :bind
+  ((:map madmacs-keymap-windows
+    ("w" . ace-window)
+    ("x" . ace-swap-window)
+    ("m" . ace-maximize-window))
+  (:map goto-map
+    ("w" . ace-window))))
 
 (use-package windmove
   :straight nil
@@ -49,7 +59,13 @@
   (winner-mode 1))
 
 (use-package transpose-frame
-  :ensure t)
+  :ensure t
+  :bind
+  (:map madmacs-keymap-windows
+    ("f" . flip-frame)
+    ("F" . flop-frame)
+    ("r" . rotate-frame-clockwise)
+    ("t" . tranpose-frame)))
 
 (use-package popper
   :ensure t

@@ -8,7 +8,10 @@
 
 (use-package hl-todo
   :ensure t
-  :hook prog-mode)
+  :hook prog-mode
+  :bind
+  (:map madmacs-keymap-ux
+    ("t" . hl-todo-mode)))
 
 (use-package goggles
   :ensure t
@@ -25,7 +28,7 @@
   :ensure t)
 
 (use-package reveal
-  :ensure nil
+  :ensure t
   :straight nil
   :custom
   (reveal-auto-hide nil)
@@ -33,8 +36,14 @@
   (global-reveal-mode))
 
 (use-package emacs
-  :ensure nil
+  :ensure t
+  :demand t
   :straight nil
+  :bind
+  (:map madmacs-keymap-ux
+    ("l" . display-line-numbers-mode)
+    ("h" . global-hl-line-mode))
+  
   :custom
   (indicate-empty-lines nil))
 
@@ -42,6 +51,11 @@
 
 (use-package fontaine
   :ensure t
+  :demand t
+  :bind
+  (:map madmacs-keymap-ux
+    ("f" . madmacs-toggle-font))
+  
   :config
   (defun madmacs-toggle-font ()
     (interactive)
@@ -81,6 +95,11 @@
 ;;; Theme
 (use-package modus-themes
   :ensure t
+  :demand t
+  :bind
+  (:map madmacs-keymap-ux
+    ("c" . madmacs-modus-theme-toggle))
+  
   :config
   (setq
     modus-themes-mode-line '(moody)
@@ -128,7 +147,6 @@
     (if madmacs--modus-theme-light
       (madmacs-modus-dark-theme)
       (madmacs-modus-light-theme)))
-
   (madmacs-modus-dark-theme))
 
 (provide 'madmacs-ui-look)

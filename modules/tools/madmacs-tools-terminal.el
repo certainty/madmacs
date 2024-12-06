@@ -8,6 +8,12 @@
   :custom
   (vterm-toggle-fullscreen-p nil)
 
+  :bind
+  ("C-x T" . vterm-toggle)
+  (:map madmacs-keymap-global
+    ("t" . vterm-toggle))
+  
+
   :config
   (add-to-list 'display-buffer-alist
     '((lambda (buffer-or-name _)

@@ -11,7 +11,6 @@
   (dashboard-items '((recents  . 8)
                      (projects . 8)
                      (bookmarks . 5)))
-
   (dashboard-icon-type 'nerd-icons)
   (dashboard-startup-banner (concat user-emacs-directory "assets/logo.png"))
   (dashboard-projects-backend 'project-el)

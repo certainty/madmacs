@@ -3,6 +3,12 @@
 (use-package project
   :ensure nil
   :straight nil
+  :bind
+  (:map goto-map
+    ("f" . project-find-file))
+  (:map search-map
+    ("R" . project-query-replace-regexp))
+  
   :custom
   (project-switch-commands '((project-find-file "Find file")
                              (project-find-regexp "Find regexp")
@@ -84,6 +90,10 @@
 (use-package tabspaces
   :custom
   (tabspaces-use-filtered-buffers-as-default t)
+
+  :bind
+  (:map goto-map
+    ("p" . tabspaces-open-or-create-project-and-workspace))
 
   :config
   (tabspaces-mode))
