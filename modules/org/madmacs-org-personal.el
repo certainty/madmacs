@@ -9,7 +9,7 @@
   :ensure nil
   :bind
   (:map goto-map
-    ("n a" . (lambda () (interactive) (org-agenda nil "t"))))
+    ("n a" . my-agenda))
   (:map madmacs-keymap-notes
     ("a" . org-agenda))
 
@@ -45,7 +45,7 @@
               (org-agenda-use-time-grid t)
               (org-agenda-deadline-leaders '(" Deadline: " " In %2d d.: " "%2d d. ago: "))
               (org-agenda-skip-function '(org-agenda-skip-entry-if  'todo 'done))
-              (org-agenda-prefix-format "%s  %?-2i %?-12c %b")))
+              (org-agenda-prefix-format "%s  %?-2i %?-12c ")))
 
           (tags "+CATEGORY=\"project\"|+TODO=\"PROJ\""
             ((org-agenda-overriding-header "\n⚡ Projects\n")
@@ -69,7 +69,7 @@
               (org-agenda-repeating-timestamp-show-all nil)
               (org-agenda-remove-tags nil)
               (org-agenda-time t)
-              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s %b")
+              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s ")
               (org-agenda-todo-keyword-format "") ;; hide todo keywords
               (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
               (org-agenda-scheduled-leaders '("" ""))
@@ -95,14 +95,14 @@
        ("w" "Weekly Review"
          ((todo "*"
             ((org-agenda-overriding-header "🎉 Completed Tasks\n")
-              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s %b")
+              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s ")
               (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo 'done))
               (org-agenda-span 'week)))
 
           (agenda ""
             ((org-agenda-overriding-header "\n📋 Unfinished Scheduled Tasks\n")
               (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s %b")
+              (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s ")
               (org-agenda-span 'week)))))
 
        ("u" "Unscheduled Tasks"
@@ -111,10 +111,14 @@
               (org-agenda-sort-strategy '(priority-down))
               (org-agenda-group-by-heading t)
               (org-tags-match-list-sublevels t)
-              (org-agenda-prefix-format "%i %-30c ")))))))
+              (org-agenda-prefix-format "%i %-15c ")))))))
   
   
   :config
+  (defun my-agenda ()
+    (interactive)
+    (org-agenda nil "t"))
+  
   ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map

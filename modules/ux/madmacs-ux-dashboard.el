@@ -6,7 +6,9 @@
                            (dashboard-refresh-buffer)
                            (madmacs--dashboard-hide-modeline)))
   :custom
-  (dashboard-banner-logo-title "This is my emacs config. There are many like it, but this one is mine.")
+  (dashboard-banner-logo-title
+    "This is my emacs config. There are many like it, but this one is mine.
+  Keybindings to try: [C-j] Global Leader [M-g] Goto [M-s] Search ")
   (dashboard-center-content t)
   (dashboard-items '((recents  . 8)
                      (projects . 8)

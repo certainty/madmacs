@@ -17,10 +17,8 @@ I use meow for modal editing, eglot as my LSP client and I use modern power ups 
 
 ## My Emacs Configuration Approach
 
-I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-package` alongside `straight`. This setup provides a straightforward boot process that's easy to understand and modify.
-
-For modal editing, I prefer Meow. It offers a consistent keybinding scheme `C-c` as prefixes, while `C-c m` serves as a mode-specific prefix.
-
+I use plain Emacs Lisp for my configuration. To manage packages, I employ `use-package` alongside `straight`. 
+This setup provides a straightforward boot process that's easy to understand and modify.
 While my setup starts fairly quickly, I don't focus heavily on startup time. Personally, I do not restart Emacs frequently, so startup speed isn't a primary concern for me.
 
 ## Usage
@@ -33,24 +31,20 @@ While my setup starts fairly quickly, I don't focus heavily on startup time. Per
 
 There are a couple of very basic conventions that I have applied.
 
-1. Global actions, actions that don't work on text or region are bound in the leader map under `C-c`. You'll fine a mnemonic grouping.
-2. Mode specific global actions are made available under the local leader map `C-c m`
-3. Context specific actions (on point, or region, etc.) are usually made available via embark actions. 
+1. Global actions that are not already present via the standard `C-x map`, are made available via `C-j`. This is a prefix map that can dispatch to other semantic units
+2. Mode specific global actions are made available in the respective major mode map, under the `C-c <letter>` prefix.
+3. Going to places and things is handled via the `M-g` prefix (the goto map)
+4. Searching things is handled via the `M-s` prefix (the search map)
+5. Context specific actions (on point, or region, etc.) are usually made available via embark actions via `C-.` and `M-.` respectively.
+6. When I don't use something often, it's not bound to a key necessarily, because I can always `M-x` it and be just fine.
 
-
-**Transient menus where possible**
-
-Use `M-o` in any mode that is supported by [casual suite](https://github.com/kickingvegas/casual-suite) to fire up the transient menu.
-
-**The rest is just Emacs**
-
-For the rest just use the normal emacs keybindings.
+This follows Emacs standards to a greater extend while minimizing conflicts.
 
 ## Usage of LLM / AI to assist programming
 
 I've enabled and configured GitHub Copilot and GPTel, ready to be used from within Emacs. Copilot is used for auto-completion of code, while GPTel is made available to interact in any buffer.
 
-All AI related functionality is available via `C-c ,` and `C-c .` prefixes.
+All AI related functionality is available via `C-j a c` and `C-j a g` prefixes.
 
 In addition, there are `embark` actions available for `gptel`, so you can use `C-.` to access them in the given context.
 
