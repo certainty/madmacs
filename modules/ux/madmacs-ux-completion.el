@@ -120,7 +120,6 @@
       ;; Notes relates
       ("n h" . consult-outline)
       ("n A" . consult-org-agenda)
-      ("g" . consult-goto-line)
       ("M-g" . consult-goto-line)
       ("r" . consult-recent-file))
   
@@ -201,7 +200,8 @@
   :after consult
   :bind
   (:map goto-map
-    ("*" . consult-project-extra-find)))
+    ("g" . consult-project-extra-find)
+    ("." . consult-project-extra-find)))
 
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
