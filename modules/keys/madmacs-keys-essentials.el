@@ -31,7 +31,6 @@
   :straight nil
 
   :bind
-  
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
     ("U" . straight-pull-all))
