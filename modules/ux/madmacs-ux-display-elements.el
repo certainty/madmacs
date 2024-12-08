@@ -37,6 +37,8 @@
     ("C-x }" . enlarge-window)
     ("C-x >" . enlarge-window-horizontally)
     ("C-x <" . shrink-window-horizontally)
+    ("C-x w +" . balance-windows)
+    ("C-x w =" . balance-windows-area)
     (:repeat-map resize-window-repeat-map
       (">" . enlarge-window-horizontally)
       ("<" . shrink-window-horizontally)))
