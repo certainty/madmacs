@@ -31,7 +31,15 @@
   :straight nil
   :ensure nil
   :bind
-  ("M-o" . other-window)
+  (:map global-map
+    ("M-o" . other-window)
+    ("C-x {" . shrink-window)
+    ("C-x }" . enlarge-window)
+    ("C-x >" . enlarge-window-horizontally)
+    ("C-x <" . shrink-window-horizontally)
+    (:repeat-map resize-window-repeat-map
+      (">" . enlarge-window-horizontally)
+      ("<" . shrink-window-horizontally)))
   :custom
   (display-buffer-base-action nil))
 
@@ -61,6 +69,11 @@
 (use-package transpose-frame
   :ensure t
   :bind
+  (:map global-map
+    ("C-x w t" . transpose-frame)
+    ("C-x w r" . rotate-frame-clockwise)
+    ("C-x w f" . flip-frame)
+    ("C-x w F" . flop-frame))
   (:map madmacs-keymap-windows
     ("f" . flip-frame)
     ("F" . flop-frame)
@@ -99,16 +112,42 @@
   (fast-but-imprecise-scrolling nil)
   (hscroll-step 1)
   (hscroll-margin 1)
-  (switch-to-buffer-preserve-window-point t))
+  (switch-to-buffer-preserve-window-point t)
+  :config
+  (add-to-list 'display-buffer-alist
+    '((or . ((derived-mode . flymake-diagnostics-buffer-mode)
+              (derived-mode . flymake-project-diagnostics-mode)
+              (derived-mode . messages-buffer-mode)
+              (derived-mode . backtrace-mode)))
+       (display-buffer-reuse-mode-window display-buffer-at-bottom)
+       (window-height . 0.3)
+       (dedicated . t)
+       (preserve-size . (t . t))))
+
+  (add-to-list 'display-buffer-alist
+    '("\\*\\(Output\\|Register Preview\\).*"
+       (display-buffer-reuse-mode-window display-buffer-at-bottom)))
+
+  (add-to-list 'display-buffer-alist
+    '("\\`\\*Async Shell Command\\*\\'"
+             (display-buffer-no-window))))
 
 (use-package uniquify
   :ensure nil
   :straight nil
   :custom
   (uniquify-buffer-name-style 'forward)
+  (uniquify-strip-common-suffix t)
   (uniquify-separator "/")
   (uniquify-after-kill-buffer-p t)
   (uniquify-ignore-buffers-re "^\\*"))
+
+(use-package whitespace
+  :ensure nil
+  :bind
+  (("<f6>" . whitespace-mode)
+   ("C-c z" . delete-trailing-whitespace)))
+
 
 ;; This doesn't play well will lsp / vcs as it slows down interaction considerably due to the timer functions it uses
 (use-package autorevert
@@ -128,9 +167,6 @@
   :bind
   ("C-c b R" . revert-buffer-all))
 
-(use-package casual-ibuffer
-  :ensure t
-  :bind (:map ibuffer-mode-map ("M-o" . casual-ibuffer-tmenu)))
 
 
 (provide 'madmacs-ux-display-elements)

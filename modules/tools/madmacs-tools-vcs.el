@@ -1,5 +1,97 @@
 ;; -*- lexical-binding: t; -*-
 
+
+(use-package vc
+  :ensure nil
+  :straight nil
+  :bind
+  (:map global-map
+    ("C-x v B" . vc-annotate) 
+    ("C-x v e" . vc-ediff)
+    ("C-x v k" . vc-delete-file) 
+    ("C-x v G" . vc-log-search) 
+    ("C-x v t" . vc-create-tag)
+    ("C-x v d" . vc-diff)
+    ("C-x v ." . vc-dir-root) 
+    ("C-x v <return>" . vc-dir-root)
+   :map vc-dir-mode-map
+    ("t" . vc-create-tag)
+    ("O" . vc-log-outgoing)
+    ("o" . vc-dir-find-file-other-window)
+    ("d" . vc-diff)         ; parallel to D: `vc-root-diff'
+    ("k" . vc-dir-delete-file)
+    ("G" . vc-revert)
+   :map vc-git-stash-shared-map
+    ("a" . vc-git-stash-apply-at-point)
+    ("c" . vc-git-stash) ; "create" named stash
+    ("k" . vc-git-stash-delete-at-point) ; symmetry with `vc-dir-delete-file'
+    ("p" . vc-git-stash-pop-at-point)
+    ("s" . vc-git-stash-snapshot)
+   :map vc-annotate-mode-map
+    ("M-q" . vc-annotate-toggle-annotation-visibility)
+    ("C-c C-c" . vc-annotate-goto-line)
+    ("<return>" . vc-annotate-find-revision-at-line)
+   :map log-edit-mode-map
+    ("M-s" . nil) ; I use M-s for my search commands
+    
+   :map log-view-mode-map
+    ("<tab>" . log-view-toggle-entry-display)
+    ("<return>" . log-view-find-revision)
+    ("s" . vc-log-search)
+    ("o" . vc-log-outgoing)
+    ("f" . vc-log-incoming)
+    ("F" . vc-update)
+    ("P" . vc-push))
+  :custom
+  (vc-follow-symlinks t)
+  
+  :config
+  (require 'vc-annotate)
+  (require 'vc-dir)
+  (require 'vc-git)
+  (require 'add-log)
+  (require 'log-view)
+
+  (setopt vc-handled-backends '(Git))
+  (require 'log-edit)
+  (setopt log-edit-confirm 'changed)
+  (setopt log-edit-keep-buffer nil)
+  (setopt log-edit-require-final-newline t)
+  (setopt log-edit-setup-add-author nil)
+  (remove-hook 'log-edit-hook #'log-edit-show-files)
+  
+  (setopt vc-find-revision-no-save t)
+  (setopt vc-annotate-display-mode 'scale) ; scale to oldest
+  (setopt add-log-keep-changes-together t)
+  (setopt vc-git-diff-switches '("--patch-with-stat" "--histogram"))
+  (setopt vc-git-log-switches '("--stat"))
+  (setopt vc-git-print-log-follow t)
+  (setopt vc-git-revision-complete-only-branches nil) ; Emacs 28
+  (setopt vc-git-root-log-format
+        `("%d %h %ai %an: %s"
+          ;; The first shy group matches the characters drawn by --graph.
+          ;; We use numbered groups because `log-view-message-re' wants the
+          ;; revision number to be group 1.
+          ,(concat "^\\(?:[*/\\|]+\\)\\(?:[*/\\| ]+\\)?"
+                   "\\(?2: ([^)]+) \\)?\\(?1:[0-9a-z]+\\) "
+                   "\\(?4:[0-9]\\{4\\}-[0-9-]\\{4\\}[0-9\s+:-]\\{16\\}\\) "
+                   "\\(?3:.*?\\):")
+          ((1 'log-view-message)
+           (2 'change-log-list nil lax)
+           (3 'change-log-name)
+           (4 'change-log-date))))
+
+  ;; These two are from Emacs 29
+  (setopt vc-git-log-edit-summary-target-len 50)
+  (setopt vc-git-log-edit-summary-max-len 70)
+
+  (add-to-list 'display-buffer-alist
+    '("\\*\\vc-\\(incoming\\|outgoing\\|git : \\).*"
+       (display-buffer-reuse-mode-window display-buffer-below-selected)
+       (window-height . 0.1)
+       (dedicated . t)
+       (preserve-size . (t . t)))))
+
 (use-package magit
   :ensure t
 
