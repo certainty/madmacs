@@ -18,12 +18,12 @@
     ("t" . vc-create-tag)
     ("O" . vc-log-outgoing)
     ("o" . vc-dir-find-file-other-window)
-    ("d" . vc-diff)         ; parallel to D: `vc-root-diff'
+    ("d" . vc-diff) 
     ("k" . vc-dir-delete-file)
     ("G" . vc-revert)
    :map vc-git-stash-shared-map
     ("a" . vc-git-stash-apply-at-point)
-    ("c" . vc-git-stash) ; "create" named stash
+    ("c" . vc-git-stash)
     ("k" . vc-git-stash-delete-at-point) ; symmetry with `vc-dir-delete-file'
     ("p" . vc-git-stash-pop-at-point)
     ("s" . vc-git-stash-snapshot)
@@ -191,6 +191,30 @@
     (:repeat-map smerge-repeat-map
       ("n" . smerge-next)
       ("p" . smerge-prev))))
+
+(use-package ediff
+  :ensure nil
+  :straight nil
+  :commands (ediff-buffers ediff-files ediff-buffers3 ediff-files3)
+  :init
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  :custom
+  (ediff-keep-variants nil)
+  (ediff-make-buffers-readonly-at-startup nil)
+  (ediff-merge-revisions-with-ancestor t)
+  (ediff-show-clashes-only t))
+
+(use-package diff-mode
+  :ensure nil
+  :straight nil
+  :custom
+  (diff-default-read-only t)
+  (diff-advance-after-apply-hunk t)
+  (diff-update-on-the-fly t)
+  (diff-refine nil) 
+  (diff-font-lock-prettify t) 
+  (diff-font-lock-syntax 'hunk-also))
 
 ;; add some embark actions to work on
 (use-package embark-vc
