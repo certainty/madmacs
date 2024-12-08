@@ -130,7 +130,16 @@
                               (org-agenda-files :maxlevel . 5)))
   
   (setq org-outline-path-complete-in-steps nil)
-  (setq org-refile-use-outline-path t))
+  (setq org-refile-use-outline-path t)
+
+  (add-to-list 'display-buffer-alist
+    '("\\*Org \\(Select\\|Note\\)\\*" 
+             (display-buffer-in-side-window)
+             (dedicated . t)
+             (side . bottom)
+             (slot . 0)
+             (window-parameters . ((mode-line-format . none))))))
+
 
 ;; make the real code appear under certain org structures. This reveals the underlying markup if you need it
 (use-package org-appear
