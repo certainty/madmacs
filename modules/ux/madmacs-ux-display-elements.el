@@ -43,6 +43,10 @@
       (">" . enlarge-window-horizontally)
       ("<" . shrink-window-horizontally)))
   :custom
+  ;; I have a wide-screen so I prefer vertical splits
+  (split-width-threshold 0)
+  (split-height-threshold nil)
+  
   (display-buffer-base-action nil))
 
 (use-package ace-window
@@ -75,13 +79,7 @@
     ("C-x w t" . transpose-frame)
     ("C-x w r" . rotate-frame-clockwise)
     ("C-x w f" . flip-frame)
-    ("C-x w F" . flop-frame))
-  
-  (:map madmacs-keymap-windows
-    ("f" . flip-frame)
-    ("F" . flop-frame)
-    ("r" . rotate-frame-clockwise)
-    ("t" . tranpose-frame)))
+    ("C-x w F" . flop-frame)))
 
 (use-package popper
   :ensure t
