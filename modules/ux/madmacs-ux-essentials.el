@@ -13,12 +13,14 @@
   (kill-whole-line t)
   (line-move-visual t))
 
+;; TODO: move to display elements
 (use-package display-line-numbers
   :ensure nil
   :straight nil
   :custom
   (display-line-numbers-type t)
   (display-line-numbers-width-start t))
+
 
 (use-package casual-isearch
   :ensure t
@@ -32,6 +34,9 @@
   :ensure t
   :after bookmark
   :bind (:map bookmark-bmenu-mode-map ("M-o" . casual-bookmarks-tmenu)))
+
+
+;; end of search
 
 (use-package emacs
   :ensure t
@@ -83,7 +88,6 @@ The DWIM behaviour of this command is as follows:
      (keyboard-quit))))
 
   :init
-  (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
-  )
+  (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim))
 
 (provide 'madmacs-ux-essentials)

@@ -10,6 +10,7 @@
      madmacs-ui-look
      madmacs-ui-modeline
      madmacs-ux-essentials
+     madmacs-ux-search
      madmacs-edit-essentials
      madmacs-keys-emacs
     ))

@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
 (use-package vc
   :ensure nil
   :straight nil
