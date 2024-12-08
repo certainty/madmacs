@@ -135,14 +135,7 @@
 
   :bind
   ((:map goto-map
-     ("v" . magit-status))
-    
-    (:map madmacs-keymap-vc
-      ("." . magit-file-dispatch)
-      ("," . magit-dispatch)
-      ("s" . magit-status)
-      ("b" . magit-blame)
-      ("l" . magit-log)))
+     ("v" . magit-status)))
   
   :custom
   (git-commit-summary-max-length 80)
@@ -160,12 +153,6 @@
                 (display-buffer-same-window))))
 
 
-(use-package git-timemachine
-  :ensure t
-  :bind
-  (:map madmacs-keymap-vc
-    ("t" . git-timemachine-toggle)))
-
 (use-package diff-hl
   :ensure t
   :config
@@ -175,9 +162,6 @@
   :ensure nil
   :straight nil
   :bind
-  (:map madmacs-keymap-vc
-    ("m" . smerge-mode))
-  
   ((:map smerge-mode-map
      ("C-c v m m" . smerge-keep-mine)
      ("C-c v m o" . smerge-keep-other)

@@ -31,13 +31,6 @@
   :straight nil
 
   :bind
-  (:map madmacs-keymap-windows
-    ("=" . balance-windows)
-    ("v" . split-window-right)
-    ("h" . split-window-below)
-    ("o" . other-window)
-    ("d" . delete-window)
-    ("D" . delete-other-window))
   
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
@@ -49,20 +42,15 @@
   
   (defvar-keymap madmacs-keymap-global :doc "The keymap used for global commands. This is the home of keys that don't live in other global maps like C-x or C-c")
   
-  (defvar-keymap madmacs-keymap-windows :doc "Window related utilities")
-
-  (defvar-keymap madmacs-keymap-vc :doc "Git functionionality")
   (defvar-keymap madmacs-keymap-ux :doc "UX settings")
   (defvar-keymap madmacs-keymap-packages :doc "Package functionality")
   (defvar-keymap madmacs-keymap-notes :doc "Note taking functionality")
-  (defvar-keymap madmacs-keymap-ai :doc "AI related functionality")
+  (defvar-keymap madmacs-keymap-ai :doc "AI related functionality") 
   
   (which-key-add-keymap-based-replacements madmacs-keymap-global
     "a" `("AI…" . ,madmacs-keymap-ai)
     "n" `("Notes…" . ,madmacs-keymap-notes)
     "p" `("Packages…" . ,madmacs-keymap-packages)
-    "w" `("Windows…" . ,madmacs-keymap-windows)
-    "v" `("VC…" . ,madmacs-keymap-vc)
     "u" `("UX…" . ,madmacs-keymap-ux)))
 
 (provide 'madmacs-keys-essentials)

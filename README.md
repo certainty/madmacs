@@ -7,7 +7,7 @@
 ## For programmers: Eglot + Copilot/Gptel + Modern Power Ups
 
 This is my emacs configuration, made for me as a software engineer.
-I use meow for modal editing, eglot as my LSP client and I use modern power ups to support my workflow:
+I use vanilla emacs for editing, eglot as my LSP client and I use modern power ups to support my workflow:
 
 * Vertico + Corfu + Marginalia for completion and choices
 * Embark for contextual actions

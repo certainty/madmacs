@@ -35,9 +35,6 @@
   :after bookmark
   :bind (:map bookmark-bmenu-mode-map ("M-o" . casual-bookmarks-tmenu)))
 
-
-;; end of search
-
 (use-package emacs
   :ensure t
   :straight nil

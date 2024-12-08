@@ -42,7 +42,7 @@
   (org-footnote-auto-adjust t) ;; renumber footnotes
 
   ;; Indentation
-  (org-adapt-indentation t)        ;; adapt indentation
+  (org-adapt-indentation nil)        ;; adapt indentation
   (org-startup-indented t)         ;; start with indentation of headlines
   (org-src-preserve-indentation t) ;; preserve code indentation
 
@@ -92,6 +92,17 @@
   (org-agenda-current-time-string
     "◀── now ─────────────────────────────────────────────────")
 
+  ;; blocks
+  (org-structure-template-alist
+    '(("s" . "src")
+       ("e" . "src emacs-lisp")
+       ("E" . "src emacs-lisp :results value code :lexical t")
+       ("t" . "src emacs-lisp :tangle FILENAME")
+       ("T" . "src emacs-lisp :tangle FILENAME :mkdirp yes")
+       ("x" . "example")
+       ("X" . "export")
+       ("q" . "quote")))
+
   :config
 
   (hl-line-mode -1)
@@ -116,15 +127,14 @@
                   (org-level-8 . 1.1)))
     (set-face-attribute (car face) nil :font madmacs-variable-pitch-font :weight 'medium :height (cdr face)))
 
-  ;; (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  ;; (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  ;; (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  ;; (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  ;; (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
   (setq org-refile-targets '((nil :maxlevel . 5)
                               (org-agenda-files :maxlevel . 5)))
@@ -150,8 +160,7 @@
   (setopt org-appear-autoemphasis t
         org-appear-autosubmarkers t
         org-appear-autolinks t
-        org-appear-delay 0.5
-        org-appear-trigger-commands '(org-cycle)))
+        org-appear-delay 0.5))
 
 ;; use org-modern
 (use-package org-modern

@@ -47,18 +47,18 @@
   :ensure t
   :demand t
   :bind
-  ((:map madmacs-keymap-windows
-    ("w" . ace-window)
-    ("x" . ace-swap-window)
-    ("m" . ace-maximize-window))
+  ((:map global-map
+    ("C-x w w" . ace-window)
+    ("C-x w x" . ace-swap-window)
+    ("C-x w m" . ace-maximize-window))
   (:map goto-map
     ("w" . ace-window))))
 
 (use-package windmove
   :straight nil
   :ensure nil
-  :config
-  (windmove-default-keybindings))
+  :custom
+  (windmove-default-keybindings nil))
 
 (use-package winner
   :straight nil
@@ -74,6 +74,7 @@
     ("C-x w r" . rotate-frame-clockwise)
     ("C-x w f" . flip-frame)
     ("C-x w F" . flop-frame))
+  
   (:map madmacs-keymap-windows
     ("f" . flip-frame)
     ("F" . flop-frame)
