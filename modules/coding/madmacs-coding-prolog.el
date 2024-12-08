@@ -62,7 +62,7 @@
     "l" `("Listener" . ,madmacs-sweeprolog-listener-keys)
     "o" `("Holes" . ,madmacs-sweeprolog-holes-keys))
 
-  (keymap-set sweeprolog-mode-map madmacs-prolog-local-leader-keys))
+  (keymap-set sweeprolog-mode-map "C-c" madmacs-prolog-local-leader-keys))
 
 
 (provide 'madmacs-coding-prolog)
