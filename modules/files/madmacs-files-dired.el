@@ -1,65 +1,75 @@
 ;; -*- lexical-binding: t; -*-
-
 (use-package dired
   :ensure nil
   :straight nil
-  :hook (dired-mode . dired-omit-mode)
+  :hook
+  (dired-mode . dired-omit-mode)
+  (dired-mode . dired-hide-details-mode)
+  (dired-mode . hl-line-mode)
+
+  :bind
+  (:map dired-jump-map
+    ("j" . nil))
+  
+  :custom
+  (dired-recursive-copies 'always)
+  (dired-recursive-deletes 'always)
+  (delete-by-moving-to-trash t)
+  (dired-dwim-target t)
+  (dired-auto-revert-buffer #'dired-directory-changed-p) ; also see `dired-do-revert-buffer'
+  (dired-make-directory-clickable t) 
+  (dired-free-space nil) 
+  (dired-mouse-drag-files t) 
+
 
   :config
   (when (and (eq system-type 'darwin) (executable-find "gls"))
     (setq insert-directory-program "gls")))
 
+(use-package dired-aux
+  :ensure nil
+  :straight nil
+  :after dired
+  :bind
+  (:map dired-mode-map
+    ("C-+" . dired-create-empty-file)
+    ("M-s f" . nil)
+    ("C-<return>" . dired-do-open)
+    ("C-x v v" . dired-vc-next-action))
+  :custom
+  (dired-isearch-filenames 'dwim)
+  (dired-create-destination-dirs 'ask) 
+  (dired-vc-rename-file t)             
+  (dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir)))) 
+  (dired-create-destination-dirs-on-trailing-dirsep t))
+
 (use-package dired-x
   :ensure nil
   :straight nil
-  :config
-  (setopt dired-omit-files (concat dired-omit-files "\\|^\\..*$")))
-
-(use-package dirvish
-  :ensure t
-  :hook (dirvish-mode . dired-omit-mode)
-  :init
-  (dirvish-override-dired-mode)
+  :ensure nil
+  :after dired
+  :bind
+  (:map dired-mode-map
+    ("I" . dired-info))
 
   :custom
-  (dirvish-quick-access-entris          ; It's a custom option, `setq' won't work
-    '(("h" "~/"                "Home")
-       ("d" "~/Downloads/"      "Downloads")
-       ("w" "~/NewWork/Code/"   "Work")
-       ("p" "~/Private/"        "Private")))
+  (dired-clean-up-buffers-too t)
+  (dired-clean-confirm-killing-deleted-buffers t)
+  (dired-x-hands-off-my-keys t)
+  (dired-bind-man nil)
+  (dired-bind-info nil))
 
-  (dirvish-side-width 100)
-  (dirvish-side-auto-close t)
-
-  (dirvish-use-header-line 'global)
-  (dirvish-default-layout '(0 0.3 0.7))
-  (dirvish-mode-line-format
-    '(:left (sort symlink) :right (omit yank index)))
-
-  (dirvish-attributes
-    '(subtree-state collapse))
-
-  :bind                                 ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-  ("C-x d" . dirvish-side)
-  
-  (:map dirvish-mode-map                ; Dirvish inherits `dired-mode-map'
-    ("a"   . dirvish-quick-access)
-    ("f"   . dirvish-file-info-menu)
-    ("y"   . dirvish-yank-menu)
-    ("N"   . dirvish-narrow)
-    ("^"   . dirvish-history-last)
-    ("<tab>" . dirvish-toggle-subtree)
-    ("h"   . dirvish-history-jump)      ; remapped `describe-mode'
-    ("s"   . dirvish-quicksort)         ; remapped `dired-sort-toggle-or-edit'
-    ("v"   . dirvish-vc-menu)           ; remapped `dired-view-file'
-    ("O"   . dired-omit-mode)
-    ("M-f" . dirvish-history-go-forward)
-    ("M-b" . dirvish-history-go-backward)
-    ("M-l" . dirvish-ls-switches-menu)
-    ("M-m" . dirvish-mark-menu)
-    ("M-t" . dirvish-layout-toggle)
-    ("M-s" . dirvish-setup-menu)
-    ("M-j" . dirvish-fd-jump)))
+(use-package dired-subtree
+  :ensure t
+  :after dired
+  :bind
+  (:map dired-mode-map
+    ("<tab>" . dired-subtree-toggle)
+    ("TAB" . dired-subtree-toggle)
+    ("<backtab>" . dired-subtree-remove)
+    ("S-TAB" . dired-subtree-remove))
+  :custom
+  (dired-subtree-use-backgrounds nil))
 
 (use-package casual-dired
   :ensure t
