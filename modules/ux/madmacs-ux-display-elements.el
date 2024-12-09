@@ -31,7 +31,7 @@
   :straight nil
   :ensure nil
   :bind
-  (:map global-map
+  (:map madmacs-mode-map 
     ("M-o" . other-window)
     ("C-x {" . shrink-window)
     ("C-x }" . enlarge-window)
@@ -53,7 +53,7 @@
   :ensure t
   :demand t
   :bind
-  ((:map global-map
+  ((:map madmacs-mode-map 
     ("C-x w w" . ace-window)
     ("C-x w x" . ace-swap-window)
     ("C-x w m" . ace-maximize-window))
@@ -75,7 +75,7 @@
 (use-package transpose-frame
   :ensure t
   :bind
-  (:map global-map
+  (:map madmacs-mode-map
     ("C-x w t" . transpose-frame)
     ("C-x w r" . rotate-frame-clockwise)
     ("C-x w f" . flip-frame)
@@ -164,10 +164,6 @@
   (rever-without-query '(".*")))
 
 (use-package revert-buffer-all
-  :ensure t
-  :bind
-  ("C-c b R" . revert-buffer-all))
-
-
+  :ensure t)
 
 (provide 'madmacs-ux-display-elements)

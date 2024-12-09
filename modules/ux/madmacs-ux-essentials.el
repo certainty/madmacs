@@ -39,7 +39,7 @@
   :ensure t
   :straight nil
   :bind
-  (:map global-map ("C-x f" . find-file))                   ; I don't want a short way to set the fill column. I want a short way to find a file
+  (:map madmacs-mode-map ("C-x f" . find-file))                   ; I don't want a short way to set the fill column. I want a short way to find a file
   
   :custom
   (sentence-end-double-space nil)
@@ -85,6 +85,6 @@ The DWIM behaviour of this command is as follows:
      (keyboard-quit))))
 
   :init
-  (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim))
+  (define-key madmacs-mode-map (kbd "C-g") #'prot/keyboard-quit-dwim))
 
 (provide 'madmacs-ux-essentials)

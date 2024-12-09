@@ -37,12 +37,22 @@
   :init
   (defvar-keymap madmacs-keymap-ai-copilot :doc "Copilot Keymap")
   (which-key-add-keymap-based-replacements madmacs-keymap-ai
-    "c" `("Copilot…" . ,madmacs-keymap-ai-copilot)))
+    "c" `("Copilot" . ,madmacs-keymap-ai-copilot))
+  (which-key-add-keymap-based-replacements madmacs-mode-map
+    "C-c a" `("Copilot" . ,madmacs-keymap-ai-copilot)))
+
+
 
 (use-package copilot-chat
   :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
   :after (org copilot)
   :bind
+  (:map madmacs-mode-map
+    ("C-c a" . madmacs-keymap-ai-copilot))
+  
+  (:map vc-git-log-edit-mode-map
+    ("C-c a" . copilot-chat-insert-commit-message))
+  
   (:map madmacs-keymap-ai-copilot
     ("." . copilot-ask-and-insert)
     ("b" . copilot-chat-add-current-buffer)

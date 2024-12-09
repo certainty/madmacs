@@ -8,15 +8,6 @@
 
 (use-package flycheck
   :ensure t
-  :bind
-  (:map flycheck-mode-map
-    ("! l" . flycheck-list-errors)
-    ("! c" . flycheck-clear)
-    ("! h" . flycheck-display-error-at-point)
-    ("! p" . flycheck-previous-error)
-    ("! n" . flycheck-next-error)
-    ("! e" . flycheck-explain-error-at-point))
-  
   :custom
   (flycheck-highlighting-mode 'symbols)
   (flycheck-indication-mode nil)

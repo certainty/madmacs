@@ -8,10 +8,11 @@
 (use-package org
   :ensure nil
   :bind
-  (:map goto-map
-    ("n a" . my-agenda))
-  (:map madmacs-keymap-notes
-    ("a" . org-agenda))
+  ((:map goto-map
+      ("n a" . my-agenda))
+    (:map madmacs-keymap-notes
+      ("a" . org-agenda)))
+  
 
   :custom
   (org-directory "~/org")
@@ -21,6 +22,7 @@
     '((sequence "TODO(t!)" "DOING(g!)" "|" "DONE(d!)")
        (sequence "PROJ(p!)" "IN PROGRESS(i!)" "|" "DONE(d!)")
        (sequence "MEETING(m!)" "|" "DONE(d!)")
+       (sequence "APPT(a!)" "|" "DONE(d!)")
        (sequence "|" "CANCELED(c!)")
        (sequence "|" "KILL(k!)")))
   
@@ -70,7 +72,6 @@
               (org-agenda-remove-tags nil)
               (org-agenda-time t)
               (org-agenda-prefix-format "   %?-2i %?-12c %?-2t%s ")
-              (org-agenda-todo-keyword-format "") ;; hide todo keywords
               (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
               (org-agenda-scheduled-leaders '("" ""))
               (org-agenda-deadline-leaders '(" Deadline: " " In %2d d.: " "%2d d. ago: "))
@@ -115,6 +116,7 @@
   
   
   :config
+  
   (defun my-agenda ()
     (interactive)
     (org-agenda nil "t"))
@@ -142,11 +144,15 @@
 (use-package org-roam
   :ensure t
   :bind
+  (:map org-mode-map
+    ("C-M-i" . org-roam-complete-link-at-point))
+  
   (:map goto-map
     ("n n" . org-roam-node-find)
     ("n t" . madmacs-org-roam-dailies-goto-today)
     ("n d" . madmacs-org-roam-dailies-goto-date)
     ("n y" . madmacs-org-roam-dailies-goto-yesterday))
+  
   (:map search-map
     ("n" . org-roam-node-find))
  
@@ -154,6 +160,10 @@
     ("n" . org-roam-dailies-capture-today)
     ("N" . org-roam-dailies-capture-date)
     ("c" . org-roam-capture))
+
+  (:map madmacs-mode-map
+    ("C-c c" . org-roam-dailies-capture-today)
+    ("C-c C" . org-roam-capture))
   
   :custom
   (org-roam-directory (file-truename "~/org/life"))
@@ -166,7 +176,14 @@
        org-roam-reflinks-section))
 
   (org-roam-capture-templates
-    `(("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
+    `(("t" "todo" entry
+         "* TODO %?
+:PROPERTIES:
+:CREATED: %U
+:END:
+"
+         :target (file "tasks.org"))
+       ("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
         :target (file+head "areas/${slug}.org" "")
         :unnarrowed t)
        ("p" "project" plain (file ,(concat org-roam-directory "/templates/project.org"))
@@ -188,10 +205,13 @@
        ))
 
   (org-roam-dailies-capture-templates
-    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+title: %<%Y-%m-%d>"))
+    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
        ("t" "task" entry "* TODO %?
 SCHEDULED: %t
-" :target (file+head "%<%Y-%m-%d>.org" "n#+created: %U\n#+title: %<%Y-%m-%d>"))
+:PROPERTIES:
+:CREATED: %U
+:END:
+" :target (file+head "%<%Y-%m-%d>.org" "n#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
        ("o" "1on1" entry (file ,(concat org-roam-directory "/templates/1on1.org"))
          :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))
        ("m" "meeting" entry (file ,(concat org-roam-directory "/templates/meeting.org"))
@@ -200,9 +220,6 @@ SCHEDULED: %t
   (org-roam-node-display-template
     (concat "${directories:10} ::  ${hierarchy:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
-  :bind
-  (:map org-mode-map
-    ("C-M-i" . org-roam-complete-link-at-point))
  
   :init
   (org-roam-db-autosync-mode)

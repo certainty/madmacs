@@ -2,6 +2,52 @@
 ;; edit actions
 ;; this is a collection of actions that can be used to manipulate text in the buffer
 
+(use-package iedit
+  :ensure t
+  :commands (iedit-mode iedit-dwim)
+  :bind
+  (:map madmacs-mode-map
+    ("C-c '" . iedit-mode)
+    ("C-c \"" . iedit-dwim))
+  :config  
+  (defun iedit-dwim (arg)
+    "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+    (interactive "P")
+    (if arg
+      (iedit-mode)
+      (save-excursion
+        (save-restriction
+          (widen)
+          ;; this function determines the scope of `iedit-start'.
+          (if iedit-mode
+            (iedit-done)
+            ;; `current-word' can of course be replaced by other
+            ;; functions.
+            (narrow-to-defun)
+            (iedit-start (current-word) (point-min) (point-max))))))))
+
+(use-package embrace
+  :ensure t
+  :demand t
+  :bind
+  (:map madmacs-mode-map
+    ("C-," . embrace-commander))
+  
+  :init
+  (add-hook 'markdown-mode-hook
+    (lambda ()
+      (embrace-add-pair ?_ "_" "_")
+      (embrace-add-pair ?i "*" "*")
+      (embrace-add-pair ?b "**" "**")))
+
+  (defun embrace-double-quotes ()
+    (interactive)
+    (embrace--add-internal (region-beginning) (region-end) ?\" ))
+
+  (defun embrace-single-quotes ()
+    (interactive)
+    (embrace--add-internal (region-beginning) (region-end) ?\')))
+
 (use-package embark
   :ensure t
   :demand t
@@ -33,7 +79,7 @@
   :demand t
   :bind
   (:map goto-map
-    ("c" . avy-goto-char-time)
+    ("c" . avy-goto-char-timer)
     ("C" . avy-goto-char))
 
   :config
@@ -111,30 +157,6 @@
     (set-mark pt)
     (transpose-sexps 0))
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
-
-
-;; iedit / edit multiple regions
-;; (use-package iedit
-;;   :ensure t
-;;   :config
-;;   (global-set-key (kbd "C-c '") 'iedit-mode)
-;;   (global-set-key (kbd "C-c \"") 'iedit-dwim)
-  
-;;   (defun iedit-dwim (arg)
-;;     "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
-;;     (interactive "P")
-;;     (if arg
-;;       (iedit-mode)
-;;       (save-excursion
-;;         (save-restriction
-;;           (widen)
-;;           ;; this function determines the scope of `iedit-start'.
-;;           (if iedit-mode
-;;             (iedit-done)
-;;             ;; `current-word' can of course be replaced by other
-;;             ;; functions.
-;;             (narrow-to-defun)
-;;             (iedit-start (current-word) (point-min) (point-max))))))))
 
 
 (provide 'madmacs-edit-actions)

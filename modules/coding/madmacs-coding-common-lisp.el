@@ -1,3 +1,4 @@
+
 ;; -*- lexical-binding: t; -*-
 
 (defvar-keymap madmacs-sly-local-leader-keys :doc "Sly related commands")
@@ -98,7 +99,7 @@
 
   (defvar-keymap madmacs-sly-diagnostics-map :doc "Sly mappings related to diagnostics")
   (which-key-add-keymap-based-replacements madmacs-sly-diagnostics-map
-    "!" '("next note" . sly-next-note)
+     "!" '("next note" . sly-next-note)
     "c" '("clear notes" . sly-remove-notes)
     "n" '("next note" . sly-next-note)
     "e" '("next error" . sly-next-error))
@@ -154,24 +155,21 @@
     "d" '("dialog" . sly-trace-dialog)
     "u" '("untrace all" . sly-trace-dialog-untrace-all))
   
-  (which-key-add-keymap-based-replacements madmacs-sly-local-leader-keys
-    "," '("Sly" . madmacs--open-repl)
-    ";" '("Sly select" . madmacs--select-implementation)
-    "!" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
-    "l" '("Quickload" . sly-quickload)
-    "D" '("Disassemble" . sly-disassemble-symbol)
-    "e" `("Export" . ,madmacs-sly-export-map)
-    "a" `("ASDF" . ,madmacs-sly-asdf-keys)
-    "c" `("Compile" . ,madmacs-sly-compile-keys)
-    "d" `("Docs" . ,madmacs-sly-help-keys)
-    "r" `("Repl" . ,madmacs-sly-repl-keys)
-    "s" `("Stickers" . ,madmacs-sly-stickers-keys)
-    "t" `("Trace" . ,madmacs-sly-trace-keys)
-    "m" '("expand macro" . macrostep-expand)
-    "x" `("Xref" . ,madmacs-sly-xref-keys))
-
-  (keymap-set sly-mode-map "C-c" madmacs-sly-local-leader-keys))
-
+  (which-key-add-keymap-based-replacements sly-mode-map
+    "C-c p" '("Sly" . madmacs--open-repl)
+    "C-c P" '("Sly select" . madmacs--select-implementation)
+    "C-c !" `("Diagnostics" . ,madmacs-sly-diagnostics-map)
+    "C-c l" '("Quickload" . sly-quickload)
+    "C-c D" '("Disassemble" . sly-disassemble-symbol)
+    "C-c e" `("Export" . ,madmacs-sly-export-map)
+    "C-c f" `("ASDF" . ,madmacs-sly-asdf-keys)
+    "C-c c" `("Compile" . ,madmacs-sly-compile-keys)
+    "C-c d" `("Docs" . ,madmacs-sly-help-keys)
+    "C-c r" `("Repl" . ,madmacs-sly-repl-keys)
+    "C-c s" `("Stickers" . ,madmacs-sly-stickers-keys)
+    "C-c t" `("Trace" . ,madmacs-sly-trace-keys)
+    "C-c m" '("expand macro" . macrostep-expand)
+    "C-c x" `("Xref" . ,madmacs-sly-xref-keys)))
 
 (use-package sly-asdf
   :ensure t
@@ -186,6 +184,7 @@
     "t" '("ASDF test system" . sly-asdf-test-system))
   
   :init
+
   (add-to-list 'sly-contribs 'sly-asdf 'append))
 
 (use-package sly-quicklisp

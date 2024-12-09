@@ -6,8 +6,7 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :commands (gptel-send gptel-menu gptel)
   :bind
-  
-  ((:map madmacs-keymap-ai-gptel
+  (:map madmacs-keymap-ai-gptel
      ("?" . gptel-ask)
      ("g" . gptel)
      ("m" . gptel-menu)
@@ -16,13 +15,17 @@
      ("f" . gptel-add-file)
      ("r" . gptel-rewrite)
      ("q" . gptel-abort)
-     ("p" . gptel-system-prompt)))
+     ("p" . gptel-system-prompt))
 
   :init
   (setq gptel-expert-commands t)
   (defvar-keymap madmacs-keymap-ai-gptel :doc "GPTel functionality")
+  
   (which-key-add-keymap-based-replacements madmacs-keymap-ai
-    "g" `("GPtel" . ,madmacs-keymap-ai-gptel))
+    "g" `("Gptel" . ,madmacs-keymap-ai-gptel))
+  
+  (which-key-add-keymap-based-replacements madmacs-mode-map
+    "C-c A" `("Gptel" . ,madmacs-keymap-ai-gptel))
 
   :custom
   (gptel-default-mode 'org-mode)
@@ -37,6 +40,7 @@
   (gptel-crowdsourced-prompts-file (expand-file-name "gptel/prompts.csv" user-emacs-directory))
 
   :config
+  
   (defvar madmacs-backend-claude
     (gptel-make-anthropic "Claude"
       :stream t
@@ -76,7 +80,7 @@
 - Improving code clarity and maintainability
 - Adding clear, concise comments explaining complex logic
 - Keeping variable/function names consistent with the original unless clarity can be improved
-- Optimizing performance where possible without sacrificing readability
+q- Optimizing performance where possible without sacrificing readability
 - Preserving any critical existing comments
 - For comments make sure that they only explain why the code is written the way it is, not what it does. Don't repeat what's in the signature. Don't explain the obvious.
 - For comments try to identify invariants and assumptions that are not obvious

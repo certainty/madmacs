@@ -4,7 +4,7 @@
   :ensure nil
   :straight nil
   :bind
-  (:map global-map
+  (:map madmacs-mode-map
     ("C-x v B" . vc-annotate) 
     ("C-x v e" . vc-ediff)
     ("C-x v k" . vc-delete-file) 
@@ -13,6 +13,9 @@
     ("C-x v d" . vc-diff)
     ("C-x v ." . vc-dir-root) 
     ("C-x v <return>" . vc-dir-root)
+    ("C-x v z p" . vc-git-stash-pop)
+    ("C-x v z z" . vc-git-stash)
+    ("C-x v z s" . vc-git-stash-snapshot)
    :map vc-dir-mode-map
     ("t" . vc-create-tag)
     ("O" . vc-log-outgoing)
@@ -96,7 +99,7 @@
   :hook
   ((diff-mode . agitate-diff-enable-outline-minor-mode))
   :bind
-  (:map global-map
+  (:map madmacs-mode-map
     ("C-x v =" . agitate-diff-buffer-or-file) ; replace `vc-diff'
     ("C-x v g" . agitate-vc-git-grep) ; replace `vc-annotate'
     ("C-x v f" . agitate-vc-git-find-revision)

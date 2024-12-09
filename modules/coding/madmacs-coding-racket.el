@@ -24,19 +24,14 @@
     "e" `("send expression" . racket-send-last-sexp)
     "r" `("send region" . racket-send-region)
     "f" '("send file" . racket-send-file))
-  
-  (defvar-keymap madmacs-racket-local-leader-keys :doc "Racket local leader keymap.")
-  (which-key-add-keymap-based-replacements madmacs-racket-local-leader-keys
-    "t" '("test" . racket-test)
-    "e" `("expand" . ,madmacs-racket-expand-keys)
-    "s" `("send" . ,madmacs-racket-send-keys)
-    "d" '("documentation" . racket-documentation-search)
-    "l" `("logger" . racket-logger)
-    "o" `("profile" . racket-profile)
-    "z" `("repl" . racket-edit-switch-to-repl))
-
+    
   (which-key-add-keymap-based-replacements racket-mode-map
-    "C-c m" `("Local Leader" . ,madmacs-racket-local-leader-keys)
-    ))
+    "C-c t" '("test" . racket-test)
+    "C-c e" `("expand" . ,madmacs-racket-expand-keys)
+    "C-c s" `("send" . ,madmacs-racket-send-keys)
+    "C-c d" '("documentation" . racket-documentation-search)
+    "C-c l" `("logger" . racket-logger)
+    "C-c o" `("profile" . racket-profile)
+    "C-c z" `("repl" . racket-edit-switch-to-repl)))
   
   (provide 'madmacs-coding-racket)

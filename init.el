@@ -4,8 +4,8 @@
 
 (setopt  madmacs-init-features
   `(
-     madmacs-keys-essentials
      madmacs-ux-minor-mode
+     madmacs-keys-essentials
      madmacs-ux-display-elements
      madmacs-ui-look
      madmacs-ui-modeline
@@ -74,8 +74,6 @@
 
      madmacs-games-chess
 
-     ;; optional consistent keybindings
-     madmacs-keys-keybindings
      ))
 
 (madmacs--boot)

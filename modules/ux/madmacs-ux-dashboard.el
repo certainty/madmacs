@@ -8,7 +8,8 @@
   :custom
   (dashboard-banner-logo-title
     "This is my emacs config. There are many like it, but this one is mine.
-  Keybindings to try: [C-j] Global Leader [M-g] Goto [M-s] Search ")
+  Keybindings to try: [C-c ,] Global Leader [M-g] Goto [M-s] Search [C-c a] Gptel [C-c A] Copilot")
+  
   (dashboard-center-content t)
   (dashboard-items '((recents  . 8)
                      (projects . 8)
@@ -18,7 +19,6 @@
   (dashboard-projects-backend 'project-el)
 
   :config
-
   (defun madmacs--dashboard-hide-modeline ()
     (interactive)
     (let ((dash-buffer (get-buffer "*dashboard*")))

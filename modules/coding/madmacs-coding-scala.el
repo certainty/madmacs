@@ -7,9 +7,6 @@
   :interpreter ("scala" . scala-mode)
   :hook (scala-ts-mode . madmacs--lsp)
   :config
-  (define-key scala-ts-mode-map (kbd "C-c m") madmacs-scala-local-leader-keys)
-  
-  
   (with-eval-after-load 'treemacs
     (madmacs--treemacs-ignore-files '(".bsp" ".metals" ".bloop" "target")))
   
@@ -46,17 +43,16 @@
   (which-key-add-keymap-based-replacements madmacs-metals-test-keys
     "t" '("Test" . lsp-metals-treeview--buffer-changed))
 
-  (which-key-add-keymap-based-replacements madmacs-scala-local-leader-keys
-    "S" '("Analyze Stacktrace" . lsp-metals-analyze-stacktrace)
-    "m" `("Metals" . ,madmacs-metals-server-keys)
-    "b" `("Metals Build" . ,madmacs-metals-build-keys)
-    "c" `("Metals Compile" . ,madmacs-metals-compile-keys)
-    "t" `("Metals Test" . ,madmacs-metals-test-keys))
-  
-  (keymap-set scala-mode-map "C-c" madmacs-scala-local-leader-keys))
+  (which-key-add-keymap-based-replacements scala-ts-mode-map
+    "C-c S" '("Analyze Stacktrace" . lsp-metals-analyze-stacktrace)
+    "C-c m" `("Metals" . ,madmacs-metals-server-keys)
+    "C-c b" `("Metals Build" . ,madmacs-metals-build-keys)
+    "C-c c" `("Metals Compile" . ,madmacs-metals-compile-keys)
+    "C-c t" `("Metals Test" . ,madmacs-metals-test-keys)))
 
 (use-package sbt-mode
   :ensure t
+  :after scala-ts-mode
   :config
   (substitute-key-definition
    'minibuffer-complete-word
@@ -64,8 +60,8 @@
    minibuffer-local-completion-map)
   (setq sbt:program-options '("-Dsbt.supershell=false"))
 
-  (which-key-add-keymap-based-replacements madmacs-scala-local-leader-keys
-    "s" '("SBT hydra" . sbt-hydra)))
+  (which-key-add-keymap-based-replacements sbt-mode-map
+    "C-c s" '("SBT hydra" . sbt-hydra)))
 
 
 (provide 'madmacs-coding-scala)

@@ -1,26 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
-(use-package embrace
-  :ensure t
-  :demand t
-  :bind
-  (("C-c ca" . embrace-add)
-    ("C-c cc" . embrace-change)
-    ("C-c cd" . embrace-delete))
-  :init
-  (add-hook 'markdown-mode-hook
-    (lambda ()
-      (embrace-add-pair ?_ "_" "_")
-      (embrace-add-pair ?i "*" "*")
-      (embrace-add-pair ?b "**" "**")))
 
-  (defun embrace-double-quotes ()
-    (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?\" ))
-
-  (defun embrace-single-quotes ()
-    (interactive)
-    (embrace--add-internal (region-beginning) (region-end) ?\')))
 
 (defun meow-setup ()
   "Setup meow keys"

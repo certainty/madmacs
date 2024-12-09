@@ -18,7 +18,9 @@
 
 (use-package smartparens
   :ensure t
-  :hook ((prog-mode . smartparens-strict-mode) text-mode markdown-mode)
+  :hook ((lisp-mode . smartparens-mode)
+          (text-mode . smartparens-mode)
+          (markdown-mode . smartparens-mode))
   :bind
   (:map smartparens-mode-map
     ("C-M-(" . sp-forward-slurp-sexp)
