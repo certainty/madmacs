@@ -37,9 +37,7 @@
   :init
   (defvar-keymap madmacs-keymap-ai-copilot :doc "Copilot Keymap")
   (which-key-add-keymap-based-replacements madmacs-keymap-ai
-    "c" `("Copilot" . ,madmacs-keymap-ai-copilot))
-  (which-key-add-keymap-based-replacements madmacs-mode-map
-    "C-c a" `("Copilot" . ,madmacs-keymap-ai-copilot)))
+    "c" `("Copilot" . ,madmacs-keymap-ai-copilot)))
 
 
 

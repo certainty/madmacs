@@ -40,9 +40,9 @@
   :ensure t
   :init
   (setopt
-         completion-styles '(orderless basic partial-completion)
-         completion-category-defaults nil
-         completion-category-overrides '((file (styles . (partial-completion))))))
+    completion-styles '(orderless basic partial-completion)
+    completion-category-defaults nil
+    completion-category-overrides '((file (styles . (partial-completion))))))
 
 (use-package minibuf-eldef
   :ensure nil
@@ -96,7 +96,7 @@
   :demand t
   :init
   (unbind-key "M-g n") ; free some prefix keys we need
-  
+
   :bind
   (([remap Info-search] . consult-info)
     ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
@@ -113,7 +113,7 @@
     ("C-M-#" . consult-register)
     ;; Other custom bindings
     ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-    
+
     (:map goto-map
       ("i" . consult-imenu)
 
@@ -122,13 +122,13 @@
       ("n A" . consult-org-agenda)
       ("M-g" . consult-goto-line)
       ("r" . consult-recent-file))
-  
+
     (:map search-map
       ("g" . consult-ripgrep)
       ("l" . consult-line)
       ("v g" . consult-git-grep)
       (""))
-    
+
     (:map isearch-mode-map
       ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
       ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
@@ -139,7 +139,7 @@
     (:map minibuffer-local-map
       ("M-s" . consult-history)                 ;; orig. next-matching-history-element
       ("M-r" . consult-history)))
-  
+
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
   ;; enable `consult-preview-at-point-mode` in Embark Collect buffers.
@@ -224,7 +224,7 @@
   :bind
     (:map corfu-map
       ("C-SPC" . corfu-insert-separator)
-      
+
       ("TAB" . nil)
       ("<return>" . nil)
       ("C-<TAB>" . corfu-insert)

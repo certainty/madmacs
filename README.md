@@ -31,9 +31,8 @@ While my setup starts fairly quickly, I don't focus heavily on startup time. Per
 
 There are a couple of very basic conventions that I have applied.
 
-1. `C-c ,` for global actions that are not already present via the standard `C-x map`.
-2. `C-c a` / `C-c A` for AI related functionality
-2. `C-c <letter>` for mode specific global actions are made available in the respective major mode map.
+1. `C-j` for global actions that are not already present via the standard `C-x map`.
+2. `C-c <letter>` for mode specific global actions, which I bind in the keymaps of the respective mode
 3. `M-g` for going to places and things.
 4. `M-s` for searching things and places.
 5. `C-.` and `M-.` for context specific actions (on point, or region, etc.) via embark

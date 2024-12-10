@@ -8,12 +8,13 @@
 (use-package org
   :ensure nil
   :bind
-  ((:map goto-map
-      ("n a" . my-agenda))
-    (:map madmacs-keymap-notes
-      ("a" . org-agenda)))
+  (:map madmacs-keymap-global
+    ("a" . personal-agenda))
+  (:map goto-map
+    ("n a" . personal-agenda))
+  (:map madmacs-keymap-notes
+    ("a" . org-agenda))
   
-
   :custom
   (org-directory "~/org")
   (org-tag-alist '(("work" . ?w) ("personal" . ?p) ("gtd" . ?g)))
@@ -117,7 +118,7 @@
   
   :config
   
-  (defun my-agenda ()
+  (defun personal-agenda ()
     (interactive)
     (org-agenda nil "t"))
   
@@ -161,9 +162,9 @@
     ("N" . org-roam-dailies-capture-date)
     ("c" . org-roam-capture))
 
-  (:map madmacs-mode-map
-    ("C-c c" . org-roam-dailies-capture-today)
-    ("C-c C" . org-roam-capture))
+  (:map madmacs-keymap-global
+    ("t" . org-roam-dailies-capture-today)
+    ("c" . org-roam-capture))
   
   :custom
   (org-roam-directory (file-truename "~/org/life"))

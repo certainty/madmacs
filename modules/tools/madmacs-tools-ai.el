@@ -6,6 +6,9 @@
   :straight (:host github :repo "karthink/gptel" :files ("*.el"))
   :commands (gptel-send gptel-menu gptel)
   :bind
+  (:map madmacs-keymap-global
+    ("I" . gptel-menu))
+  
   (:map madmacs-keymap-ai-gptel
      ("?" . gptel-ask)
      ("g" . gptel)
@@ -23,9 +26,6 @@
   
   (which-key-add-keymap-based-replacements madmacs-keymap-ai
     "g" `("Gptel" . ,madmacs-keymap-ai-gptel))
-  
-  (which-key-add-keymap-based-replacements madmacs-mode-map
-    "C-c A" `("Gptel" . ,madmacs-keymap-ai-gptel))
 
   :custom
   (gptel-default-mode 'org-mode)

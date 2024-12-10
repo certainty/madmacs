@@ -69,7 +69,6 @@
     ("C-x C-q" . wgrep-change-to-wgrep-mode)
     ("C-c C-c" . wgrep-finish-edit))
   :custom
-  (wgrep-auto-save-buffer t)
-  (wgrep-change-readonly-file t))
+  (wgrep-auto-save-buffer t))
 
 (provide 'madmacs-ux-search)

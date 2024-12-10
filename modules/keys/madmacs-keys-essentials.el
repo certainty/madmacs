@@ -39,10 +39,8 @@
   :init
   ;; make room in the goto-map
   (unbind-key "M-g n") ; notes prefix
-  (unbind-key "C-c ,")
   
   (defvar-keymap madmacs-keymap-global :doc "The keymap used for global commands. This is the home of keys that don't live in other global maps like C-x or C-c")
-  
   (defvar-keymap madmacs-keymap-ux :doc "UX settings")
   (defvar-keymap madmacs-keymap-packages :doc "Package functionality")
   (defvar-keymap madmacs-keymap-notes :doc "Note taking functionality")
@@ -55,6 +53,6 @@
     "u" `("UX" . ,madmacs-keymap-ux))
 
   (which-key-add-keymap-based-replacements madmacs-mode-map
-    "C-c ," `("Madmacs" . ,madmacs-keymap-global)))
+    "C-j" `("Madmacs" . ,madmacs-keymap-global)))
  
 (provide 'madmacs-keys-essentials)
