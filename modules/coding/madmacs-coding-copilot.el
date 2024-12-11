@@ -45,14 +45,12 @@
   :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
   :after (org copilot)
   :bind
-  (:map madmacs-mode-map
-    ("C-c a" . madmacs-keymap-ai-copilot))
-  
   (:map vc-git-log-edit-mode-map
     ("C-c a" . copilot-chat-insert-commit-message))
-  
+  (:map madmacs-keymap-global
+    ("i" . copilot-chat-ask-and-insert))
   (:map madmacs-keymap-ai-copilot
-    ("." . copilot-ask-and-insert)
+    ("." . copilot-chat-ask-and-insert)
     ("b" . copilot-chat-add-current-buffer)
     ("B" . copilot-chat-del-current-buffer)
     ("c" . copilot-chat-display)
@@ -68,7 +66,11 @@
     ("C-c C-c" . copilot-chat-prompt-send))
   :custom
   (copilot-chat-backend 'curl)
-  (copilot-chat-frontend 'markdown))
+  (copilot-chat-frontend 'markdown)
+  
+  :init
+    (which-key-add-keymap-based-replacements madmacs-keymap-ai
+    "c" `("Copilot" . ,madmacs-keymap-ai-copilot)))
 
 (provide 'madmacs-coding-copilot)
 

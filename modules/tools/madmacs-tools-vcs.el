@@ -15,28 +15,31 @@
     ("C-x v <return>" . vc-dir-root)
     ("C-x v z p" . vc-git-stash-pop)
     ("C-x v z z" . vc-git-stash)
-    ("C-x v z s" . vc-git-stash-snapshot)
-   :map vc-dir-mode-map
+    ("C-x v z s" . vc-git-stash-snapshot))
+  (:map madmacs-keymap-global
+    ("v" . vc-dir-root))
+   
+   (:map vc-dir-mode-map
     ("t" . vc-create-tag)
     ("O" . vc-log-outgoing)
     ("o" . vc-dir-find-file-other-window)
     ("d" . vc-diff) 
     ("k" . vc-dir-delete-file)
-    ("G" . vc-revert)
-   :map vc-git-stash-shared-map
+    ("G" . vc-revert))
+   (:map vc-git-stash-shared-map
     ("a" . vc-git-stash-apply-at-point)
     ("c" . vc-git-stash)
     ("k" . vc-git-stash-delete-at-point) ; symmetry with `vc-dir-delete-file'
     ("p" . vc-git-stash-pop-at-point)
-    ("s" . vc-git-stash-snapshot)
-   :map vc-annotate-mode-map
+    ("s" . vc-git-stash-snapshot))
+   (:map vc-annotate-mode-map
     ("M-q" . vc-annotate-toggle-annotation-visibility)
     ("C-c C-c" . vc-annotate-goto-line)
-    ("<return>" . vc-annotate-find-revision-at-line)
-   :map log-edit-mode-map
-    ("M-s" . nil) ; I use M-s for my search commands
+    ("<return>" . vc-annotate-find-revision-at-line))
+   (:map log-edit-mode-map
+    ("M-s" . nil)) ; I use M-s for my search commands
     
-   :map log-view-mode-map
+   (:map log-view-mode-map
     ("<tab>" . log-view-toggle-entry-display)
     ("<return>" . log-view-find-revision)
     ("s" . vc-log-search)

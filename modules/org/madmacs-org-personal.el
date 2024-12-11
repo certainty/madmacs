@@ -13,7 +13,9 @@
   (:map goto-map
     ("n a" . madmacs-personal-agenda)
     ("t" . madmacs-goto-tasks))
-  
+  (:map search-map
+    ("n G" . madmacs-org-grep)
+    ("n g" . madmacs-org-ripgrep))
   (:map madmacs-keymap-notes
     ("a" . org-agenda)
     ("p" . madmacs-capture-project))
@@ -152,6 +154,15 @@ SCHEDULED: %t
   (defun madmacs-goto-tasks ()
     (interactive)
     (find-file-other-window (concat org-directory "/tasks.org")))
+
+  (defun madmacs-org-ripgrep ()
+    (interactive)
+    (consult-ripgrep org-directory))
+
+  (defun madmacs-org-grep ()
+    (interactive)
+    (let ((default-directory org-directory))
+      (call-interactively #'grep)))
   
   ;; embark
   (with-eval-after-load 'embark
@@ -186,7 +197,7 @@ SCHEDULED: %t
     ("n y" . madmacs-org-roam-dailies-goto-yesterday))
   
   (:map search-map
-    ("n" . org-roam-node-find))
+    ("n n" . org-roam-node-find))
  
   (:map madmacs-keymap-notes
     ("n" . org-roam-dailies-capture-today)
@@ -230,7 +241,7 @@ SCHEDULED: %t
        ))
 
   (org-roam-dailies-capture-templates
-    `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
+    `(("d" "default" entry "- %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
        
        ("o" "1on1" entry (file ,(concat org-roam-directory "/templates/1on1.org"))
          :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))

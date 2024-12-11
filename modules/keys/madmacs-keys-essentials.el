@@ -47,7 +47,7 @@
   (defvar-keymap madmacs-keymap-ai :doc "AI related functionality")
   
   (which-key-add-keymap-based-replacements madmacs-keymap-global
-    "a" `("AI" . ,madmacs-keymap-ai)
+    "i" `("AI" . ,madmacs-keymap-ai)
     "n" `("Notes" . ,madmacs-keymap-notes)
     "p" `("Packages" . ,madmacs-keymap-packages)
     "u" `("UX" . ,madmacs-keymap-ux))

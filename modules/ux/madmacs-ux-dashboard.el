@@ -8,7 +8,7 @@
   :custom
   (dashboard-banner-logo-title
     "This is my emacs config. There are many like it, but this one is mine.
-  Keybindings to try: [C-c ,] Global Leader [M-g] Goto [M-s] Search [C-c a] Gptel [C-c A] Copilot")
+  Keybindings to try: [C-c ,] Global Leader [M-g] Goto [M-s] Search [C-j I] Gptel [C-j i] Copilot")
   
   (dashboard-center-content t)
   (dashboard-items '((recents  . 8)

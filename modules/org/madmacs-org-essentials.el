@@ -113,8 +113,8 @@
   (setq visual-fill-column-center-text t)
   (setq visual-fill-column-width 250)
   (visual-line-mode 1)
-  (setopt org-directory madmacs-org-directory)
-  (setopt org-attach-id-dir (concat madmacs-org-directory "~/org/.attachments"))
+  (setopt org-directory (file-truename "~/org/life"))
+  (setopt org-attach-id-dir (file-truename "~/org/.attachments"))
 
   (require 'org-faces)
   (dolist (face '((org-level-1 . 1.2)
