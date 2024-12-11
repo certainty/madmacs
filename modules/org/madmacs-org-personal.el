@@ -9,23 +9,28 @@
   :ensure nil
   :bind
   (:map madmacs-keymap-global
-    ("a" . personal-agenda))
+    ("a" . madmacs-personal-agenda))
   (:map goto-map
-    ("n a" . personal-agenda))
+    ("n a" . madmacs-personal-agenda)
+    ("t" . madmacs-goto-tasks))
+  
   (:map madmacs-keymap-notes
-    ("a" . org-agenda))
+    ("a" . org-agenda)
+    ("p" . madmacs-capture-project))
+  
+  (:map madmacs-keymap-global
+    ("t" . madmacs-capture-task))
   
   :custom
-  (org-directory "~/org")
-  (org-tag-alist '(("work" . ?w) ("personal" . ?p) ("gtd" . ?g)))
+  (org-directory (file-truename "~/org/life"))
+  (org-tag-alist '(("@nw1" . ?n) ("@xws" . ?x) ("@messaging" . ?m) ("@cloud_migration" . ?c)))
  
   (org-todo-keywords
-    '((sequence "TODO(t!)" "DOING(g!)" "|" "DONE(d!)")
-       (sequence "PROJ(p!)" "IN PROGRESS(i!)" "|" "DONE(d!)")
-       (sequence "MEETING(m!)" "|" "DONE(d!)")
-       (sequence "APPT(a!)" "|" "DONE(d!)")
-       (sequence "|" "CANCELED(c!)")
-       (sequence "|" "KILL(k!)")))
+    '((sequence "TODO(t)" "DOING(g!)" "|" "DONE(d!)")
+       (sequence "PROJ(p)" "DOING(g!)" "|" "DONE(d!)")
+       (sequence "MEETING(m)" "|" "DONE(d)")
+       (sequence "APPT(a)" "|" "DONE(d)")
+       (sequence "|" "CANCELED(c!)")))
   
   (org-priority-default ?B)
   (org-priority-highest ?A)
@@ -36,6 +41,20 @@
        (todo priority-down category-keep)
        (tags priority-down category-keep)
        (search category-keep)))
+
+  (org-capture-templates
+    `(("t" "Task" entry (file+headline ,(concat org-directory "/tasks.org") "Main")
+        "* TODO %?
+SCHEDULED: %t
+:PROPERTIES:
+:CREATED: %U
+:END:")
+       ("p" "Project" entry (file+headline ,(concat org-directory "/tasks.org") "Projects")
+        "* PROJ %? :project:
+:PROPERTIES:
+:CREATED: %U
+:CATEGORY: %^{category}p
+:END:")))
 
   (org-columns-default-format-for-agenda "%SCHEDULED %25ITEM %TODO %3PRIORITY %TAGS")
 
@@ -118,9 +137,21 @@
   
   :config
   
-  (defun personal-agenda ()
+  (defun madmacs-personal-agenda ()
     (interactive)
     (org-agenda nil "t"))
+  
+  (defun madmacs-capture-task ()
+    (interactive)
+    (org-capture nil "t"))
+
+  (defun madmacs-capture-project ()
+    (interactive)
+    (org-capture nil "p"))
+
+  (defun madmacs-goto-tasks ()
+    (interactive)
+    (find-file-other-window (concat org-directory "/tasks.org")))
   
   ;; embark
   (with-eval-after-load 'embark
@@ -163,7 +194,7 @@
     ("c" . org-roam-capture))
 
   (:map madmacs-keymap-global
-    ("t" . org-roam-dailies-capture-today)
+    ("T" . org-roam-dailies-capture-today)
     ("c" . org-roam-capture))
   
   :custom
@@ -177,23 +208,16 @@
        org-roam-reflinks-section))
 
   (org-roam-capture-templates
-    `(("t" "todo" entry
-         "* TODO %?
-:PROPERTIES:
-:CREATED: %U
-:END:
-"
-         :target (file "tasks.org"))
-       ("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
+    `(("p" "project note" plain (file ,(concat org-roam-directory "/templates/project.org"))
+        :target (file+head "projects/${slug}.org")
+        :unnarrowed t)
+      ("a" "area" plain (file ,(concat org-roam-directory "/templates/area.org"))
         :target (file+head "areas/${slug}.org" "")
         :unnarrowed t)
-       ("p" "project" plain (file ,(concat org-roam-directory "/templates/project.org"))
-         :target (file+head "projects/${slug}.org" "")
-         :unnarrowed t)
-       ("r" "reference" plain (file ,(concat org-roam-directory "/templates/reference.org"))
-         :target (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "")
-         :unnarrowed t)
-       ("c" "contact" entry "* @${title}
+      ("r" "reference" plain (file ,(concat org-roam-directory "/templates/reference.org"))
+        :target (file+head "references/%<%Y%m%d%H%M%S>-${slug}.org" "")
+        :unnarrowed t)
+      ("c" "contact" entry "* @${title}
 %U
 :PROPERTIES:
 :ID: %(org-id-uuid)
@@ -207,14 +231,10 @@
 
   (org-roam-dailies-capture-templates
     `(("d" "default" entry "* %?" :target (file+head "%<%Y-%m-%d>.org" "#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
-       ("t" "task" entry "* TODO %?
-SCHEDULED: %t
-:PROPERTIES:
-:CREATED: %U
-:END:
-" :target (file+head "%<%Y-%m-%d>.org" "n#+created: %U\n#+category: %<%Y-%m-%d>\n#+title: %<%Y-%m-%d>"))
+       
        ("o" "1on1" entry (file ,(concat org-roam-directory "/templates/1on1.org"))
          :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))
+       
        ("m" "meeting" entry (file ,(concat org-roam-directory "/templates/meeting.org"))
          :target (file+head "%<%Y-%m-%d>.org" "%U\n#+title: %<%Y-%m-%d>"))))
 
@@ -253,7 +273,7 @@ SCHEDULED: %t
   
   (setopt org-agenda-files
     (mapcar (lambda (n) (concat org-roam-directory n))
-      '("/projects" "/calendar" "/areas" "/inbox.org")))
+      '("/projects" "/calendar" "/areas" "/inbox.org" "/tasks.org")))
   
   (setopt org-agenda-regexp-filter ".+\.org$")
   
