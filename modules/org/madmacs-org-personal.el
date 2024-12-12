@@ -7,6 +7,7 @@
 ;; we use this as a very barebones org setup and all the rest is configured in the org-roam section
 (use-package org
   :ensure nil
+  :hook (org-after-todo-state-change . save-buffer)
   :bind
   (:map madmacs-keymap-global
     ("a" . madmacs-personal-agenda))
@@ -25,7 +26,9 @@
   
   :custom
   (org-directory (file-truename "~/org/life"))
-  (org-tag-alist '(("@nw1" . ?n) ("@xws" . ?x) ("@messaging" . ?m) ("@cloud_migration" . ?c)))
+  (org-tag-alist '(("@nw1" . ?n) ("@xws" . ?x) ("@messaging" . ?m) ("@cloud_migration" . ?c) ("recurring" . ?r)))
+
+  (org-pretty-symbols t)
  
   (org-todo-keywords
     '((sequence "TODO(t)" "DOING(g!)" "|" "DONE(d!)")
@@ -52,10 +55,11 @@ SCHEDULED: %t
 :CREATED: %U
 :END:")
        ("p" "Project" entry (file+headline ,(concat org-directory "/tasks.org") "Projects")
-        "* PROJ %? :project:
+        "* PROJ %?
 :PROPERTIES:
 :CREATED: %U
-:CATEGORY: %^{category}p
+:CATEGORY: project
+:PROJECTKEY:
 :END:")))
 
   (org-columns-default-format-for-agenda "%SCHEDULED %25ITEM %TODO %3PRIORITY %TAGS")
@@ -284,7 +288,7 @@ SCHEDULED: %t
   
   (setopt org-agenda-files
     (mapcar (lambda (n) (concat org-roam-directory n))
-      '("/projects" "/calendar" "/areas" "/inbox.org" "/tasks.org")))
+      '("/projects" "/calendar" "/areas"  "/tasks.org")))
   
   (setopt org-agenda-regexp-filter ".+\.org$")
   

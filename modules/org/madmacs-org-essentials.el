@@ -47,7 +47,7 @@
   (org-src-preserve-indentation t) ;; preserve code indentation
 
   ;; Insertion/Yanking
-  (org-insert-heading-respect-content t) ;; insert new headings after subtree
+  (org-insert-heading-respect-content nil) ;; I never want to insert after subtree NOOOO
   (org-M-RET-may-split-line '((default . t))) ;; don't split line when creating a new headline, list item, or table field
   (org-yank-adjusted-subtrees t) ;; adjust subtrees to depth when yanked
   (org-yank-folded-subtrees t)   ;; fold subtrees on yank
