@@ -1,5 +1,18 @@
 ;; -*- lexical-binding: t; -*-
 
+;;; This is my GTD setup
+;;;
+;;; With the following base properties:
+;;; 1. Tasks and notes are separated
+;;; 1.1 I use a tasks.org file for projects and tasks
+;;; 2. Meeting minutes are taken in separate file called meetings.org
+;;; 2.2 reverse date tree to have most recent meetings on top
+;;; 3. Notes are separated into fleeting and permanent
+;;; 3.1 Fleeting notes are added to journal.org
+;;; 3.2 Permanent notes are done via denote and stored in the /notes directory
+;;;     This directory contains all the reference notes that I might need
+
+
 (use-package org
   :ensure nil
   :straight nil
@@ -7,23 +20,30 @@
   :bind
   (:map madmacs-keymap-global
     ("a" . madmacs-personal-agenda)
-    ("c" . org-capture))
+    ("c" . org-capture)
+    ("t" . madmacs-capture-task))
+  
   (:map goto-map
-    ("n a" . madmacs-personal-agenda)
+    ("a" . madmacs-personal-agenda)
     ("t" . madmacs-goto-tasks))
+  
   (:map search-map
     ("n G" . madmacs-org-grep)
     ("n g" . madmacs-org-ripgrep))
-  (:map madmacs-keymap-notes
-    ("a" . org-agenda)
-    ("p" . madmacs-capture-project))
   
-  (:map madmacs-keymap-global
-    ("t" . madmacs-capture-task))
+  (:map madmacs-keymap-gtd
+    ("a" . org-agenda)
+    ("c" . org-capture)
+    ("t" . madmacs-capture-task)
+    ("p" . madmacs-capture-project))
 
   :init
   (require 'org-id)
-
+  
+  (defvar-keymap madmacs-keymap-gtd :doc "Get things done")
+  (which-key-add-keymap-based-replacements madmacs-keymap-global
+    "g" `("GTD" . ,madmacs-keymap-gtd))
+  
   :custom
   (org-id-link-to-org-use-id t)
   
@@ -64,7 +84,7 @@
 :CAPTURED: %U
 :END:")
 
-       ("T" "Task (now)" entry (file+headline "tasks.org" "Main")
+       ("T" "Task (today)" entry (file+headline "tasks.org" "Main")
          "* TODO %?
 SCHEDULED: %t
 :PROPERTIES:
@@ -78,6 +98,9 @@ SCHEDULED: %t
 :CATEGORY: project
 :PROJECTKEY: %^{Project Key}
 :END:"  )
+       ("m" "Meeting")
+       ("n" "Notes")
+       
        ("c" "Contact" entry (file "contacts.org")
          "* %^{Name}
 :PROPERTIES:
@@ -86,23 +109,7 @@ SCHEDULED: %t
 :END:
 
 %?
-"    )
-       ("m" "Meeting (adhoc)" entry (file "meetings.org")
-         "* %T %?
-:PROPERTIES:
-:CAPTURED: %U
-:CATEGORY: meeting
-:RECURRING: no
-:END:")
-       ("M" "Meeting (recurring)" entry (file "meetings.org")
-         "* %T %?
-:PROPERTIES:
-:CAPTURED: %U
-:CATEGORY: meeting
-:RECURRING: yes
-:END:")))
-  
-  
+"    )))
   
   ;; Agenda
   (org-agenda-files
@@ -230,39 +237,103 @@ SCHEDULED: %t
                 (window-width . 0.4)
                 (reusable-frames . visible))))
 
-;; Fleeting notes in journal
-
-(use-package org-journal
+;; Meeting notes
+(use-package org-reverse-datetree
   :ensure t
-  :after (org)
-  :custom
-  (org-journal-dir (concat org-directory "/journal"))
-  (org-journal-file-type 'weekly)
-  (org-journal-date-format "%A, %B %d, %Y")        
-  (org-journal-enable-agenda-integration t)
-  (org-journal-enable-agenda-integration t))
+  :after org
+  :bind
+  (:map madmacs-keymap-global
+    ("j" . madmacs-capture-fleeting-note))
+  
+  (:map madmacs-keymap-notes
+    ("j" . madmacs-capture-fleeting-node))
+  
+  (:map calendar-mode-map
+    ("]" . org-reverse-datetree-calendar-next)
+    ("[" . org-reverse-datetree-calendar-prev)
+    ("C-<return>" . org-reverse-datetree-display-entry))
+  
+  :init
+  (defun madmacs-capture-fleeting-node ()
+    (interactive)
+    (org-capture nil "nj"))
+  
+  (defun madmacs-adhoc-meeting-location ()
+    (org-reverse-datetree-goto-date-in-file nil :olp '("Adhoc")))
+  
+  (defun madmacs-adhoc-meeting-location/date ()
+    (org-reverse-datetree-goto-read-date-in-file nil :olp '("Adhoc")))
+  
+  (defun madmacs-1on1-meeting-location ()
+    (org-reverse-datetree-goto-date-in-file nil :olp '("1on1")))
+  
+  (defun madmacs-1on1-meeting-location/date ()
+    (org-reverse-datetree-goto-read-date-in-file nil :olp '("1on1")))
+  
+  (with-eval-after-load 'org-capture
+    (setq org-capture-templates
+      (append org-capture-templates
+        '(("nj" "Fleeting note" entry (file+function "journal.org" org-reverse-datetree-goto-date-in-file)
+          "* %U %?") ; mnemonic Jot
+          ("mm" "Adhoc" entry (file+function "meetings.org" madmacs-adhoc-meeting-location)
+         "* %T %?
+:PROPERTIES:
+:CATEGORY: meetings
+:RECURRING: no
+:CAPTURED: %U
+:END:
+")
 
+        ("mM" "Adhoc (date)" entry (file+function "meetings.org" madmacs-adhoc-meeting-location/date)
+         "* %T %?
+:PROPERTIES:
+:CATEGORY: meetings
+:RECURRING: no
+:CAPTURED: %U
+:END:
+")
+
+  
+      ("mo" "1on1" entry (file+function "meetings.org" madmacs-1on1-meeting-location)
+         "* %T :1on1:
+:PROPERTIES:f
+:CATEGORY: meetings
+:CAPTURED: %U
+:RECURRING: yes
+:END:
+
+%?
+")
+           
+    ("mO" "1on1 (date)" entry (file+function "meetings.org" madmacs-1on1-meeting-location/date)
+      "* %T :1on1:
+:PROPERTIES:f
+:CATEGORY: meetings
+:CAPTURED: %U
+:RECURRING: yes
+:END:
+
+%?"))))))
 
 ;; Permanent notes
-
 (use-package denote
   :ensure t
   :hook (dired-mode . denote-dired-mode)
   :bind
-  (:map madmacs-keymap-global
-    ("d n" . denote)
-    ("d c" . denote-region) ; "contents" mnemonic
-    ("d N" . denote-type)
-    ("d d" . denote-date)
-    ("d z" . denote-signature) ; "zettelkasten" mnemonic
-    ("d s" . denote-subdirectory)
-    ("d i" . denote-link) ; "insert" mnemonic
-    ("d I" . denote-add-links)
-    ("d b" . denote-backlinks)
-    ("d f f" . denote-find-link)
-    ("d f b" . denote-find-backlink)
-    ("d r" . denote-rename-file)
-    ("d R" . denote-rename-file-using-front-matter))
+  (:map madmacs-keymap-notes
+    ("n" . denote)
+    ("c" . denote-region) ; "contents" mnemonic
+    ("N" . denote-type)
+    ("d" . denote-date)
+    ("z" . denote-signature) ; "zettelkasten" mnemonic
+    ("s" . denote-subdirectory)
+    ("i" . denote-link) ; "insert" mnemonic
+    ("I" . denote-add-links)
+    ("b" . denote-backlinks)
+    ("f f" . denote-find-link)
+    ("f b" . denote-find-backlink)
+    ("r" . denote-rename-file)
+    ("R" . denote-rename-file-using-front-matter))
     
   (:map dired-mode-map
     ("C-c C-d C-i" . denote-dired-link-marked-notes)
@@ -287,7 +358,7 @@ SCHEDULED: %t
   
   :init
   (with-eval-after-load 'org-capture
-    (setq denote-org-capture-specifiers "%i\n\n%?")
+    (setq denote-org-capture-specifiers "%i\n%?")
     (add-to-list 'org-capture-templates
       '("n" "Permanent Note" plain
          (file denote-last-path)
@@ -300,6 +371,21 @@ SCHEDULED: %t
   :config
   (require 'denote-org-extras)
   (denote-rename-buffer-mode 1))
+
+(use-package consult-notes
+  :ensure t
+  :after (org denote)
+  :bind
+  (:map search-map
+    ("n n" . consult-notes)
+    ("n N" . consult-notes-search-in-all-notes))
+
+  :config
+  (setopt consult-notes-file-dir-sources
+    `(("Org"       ?o ,org-directory)
+      ("Notes"    ?n ,denote-directory)))
+  (consult-notes-org-headings-mode)
+  (consult-notes-denote-mode))
 
 ;; Aux
 (use-package org-ql

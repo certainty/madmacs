@@ -14,7 +14,7 @@
   ;; See https://emacs.stackexchange.com/q/54673/11934
   ;; https://emacs.stackexchange.com/q/54632/11934
 
-  (setq org-emphasis-regexp-components
+  (setq org-emphasis-regexp-componentsr
         '("-—[:space:]('\"{["
           "\] - [:space:].,:!?;'\")}\\["
           "[:space:]"
@@ -22,13 +22,13 @@
           1))
 
   :custom
-  (org-directory (file-truename "~/org_new"))
-  (org-attach-id-dir (file-truename "~/org_new/.attachments"))
+  (org-directory (file-truename "~/org"))
+  (org-attach-id-dir (file-truename "~/org/.attachments"))
   
   ;; Aesthetics & UI
   (org-auto-align-tags t)              
   (org-catch-invisible-edits 'smart)     
-  (org-cycle-separator-lines 1)
+  (org-cycle-separator-lines 0)
   (org-ellipsis "…")
   (org-fontify-quote-and-verse-blocks t)
   (org-hide-emphasis-markers t)         
