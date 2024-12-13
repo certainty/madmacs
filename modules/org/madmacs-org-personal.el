@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(defvar-keymap madmacs-org-mode-keys :doc "Keys for org mode interactions")
-
 ;; TODO: steel ideas from: https://github.com/psamim/dotfiles/blob/master/doom/config.el#L441
 
 ;; we use this as a very barebones org setup and all the rest is configured in the org-roam section
@@ -186,7 +184,7 @@ SCHEDULED: %t
                 (reusable-frames . visible)))
   
   ;; capture templates
-  (madmacs-bind-local-leader-map org-mode-map madmacs-org-mode-keys))
+  )
 
 (use-package org-roam
   :ensure t

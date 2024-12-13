@@ -22,18 +22,21 @@
           1))
 
   :custom
+  (org-directory (file-truename "~/org_new"))
+  (org-attach-id-dir (file-truename "~/org_new/.attachments"))
+  
   ;; Aesthetics & UI
-  (org-auto-align-tags nil)              ;; don't auto-align tags
-  (org-catch-invisible-edits 'smart)     ;; prevent editing invisible area
-  (org-cycle-separator-lines 0)          ;; no empty lines in collapsed view
-  (org-ellipsis "…");; nicer elipses "↷" "↴" "▼"
-  (org-fontify-quote-and-verse-blocks t) ;; make quotes stand out
-  (org-hide-emphasis-markers t)          ;; hide emph markers
-  (org-hide-leading-stars t)             ;; hide leading stars
-  (org-image-actual-width  500) ;; show all images at 500px using imagemagik
-  (org-pretty-entities t)       ;; make latex look good, etc.
-  (org-pretty-entities-include-sub-superscripts t) ;; prettify sub/superscripts
-  (org-read-date-prefer-future 'time) ;; Incomplete dates refer to future dates & times
+  (org-auto-align-tags t)              
+  (org-catch-invisible-edits 'smart)     
+  (org-cycle-separator-lines 1)
+  (org-ellipsis "…")
+  (org-fontify-quote-and-verse-blocks t)
+  (org-hide-emphasis-markers t)         
+  (org-hide-leading-stars t)            
+  (org-image-actual-width  500)
+  (org-pretty-entities t)      
+  (org-pretty-entities-include-sub-superscripts t) 
+  (org-read-date-prefer-future 'time) 
   (org-startup-folded t)
   
 
@@ -42,7 +45,7 @@
   (org-footnote-auto-adjust t) ;; renumber footnotes
 
   ;; Indentation
-  (org-adapt-indentation nil)        ;; adapt indentation
+  (org-adapt-indentation nil)      ;; adapt indentation
   (org-startup-indented t)         ;; start with indentation of headlines
   (org-src-preserve-indentation t) ;; preserve code indentation
 
@@ -50,13 +53,9 @@
   (org-insert-heading-respect-content nil) ;; I never want to insert after subtree NOOOO
   (org-M-RET-may-split-line '((default . t))) ;; don't split line when creating a new headline, list item, or table field
   (org-yank-adjusted-subtrees t) ;; adjust subtrees to depth when yanked
-  (org-yank-folded-subtrees t)   ;; fold subtrees on yank
 
   ;; Lists
   (org-list-allow-alphabetical t) ;; allow alphabetical list
-  ;; Demote sequence for list bullets
-  (org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+")))
-  (org-list-indent-offset 1) ;; increase sub-item indentation
 
   ;; Logging
   (org-log-done 'time)
@@ -70,7 +69,7 @@
   (org-special-ctrl-a/e nil)  
 
   ;; Searching
-  (org-imenu-depth 8)   ;; scan to depth 8 w/imenu
+  (org-imenu-depth 10)   ;; scan to depth 8 w/imenu
   (imenu-auto-rescan t) ;; make sure imenu refreshes
 
   ;; Source block settings
@@ -79,42 +78,17 @@
   (org-src-tab-acts-natively t)        ;; use lang bindings
   (org-confirm-babel-evaluate t)       ;; confirm evaluation
 
-  ;; TODOS
-  (org-use-fast-todo-selection 'expert) ;; don't use popup window for todos
-  ;; don't set to DONE if children aren’t DONE
-  (org-enforce-todo-dependencies t)
-  (org-enforce-todo-checkbox-dependencies t)
-
+  ;; Refiling
+  (org-refile-targets '((nil :maxlevel . 5)
+                              (org-agenda-files :maxlevel . 5)))
+  
+  (org-outline-path-complete-in-steps nil)
+  (org-refile-use-outline-path t)
+  
   ;; Images
   (org-display-inline-images t)
 
-  ;; Agenda
-  (org-agenda-current-time-string
-    "◀── now ─────────────────────────────────────────────────")
-
-  ;; blocks
-  (org-structure-template-alist
-    '(("s" . "src")
-       ("e" . "src emacs-lisp")
-       ("E" . "src emacs-lisp :results value code :lexical t")
-       ("t" . "src emacs-lisp :tangle FILENAME")
-       ("T" . "src emacs-lisp :tangle FILENAME :mkdirp yes")
-       ("x" . "example")
-       ("X" . "export")
-       ("q" . "quote")))
-
   :config
-
-  (hl-line-mode -1)
-  (display-line-numbers-mode -1)
-
-  (flycheck-mode -1)
-
-  (setq visual-fill-column-center-text t)
-  (setq visual-fill-column-width 250)
-  (visual-line-mode 1)
-  (setopt org-directory (file-truename "~/org/life"))
-  (setopt org-attach-id-dir (file-truename "~/org/.attachments"))
 
   (require 'org-faces)
   (dolist (face '((org-level-1 . 1.2)
@@ -136,11 +110,6 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
-  (setq org-refile-targets '((nil :maxlevel . 5)
-                              (org-agenda-files :maxlevel . 5)))
-  
-  (setq org-outline-path-complete-in-steps nil)
-  (setq org-refile-use-outline-path t)
 
   (add-to-list 'display-buffer-alist
     '("\\*Org \\(Select\\|Note\\)\\*" 

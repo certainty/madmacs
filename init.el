@@ -70,8 +70,9 @@
 
      ;; add-ons
      madmacs-org-essentials
-     madmacs-org-personal
-     madmacs-org-denote
+     madmacs-org-gtd
+     ;madmacs-org-personal
+     ;madmacs-org-denote
 
      madmacs-games-chess
 
