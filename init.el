@@ -48,7 +48,6 @@
   (use-package-verbose t)
   (use-package-minmum-reported-time 0)
   (use-package-expand-minimally nil)
-  (package-user-dir (madmacs--ensure-data-dir "elpa"))
   (package-archives
    '(("elpa" . "https://elpa.gnu.org/packages/")
      ("elpa-devel" . "https://elpa.gnu.org/devel/")
@@ -76,9 +75,21 @@
 (use-package no-littering
   :demand t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Useful libraries
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package cl-lib
+  :straight nil
+  :demand t)
+
+(use-package subr-x
+  :straight nil
+  :demand t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Madmacs main config starts here
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Setup additional load paths so that we can load our modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
@@ -100,3 +111,9 @@
 ;;; Now we can load the madmacs modules
 (require 'madmacs-settings)
 (require 'madmacs-keys)
+
+(when (eq system-type 'darwin)
+  (require 'madmacs-osx))
+
+(require 'madmacs-ui)
+
