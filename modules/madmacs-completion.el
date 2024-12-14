@@ -82,6 +82,11 @@
     (add-to-list 'corfu-margin-formatters 'kind-icon-margin-formatter)))
 
 
+(use-package cape
+  :demand t
+  :config
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; consult
@@ -128,7 +133,6 @@
   (:map minibuffer-local-map
 	("M-s" . consult-history)                 ;; orig. next-matching-history-element
 	("M-r" . consult-history))
-
 
   :init
   (unbind-key "M-g n") ; free some prefix keys we need
@@ -193,6 +197,5 @@
   :after embark
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
 
 (provide 'madmacs-completion)

@@ -100,7 +100,9 @@
 ;;; Define a minor mode which we load in all files.
 ;;; This allows me to override keybindings more predictibly
 (use-package emacs
-  :hook (find-file . madmacs-mode)
+  :hook
+  (find-file . madmacs-mode)
+  
   :init
   (define-minor-mode madmacs-mode
     "Minor mode for madmacs, which gives a home for my customizations and keybindings."
@@ -120,5 +122,6 @@
 (require 'madmacs-completion)
 (require 'madmacs-files)
 (require 'madmacs-search)
+(require 'madmacs-editing)
+(require 'madmacs-workspaces)
 
-    

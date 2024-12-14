@@ -20,7 +20,6 @@
   :demand t
   :straight nil
   :custom
-  (recentf-save-file (expand-file-name "recentf" madmacs--data-dir))
   (recentf-max-saved-items 100)
   (recentf-max-menu-items 15)
   (recentf-auto-cleanup 'never)
@@ -33,8 +32,7 @@
   (trashed-action-confirmer 'y-or-n-p)
   (trashed-use-header-line t)
   (trashed-sort-key '("Date deleted" . t))
-  (trashed-date-format "%Y-%m-%d %H:%M:%S"))
-
+  (trashed-date-format "%Y-%m-%d %H:%M:%S")) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Dired
