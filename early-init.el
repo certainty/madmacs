@@ -4,6 +4,7 @@
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
 (tool-bar-mode -1)
+(require 'cl-lib)
 
 ;; load the environment file if it exists
 (let ((env-file (expand-file-name "madmacs.env" user-emacs-directory)))
