@@ -3,18 +3,17 @@
 (use-package vterm
   :ensure t)
 
-(use-package vterm-toggle
+(use-package multi-vterm
   :ensure t
-  :custom
-  (vterm-toggle-fullscreen-p nil)
-
+  :after popper
   :bind
-  ("C-x T" . vterm-toggle)
+  ("C-x T" . multi-vterm-project)
   (:map madmacs-keymap-global
-    ("t" . vterm-toggle))
+    ("t" . multi-vterm-project))
   
 
   :config
+  (add-to-list 'popper-reference-buffers 'vterm-mode)
   (add-to-list 'display-buffer-alist
     '((lambda (buffer-or-name _)
         (let ((buffer (get-buffer buffer-or-name)))

@@ -4,10 +4,10 @@
 
 (use-package org
   :ensure nil
-  :straight nil
+  :straight (:type built-in)
   :commands (org-mode)
   :mode (("\\.org$" . org-mode))
-   
+
   :init
   ;; Org-Emphasis-Regex settings. Set regex boundaries for emphasis.
   ;; Load this before org-mode is loaded.
@@ -24,21 +24,21 @@
   :custom
   (org-directory (file-truename "~/org"))
   (org-attach-id-dir (file-truename "~/org/.attachments"))
-  
+
   ;; Aesthetics & UI
-  (org-auto-align-tags t)              
-  (org-catch-invisible-edits 'smart)     
+  (org-auto-align-tags t)
+  (org-catch-invisible-edits 'smart)
   (org-cycle-separator-lines 0)
   (org-ellipsis "…")
   (org-fontify-quote-and-verse-blocks t)
-  (org-hide-emphasis-markers t)         
-  (org-hide-leading-stars t)            
+  (org-hide-emphasis-markers t)
+  (org-hide-leading-stars t)
   (org-image-actual-width  500)
-  (org-pretty-entities t)      
-  (org-pretty-entities-include-sub-superscripts t) 
-  (org-read-date-prefer-future 'time) 
+  (org-pretty-entities t)
+  (org-pretty-entities-include-sub-superscripts t)
+  (org-read-date-prefer-future 'time)
   (org-startup-folded t)
-  
+
 
   ;; Footnotes
   (org-footnote-section nil)   ;; place footnotes locally
@@ -66,7 +66,7 @@
 
   ;; Movement
   (org-return-follows-link t) ;; make RET follow links
-  (org-special-ctrl-a/e nil)  
+  (org-special-ctrl-a/e nil)
 
   ;; Searching
   (org-imenu-depth 10)   ;; scan to depth 8 w/imenu
@@ -81,10 +81,10 @@
   ;; Refiling
   (org-refile-targets '((nil :maxlevel . 5)
                               (org-agenda-files :maxlevel . 5)))
-  
+
   (org-outline-path-complete-in-steps nil)
   (org-refile-use-outline-path t)
-  
+
   ;; Images
   (org-display-inline-images t)
 
@@ -112,7 +112,7 @@
 
 
   (add-to-list 'display-buffer-alist
-    '("\\*Org \\(Select\\|Note\\)\\*" 
+    '("\\*Org \\(Select\\|Note\\)\\*"
              (display-buffer-in-side-window)
              (dedicated . t)
              (side . bottom)
@@ -121,19 +121,20 @@
 
 
 ;; make the real code appear under certain org structures. This reveals the underlying markup if you need it
-(use-package org-appear
-  :ensure t
-  :after org
-  :hook (org-mode . org-appear-mode)
-  :config
-  (setopt org-appear-autoemphasis t
-        org-appear-autosubmarkers t
-        org-appear-autolinks t
-        org-appear-delay 0.5))
+;; (use-package org-appear
+;;   :ensure t
+;;   :after org
+;;   :hook (org-mode . org-appear-mode)
+;;   :config
+;;   (setopt org-appear-autoemphasis t
+;;         org-appear-autosubmarkers t
+;;         org-appear-autolinks t
+;;         org-appear-delay 0.5))
 
 ;; use org-modern
 (use-package org-modern
   :straight (org-modern :host github :repo "minad/org-modern")
+  :after org
   :custom
   (org-modern-fold-stars '(("◉" . "◉") ("○" . "○") ("◈" . "◈") ("◇" . "◇") ("✳" . "✳")))
   :hook
@@ -141,5 +142,5 @@
     (org-agenda-finalize . org-modern-agenda))
   :config
   (org-indent-mode t))
- 
+
 (provide 'madmacs-org-essentials)

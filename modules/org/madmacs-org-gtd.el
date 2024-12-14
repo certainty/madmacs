@@ -4,7 +4,7 @@
 ;;;
 ;;; With the following base properties:
 ;;; 1. Tasks and notes are separated
-;;; 1.1 I use a tasks.org file for projects and tasks
+ ;;; 1.1 I use a tasks.org file for projects and tasks
 ;;; 2. Meeting minutes are taken in separate file called meetings.org
 ;;; 2.2 reverse date tree to have most recent meetings on top
 ;;; 3. Notes are separated into fleeting and permanent
@@ -15,51 +15,51 @@
 
 (use-package org
   :ensure nil
-  :straight nil
+  :straight (:type built-in)
   :hook (org-after-todo-state-change . save-buffer)
   :bind
   (:map madmacs-keymap-global
     ("a" . madmacs-personal-agenda)
     ("c" . org-capture)
     ("t" . madmacs-capture-task))
-  
+
   (:map goto-map
     ("a" . madmacs-personal-agenda)
-    ("t" . madmacs-goto-tasks))
-  
+    ("t" . madmacs-goto-tasks)
+    (""))
+
   (:map search-map
-    ("n G" . madmacs-org-grep)
-    ("n g" . madmacs-org-ripgrep))
-  
+    ("n G" . madmacs-org-grep))
+
   (:map madmacs-keymap-gtd
     ("a" . org-agenda)
     ("c" . org-capture)
     ("t" . madmacs-capture-task)
     ("p" . madmacs-capture-project))
-
   :init
   (require 'org-id)
-  
+
   (defvar-keymap madmacs-keymap-gtd :doc "Get things done")
   (which-key-add-keymap-based-replacements madmacs-keymap-global
     "g" `("GTD" . ,madmacs-keymap-gtd))
-  
+
   :custom
   (org-id-link-to-org-use-id t)
-  
+
   ;; TODOs
   (org-todo-keywords
     '((sequence "TODO(t)" "DOING(g!)" "|" "DONE(d!)")
        (sequence "PROJ(p)" "DOING(g!)" "|" "DONE(d!)")
+       (sequence "EPIC(e)" "DISCOVERY(y!)" "|" "DONE(d!)")
        (sequence "MEETING(m)" "|" "DONE(d)")
        (sequence "APPT(a)" "|" "DONE(d)")
        (sequence "|" "CANCELED(c!)")))
-  
+
   (org-priority-default ?B)
   (org-priority-highest ?A)
   (org-priority-lowest ?F)
 
-  (org-use-fast-todo-selection 'expert) 
+  (org-use-fast-todo-selection 'expert)
   (org-enforce-todo-dependencies t)
   (org-enforce-todo-checkbox-dependencies t)
 
@@ -82,24 +82,88 @@
         "* TODO %?
 :PROPERTIES:
 :CAPTURED: %U
-:END:")
+:END:"
+        :prepend t)
 
        ("T" "Task (today)" entry (file+headline "tasks.org" "Main")
          "* TODO %?
 SCHEDULED: %t
 :PROPERTIES:
 :CAPTURED: %U
-:END:")
+:END:"
+         :prepend t)
 
        ("p" "Project" entry (file+headline "tasks.org" "Projects")
        "* PROJ %?
 :PROPERTIES:
 :CAPTURED: %U
 :CATEGORY: project
-:PROJECTKEY: %^{Project Key}
+:PROJECT_KEY: %^{Project Key}
 :END:"  )
+       
+       ("e" "Epic" entry (file+headline "tasks.org" "Epics")
+         "* EPIC %?
+:PROPERTIES:
+:CAPTURED: %U
+:CATEGORY: epic
+:EPIC_KEY: %^{Epic Key}
+:END:")
+       
        ("m" "Meeting")
+       
+       ("mm" "Adhoc" entry (file+olp+datetree "meetings.org" "Adhoc")
+         "* %T %?
+:PROPERTIES:
+:CATEGORY: meetings
+:RECURRING: no
+:CAPTURED: %U
+:END:
+"
+         :prepend t
+         :tree-type week)
+       
+       ("mM" "Adhoc (date)" entry (file+olp+datetree "meetings.org" "Adhoc")
+         "* %T %?
+:PROPERTIES:
+:CATEGORY: meetings
+:RECURRING: no
+:CAPTURED: %U
+:END:
+"
+         :prepend t
+         :tree-type week
+         :time-prompt t)
+
+       ("mo" "1on1" entry (file+olp+datetree "meetings.org" "1on1")
+         "* %T :1on1:
+:PROPERTIES:
+:CATEGORY: meetings
+:CAPTURED: %U
+:RECURRING: yes
+:END:
+
+%?
+"
+         :prepend t
+         :tree-type month)
+
+       ("mO" "1on1" entry (file+olp+datetree "meetings.org" "1on1")
+         "* %T :1on1:
+:PROPERTIES:f
+:CATEGORY: meetings
+:CAPTURED: %U
+:RECURRING: yes
+:END:
+
+%?"
+         :prepend t
+         :time-prompt t
+         :tree-type month)
+       
        ("n" "Notes")
+       ("nj" "Fleeting note" entry (file+olp+datetree "journal.org")
+         "* %U %?"
+         :tree-type week)
        
        ("c" "Contact" entry (file "contacts.org")
          "* %^{Name}
@@ -110,13 +174,13 @@ SCHEDULED: %t
 
 %?
 "    )))
-  
+
   ;; Agenda
   (org-agenda-files
     (list (concat org-directory "/tasks.org")
       (concat org-directory "/meetings.org")
       (concat org-directory "/contacts.org")))
-  
+
   (org-agenda-current-time-string
     "◀── now ─────────────────────────────────────────────────")
 
@@ -129,7 +193,7 @@ SCHEDULED: %t
   (org-columns-default-format-for-agenda "%SCHEDULED %25ITEM %TODO %3PRIORITY %TAGS")
 
   (org-agenda-custom-commands
-    '(("t" "My Agenda"
+    '(("y" "My Agenda"
         ((tags-todo "+SCHEDULED<=\"<today>\"|+DEADLINE<=\"<today>\""
             ((org-agenda-overriding-header "⚡ Today\n")
               (org-agenda-sorting-strategy '(priority-down))
@@ -145,9 +209,9 @@ SCHEDULED: %t
               (org-tags-match-list-sublevels nil)
               (org-agenda-show-inherited-tags t)
               (org-agenda-prefix-format "  %?-2i %s ")
-              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done ))
+              (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
               (org-agenda-todo-keyword-format "")))
-          
+
           (agenda ""
             ((org-agenda-overriding-header "\n🗓️ Calendar\n")
               (org-deadline-warning-days 3)
@@ -165,7 +229,7 @@ SCHEDULED: %t
               (org-agenda-scheduled-leaders '("" ""))
               (org-agenda-deadline-leaders '(" Deadline: " " In %2d d.: " "%2d d. ago: "))
               (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))
-       
+
        ("m" "Meetings"
          ((tags "+CATEGORY=\"meeting\"|+TODO=\"MEETING\""
             ((org-agenda-overriding-header "Meetings \n")
@@ -173,7 +237,7 @@ SCHEDULED: %t
               (org-agenda-remove-tags nil)
               (org-agenda-prefix-format "%-15c %s")
               (org-agenda-sorting-strategy '(scheduled-down))))))
-       
+
        ("w" "Weekly Review"
          ((todo "*"
             ((org-agenda-overriding-header "🎉 Completed Tasks\n")
@@ -197,8 +261,8 @@ SCHEDULED: %t
   :config
   (defun madmacs-personal-agenda ()
     (interactive)
-    (org-agenda nil "t"))
-  
+    (org-agenda nil "y"))
+
   (defun madmacs-capture-task ()
     (interactive)
     (org-capture nil "t"))
@@ -219,12 +283,12 @@ SCHEDULED: %t
     (interactive)
     (let ((default-directory org-directory))
       (call-interactively #'grep)))
-  
+
   ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map
       "i" #'org-id-get-create))
-  
+
   (add-to-list 'popper-reference-buffers 'org-agenda-mode)
   (add-to-list 'popper-reference-buffers "\\*Org Agenda\\*")
 
@@ -236,84 +300,6 @@ SCHEDULED: %t
                (slot . 0)
                 (window-width . 0.4)
                 (reusable-frames . visible))))
-
-;; Meeting notes
-(use-package org-reverse-datetree
-  :ensure t
-  :after org
-  :bind
-  (:map madmacs-keymap-global
-    ("j" . madmacs-capture-fleeting-note))
-  
-  (:map madmacs-keymap-notes
-    ("j" . madmacs-capture-fleeting-node))
-  
-  (:map calendar-mode-map
-    ("]" . org-reverse-datetree-calendar-next)
-    ("[" . org-reverse-datetree-calendar-prev)
-    ("C-<return>" . org-reverse-datetree-display-entry))
-  
-  :init
-  (defun madmacs-capture-fleeting-node ()
-    (interactive)
-    (org-capture nil "nj"))
-  
-  (defun madmacs-adhoc-meeting-location ()
-    (org-reverse-datetree-goto-date-in-file nil :olp '("Adhoc")))
-  
-  (defun madmacs-adhoc-meeting-location/date ()
-    (org-reverse-datetree-goto-read-date-in-file nil :olp '("Adhoc")))
-  
-  (defun madmacs-1on1-meeting-location ()
-    (org-reverse-datetree-goto-date-in-file nil :olp '("1on1")))
-  
-  (defun madmacs-1on1-meeting-location/date ()
-    (org-reverse-datetree-goto-read-date-in-file nil :olp '("1on1")))
-  
-  (with-eval-after-load 'org-capture
-    (setq org-capture-templates
-      (append org-capture-templates
-        '(("nj" "Fleeting note" entry (file+function "journal.org" org-reverse-datetree-goto-date-in-file)
-          "* %U %?") ; mnemonic Jot
-          ("mm" "Adhoc" entry (file+function "meetings.org" madmacs-adhoc-meeting-location)
-         "* %T %?
-:PROPERTIES:
-:CATEGORY: meetings
-:RECURRING: no
-:CAPTURED: %U
-:END:
-")
-
-        ("mM" "Adhoc (date)" entry (file+function "meetings.org" madmacs-adhoc-meeting-location/date)
-         "* %T %?
-:PROPERTIES:
-:CATEGORY: meetings
-:RECURRING: no
-:CAPTURED: %U
-:END:
-")
-
-  
-      ("mo" "1on1" entry (file+function "meetings.org" madmacs-1on1-meeting-location)
-         "* %T :1on1:
-:PROPERTIES:f
-:CATEGORY: meetings
-:CAPTURED: %U
-:RECURRING: yes
-:END:
-
-%?
-")
-           
-    ("mO" "1on1 (date)" entry (file+function "meetings.org" madmacs-1on1-meeting-location/date)
-      "* %T :1on1:
-:PROPERTIES:f
-:CATEGORY: meetings
-:CAPTURED: %U
-:RECURRING: yes
-:END:
-
-%?"))))))
 
 ;; Permanent notes
 (use-package denote
@@ -334,7 +320,7 @@ SCHEDULED: %t
     ("f b" . denote-find-backlink)
     ("r" . denote-rename-file)
     ("R" . denote-rename-file-using-front-matter))
-    
+
   (:map dired-mode-map
     ("C-c C-d C-i" . denote-dired-link-marked-notes)
     ("C-c C-d C-r" . denote-dired-rename-files)
@@ -351,11 +337,11 @@ SCHEDULED: %t
   (denote-excluded-directories-regexp nil)
   (denote-excluded-keywords-regexp nil)
   (denote-rename-confirmations '(rewrite-front-matter modify-file-name))
-  
+
   (denote-date-prompt-use-org-read-date t)
   (denote-backlinks-show-context t)
   (denote-dired-directories (list denote-directory (concat org-directory "/.attachments")))
-  
+
   :init
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers "%i\n%?")
@@ -374,16 +360,17 @@ SCHEDULED: %t
 
 (use-package consult-notes
   :ensure t
-  :after (org denote)
+  :after (org)
   :bind
+  (:map goto-map
+    ("n n" . consult-notes))
   (:map search-map
-    ("n n" . consult-notes)
-    ("n N" . consult-notes-search-in-all-notes))
+    ("n g" . consult-notes-search-in-all-notes))
 
   :config
   (setopt consult-notes-file-dir-sources
-    `(("Org"       ?o ,org-directory)
-      ("Notes"    ?n ,denote-directory)))
+    `(("Org"       ?o "~/org")
+      ("Notes"    ?n "~/org/notes")))
   (consult-notes-org-headings-mode)
   (consult-notes-denote-mode))
 
@@ -401,7 +388,7 @@ SCHEDULED: %t
 (use-package yankpad
   :bind
   (("C-c y" . yankpad-insert))
-  
+
   :custom
   (yankpad-file (concat org-directory "/snippets.org")))
 
