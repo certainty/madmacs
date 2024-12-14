@@ -124,4 +124,5 @@
 (require 'madmacs-search)
 (require 'madmacs-editing)
 (require 'madmacs-workspaces)
+(require 'madmacs-dashboard)
 
