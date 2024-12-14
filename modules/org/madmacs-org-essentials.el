@@ -21,10 +21,18 @@
           "."
           1))
 
+  :bind
+  (:repeat-map madmacs-org-motion-repeat
+    ("n" . org-next-item)
+    ("p" . org-previous-item))
+  
   :custom
   (org-directory (file-truename "~/org"))
   (org-attach-id-dir (file-truename "~/org/.attachments"))
 
+  ;; let's get fast
+  (org-use-speed-commands t)
+  
   ;; Aesthetics & UI
   (org-auto-align-tags t)
   (org-catch-invisible-edits 'smart)
@@ -69,7 +77,7 @@
   (org-special-ctrl-a/e nil)
 
   ;; Searching
-  (org-imenu-depth 10)   ;; scan to depth 8 w/imenu
+  (org-imenu-depth 12)   ;; scan to depth 8 w/imenu
   (imenu-auto-rescan t) ;; make sure imenu refreshes
 
   ;; Source block settings

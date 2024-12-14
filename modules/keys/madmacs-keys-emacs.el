@@ -24,37 +24,14 @@
     ("]" . next-buffer)
     ("[" . previous-buffer))
   
-  ;; Object-specific Motion Repeat Maps
-  (:repeat-map madmacs-char-repeat-map
-    ("f" . forward-char)
-    ("b" . backward-char)
-    ("d" . delete-char))
-
-  (:repeat-map madmacs-word-repeat-map
-    ("f" . forward-word)
-    ("b" . backward-word)
-    ("d" . kill-word)
-    ("DEL" . backward-kill-word))
-  
-  (:repeat-map madmacs-sentence-repeat-map
-    ("f" . forward-sentence)
-    ("b" . backward-sentence))
-
-  (:repeat-map madmacs-sexp-repeat-map
-    ("f" . forward-sexp)
-    ("b" . backward-sexp)
-    ("k" . kill-sexp))
-  
+  ;; Object-specific Motion Repeat 
   (:repeat-map madmacs-line-repeat-map
-    ("n" . next-line)
-    ("p" . previous-line)
-    ("a" . beginning-of-line)
-    ("e" . end-of-line)
     ("^" . join-line))
 
   (:repeat-map madmacs-paragraph-repeat-map
     ("}" . forward-paragraph)
     ("{" . backward-paragraph))
+  
   (:repeat-map madmacs-undo-repeat-map
     ("u" . undo))
 

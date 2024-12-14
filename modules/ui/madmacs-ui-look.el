@@ -102,7 +102,6 @@
   
   :config
   (setq
-    modus-themes-mode-line '(moody)
     modus-themes-custom-auto-reload t
     modus-themes-disable-other-themes nil
     modus-themes-mixed-fonts t
@@ -110,8 +109,6 @@
     modus-themes-bold-constructs t
     modus-themes-variable-pitch-ui t
     modus-themes-prompts '(extrabold italic)
-    modus-themes-paren-match '(bold intense)
-    modus-themes-org-blocks 'tinted-background
     modus-themes-completions
     '((matches . (extrabold underline))
        (selection . (semibold italic))))
@@ -155,14 +152,22 @@
   (ef-themes-mixed-fonts t)
   (ef-themes-variable-pitch-ui t)
   (ef-themes-headings ; read the manual's entry or the doc string
-      '((0 variable-pitch light 1.9)
-        (1 variable-pitch light 1.8)
-        (2 variable-pitch regular 1.7)
-        (3 variable-pitch regular 1.6)
-        (4 variable-pitch regular 1.5)
-        (5 variable-pitch 1.4) ; absence of weight means `bold'
-        (6 variable-pitch 1.3)
-        (7 variable-pitch 1.2)
-        (t variable-pitch 1.1))))
+      '((0 variable-pitch light 1.23)
+        (1 variable-pitch light 1.2)
+        (2 variable-pitch regular 1.1)
+        (3 variable-pitch regular 1.05)
+        (4 variable-pitch regular 1.0)
+        (5 variable-pitch 1.0) ; absence of weight means `bold'
+        (6 variable-pitch 1.0)
+        (7 variable-pitch 1.0)
+         (t variable-pitch 1.0)))
+  ;(ef-owl-palette-overrides             
+   ; '((bg-main "#000000")))
+ 
+  ;:config
+  ;(mapc #'disable-theme custom-enabled-themes)
+  ;(ef-themes-select 'ef-owl)
+  )
+  
 
 (provide 'madmacs-ui-look)
