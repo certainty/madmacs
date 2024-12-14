@@ -116,4 +116,9 @@
   (require 'madmacs-osx))
 
 (require 'madmacs-ui)
+(require 'madmacs-display-elements)
+(require 'madmacs-completion)
+(require 'madmacs-files)
+(require 'madmacs-search)
 
+    
