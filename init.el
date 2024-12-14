@@ -110,7 +110,7 @@
     :lighter " #"
     :keymap (make-sparse-keymap)))
 
-;;; Now we can load the madmacs modules
+;; basic modules
 (require 'madmacs-settings)
 (require 'madmacs-keys)
 
@@ -126,3 +126,4 @@
 (require 'madmacs-workspaces)
 (require 'madmacs-dashboard)
 
+;; extra modules
