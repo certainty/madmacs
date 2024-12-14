@@ -35,12 +35,14 @@
   (load bootstrap-file nil 'nomessage))
 
 (use-package straight
+  :demand t
   :custom
   (straight-check-for-modifications '(check-on-save))
   (straight-use-package 'use-package)
   (straight-use-package-by-default t))
 
 (use-package use-package
+  :demand t
   :custom
   (use-package-always-ensure t)
   (use-package-verbose t)
@@ -55,7 +57,28 @@
 
   (package-archive-priority
    '(("elpa-devel" . 99)
-      ("melpa" . 90))))
+     ("melpa" . 90))))
+
+(use-package emacs
+  :init
+  (add-to-list 'display-buffer-alist
+             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+               (display-buffer-no-window)
+               (allow-no-window . t))))
+
+;; secure connections
+(use-package gnutls
+  :custom
+  (gnutls-verify-error t)
+  (gnutls-min-prime-bits 3072))
+
+;; don't pollute the emacs directory with package files
+(use-package no-littering
+  :demand t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Madmacs main config starts here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Setup additional load paths so that we can load our modules
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
@@ -63,12 +86,8 @@
   (when (file-directory-p dir)
     (add-to-list 'load-path dir)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Madmacs main config starts here
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Define a minor mode which we load in all files.
-;; This allows me to override keybindings more predictibly
+;;; Define a minor mode which we load in all files.
+;;; This allows me to override keybindings more predictibly
 (use-package emacs
   :hook (find-file . madmacs-mode)
   :init
@@ -80,4 +99,4 @@
 
 ;;; Now we can load the madmacs modules
 (require 'madmacs-settings)
-
+(require 'madmacs-keys)
