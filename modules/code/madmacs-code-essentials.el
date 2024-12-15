@@ -42,10 +42,7 @@
 
 
 (use-package fancy-compilation
-    :commands (fancy-compilation-mode)
-    :init
-    (with-eval-after-load 'compile
-      (fancy-compilation-mode)))
+    :hook compile-mode)
 
 (use-package emacs
   :straight nil
