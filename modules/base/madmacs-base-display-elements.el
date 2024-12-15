@@ -143,7 +143,7 @@ The DWIM behaviour of this command is as follows:
 
 (use-package display-line-numbers
   :straight nil
-  :hook (after-init . global-display-line-numbers-mode)
+  :hook (prog-mode . display-line-numbers-mode)
   :custom
   (display-line-numbers-type t)
   (display-line-numbers-width-start t))

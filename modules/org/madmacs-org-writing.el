@@ -33,9 +33,10 @@
 
 (use-package google-translate
   :after embark
+  :bind
+  (:map embark-region-map
+        ("t" . google-translate-at-point))
   :config
-  (keymap-set embark-region-map "t" 'google-translate-at-point)
-
   (setq google-translate-default-target-language "en")
   (setq google-translate-backend-method 'curl)
   (setq google-translate-listen-program "mpv")

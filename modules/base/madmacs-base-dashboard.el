@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package dashboard
+  :defer nil
   :hook (emacs-startup . (lambda ()
                            (dashboard-refresh-buffer)
                            (madmacs--dashboard-hide-modeline)))

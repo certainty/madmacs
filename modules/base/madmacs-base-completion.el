@@ -65,7 +65,7 @@
   (:map corfu-map
 	("C-SPC" . corfu-insert-separator))
   :custom
-  ;(corfu-auto t)
+  (corfu-auto t)
   (corfu-preview-current nil)
   (corfu-min-width 20)
   (corfu-bar-width 0.5)
@@ -132,6 +132,7 @@
 	("M-y" . consult-yank-pop))                ;; orig. yank-pop
 
   (:map goto-map
+  ("!" . consult-flymake)
 	("i" . consult-imenu)
 	("n h" . consult-outline)
 	("n A" . consult-org-agenda)

@@ -95,7 +95,8 @@
   
   (which-key-add-keymap-based-replacements madmacs-keymap-global
     "p" `("Packages" . ,madmacs-keymap-packages)
-    "u" `("UX" . ,madmacs-keymap-ux))
+    "u" `("UX" . ,madmacs-keymap-ux)
+    "l" `("AI" . ,madmacs-keymap-ai))
 
   (which-key-add-keymap-based-replacements global-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))

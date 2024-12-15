@@ -37,13 +37,14 @@
 (use-package straight
   :demand t
   :custom
-  (straight-check-for-modifications '(check-on-save))
+  (straight-check-for-modific ations '(check-on-save))
   (straight-use-package 'use-package)
   (straight-use-package-by-default t))
 
 (use-package use-package
   :demand t
   :custom
+  (use-package-always-defer t)
   (use-package-always-ensure t)
   (use-package-verbose t)
   (use-package-minmum-reported-time 0)
@@ -115,3 +116,20 @@
 (require 'madmacs-org-writing)
 
 (require 'madmacs-tools-vcs)
+(require 'madmacs-tools-terminal)
+(require 'madmacs-tools-pass)
+(require 'madmacs-tools-docker)
+
+;; coding
+(require 'madmacs-code-essentials)
+(require 'madmacs-code-lsp)
+(require 'madmacs-code-elisp)
+(require 'madmacs-code-cl)
+(require 'madmacs-code-racket)
+(require 'madmacs-code-scala)
+(require 'madmacs-code-misc) ;; various modes that don't have elaborate configuration
+
+
+;; ai enhancements
+(require 'madmacs-ai-copilot)
+(require 'madmacs-ai-gptel)

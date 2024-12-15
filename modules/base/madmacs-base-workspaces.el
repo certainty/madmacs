@@ -77,6 +77,7 @@
 (use-package tabspaces
   :custom
   (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-initialize-project-with-todo nil)
   :bind
   (:map goto-map
     ("p" . tabspaces-open-or-create-project-and-workspace))
