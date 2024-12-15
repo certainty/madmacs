@@ -53,15 +53,13 @@
     "c" '("Count holes" .  sweeprolog-count-holes))
 
   (defvar-keymap madmacs-prolog-local-leader-keys :doc "Keymap for local leader keys for prolog")
-  (which-key-add-keymap-based-replacements madmacs-prolog-local-leader-keys
-    "h" `("Help" . ,madmacs-sweeprolog-help-keys)
-    "x" `("Xref" . ,madmacs-sweeprolog-xref-keys)
-    "r" `("Refactor" . ,madmacs-sweeprolog-refactoring-keys)
-    "t" `("Term" . ,madmacs-sweeprolog-term-keys)
-    "l" `("Listener" . ,madmacs-sweeprolog-listener-keys)
-    "o" `("Holes" . ,madmacs-sweeprolog-holes-keys))
-
-  (keymap-set sweeprolog-mode-map "C-c ," madmacs-prolog-local-leader-keys))
+  (which-key-add-keymap-based-replacements sweeprolog-mode-map
+    "C-c h" `("Help" . ,madmacs-sweeprolog-help-keys)
+    "C-c x" `("Xref" . ,madmacs-sweeprolog-xref-keys)
+    "C-c r" `("Refactor" . ,madmacs-sweeprolog-refactoring-keys)
+    "C-c t" `("Term" . ,madmacs-sweeprolog-term-keys)
+    "C-c l" `("Listener" . ,madmacs-sweeprolog-listener-keys)
+    "C-c o" `("Holes" . ,madmacs-sweeprolog-holes-keys)))
 
 
 (provide 'madmacs-code-prolog)
