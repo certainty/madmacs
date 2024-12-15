@@ -21,4 +21,4 @@
 (use-package reveal-in-osx-finder)
 (use-package osx-lib)
 
-(provide 'madmacs-osx)
+(provide 'madmacs-base-osx)

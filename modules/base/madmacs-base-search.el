@@ -67,4 +67,4 @@
   (wgrep-auto-save-buffer t))
 
 
-(provide 'madmacs-search)
+(provide 'madmacs-base-search)

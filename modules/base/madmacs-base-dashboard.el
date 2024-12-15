@@ -7,12 +7,12 @@
   :custom
   (dashboard-banner-logo-title
     "This is my emacs config. There are many like it, but this one is mine.
-  Keybindings to try: [C-c ,] Global Leader [M-g] Goto [M-s] Search [C-j I] Gptel [C-j i] Copilot")
+  Keybindings to try: [C-c j] Global Leader [M-g] Goto [M-s] Search [C-j I] Gptel [C-j i] Copilot")
   
   (dashboard-center-content t)
-  (dashboard-items '((recents  . 8)
-                     (projects . 8)
-                     (bookmarks . 5)))
+  (dashboard-items '((projects . 10)
+                     (bookmarks . 8)
+                     (recents  . 8)))
   (dashboard-icon-type 'nerd-icons)
   (dashboard-startup-banner (concat user-emacs-directory "assets/logo.png"))
   (dashboard-projects-backend 'project-el)
@@ -33,4 +33,4 @@
     (switch-to-buffer "*dashboard*")
     (delete-other-windows)))
 
-(provide 'madmacs-dashboard)
+(provide 'madmacs-base-dashboard)

@@ -4,17 +4,13 @@
 ;;; Basic tweaks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package delsel
-  :straight nil
-  :hook (after-init . delete-selection-mode))
-
 (use-package emacs
   :demand t
   :straight nil
   :bind
-  :map madmacs-mode-map
-  ("C-x f" . find-file)
-  ("C-g" . prot/keyboard-quit-dwim)
+  (:map madmacs-mode-map
+	("C-x f" . find-file)
+	("C-g" . prot/keyboard-quit-dwim))
 
   
   :custom
@@ -97,6 +93,8 @@ The DWIM behaviour of this command is as follows:
 (use-package window
   :demand t
   :straight nil
+  :hook
+  (after-init . winner-mode)
   :bind
   (:map madmacs-mode-map 
 	("M-o" . other-window)
@@ -197,7 +195,7 @@ The DWIM behaviour of this command is as follows:
 (use-package whitespace
   :demand t
   :bind
-  (:map madmac-keymap-ux
+  (:map madmacs-keymap-ux
 	("W" . whitespace-mode))
   (:map madmacs-mode-map
 	("C-c z" . delete-trailing-whitespace)))
@@ -226,4 +224,4 @@ The DWIM behaviour of this command is as follows:
 
 
 
-(provide 'madmacs-display-elements)
+(provide 'madmacs-base-display-elements)

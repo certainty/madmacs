@@ -1,4 +1,34 @@
 ;; -*- lexical-binding: t; -*-
+
+(use-package emacs
+  :demand t
+  :straight nil
+  :hook
+  (after-init . repeat-mode)
+  :bind
+  (:map madmacs-mode-map
+	("M-z" . zap-up-to-char))
+  :custom
+  (next-line-add-newlines t)
+  (kill-whole-line t))
+
+(use-package delsel
+  :straight nil
+  :hook (after-init . delete-selection-mode))
+
+
+(use-package expand-region
+  :demand t)
+
+(use-package expreg
+  :bind
+  ("C->" . expreg-expand)
+  ("C-<" . expreg-contract)
+
+  (:repeat-map madmacs-expreg-repeat-map
+    (">" . expreg-expand)
+    ("<" . expreg-contract)))
+
 (use-package iedit
   :commands (iedit-mode iedit-dwim)
   :demand t
@@ -154,4 +184,4 @@
   (add-to-list 'avy-dispatch-alist '(?e . avy-action-exchange)))
 
 
-(provide 'madmacs-editing)
+(provide 'madmacs-base-editing)

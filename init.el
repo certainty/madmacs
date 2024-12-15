@@ -58,33 +58,14 @@
    '(("elpa-devel" . 99)
      ("melpa" . 90))))
 
-(use-package emacs
-  :init
-  (add-to-list 'display-buffer-alist
-             '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-               (display-buffer-no-window)
-               (allow-no-window . t))))
-
 ;; secure connections
 (use-package gnutls
-  :custom
-  (gnutls-verify-error t)
-  (gnutls-min-prime-bits 3072))
+  :init
+  (setopt gnutls-verify-error t)
+  (setopt gnutls-min-prime-bits 3072))
 
 ;; don't pollute the emacs directory with package files
 (use-package no-littering
-  :demand t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Useful libraries
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package cl-lib
-  :straight nil
-  :demand t)
-
-(use-package subr-x
-  :straight nil
   :demand t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -102,7 +83,8 @@
 (use-package emacs
   :hook
   (find-file . madmacs-mode)
-  
+  (after-init . madmacs-mode)
+
   :init
   (define-minor-mode madmacs-mode
     "Minor mode for madmacs, which gives a home for my customizations and keybindings."
@@ -111,19 +93,19 @@
     :keymap (make-sparse-keymap)))
 
 ;; basic modules
-(require 'madmacs-settings)
-(require 'madmacs-keys)
+(require 'madmacs-base-settings)
+(require 'madmacs-base-keys)
 
 (when (eq system-type 'darwin)
-  (require 'madmacs-osx))
+  (require 'madmacs-base-osx))
 
-(require 'madmacs-ui)
-(require 'madmacs-display-elements)
-(require 'madmacs-completion)
-(require 'madmacs-files)
-(require 'madmacs-search)
-(require 'madmacs-editing)
-(require 'madmacs-workspaces)
-(require 'madmacs-dashboard)
+(require 'madmacs-base-ui)
+(require 'madmacs-base-display-elements)
+(require 'madmacs-base-completion)
+(require 'madmacs-base-files)
+(require 'madmacs-base-search)
+(require 'madmacs-base-editing)
+(require 'madmacs-base-workspaces)
+(require 'madmacs-base-dashboard)
 
 ;; extra modules

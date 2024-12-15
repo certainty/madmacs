@@ -16,7 +16,6 @@
   (initial-major-mode 'fundamental-mode))
 
 (use-package diminish
-  :ensure t
   :demand t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -25,6 +24,7 @@
 
 (use-package fontaine
   :demand t
+  :after diminish
   :bind
   (:map madmacs-keymap-ux
 	("f" . madmacs-toggle-font))
@@ -144,4 +144,4 @@
   (minions-mode))
 
 
-(provide 'madmacs-ui)
+(provide 'madmacs-base-ui)

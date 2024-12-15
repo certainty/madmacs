@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Dabbrev
+;;; Dabbrev -> hippie expand
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package emacs
@@ -9,6 +9,27 @@
   :straight nil
   :init
   (global-set-key [remap dabbrev-expand] 'hippie-expand))
+
+(use-package emacs
+  :demand t
+  :straight nil
+  :custom
+  (tab-always-indent 'complete)
+  (enable-recursive-minibuffers t)
+  (completion-auto-help 'always)
+  (completions-max-height 20)
+  (completions-format 'one-column)
+  (completion-auto-select 'second-tab)
+  (completion-detailed t)
+  (suggest-keybindings t)
+  (completion-sort 'historical))
+
+(use-package minibuf-eldef
+  :straight nil
+  :custom
+  (minibuffer-default-prompt-format " [%s]")
+  :init
+  (minibuffer-electric-default-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Completion styles
@@ -44,8 +65,7 @@
   (:map corfu-map
 	("C-SPC" . corfu-insert-separator))
   :custom
-  (corfu-auto t)
-  (tab-always-indent 'complete)
+  ;(corfu-auto t)
   (corfu-preview-current nil)
   (corfu-min-width 20)
   (corfu-bar-width 0.5)
@@ -198,4 +218,4 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(provide 'madmacs-completion)
+(provide 'madmacs-base-completion)

@@ -83,4 +83,4 @@
   :config
   (tabspaces-mode))
 
-(provide 'madmacs-workspaces)
+(provide 'madmacs-base-workspaces)

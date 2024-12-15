@@ -46,5 +46,5 @@
   (user-mail-address madmacs-user-email)
   (custom-file (expand-file-name "custom.el" user-emacs-directory)))
 
-(provide 'madmacs-settings)
+(provide 'madmacs-base-settings)
 

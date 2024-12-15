@@ -32,7 +32,7 @@
   (trashed-action-confirmer 'y-or-n-p)
   (trashed-use-header-line t)
   (trashed-sort-key '("Date deleted" . t))
-  (trashed-date-format "%Y-%m-%d %H:%M:%S")) 
+  (trashed-date-format "%Y-%m-%d %H:%M:%S"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Dired
@@ -48,16 +48,16 @@
   :bind
   (:map dired-jump-map
     ("j" . nil))
-  
+
   :custom
   (dired-recursive-copies 'always)
   (dired-recursive-deletes 'always)
   (delete-by-moving-to-trash t)
   (dired-dwim-target t)
   (dired-auto-revert-buffer #'dired-directory-changed-p) ; also see `dired-do-revert-buffer'
-  (dired-make-directory-clickable t) 
-  (dired-free-space nil) 
-  (dired-mouse-drag-files t) 
+  (dired-make-directory-clickable t)
+  (dired-free-space nil)
+  (dired-mouse-drag-files t)
 
 
   :config
@@ -75,9 +75,9 @@
     ("C-x v v" . dired-vc-next-action))
   :custom
   (dired-isearch-filenames 'dwim)
-  (dired-create-destination-dirs 'ask) 
-  (dired-vc-rename-file t)             
-  (dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir)))) 
+  (dired-create-destination-dirs 'ask)
+  (dired-vc-rename-file t)
+  (dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir))))
   (dired-create-destination-dirs-on-trailing-dirsep t))
 
 (use-package dired-x
@@ -117,4 +117,4 @@
   :hook dired-mode)
 
 
-(provide 'madmacs-files)
+(provide 'madmacs-base-files)
