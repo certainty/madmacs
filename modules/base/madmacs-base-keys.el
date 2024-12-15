@@ -91,14 +91,9 @@
   (defvar-keymap madmacs-keymap-global :doc "The keymap used for global commands. This is the home of keys that don't live in other global maps like C-x or C-c")
   (defvar-keymap madmacs-keymap-ux :doc "UX settings")
   (defvar-keymap madmacs-keymap-packages :doc "Package functionality")
-  (defvar-keymap madmacs-keymap-gtd :doc "Task & Project management")
-  (defvar-keymap madmacs-keymap-notes :doc "Note taking functionality")
   (defvar-keymap madmacs-keymap-ai :doc "AI related functionality")
   
   (which-key-add-keymap-based-replacements madmacs-keymap-global
-    "l" `("AI" . ,madmacs-keymap-ai)
-    "g" `("GTD" . ,madmacs-keymap-gtd)
-    "n" `("Notes" . ,madmacs-keymap-notes)
     "p" `("Packages" . ,madmacs-keymap-packages)
     "u" `("UX" . ,madmacs-keymap-ux))
 

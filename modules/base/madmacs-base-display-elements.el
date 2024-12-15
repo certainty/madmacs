@@ -202,6 +202,25 @@ The DWIM behaviour of this command is as follows:
 
 (use-package revert-buffer-all)
 
+(use-package popper
+  :bind
+  (:map madmacs-mode-map
+        ("C-`"  . popper-toggle)
+        ("M-`"  . popper-cycle)
+        ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+    '("\\*Messages\\*"
+       "Output\\*$"
+       "\\*Async Shell Command\\*"
+       copilot-chat-mode
+       sly-mrepl-mode
+       help-mode
+       compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

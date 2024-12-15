@@ -109,3 +109,7 @@
 (require 'madmacs-base-dashboard)
 
 ;; extra modules
+
+(require 'madmacs-org-mode)
+(require 'madmacs-org-gtd)
+(require 'madmacs-org-writing)
