@@ -2,7 +2,7 @@
 
 ;;; Eglot
 (use-package eglot
-  :straight nil
+  :straight (:type built-in)
   :after (project embark)
   :custom
   (eglot-report-progress t)
