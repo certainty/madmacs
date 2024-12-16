@@ -102,7 +102,7 @@
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
 (use-package boon
-  ;:hook (after-init . boon-mode)
+  :hook (after-init . boon-mode)
   :bind
   (:map vc-dir-mode-map
     ("X" . vc-dir-hide-up-to-date)) ; since boon steals x, we rebind this to X
