@@ -101,4 +101,26 @@
   (which-key-add-keymap-based-replacements global-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
+(use-package boon
+  ;:hook (after-init . boon-mode)
+  :bind
+  (:map vc-dir-mode-map
+    ("X" . vc-dir-hide-up-to-date)) ; since boon steals x, we rebind this to X
+  (:map madmacs-mode-map
+    ("C-c C-r" . madmacs-boon-reset))
+  
+  :config
+  (require 'boon-qwerty-hjkl)
+  
+  (defun madmacs-boon-reset ()
+    "Reset boon to default state."
+    (interactive)
+    (turn-off-boon-mode)
+    (turn-on-boon-mode))
+  
+  (with-eval-after-load 'vterm
+    (add-hook 'vterm-mode-hook
+      (lambda ()
+        (turn-off-boon-mode)))))
+
 (provide 'madmacs-base-keys)
