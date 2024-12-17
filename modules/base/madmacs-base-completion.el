@@ -46,7 +46,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vertico
-  :hook (after-init . vertico-mode))
+  :hook after-init)
 
 (use-package marginalia
   :hook (after-init . marginalia-mode))

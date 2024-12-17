@@ -14,7 +14,7 @@
   (org-attach-id-dir (file-truename "~/org/.attachments"))
 
   ;; let's get fast and be nice to our fingers
-  (org-use-speed-commands t)
+  ;;(org-use-speed-commands t)
   
   ;; Aesthetics & UI
   (org-auto-align-tags t)

@@ -15,10 +15,14 @@
     ("C-x v z p" . vc-git-stash-pop)
     ("C-x v z z" . vc-git-stash)
     ("C-x v z s" . vc-git-stash-snapshot))
+  
   (:map madmacs-keymap-global
     ("v" . vc-dir-root))
-   
-   (:map vc-dir-mode-map
+
+  (:map goto-map
+    ("v" . project-vc-dir))
+  
+  (:map vc-dir-mode-map
     ("t" . vc-create-tag)
     ("O" . vc-log-outgoing)
     ("o" . vc-dir-find-file-other-window)
@@ -132,10 +136,6 @@
   (agitate-log-edit-informative-mode))
 
 (use-package magit
-  :bind
-  ((:map goto-map
-     ("v" . magit-status)))
-  
   :custom
   (git-commit-summary-max-length 80)
   (git-commit-style-convention-checks '(overlong-summary-line non-empty-second-line))

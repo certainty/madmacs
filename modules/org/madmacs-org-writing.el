@@ -68,7 +68,9 @@
 :CATEGORY: meetings
 :RECURRING: no
 :CAPTURED: %U
+:REFS: %a
 :END:
+
 "
                 :prepend t
                 :tree-type week)
@@ -79,6 +81,7 @@
 :CATEGORY: meetings
 :RECURRING: no
 :CAPTURED: %U
+:REFS: %a
 :END:
 "
                 :prepend t
@@ -86,7 +89,7 @@
                 :time-prompt t)
                
                ("mo" "1on1" entry (file+olp+datetree "meetings.org" "1on1")
-                "* %T :1on1: 
+                "* %T :1on1:
 :PROPERTIES:
 :CATEGORY: meetings
 :CAPTURED: %U

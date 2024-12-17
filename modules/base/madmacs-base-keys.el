@@ -83,7 +83,7 @@
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
     ("U" . straight-pull-all))
-  
+
   :config
   (unbind-key "M-g n")
   (unbind-key "C-j")
@@ -99,24 +99,39 @@
     "l" `("AI" . ,madmacs-keymap-ai))
 
   (which-key-add-keymap-based-replacements global-map
+    "C-j" `("Madmacs" . ,madmacs-keymap-global))
+  
+  (which-key-add-keymap-based-replacements madmacs-mode-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
 (use-package boon
   :hook (after-init . boon-mode)
   :bind
+  (:map boon-command-map
+    ("_" . undo)
+    ("." . xref-find-definitions)
+    ("?" . xref-find-references)
+    ("," . xref-pop-marker-stack))
+  (:map boon-forward-search-map
+    ("c" . nil)
+    ("k" . nil))
+  (:map boon-backward-search-map
+    ("c" . nil)
+    ("k" . nil))
   (:map vc-dir-mode-map
     ("X" . vc-dir-hide-up-to-date)) ; since boon steals x, we rebind this to X
-  (:map madmacs-mode-map
-    ("C-c C-r" . madmacs-boon-reset))
-  
+
   :config
-  (require 'boon-qwerty-hjkl)
+  (require 'boon-emacs)
   
-  (defun madmacs-boon-reset ()
-    "Reset boon to default state."
-    (interactive)
-    (turn-off-boon-mode)
-    (turn-on-boon-mode))
+  (defun madmacs-restore-original-bindings (keymap parent-keymap keys)
+    "Restore the original bindings for KEYS in KEYMAP from PARENT-KEYMAP."
+    (dolist (key keys)
+      (let ((original-binding (lookup-key parent-keymap key)))
+        (define-key keymap key original-binding))))
+
+  (madmacs-restore-original-bindings boon-goto-map goto-map
+    '("f" "w" "e" ":"))
   
   (with-eval-after-load 'vterm
     (add-hook 'vterm-mode-hook
