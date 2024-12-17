@@ -113,9 +113,11 @@
     ("?" . xref-find-references)
     ("," . xref-pop-marker-stack))
   (:map boon-forward-search-map
+    ("o" . occur)
     ("c" . nil)
     ("k" . nil))
   (:map boon-backward-search-map
+    ("o" . occur)
     ("c" . nil)
     ("k" . nil))
   (:map vc-dir-mode-map
