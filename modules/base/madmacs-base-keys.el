@@ -78,7 +78,7 @@
   :bind
   (:map madmacs-mode-map
 	("C-z" . repeat) ; I don't use suspend frame so this is a nicer binding than C-x z
-	("C-x z" . repeat-complext-command)) ; now this can go here
+	("C-x z" . repeat-complex-command)) ; now this can go here
   
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
