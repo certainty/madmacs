@@ -53,6 +53,8 @@
             (narrow-to-defun)
             (iedit-start (current-word) (point-min) (point-max))))))))
 
+(use-package multiple-cursors)
+
 (use-package embrace
   :demand t
   :bind

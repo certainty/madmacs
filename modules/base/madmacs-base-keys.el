@@ -83,6 +83,8 @@
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
     ("U" . straight-pull-all))
+  (:map goto-map
+    ("#" . jump-to-register))
 
   :config
   (unbind-key "M-g n")
@@ -111,20 +113,32 @@
     ("_" . undo)
     ("." . xref-find-definitions)
     ("?" . xref-find-references)
-    ("," . xref-pop-marker-stack))
+    ("," . xref-pop-marker-stack)
+    ("h" . avy-goto-char) ; mnemonic hop
+    ("m" . embark-act) ; mnemonic menu
+    ("v" . boon-copy-to-register)
+    ("V" . insert-register)
+    (":" . bookmark-set)
+    ("#" . point-to-register))
+  
   (:map boon-forward-search-map
     ("o" . occur)
     ("c" . nil)
     ("k" . nil))
+  
   (:map boon-backward-search-map
     ("o" . occur)
     ("c" . nil)
     ("k" . nil))
+  
   (:map vc-dir-mode-map
     ("X" . vc-dir-hide-up-to-date)) ; since boon steals x, we rebind this to X
 
   :config
   (require 'boon-emacs)
+  
+  (add-to-list 'global-mode-string
+    '("%e" (:eval (boon-state-string))))
   
   (defun madmacs-restore-original-bindings (keymap parent-keymap keys)
     "Restore the original bindings for KEYS in KEYMAP from PARENT-KEYMAP."

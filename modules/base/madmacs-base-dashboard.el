@@ -7,7 +7,7 @@
                            (madmacs--dashboard-hide-modeline)))
   :custom
   (dashboard-banner-logo-title
-    "This is my emacs config. There are many like it, but this one is mine.
+    "       This is my emacs config. There are many like it, but this one is mine.
   Keybindings to try: [C-j] Global Leader [M-g] Goto [M-s] Search [C-j I] Gptel [C-j i] Copilot")
   
   (dashboard-center-content t)

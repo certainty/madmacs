@@ -7,8 +7,7 @@
   :after popper
   :bind
   ("C-x T" . multi-vterm-project)
-  (:map madmacs-keymap-global
-    ("t" . multi-vterm-project))
+
   
   :config
   (add-to-list 'popper-reference-buffers 'vterm-mode)

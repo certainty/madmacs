@@ -60,12 +60,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package corfu
-  :hook (after-init . global-corfu-mode)
+  :hook
+  (after-startup . global-corfu-mode)
+  (after-startup . corfu-popupinfo-mode)
   :bind
   (:map corfu-map
 	("C-SPC" . corfu-insert-separator))
   :custom
   (corfu-auto t)
+  (corfu-auto-prefix 3)
+  (corfu-auto-delay 0.5)
+  (corfu-preselect 'valid)
   (corfu-preview-current nil)
   (corfu-min-width 20)
   (corfu-bar-width 0.5)
@@ -75,12 +80,19 @@
   (corfu-popupinfo-delay '(1.25 . 0.5))
   
   :config
-  (corfu-popupinfo-mode 1)
-  (global-corfu-mode 1)
-
   (with-eval-after-load 'savehist
     (corfu-history-mode 1)
     (add-to-list 'savehist-additional-variables 'corfu-history)))
+
+(use-package corfu-history
+  :straight nil ; part of corfu
+  :after corfu
+  :hook global-corfu-mode)
+
+(use-package corfu-quick
+  :straight nil ; part of corfu
+  :bind (:map corfu-map ("'" . corfu-quick-complete))
+  :config (setq corfu-quick1 "asdfghjkl"))
 
 (use-package nerd-icons-corfu
   :after corfu
@@ -132,12 +144,13 @@
 	("M-y" . consult-yank-pop))                ;; orig. yank-pop
 
   (:map goto-map
-  ("!" . consult-flymake)
-	("i" . consult-imenu)
-	("n h" . consult-outline)
-	("n A" . consult-org-agenda)
-	("M-g" . consult-goto-line)
-	("r" . consult-recent-file))
+    ("!" . consult-flymake)
+	  ("i" . consult-imenu)
+    ("b" . consult-bookmark)
+	  ("n h" . consult-outline)
+	  ("n A" . consult-org-agenda)
+	  ("M-g" . consult-goto-line)
+	  ("r" . consult-recent-file))
 
   (:map search-map
 	("g" . consult-ripgrep)

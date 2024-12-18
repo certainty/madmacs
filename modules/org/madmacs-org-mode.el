@@ -5,6 +5,8 @@
   :commands (org-mode)
   :mode (("\\.org$" . org-mode))
   :bind
+  (:map org-mode-map
+    ("C-c Y" . yank-media)) ; enable pasting of media from clipboard
   (:repeat-map madmacs-org-motion-repeat
     ("n" . org-next-item)
     ("p" . org-previous-item))
