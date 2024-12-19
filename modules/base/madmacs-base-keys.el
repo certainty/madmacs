@@ -107,7 +107,7 @@
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
 (use-package boon
-  :hook (after-init . boon-mode)
+  :hook (after-startup . boon-mode)
   :bind
   (:map boon-command-map
     ("_" . undo)

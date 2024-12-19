@@ -1,17 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
-;;; This is my GTD setup
-;;;
-;;; With the following base properties:
-;;; 1. Tasks and notes are separated
- ;;; 1.1 I use a tasks.org file for projects and tasks
-;;; 2. Meeting minutes are taken in separate file called meetings.org
-;;; 2.2 reverse date tree to have most recent meetings on top
-;;; 3. Notes are separated into fleeting and permanent
-;;; 3.1 Fleeting notes are added to journal.org
-;;; 3.2 Permanent notes are done via denote and stored in the /notes directory
-;;;     This directory contains all the reference notes that I might need
-
+;;; This is my GTD setup tailored to manage code related tasks
+;;; All other tasks I manage in a different app
 
 (use-package org
   :straight (:type built-in)
@@ -49,10 +39,14 @@
   ;; TODOs
   (org-todo-keywords
     '((sequence "TODO(t)" "DOING(g!)" "|" "DONE(d!)")
-       (sequence "PROJ(p)" "DOING(g!)" "|" "DONE(d!)")
-       (sequence "EPIC(e)" "DISCOVERY(y!)" "|" "DONE(d!)")
+       (sequence "TECHDEPT(e)" "|" "DONE(d!)")
+       (sequence "FIX(f!)" "REVIEW(r!)" "|" "DONE(d)")
+       (sequence "POC(p)" "|" "DONE(d)")
+       (sequence "REFACTOR(f)" "|" "DONE(d)")
+       (sequence "DOC(o)" "|" "DONE(d)")
        (sequence "MEETING(m)" "|" "DONE(d)")
        (sequence "APPT(a)" "|" "DONE(d)")
+       (sequence "|" "BLOCKED(l!)")
        (sequence "|" "CANCELED(c!)")))
 
   (org-priority-default ?B)
@@ -96,30 +90,18 @@
 :END:"
         :prepend t)
 
-       ("T" "Task (today)" entry (file+headline "tasks.org" "Main")
+       ("o" "Codebase Task" entry (file+function "tasks.org" madmacs-ensure-project-heading)
          "* TODO %?
-SCHEDULED: %t
 :PROPERTIES:
 :CAPTURED: %U
-:END:"
-         :prepend t)
+:PROJECT_ROOT: %(project-root (project-current t))
+:FILE: [[%F][%f]]
+:POS: %l
+:END:
 
-       ("p" "Project" entry (file+headline "tasks.org" "Projects")
-       "* PROJ %?
-:PROPERTIES:
-:CAPTURED: %U
-:CATEGORY: project
-:PROJECT_KEY: %^{Project Key}
-:END:"  )
-       
-       ("e" "Epic" entry (file+headline "tasks.org" "Epics")
-         "* EPIC %?
-:PROPERTIES:
-:CAPTURED: %U
-:CATEGORY: epic
-:EPIC_KEY: %^{Epic Key}
-:END:")
-       
+%i
+"
+         :jump-to-captured nil)
        
        ("c" "Contact" entry (file "contacts.org")
          "* %^{Name}
@@ -148,6 +130,7 @@ SCHEDULED: %t
 
   (org-columns-default-format-for-agenda "%SCHEDULED %25ITEM %TODO %3PRIORITY %TAGS")
 
+  ;; TODO tweak agenda to be more useful for coderelated tasks
   (org-agenda-custom-commands
     '(("y" "My Agenda"
         ((tags-todo "+SCHEDULED<=\"<today>\"|+DEADLINE<=\"<today>\""
@@ -240,6 +223,34 @@ SCHEDULED: %t
     (let ((default-directory org-directory))
       (call-interactively #'grep)))
 
+  (defun madmacs-get-project-info ()
+    "Get project information including parent directory structure."
+    (interactive)
+    (let* ((project-root (project-root (project-current t)))
+            (project-dir (file-name-nondirectory (directory-file-name project-root)))
+            (parent-dir (file-name-nondirectory 
+                          (directory-file-name 
+                            (file-name-directory 
+                              (directory-file-name project-root)))))
+            (project-name (if (string= parent-dir "")
+                            project-dir
+                            (format "%s > %s" parent-dir project-dir))))
+      project-name))
+
+   (defun madmacs-ensure-project-heading ()
+     (let* ((project-name (madmacs-get-project-info))
+             (olp `("Codebases" ,project-name))
+             (marker (ignore-errors (org-find-olp olp t))))
+       (if marker
+         (goto-char marker)
+         (org-ql-select (current-buffer)
+           '(and (level 1) (heading "Codebases"))
+           :action `(progn
+                      (org-insert-subheading "")
+                      (insert ,project-name)
+                      (insert "\n"))))
+       (goto-char (org-find-olp olp t))))
+  
   ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map
@@ -258,7 +269,3 @@ SCHEDULED: %t
                 (reusable-frames . visible))))
 
 (provide 'madmacs-org-gtd)
-
-
-
-

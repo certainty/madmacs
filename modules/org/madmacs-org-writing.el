@@ -160,7 +160,6 @@
   (denote-dired-directories (list denote-directory (concat org-directory "/.attachments")))
 
   :init
-
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers "%i\n%?")
     (add-to-list 'org-capture-templates
