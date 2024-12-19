@@ -107,7 +107,10 @@
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
 (use-package boon
-  :hook (after-startup . boon-mode)
+  :demand t
+  :hook
+  (vc-dir-mode . turn-off-boon-mode)
+  (vterm-mode . turn-off-boon-mode)
   :bind
   (:map boon-command-map
     ("_" . undo)
@@ -131,8 +134,7 @@
     ("c" . nil)
     ("k" . nil))
   
-  (:map vc-dir-mode-map
-    ("X" . vc-dir-hide-up-to-date)) ; since boon steals x, we rebind this to X
+  
 
   :config
   (require 'boon-emacs)
@@ -148,10 +150,7 @@
 
   (madmacs-restore-original-bindings boon-goto-map goto-map
     '("f" "w" "e" ":"))
-  
-  (with-eval-after-load 'vterm
-    (add-hook 'vterm-mode-hook
-      (lambda ()
-        (turn-off-boon-mode)))))
+
+  (boon-mode 1))
 
 (provide 'madmacs-base-keys)
