@@ -90,7 +90,7 @@
 :END:"
         :prepend t)
 
-       ("o" "Codebase Task" entry (file+function "tasks.org" madmacs-ensure-project-heading)
+       ("o" "Codebase Task" entry (function madmacs-ensure-project-heading)
          "* TODO %?
 :PROPERTIES:
 :CAPTURED: %U
@@ -237,19 +237,20 @@
                             (format "%s > %s" parent-dir project-dir))))
       project-name))
 
-   (defun madmacs-ensure-project-heading ()
-     (let* ((project-name (madmacs-get-project-info))
-             (olp `("Codebases" ,project-name))
-             (marker (ignore-errors (org-find-olp olp t))))
-       (if marker
-         (goto-char marker)
-         (org-ql-select (current-buffer)
-           '(and (level 1) (heading "Codebases"))
-           :action `(progn
-                      (org-insert-subheading "")
-                      (insert ,project-name)
-                      (insert "\n"))))
-       (goto-char (org-find-olp olp t))))
+  (defun madmacs-ensure-project-heading ()
+    (let ((project-name (madmacs-get-project-info)))
+      (with-current-buffer (org-capture-target-buffer "tasks.org")
+        (let* ((olp `("Codebases" ,project-name))
+                (marker (ignore-errors (org-find-olp olp t))))
+          (if marker
+            (goto-char marker)
+            (org-ql-select (current-buffer)
+              '(and (level 1) (heading "Codebases"))
+              :action `(progn
+                         (org-insert-subheading "")
+                         (insert ,project-name)
+                         (insert "\n"))))
+          (goto-char (org-find-olp olp t))))))
   
   ;; embark
   (with-eval-after-load 'embark
