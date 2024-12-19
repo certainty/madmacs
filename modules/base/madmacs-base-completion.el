@@ -61,8 +61,8 @@
 
 (use-package corfu
   :hook
-  (after-startup . global-corfu-mode)
-  (after-startup . corfu-popupinfo-mode)
+  (after-init . global-corfu-mode)
+  (corfu-mode . corfu-popupinfo-mode)
   :bind
   (:map corfu-map
 	("C-SPC" . corfu-insert-separator))
@@ -87,7 +87,7 @@
 (use-package corfu-history
   :straight nil ; part of corfu
   :after corfu
-  :hook global-corfu-mode)
+  :hook corfu-mode)
 
 (use-package corfu-quick
   :straight nil ; part of corfu

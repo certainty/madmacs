@@ -134,22 +134,17 @@
     ("c" . nil)
     ("k" . nil))
   
+  (:map boon-goto-map
+    ("e" . nil)
+    (":" . nil)
+    ("w" . ace-window)
+    ("f" . project-find-file)) ; restore sane bingings
   
-
   :config
   (require 'boon-emacs)
   
   (add-to-list 'global-mode-string
     '("%e" (:eval (boon-state-string))))
-  
-  (defun madmacs-restore-original-bindings (keymap parent-keymap keys)
-    "Restore the original bindings for KEYS in KEYMAP from PARENT-KEYMAP."
-    (dolist (key keys)
-      (let ((original-binding (lookup-key parent-keymap key)))
-        (define-key keymap key original-binding))))
-
-  (madmacs-restore-original-bindings boon-goto-map goto-map
-    '("f" "w" "e" ":"))
 
   (boon-mode 1))
 
