@@ -2,10 +2,10 @@
 
 (use-package asdf
   :straight (asdf :type git :host github :repo "tabfugnic/asdf.el")
-  :hook (after-startup . asdf-enable))
+  :hook (after-init . asdf-enable))
 
 (use-package envrc
-  :hook (after-startup . envrc-global-mode))
+  :hook (after-init . envrc-global-mode))
 
 ;; Elixir / Erlang
 (use-package inf-elixir)
