@@ -131,7 +131,7 @@
   ;; TODO tweak agenda to be more useful for coderelated tasks
   (org-agenda-custom-commands
     '(("y" "My Agenda"
-        ((tags-todo "+SCHEDULED<=\"<today>\"|+DEADLINE<=\"<today>\""
+        ((tags-todo "-CATEGORY=\"project\""
             ((org-agenda-overriding-header "⚡ Today\n")
               (org-agenda-sorting-strategy '(priority-down))
               (org-agenda-remove-tags nil)
