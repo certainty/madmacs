@@ -12,7 +12,7 @@
 	("C-x f" . find-file)
 	("C-g" . prot/keyboard-quit-dwim))
 
-  
+
   :custom
   (sentence-end-double-space nil)
   (tab-width 2)
@@ -27,7 +27,7 @@
   (use-short-answers t)
   (blink-cursor-mode 0)
   (indent-tabs-mode nil)
-  
+
   :init
   (defun prot/keyboard-quit-dwim ()
     "Do-What-I-Mean behaviour for a general `keyboard-quit'.
@@ -64,12 +64,13 @@ The DWIM behaviour of this command is as follows:
   :hook (before-make-frame . window-divider-mode)
   :bind
   (:map madmacs-keymap-ux
-    ("w" . toggle-frame-fullscreen))
-  
+    ("w" . toggle-frame-maximized)
+    ("W" . toggle-frame-fullscreen))
   :custom
   (confirm-kill-emacs nil)
   (default-frame-alist
-   '((frame-title-format . nil)
+   '((undecorated . t)
+     (frame-title-format . nil)
      (internal-border-width . 2)
      (tool-bar-lines . 0)
      (vertical-scroll-bars . nil)
@@ -96,28 +97,28 @@ The DWIM behaviour of this command is as follows:
   :hook
   (after-init . winner-mode)
   :bind
-  (:map madmacs-mode-map 
-	("M-o" . other-window)
-	("C-x {" . shrink-window)
-	("C-x }" . enlarge-window)
-	("C-x >" . enlarge-window-horizontally)
-	("C-x <" . shrink-window-horizontally)
-	("C-x w +" . balance-windows)
-	("C-x w =" . balance-windows-area))
+  (:map madmacs-mode-map
+	  ("M-o" . other-window)
+	  ("C-x {" . shrink-window)
+	  ("C-x }" . enlarge-window)
+	  ("C-x >" . enlarge-window-horizontally)
+	  ("C-x <" . shrink-window-horizontally)
+	  ("C-x w +" . balance-windows)
+	  ("C-x w =" . balance-windows-area))
   (:repeat-map resize-window-repeat-map
-	       (">" . enlarge-window-horizontally)
-	       ("<" . shrink-window-horizontally))
+	  (">" . enlarge-window-horizontally)
+	  ("<" . shrink-window-horizontally))
   :custom
   ;; I have a wide-screen so I prefer vertical splits
   (split-width-threshold 0)
   (split-height-threshold nil)
-  
+
   (display-buffer-base-action nil))
 
 (use-package ace-window
   :demand t
   :bind
-  (:map madmacs-mode-map 
+  (:map madmacs-mode-map
 	("C-x w w" . ace-window)
 	("C-x w x" . ace-swap-window)
 	("C-x w m" . ace-maximize-window)
@@ -162,7 +163,7 @@ The DWIM behaviour of this command is as follows:
   (hscroll-step 1)
   (hscroll-margin 1)
   (switch-to-buffer-preserve-window-point t)
-  
+
   :config
   (add-to-list 'display-buffer-alist
     '((or . ((derived-mode . flymake-diagnostics-buffer-mode)
