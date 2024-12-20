@@ -1,5 +1,4 @@
 ;; -*- lexical-binding: t; -*-
-
 ;;; This is my GTD setup tailored to manage code related tasks
 ;;; All other tasks I manage in a different app
 
@@ -27,7 +26,6 @@
     ("p" . madmacs-capture-project))
   :init
   (require 'org-id)
-
   
   (defvar-keymap madmacs-keymap-gtd :doc "Task & Project management")
   (which-key-add-keymap-based-replacements madmacs-keymap-global
@@ -90,7 +88,7 @@
 :END:"
         :prepend t)
 
-       ("o" "Codebase Task" entry (function madmacs-ensure-project-heading)
+       ("o" "Codebase Task" entry (file+function "tasks.org" madmacs-ensure-project-heading)
          "* TODO %?
 :PROPERTIES:
 :CAPTURED: %U
@@ -223,6 +221,14 @@
     (let ((default-directory org-directory))
       (call-interactively #'grep)))
 
+  (defvar madmacs-capture-project-context nil "The project context of the file from which the capture was started")
+  
+  (defun madmacs-capture-with-project-context (orig-fn &rest args)
+    (let ((madmacs-capture-project-context (madmacs-get-project-info)))
+      (apply orig-fn args)))
+  
+  (advice-add 'org-capture :around #'madmacs-capture-with-project-context)
+
   (defun madmacs-get-project-info ()
     "Get project information including parent directory structure."
     (interactive)
@@ -238,20 +244,18 @@
       project-name))
 
   (defun madmacs-ensure-project-heading ()
-    (let ((project-name (madmacs-get-project-info)))
-      (with-current-buffer (org-capture-target-buffer "tasks.org")
-        (let* ((olp `("Codebases" ,project-name))
-                (marker (ignore-errors (org-find-olp olp t))))
-          (if marker
-            (goto-char marker)
-            (org-ql-select (current-buffer)
-              '(and (level 1) (heading "Codebases"))
-              :action `(progn
-                         (org-insert-subheading "")
-                         (insert ,project-name)
-                         (insert "\n"))))
-          (goto-char (org-find-olp olp t))))))
-  
+    (let* ((project-name madmacs-capture-project-context)
+            (olp `("Codebases" ,project-name))
+            (marker (ignore-errors (org-find-olp olp t))))
+      (if marker
+        (goto-char marker)
+        (org-ql-select (current-buffer)
+          '(and (level 1) (heading "Codebases"))
+          :action `(progn
+                     (org-insert-subheading "")
+                     (insert ,project-name)
+                     (insert "\n"))))
+      (goto-char (org-find-olp olp t))))
   ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map

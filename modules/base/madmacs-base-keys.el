@@ -142,9 +142,10 @@
   
   :config
   (require 'boon-emacs)
+  ;(remove-hook 'window-selection-change-functions #'boon-reset-state-for-switchw)
   
   (add-to-list 'global-mode-string
-    '("%e" (:eval (boon-state-string))))
+    '("%e" (:eval (boon-modeline-string))))
 
   (boon-mode 1))
 
