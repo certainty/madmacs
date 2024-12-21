@@ -133,6 +133,11 @@
     (interactive)
     (back-to-indentation)
     (apply #'meow-insert args))
+  
+  (defun madmacs-meow-insert-and-of-line (&rest args)
+    (interactive)
+    (end-of-visual-line)
+    (apply #'meow-insert args))
 
   (meow-define-keys 'sexp
     '("<escape>" . ensure-meow-normal-mode)
@@ -174,7 +179,7 @@
     '("P" . meow-prev-expand)
     
     '("[" . meow-pop-to-mark)
-    '("]" . meow-unpop-to-mark)
+    '("]" . meow-unpop-to-marke)
     '("<" . meow-back-symbol)
     '(">" . meow-next-symbol)
     '("}" . forward-sexp)
@@ -206,9 +211,10 @@
     '("(" . meow-bounds-of-thing)
 
     ;; editing
-    '("a" . meow-insert)
+    '("i" . meow-insert)
+    '("a" . meow-append)
     '("A" . madmacs-meow-insert-at-indentation)
-    '("e" . meow-append)
+    '("E" . madmacs-meow-insert-and-of-line)
     '("o" . meow-open-below)
     '("O" . meow-open-above)
     '("c" . meow-change-char)
