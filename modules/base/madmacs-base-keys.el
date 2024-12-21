@@ -101,8 +101,23 @@
   (meow-use-clipboard t)
   (meow-goto-line-function 'consult-goto-line)
   (meow-keypad-leader-dispatch madmacs-keymap-global)
+  (meow-char-thing-table
+    '((?( . round)
+      (?) . round)
+      (?[ . square)
+      (?] . square)
+      (?{ . curly)
+      (?} . curly)
+      (?\" . string)
+      (?s . symbol)
+      (?w . window)
+      (?b . buffer)
+      (?p . paragraph)
+      (?l . line)
+      (?d . defun)
+      (?. . sentence)))
 
-  :init
+  :config
   (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
   (add-to-list 'meow-mode-state-list '(vc-dir-mode . motion))
   (add-to-list 'meow-mode-state-list '(dired-mode . motion))
@@ -114,46 +129,8 @@
   (with-eval-after-load 'org
     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
 
-  (defvar-keymap meow-sexp-map :doc "Keymap for meow sexp state")
-  
-  (meow-define-state sexp
-    "meow state for interacting with sexps"
-    :lighter " [S]"
-    :keymap meow-sexp-map)
-
-  (setq meow-cursor-type-sexp 'hollow)
-  
-  (defun ensure-meow-normal-mode ()
-    "Ensure Meow is in normal mode. If not, switch to it."
-    (interactive)
-    (unless (eq meow--current-state 'normal)
-      (meow-normal-mode)))
-
-  (defun madmacs-meow-insert-at-indentation (&rest args)
-    (interactive)
-    (back-to-indentation)
-    (apply #'meow-insert args))
-  
-  (defun madmacs-meow-insert-and-of-line (&rest args)
-    (interactive)
-    (end-of-visual-line)
-    (apply #'meow-insert args))
-
-  (meow-define-keys 'sexp
-    '("<escape>" . ensure-meow-normal-mode)
-    '("f" . forward-sexp)
-    '("b" . backward-sexp)
-    '("F" . down-list)
-    '("B" . up-list)
-    '("n" . meow-forward-slurp)
-    '("N" . meow-forward-barf)
-    '("p" . meow-backward-slurp)
-    '("P" . meow-backward-barf))
-
   ;; These keybindings are intentionally close to emacs defaults
   (meow-normal-define-key
-    '("&" . meow-sexp-mode)
-    
     '("0" . meow-expand-0)
     '("9" . meow-expand-9)
     '("8" . meow-expand-8)
@@ -179,11 +156,21 @@
     '("P" . meow-prev-expand)
     
     '("[" . meow-pop-to-mark)
-    '("]" . meow-unpop-to-marke)
-    '("<" . meow-back-symbol)
-    '(">" . meow-next-symbol)
-    '("}" . forward-sexp)
-    '("{" . backward-sexp)
+    '("]" . meow-unpop-to-mark)
+    
+    '("<<" . meow-back-symbol)
+    '(">>" . meow-next-symbol)
+    '("<w" . meow-back-word)
+    '(">w" . meow-next-word)
+    '(">@" . forward-sexp)
+    '("<@" . backward-sexp) 
+    '(">[" . sp-forward-slurp-sexp)
+    '(">]" . sp-forward-barf-sexp)
+    '("<[" . sp-backward-slurp-sexp)
+    '("<]" . sp-backward-barf-sexp)
+    '(">)" . down-list)
+    '("<)" . up-list)
+    
     '("s" . meow-visit)
     '("S" . meow-search)
     
@@ -205,8 +192,8 @@
     '("<escape>" . meow-cancel-selection)
 
     ;; things
-    '("^" . meow-beginning-of-thing)
-    '("$" . meow-end-of-thing)
+    '("{" . meow-beginning-of-thing)
+    '("}" . meow-end-of-thing)
     '(")" . meow-inner-of-thing)
     '("(" . meow-bounds-of-thing)
 
