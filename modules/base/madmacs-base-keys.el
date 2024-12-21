@@ -5,25 +5,6 @@
   :custom
   (bind-key-describe-special-forms nil))
 
-(use-package which-key
-  :straight (:type built-in)
-  :demand t
-  :custom
-  (which-key-sort-order 'which-key-prefix-then-key-order)
-  (which-key-max-display-columns 10)
-  (which-key-show-early-on-C-h t)
-  (which-key-show-prefix nil)
-  (which-key-idle-delay .75)
-  (which-key-idle-secondary-delay 0.05)
-  (which-key-popup-type 'side-window)
-  (which-key-side-window-location 'bottom)
-  (which-key-setup-minibuffer)
-  (which-key-separator " • ")
-  (which-key-prefix-prefix nil)
-
-  :init
-  (which-key-mode))
-
 (use-package repeat
   :straight nil
   :demand t
@@ -50,6 +31,10 @@
   (:repeat-map madmacs-paragraph-repeat-map
     ("}" . forward-paragraph)
     ("{" . backward-paragraph))
+
+  (:repeat-map madmacs-xref-repeat-map
+    ("{" . xref-go-back)
+    ("}" . xref-go-forward))
 
   (:repeat-map madmacs-undo-repeat-map
     ("u" . undo))
@@ -84,6 +69,8 @@
     ("u" . straight-pull-package)
     ("U" . straight-pull-all))
   (:map goto-map
+    ("{" . xref-go-back)
+    ("}" . xref-go-forward)
     ("#" . jump-to-register))
 
   :config
@@ -106,54 +93,247 @@
   (which-key-add-keymap-based-replacements madmacs-mode-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
-(use-package boon
+(use-package meow
   :demand t
-  :hook
-  (vc-dir-mode . turn-off-boon-mode)
-  (vterm-mode . turn-off-boon-mode)
-  :bind
-  (:map boon-command-map
-    ("_" . undo)
-    ("." . xref-find-definitions)
-    ("?" . xref-find-references)
-    ("," . xref-pop-marker-stack)
-    ("h" . avy-goto-char) ; mnemonic hop
-    ("m" . embark-act) ; mnemonic menu
-    ("v" . boon-copy-to-register)
-    ("V" . insert-register)
-    (":" . bookmark-set)
-    ("#" . point-to-register))
+  :custom
+  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-use-cursor-position-hack t)
+  (meow-use-clipboard t)
+  (meow-goto-line-function 'consult-goto-line)
+  (meow-keypad-leader-dispatch madmacs-keymap-global)
 
-  (:map boon-forward-search-map
-    ("o" . occur)
-    ("c" . nil)
-    ("k" . nil))
+  :init
+  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
+  (add-to-list 'meow-mode-state-list '(vc-dir-mode . motion))
+  (add-to-list 'meow-mode-state-list '(dired-mode . motion))
+  (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
+  (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
 
-  (:map boon-backward-search-map
-    ("o" . occur)
-    ("c" . nil)
-    ("k" . nil))
+  (setq meow-use-dynamic-face-color nil)
+  (setq meow--kbd-delete-char "<deletechar>")
+  (with-eval-after-load 'org
+    (modify-syntax-entry ?@ "_" org-mode-syntax-table))
 
-  (:map boon-goto-map
-    ("e" . nil)
-    (":" . nil)
-    ("w" . ace-window)
-    ("f" . project-find-file)) ; restore sane bingings
-
-  :config
-  (require 'boon-emacs)
+  (defvar-keymap meow-sexp-map :doc "Keymap for meow sexp state")
   
-  ;; adivce the boon-reset-state-for-switchw function
-  (defun madmacs-reset-state-unless-target-is-corfu-overlay (orig-fn frame)
-    (unless (frame-parent frame)
-      ;; no parent means this is not a child frame so we can reset
-      (funcall orig-fn frame)))
+  (meow-define-state sexp
+    "meow state for interacting with sexps"
+    :lighter " [S]"
+    :keymap meow-sexp-map)
+
+  (setq meow-cursor-type-sexp 'hollow)
   
-  (advice-add 'boon-reset-state-for-switchw :around #'madmacs-reset-state-unless-target-is-corfu-overlay)
-  
+  (defun ensure-meow-normal-mode ()
+    "Ensure Meow is in normal mode. If not, switch to it."
+    (interactive)
+    (unless (eq meow--current-state 'normal)
+      (meow-normal-mode)))
+
+  (defun madmacs-meow-insert-at-indentation (&rest args)
+    (interactive)
+    (back-to-indentation)
+    (apply #'meow-insert args))
+
+  (meow-define-keys 'sexp
+    '("<escape>" . ensure-meow-normal-mode)
+    '("f" . forward-sexp)
+    '("b" . backward-sexp)
+    '("F" . down-list)
+    '("B" . up-list)
+    '("n" . meow-forward-slurp)
+    '("N" . meow-forward-barf)
+    '("p" . meow-backward-slurp)
+    '("P" . meow-backward-barf))
+
+  ;; These keybindings are intentionally close to emacs defaults
+  (meow-normal-define-key
+    '("&" . meow-sexp-mode)
+    
+    '("0" . meow-expand-0)
+    '("9" . meow-expand-9)
+    '("8" . meow-expand-8)
+    '("7" . meow-expand-7)
+    '("6" . meow-expand-6)
+    '("5" . meow-expand-5)
+    '("4" . meow-expand-4)
+    '("3" . meow-expand-3)
+    '("2" . meow-expand-2)
+    '("1" . meow-expand-1)
+
+    ;; navigation
+    '("f" . meow-right)
+    '("F" . meow-right-expand)
+    
+    '("b" . meow-left)
+    '("B" . meow-left-expand)
+    
+    '("n" . meow-next)
+    '("N" . meow-next-expand)
+    
+    '("p" . meow-prev)
+    '("P" . meow-prev-expand)
+    
+    '("[" . meow-pop-to-mark)
+    '("]" . meow-unpop-to-mark)
+    '("<" . meow-back-symbol)
+    '(">" . meow-next-symbol)
+    '("}" . forward-sexp)
+    '("{" . backward-sexp)
+    '("s" . meow-visit)
+    '("S" . meow-search)
+    
+    ;; scrolling
+    '("K" . scroll-down-line)
+    '("J" . scroll-up-line)
+    
+    ;; selections
+    '("~" . negative-argument)
+    '("'" . meow-reverse)
+    '("@" . meow-mark-symbol)
+    '("%" . meow-mark-word)
+    '("l" . meow-line)
+    '("x" . meow-to-block)
+    '("X" . meow-block) ; mnemonic eXpression
+    '("t" . meow-till)
+    '("T" . meow-find)
+    '("j" . meow-join)
+    '("<escape>" . meow-cancel-selection)
+
+    ;; things
+    '("^" . meow-beginning-of-thing)
+    '("$" . meow-end-of-thing)
+    '(")" . meow-inner-of-thing)
+    '("(" . meow-bounds-of-thing)
+
+    ;; editing
+    '("a" . meow-insert)
+    '("A" . madmacs-meow-insert-at-indentation)
+    '("e" . meow-append)
+    '("o" . meow-open-below)
+    '("O" . meow-open-above)
+    '("c" . meow-change-char)
+    '("C" . meow-change)
+    '("v" . just-one-space)
+    
+    ;; acting on selections
+    '("M-d" . meow-kill-word)
+    '("M-DEL" . meow-backward-kill-word)
+    '("w" . meow-kill)
+    '("k" . meow-kill-whole-line)
+    '("W" . meow-save)
+    '("d" . meow-delete)
+    '("y" . meow-yank)
+    '("Y" . meow-yank-pop)
+    '("r" . meow-replace)
+
+    ;; misc
+    '("_" . meow-undo)
+    '("U" . meow-undo-in-selection)
+    '("G" . meow-grab)
+    '(":" . meow-swap-grab) ; mnemonic exchange
+    '(";" . meow-pop-grab)
+    '("/" . meow-pop-selection)
+    '("z" . repeat)
+    '("Z" . meow-repeat)
+    '("q" . meow-quit)
+    
+    ;; quick actions
+    '("\"" . embrace-commander)
+    '("." . xref-find-definitions)
+    '("?" . xref-find-references)
+    '("," . xref-go-back)
+    '("m" . embark-act) ;; mnemnoic menu
+    `("g" . ,goto-map)
+    '("`" . captialize-dwim)
+    '("|" . shell-command-on-region)
+    '("=" . indent-region)
+    '("#" . meow-comment)
+    '("\\" . indent-rigidly)
+    '("+" . expreg-expand)
+    '("-" . expreg-contract))
+
   (add-to-list 'global-mode-string
-    '("%e" (:eval (boon-modeline-string))))
+    '("%e" (:eval (meow-indicator))))
 
-  (boon-mode 1))
+  (meow-global-mode 1))
+
+(use-package meow-tree-sitter
+  :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
+  :after meow
+  :init
+  (meow-tree-sitter-register-defaults))
+
+;; it is important to load which-key after meow to make sure the keymaps show up correctly
+(use-package which-key
+  :straight (:type built-in)
+  :demand t
+  :after meow
+  :custom
+  (which-key-sort-order 'which-key-prefix-then-key-order)
+  (which-key-max-display-columns 10)
+  (which-key-show-early-on-C-h t)
+  (which-key-show-prefix nil)
+  (which-key-idle-delay .75)
+  (which-key-idle-secondary-delay 0.05)
+  (which-key-popup-type 'side-window)
+  (which-key-side-window-location 'bottom)
+  (which-key-setup-minibuffer)
+  (which-key-separator " • ")
+  (which-key-prefix-prefix nil)
+
+  :init
+  (which-key-mode))
+
+
+;; (use-package boon
+;;   :demand t
+;;   :hook
+;;   (vc-dir-mode . turn-off-boon-mode)
+;;   (vterm-mode . turn-off-boon-mode)
+;;   :bind
+;;   (:map boon-command-map
+;;     ("_" . undo)
+;;     ("." . xref-find-definitions)
+;;     ("?" . xref-find-references)
+;;     ("," . xref-pop-marker-stack)
+;;     ("h" . avy-goto-char) ; mnemonic hop
+;;     ("m" . embark-act) ; mnemonic menu
+;;     ("v" . boon-copy-to-register)
+;;     ("V" . insert-register)
+;;     (":" . bookmark-set)
+;;     ("#" . point-to-register))
+
+;;   (:map boon-forward-search-map
+;;     ("o" . occur)
+;;     ("c" . nil)
+;;     ("k" . nil))
+
+;;   (:map boon-backward-search-map
+;;     ("o" . occur)
+;;     ("c" . nil)
+;;     ("k" . nil))
+
+;;   (:map boon-goto-map
+;;     ("e" . nil)
+;;     (":" . nil)
+;;     ("w" . ace-window)
+;;     ("f" . project-find-file)) ; restore sane bingings
+
+;;   :config
+;;   (require 'boon-emacs)
+  
+;;   ;; adivce the boon-reset-state-for-switchw function
+;;   (defun madmacs-reset-state-unless-target-is-corfu-overlay (orig-fn frame)
+;;     (unless (frame-parent frame)
+;;       ;; no parent means this is not a child frame so we can reset
+;;       (funcall orig-fn frame)))
+  
+;;   (advice-add 'boon-reset-state-for-switchw :around #'madmacs-reset-state-unless-target-is-corfu-overlay)
+  
+;;   (add-to-list 'global-mode-string
+;;     '("%e" (:eval (boon-modeline-string))))
+
+;;   (boon-mode 1))
+
 
 (provide 'madmacs-base-keys)
