@@ -272,7 +272,7 @@
 (use-package which-key
   :straight (:type built-in)
   :demand t
-  :after meow
+;  :after meow
   :custom
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-max-display-columns 10)
