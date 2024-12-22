@@ -4,7 +4,7 @@
   :straight (copilot :type git :host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :hook (prog-mode . copilot-mode)
   :bind
-  (:map prog-mode-map
+  (:map madmacs-mode-map
     ("C-M-i" . copilot-complete))
   
   (:map madmacs-keymap-ai-copilot

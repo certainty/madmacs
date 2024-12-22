@@ -98,7 +98,6 @@ The DWIM behaviour of this command is as follows:
   (after-init . winner-mode)
   :bind
   (:map madmacs-mode-map
-	  ("M-o" . other-window)
 	  ("C-x {" . shrink-window)
 	  ("C-x }" . enlarge-window)
 	  ("C-x >" . enlarge-window-horizontally)

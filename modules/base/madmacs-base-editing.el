@@ -4,8 +4,8 @@
   :bind
   (:map madmacs-mode-map
     ("C-<backspace>" . crux-kill-line-backwards)
-    ("S-<return>" . crux-smart-open-line)
-    ("M-O" . crux-smart-open-line-above)))
+    ("C-o" . crux-smart-open-line)
+    ("M-o" . crux-smart-open-line-above)))
 
 (use-package emacs
   :demand t
