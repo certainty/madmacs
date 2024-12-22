@@ -1,5 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package crux
+  :bind
+  (:map madmacs-mode-map
+    ("C-<backspace>" . crux-kill-line-backwards)
+    ("S-<return>" . crux-smart-open-line)
+    ("M-O" . crux-smart-open-line-above)))
+
 (use-package emacs
   :demand t
   :straight nil
@@ -7,10 +14,20 @@
   (after-init . repeat-mode)
   :bind
   (:map madmacs-mode-map
-	("M-z" . zap-up-to-char))
+	  ("M-z" . zap-up-to-char))
   :custom
   (next-line-add-newlines t)
-  (kill-whole-line t))
+  (kill-whole-line t)
+  :config
+
+  (defun smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+    (interactive)
+    (move-beginning-of-line nil)
+    (newline-and-indent)
+    (forward-line -1)
+    (indent-according-to-mode)))
 
 (use-package delsel
   :straight nil
@@ -36,7 +53,8 @@
   (:map madmacs-mode-map
     ("C-c '" . iedit-mode)
     ("C-c \"" . iedit-dwim))
-  :config  
+  
+  :config
   (defun iedit-dwim (arg)
     "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
     (interactive "P")
@@ -67,7 +85,7 @@
       (embrace-add-pair ?_ "_" "_")
       (embrace-add-pair ?i "*" "*")
       (embrace-add-pair ?b "**" "**")))
-
+ 
   (defun embrace-double-quotes ()
     (interactive)
     (embrace--add-internal (region-beginning) (region-end) ?\" ))

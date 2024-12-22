@@ -5,7 +5,7 @@
   :hook (prog-mode . copilot-mode)
   :bind
   (:map prog-mode-map
-    ("C-o" . copilot-complete))
+    ("C-M-i" . copilot-complete))
   
   (:map madmacs-keymap-ai-copilot
     ("l" . copilot-login)
