@@ -102,10 +102,10 @@
   (meow-goto-line-function 'consult-goto-line)
   (meow-keypad-leader-dispatch madmacs-keymap-global)
   (meow-char-thing-table
-    '((?( . round)
-      (?) . round)
-      (?[ . square)
-      (?] . square)
+    '((?\( . round)
+      (?\) . round)
+      (?\[ . square)
+      (?\] . square)
       (?{ . curly)
       (?} . curly)
       (?\" . string)
@@ -115,15 +115,22 @@
       (?p . paragraph)
       (?l . line)
       (?d . defun)
-      (?. . sentence)))
+       (?. . sentence)))
+
+  (meow-mode-state-list
+    '((vterm-mode . insert)
+       (vc-git-log-edit-mode . insert)
+       (eshell-mode . insert)
+       (vc-dir-mode . motion)
+       (dired-mode . motion)
+       (helpful-mode . motion)
+       (help-mode . motion)
+       (conf-mode . normal)
+       (fundamental-mode . normal)
+       (prog-mode . normal)
+       (text-mode . normal)))
 
   :config
-  (add-to-list 'meow-mode-state-list '(vterm-mode . insert))
-  (add-to-list 'meow-mode-state-list '(vc-dir-mode . motion))
-  (add-to-list 'meow-mode-state-list '(dired-mode . motion))
-  (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
-  (add-to-list 'meow-mode-state-list '(helpful-mode . normal))
-
   (setq meow-use-dynamic-face-color nil)
   (setq meow--kbd-delete-char "<deletechar>")
   (with-eval-after-load 'org
@@ -162,7 +169,7 @@
     '("[" . meow-pop-to-mark)
     '("]" . meow-unpop-to-mark)
     '(")" . meow-next-symbol)
-    '("(" . meow-prev-symbol)
+    '("(" . meow-back-symbol)
     
     '("<<" . meow-back-word)
     '(">>" . meow-next-word)
@@ -211,6 +218,7 @@
     '("E" . meow-open-below)
     '("c" . meow-change-char)           
     '("C" . meow-change)
+    '("O" . delete-blank-lines)
     
     ;; acting on selections
     '("M-d" . meow-kill-word)
@@ -332,22 +340,5 @@
 
 ;;   (boon-mode 1))
 
-
-(defun meow-tutor ()
-  "Open a buffer with meow tutor."
-  (interactive)
-  (let ((buf (get-buffer-create "*Meow Tutor*")))
-    (with-current-buffer buf
-      (erase-buffer)
-      (message (substitute-command-keys meow--tutor-content))
-      (insert (format (substitute-command-keys meow--tutor-content)
-                      (alist-get 'normal meow-replace-state-name-list)
-                      (alist-get 'insert meow-replace-state-name-list)))
-      (setq-local scroll-conservatively 1)
-      (setq-local scroll-margin 3)
-      (setq-local scroll-step 1)
-      (goto-char (point-min))
-      (display-line-numbers-mode))
-    (switch-to-buffer buf)))
 
 (provide 'madmacs-base-keys)
