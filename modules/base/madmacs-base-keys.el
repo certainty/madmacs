@@ -93,180 +93,180 @@
   (which-key-add-keymap-based-replacements madmacs-mode-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
-(use-package meow
-  :demand t
-  :custom
-  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  (meow-use-cursor-position-hack t)
-  (meow-use-clipboard t)
-  (meow-goto-line-function 'consult-goto-line)
-  (meow-keypad-leader-dispatch madmacs-keymap-global)
-  (meow-char-thing-table
-    '((?\( . round)
-      (?\) . round)
-      (?\[ . square)
-      (?\] . square)
-      (?{ . curly)
-      (?} . curly)
-      (?\" . string)
-      (?s . symbol)
-      (?w . window)
-      (?b . buffer)
-      (?p . paragraph)
-      (?l . line)
-      (?d . defun)
-       (?. . sentence)))
+;; (use-package meow
+;;   :demand t
+;;   :custom
+;;   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+;;   (meow-use-cursor-position-hack t)
+;;   (meow-use-clipboard t)
+;;   (meow-goto-line-function 'consult-goto-line)
+;;   (meow-keypad-leader-dispatch madmacs-keymap-global)
+;;   (meow-char-thing-table
+;;     '((?\( . round)
+;;       (?\) . round)
+;;       (?\[ . square)
+;;       (?\] . square)
+;;       (?{ . curly)
+;;       (?} . curly)
+;;       (?\" . string)
+;;       (?s . symbol)
+;;       (?w . window)
+;;       (?b . buffer)
+;;       (?p . paragraph)
+;;       (?l . line)
+;;       (?d . defun)
+;;        (?. . sentence)))
 
-  (meow-mode-state-list
-    '((vterm-mode . insert)
-       (vc-git-log-edit-mode . insert)
-       (eshell-mode . insert)
-       (vc-dir-mode . motion)
-       (dired-mode . motion)
-       (helpful-mode . motion)
-       (help-mode . motion)
-       (conf-mode . normal)
-       (fundamental-mode . normal)
-       (prog-mode . normal)
-       (text-mode . normal)))
+;;   (meow-mode-state-list
+;;     '((vterm-mode . insert)
+;;        (vc-git-log-edit-mode . insert)
+;;        (eshell-mode . insert)
+;;        (vc-dir-mode . motion)
+;;        (dired-mode . motion)
+;;        (helpful-mode . motion)
+;;        (help-mode . motion)
+;;        (conf-mode . normal)
+;;        (fundamental-mode . normal)
+;;        (prog-mode . normal)
+;;        (text-mode . normal)))
 
-  :config
-  (setq meow-use-dynamic-face-color nil)
-  (setq meow--kbd-delete-char "<deletechar>")
-  (with-eval-after-load 'org
-    (modify-syntax-entry ?@ "_" org-mode-syntax-table))
+;;   :config
+;;   (setq meow-use-dynamic-face-color nil)
+;;   (setq meow--kbd-delete-char "<deletechar>")
+;;   (with-eval-after-load 'org
+;;     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
 
-  ;; These keybindings are intentionally close to emacs defaults
-  (meow-normal-define-key
-    '("<escape>" . meow-cancel-selection)
+;;   ;; These keybindings are intentionally close to emacs defaults
+;;   (meow-normal-define-key
+;;     '("<escape>" . meow-cancel-selection)
     
-    '("0" . meow-expand-0)
-    '("9" . meow-expand-9)
-    '("8" . meow-expand-8)
-    '("7" . meow-expand-7)
-    '("6" . meow-expand-6)
-    '("5" . meow-expand-5)
-    '("4" . meow-expand-4)
-    '("3" . meow-expand-3)
-    '("2" . meow-expand-2)
-    '("1" . meow-expand-1)
+;;     '("0" . meow-expand-0)
+;;     '("9" . meow-expand-9)
+;;     '("8" . meow-expand-8)
+;;     '("7" . meow-expand-7)
+;;     '("6" . meow-expand-6)
+;;     '("5" . meow-expand-5)
+;;     '("4" . meow-expand-4)
+;;     '("3" . meow-expand-3)
+;;     '("2" . meow-expand-2)
+;;     '("1" . meow-expand-1)
 
-    ;; navigation
-    '("f" . meow-right)
-    '("F" . meow-right-expand)
+;;     ;; navigation
+;;     '("f" . meow-right)
+;;     '("F" . meow-right-expand)
     
-    '("b" . meow-left)
-    '("B" . meow-left-expand)
+;;     '("b" . meow-left)
+;;     '("B" . meow-left-expand)
     
-    '("n" . meow-next)
-    '("N" . meow-next-expand)
+;;     '("n" . meow-next)
+;;     '("N" . meow-next-expand)
     
-    '("p" . meow-prev)
-    '("P" . meow-prev-expand)
+;;     '("p" . meow-prev)
+;;     '("P" . meow-prev-expand)
 
-    '("m" . meow-back-to-indentation)
+;;     '("m" . meow-back-to-indentation)
     
-    '("[" . meow-pop-to-mark)
-    '("]" . meow-unpop-to-mark)
-    '(")" . meow-next-symbol)
-    '("(" . meow-back-symbol)
+;;     '("[" . meow-pop-to-mark)
+;;     '("]" . meow-unpop-to-mark)
+;;     '(")" . meow-next-symbol)
+;;     '("(" . meow-back-symbol)
     
-    '("<<" . meow-back-word)
-    '(">>" . meow-next-word)
-    '(">@" . forward-sexp)
-    '("<@" . backward-sexp) 
-    '(">[" . sp-forward-slurp-sexp)
-    '(">]" . sp-forward-barf-sexp)
-    '("<[" . sp-backward-slurp-sexp)
-    '("<]" . sp-backward-barf-sexp)
-    '(">)" . down-list)
-    '("<)" . up-list)
-    '(">p" . forward-paragraph)
-    '("<p" . backward-paragraph)
+;;     '("<<" . meow-back-word)
+;;     '(">>" . meow-next-word)
+;;     '(">@" . forward-sexp)
+;;     '("<@" . backward-sexp) 
+;;     '(">[" . sp-forward-slurp-sexp)
+;;     '(">]" . sp-forward-barf-sexp)
+;;     '("<[" . sp-backward-slurp-sexp)
+;;     '("<]" . sp-backward-barf-sexp)
+;;     '(">)" . down-list)
+;;     '("<)" . up-list)
+;;     '(">p" . forward-paragraph)
+;;     '("<p" . backward-paragraph)
     
-    '("s" . meow-visit)
-    '("S" . meow-search)
+;;     '("s" . meow-visit)
+;;     '("S" . meow-search)
 
-    `("g" . ,goto-map)
+;;     `("g" . ,goto-map)
     
-    ;; scrolling
-    '("K" . scroll-down-line)
-    '("J" . scroll-up-line)
+;;     ;; scrolling
+;;     '("K" . scroll-down-line)
+;;     '("J" . scroll-up-line)
     
-    ;; selections
-    '("~" . negative-argument)
-    '("'" . meow-reverse)
-    '("@" . meow-mark-symbol)
-    '("%" . meow-mark-word)
-    '("l" . meow-line)
-    '("x" . meow-to-block)
-    '("X" . meow-block) ; mnemonic eXpression
-    '("t" . meow-till)
-    '("T" . meow-find)
-    '("j" . meow-join)
+;;     ;; selections
+;;     '("~" . negative-argument)
+;;     '("'" . meow-reverse)
+;;     '("@" . meow-mark-symbol)
+;;     '("%" . meow-mark-word)
+;;     '("l" . meow-line)
+;;     '("x" . meow-to-block)
+;;     '("X" . meow-block) ; mnemonic eXpression
+;;     '("t" . meow-till)
+;;     '("T" . meow-find)
+;;     '("j" . meow-join)
 
-    ;; things
-    '("{" . meow-beginning-of-thing)
-    '("}" . meow-end-of-thing)
-    '("i" . meow-inner-of-thing)  ;; inner
-    '("o" . meow-bounds-of-thing) ;; outer 
+;;     ;; things
+;;     '("{" . meow-beginning-of-thing)
+;;     '("}" . meow-end-of-thing)
+;;     '("i" . meow-inner-of-thing)  ;; inner
+;;     '("o" . meow-bounds-of-thing) ;; outer 
 
-    ;; editing
-    '("a" . meow-insert)
-    '("A" . meow-open-above)
-    '("e" . meow-append)
-    '("E" . meow-open-below)
-    '("c" . meow-change-char)           
-    '("C" . meow-change)
-    '("O" . delete-blank-lines)
+;;     ;; editing
+;;     '("a" . meow-insert)
+;;     '("A" . meow-open-above)
+;;     '("e" . meow-append)
+;;     '("E" . meow-open-below)
+;;     '("c" . meow-change-char)           
+;;     '("C" . meow-change)
+;;     '("O" . delete-blank-lines)
     
-    ;; acting on selections
-    '("M-d" . meow-kill-word)
-    '("M-DEL" . meow-backward-kill-word)
-    '("w" . meow-kill)
-    '("k" . meow-kill-whole-line)
-    '("W" . meow-save)
-    '("d" . meow-delete)
-    '("y" . meow-yank)
-    '("Y" . meow-yank-pop)
-    '("r" . meow-replace)
+;;     ;; acting on selections
+;;     '("M-d" . meow-kill-word)
+;;     '("M-DEL" . meow-backward-kill-word)
+;;     '("w" . meow-kill)
+;;     '("k" . meow-kill-whole-line)
+;;     '("W" . meow-save)
+;;     '("d" . meow-delete)
+;;     '("y" . meow-yank)
+;;     '("Y" . meow-yank-pop)
+;;     '("r" . meow-replace)
 
-    ;; misc
-    '("_" . meow-undo)
-    '("U" . meow-undo-in-selection)
-    '("G" . meow-grab)
-    '(":" . meow-swap-grab) ; mnemonic exchange
-    '(";" . meow-pop-grab)
-    '("/" . meow-pop-selection)
-    '("z" . repeat)
-    '("q" . meow-quit)
-    '("#" . point-to-register)
+;;     ;; misc
+;;     '("_" . meow-undo)
+;;     '("U" . meow-undo-in-selection)
+;;     '("G" . meow-grab)
+;;     '(":" . meow-swap-grab) ; mnemonic exchange
+;;     '(";" . meow-pop-grab)
+;;     '("/" . meow-pop-selection)
+;;     '("z" . repeat)
+;;     '("q" . meow-quit)
+;;     '("#" . point-to-register)
     
-    ;; quick actions
-    '("\"" . embrace-commander)
-    '("." . xref-find-definitions)
-    '("?" . xref-find-references)
-    '("," . xref-go-back)
-    '("$" . eglot-code-actions)
-    '("^" . embark-act) 
-    '("`" . captialize-dwim)
-    '("|" . shell-command-on-region)
-    '("=" . indent-region)
-    '("\\" . meow-comment)
-    '("*" . indent-rigidly)
-    '("+" . expreg-expand)
-    '("-" . expreg-contract))
+;;     ;; quick actions
+;;     '("\"" . embrace-commander)
+;;     '("." . xref-find-definitions)
+;;     '("?" . xref-find-references)
+;;     '("," . xref-go-back)
+;;     '("$" . eglot-code-actions)
+;;     '("^" . embark-act) 
+;;     '("`" . captialize-dwim)
+;;     '("|" . shell-command-on-region)
+;;     '("=" . indent-region)
+;;     '("\\" . meow-comment)
+;;     '("*" . indent-rigidly)
+;;     '("+" . expreg-expand)
+;;     '("-" . expreg-contract))
 
-  (add-to-list 'global-mode-string
-    '("%e" (:eval (meow-indicator))))
+;;   (add-to-list 'global-mode-string
+;;     '("%e" (:eval (meow-indicator))))
 
-  (meow-global-mode 1))
+;;   (meow-global-mode 1))
 
-(use-package meow-tree-sitter
-  :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
-  :after meow
-  :init
-  (meow-tree-sitter-register-defaults))
+;; (use-package meow-tree-sitter
+;;   :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
+;;   :after meow
+;;   :init
+;;   (meow-tree-sitter-register-defaults))
 
 ;; it is important to load which-key after meow to make sure the keymaps show up correctly
 (use-package which-key
