@@ -131,6 +131,8 @@
 
   ;; These keybindings are intentionally close to emacs defaults
   (meow-normal-define-key
+    '("<escape>" . meow-cancel-selection)
+    
     '("0" . meow-expand-0)
     '("9" . meow-expand-9)
     '("8" . meow-expand-8)
@@ -154,14 +156,16 @@
     
     '("p" . meow-prev)
     '("P" . meow-prev-expand)
+
+    '("m" . meow-back-to-indentation)
     
     '("[" . meow-pop-to-mark)
     '("]" . meow-unpop-to-mark)
+    '(")" . meow-next-symbol)
+    '("(" . meow-prev-symbol)
     
-    '("<<" . meow-back-symbol)
-    '(">>" . meow-next-symbol)
-    '("<w" . meow-back-word)
-    '(">w" . meow-next-word)
+    '("<<" . meow-back-word)
+    '(">>" . meow-next-word)
     '(">@" . forward-sexp)
     '("<@" . backward-sexp) 
     '(">[" . sp-forward-slurp-sexp)
@@ -170,9 +174,13 @@
     '("<]" . sp-backward-barf-sexp)
     '(">)" . down-list)
     '("<)" . up-list)
+    '(">p" . forward-paragraph)
+    '("<p" . backward-paragraph)
     
     '("s" . meow-visit)
     '("S" . meow-search)
+
+    `("g" . ,goto-map)
     
     ;; scrolling
     '("K" . scroll-down-line)
@@ -189,24 +197,20 @@
     '("t" . meow-till)
     '("T" . meow-find)
     '("j" . meow-join)
-    '("<escape>" . meow-cancel-selection)
 
     ;; things
     '("{" . meow-beginning-of-thing)
     '("}" . meow-end-of-thing)
-    '(")" . meow-inner-of-thing)
-    '("(" . meow-bounds-of-thing)
+    '("i" . meow-inner-of-thing)  ;; inner
+    '("o" . meow-bounds-of-thing) ;; outer 
 
     ;; editing
-    '("i" . meow-insert)
-    '("a" . meow-append)
-    '("A" . madmacs-meow-insert-at-indentation)
-    '("E" . madmacs-meow-insert-and-of-line)
-    '("o" . meow-open-below)
-    '("O" . meow-open-above)
-    '("c" . meow-change-char)
+    '("a" . meow-insert)
+    '("A" . meow-open-above)
+    '("e" . meow-append)
+    '("E" . meow-open-below)
+    '("c" . meow-change-char)           
     '("C" . meow-change)
-    '("v" . just-one-space)
     
     ;; acting on selections
     '("M-d" . meow-kill-word)
@@ -227,21 +231,21 @@
     '(";" . meow-pop-grab)
     '("/" . meow-pop-selection)
     '("z" . repeat)
-    '("Z" . meow-repeat)
     '("q" . meow-quit)
+    '("#" . point-to-register)
     
     ;; quick actions
     '("\"" . embrace-commander)
     '("." . xref-find-definitions)
     '("?" . xref-find-references)
     '("," . xref-go-back)
-    '("m" . embark-act) ;; mnemnoic menu
-    `("g" . ,goto-map)
+    '("$" . eglot-code-actions)
+    '("^" . embark-act) 
     '("`" . captialize-dwim)
     '("|" . shell-command-on-region)
     '("=" . indent-region)
-    '("#" . meow-comment)
-    '("\\" . indent-rigidly)
+    '("\\" . meow-comment)
+    '("*" . indent-rigidly)
     '("+" . expreg-expand)
     '("-" . expreg-contract))
 
@@ -328,5 +332,22 @@
 
 ;;   (boon-mode 1))
 
+
+(defun meow-tutor ()
+  "Open a buffer with meow tutor."
+  (interactive)
+  (let ((buf (get-buffer-create "*Meow Tutor*")))
+    (with-current-buffer buf
+      (erase-buffer)
+      (message (substitute-command-keys meow--tutor-content))
+      (insert (format (substitute-command-keys meow--tutor-content)
+                      (alist-get 'normal meow-replace-state-name-list)
+                      (alist-get 'insert meow-replace-state-name-list)))
+      (setq-local scroll-conservatively 1)
+      (setq-local scroll-margin 3)
+      (setq-local scroll-step 1)
+      (goto-char (point-min))
+      (display-line-numbers-mode))
+    (switch-to-buffer buf)))
 
 (provide 'madmacs-base-keys)

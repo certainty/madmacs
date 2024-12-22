@@ -76,7 +76,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package treesit-auto
-  :hook (after-startup . global-treesit-auto-mode)
+  :hook (after-init . global-treesit-auto-mode)
   :custom
   (treesit-font-lock-level 4) ;; make sure we get the elements highlighted we're interested in
   (treesit-auto-install 'prompt)
@@ -103,9 +103,6 @@
 (use-package flymake
   :straight (:type built-in)
   :hook
-  (prog-mode . flymake-mode)
-  :custom
-  (flymake-mode-line-counter-format '("" flymake-mode-line-error-counter flymake-mode-line-warning-counter flymake-mode-line-note-counter ""))
-  (flymake-mode-line-format '(" " flymake-mode-line-exception flymake-mode-line-counters)))
+  (prog-mode . flymake-mode))
 
 (provide 'madmacs-code-essentials)
