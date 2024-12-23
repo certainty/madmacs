@@ -11,7 +11,7 @@
   (vc-make-backup-files nil) ; no backup files in vc
   (create-lockfiles nil) ; no lockfiles since I only ever have one instance of emacs running
   (delete-auto-save-files t)
-  (auto-save-default nil)
+  (auto-save-default t)
   (auto-save-files-dir "~/.local/cache/emacs")
   (auto-save-list-file-prefix
    (concat "~/.local/cache/auto-save-list" "/.saves-")))

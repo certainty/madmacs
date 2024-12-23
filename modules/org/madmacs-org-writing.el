@@ -1,6 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 
+(defvar madmacs-notes-shared-vault-path (file-truename "~/Vault/Silos/Shared"))
+(defvar madmacs-notes-private-vault-path (file-truename "~/Vault/Silos/Strictly Private"))
+
 (defvar-keymap madmacs-keymap-notes :doc "Writing and note taking")
+
 (which-key-add-keymap-based-replacements madmacs-keymap-global
   "n" `("Notes+Writing" . ,madmacs-keymap-notes))
 
@@ -125,7 +129,7 @@
   :bind
   (:map madmacs-keymap-notes
     ("n" . denote)
-    ("c" . denote-region) ; "contents" mnemonic
+    ("r" . denote-region) ; "contents" mnemonic
     ("N" . denote-type)
     ("d" . denote-date)
     ("z" . denote-signature) ; "zettelkasten" mnemonic
@@ -135,8 +139,8 @@
     ("b" . denote-backlinks)
     ("f f" . denote-find-link)
     ("f b" . denote-find-backlink)
-    ("r" . denote-rename-file)
-    ("R" . denote-rename-file-using-front-matter))
+    ("m" . denote-rename-file)
+    ("M" . denote-rename-file-using-front-matter))
 
   (:map dired-mode-map
     ("C-c C-d C-i" . denote-dired-link-marked-notes)
@@ -144,13 +148,13 @@
     ("C-c C-d C-k" . denote-dired-rename-marked-files-with-keywords)
     ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter))
   :custom
-  (denote-directory (concat org-directory "/notes"))
+  (denote-directory madmacs-notes-shared-vault-path)
   (denote-save-buffers nil)
-  (denote-known-keywords '("nw1" "messaging" "xws" "pmd" "cloud_migration" "emacs" "health" "finance" "home" "family" "dea"))
+  (denote-known-keywords '("area" "project" "archive" "resource" "nw1" "messaging" "xws" "pmd" "cloud_migration" "emacs" "health" "finance" "home" "family" "dea"))
   (denote-infer-keywords t)
   (denote-sort-keywords t)
   (denote-file-type nil) ; Org is the default, set others here
-  (denote-prompts '(title keywords))
+  (denote-prompts '(subdirectory title keywords))
   (denote-excluded-directories-regexp nil)
   (denote-excluded-keywords-regexp nil)
   (denote-rename-confirmations '(rewrite-front-matter modify-file-name))
@@ -173,6 +177,7 @@
 
   :config
   (require 'denote-org-extras)
+  (require 'denote-silo-extras)
   (denote-rename-buffer-mode 1))
 
 (use-package consult-notes
@@ -183,12 +188,83 @@
   (:map search-map
     ("n g" . consult-notes-search-in-all-notes))
 
+  :custom
+  (consult-notes-file-dir-sources
+    `(("Org"       ?o "~/Org")
+       ("Shared"    ?n ,madmacs-notes-shared-vault-path)
+       ("Private"  ?p ,madmacs-notes-private-vault-path)))
   :config
-  (setopt consult-notes-file-dir-sources
-    `(("Org"       ?o "~/org")
-      ("Notes"    ?n "~/org/notes")))
   (consult-notes-org-headings-mode)
   (consult-notes-denote-mode))
 
+
+;;;; Bibliography
+
+(defvar madmacs-notes-bib-path (concat madmacs-notes-shared-vault-path "/Resources/Library/library.bib"))
+(defvar madmacs-notes-library-path (concat madmacs-notes-shared-vault-path "/Resources/Library"))
+
+(defvar-keymap madmacs-keymap-bib :doc "Keymap to manage bibliography notes")
+
+(with-eval-after-load 'which-key
+  (which-key-add-keymap-based-replacements madmacs-keymap-notes
+    "b" `("Bib" . ,madmacs-keymap-bib)))
+
+(use-package biblio)
+
+(use-package ebib
+  :bind
+  (:map madmacs-keymap-bib
+    ("b" . ebib))
+  :custom
+  (ebib-bibtex-dialect 'biblatex)
+  (ebib-preload-bib-files (list madmacs-notes-bib-path)))
+
+(use-package bibtex
+  :custom
+  (bibtex-file-path madmacs-notes-library-path))
+
+(use-package citar
+  :demand t
+  :custom
+  ;; set bibliography's location
+  (citar-bibliography (list madmacs-notes-bib-path))
+  (citar-library-paths (list (concat madmacs-notes-library-path "/Books") (concat madmacs-notes-library-path "/Papers")))
+  (citar-notes-paths (list madmacs-notes-library-path))
+  (citar-open-always-create-notes nil)
+  (citar-file-note-extensions (list "org"))
+  :bind
+  (:map madmacs-keymap-bib
+    ("c" . citar-create-note)))
+
+(use-package citar-denote
+  :after citar
+  :custom
+  (citar-denote-file-type 'org)
+  (citar-denote-keyword "bib")
+  (citar-denote-signature nil)
+  (citar-denote-subdir nil)
+  (citar-denote-title-format "title")
+  (citar-denote-title-format-andstr "and")
+  (citar-denote-title-format-authors 1)
+  (citar-denote-use-bib-keywords t)
+  (citar-denote-template 'biblio)
+  :bind
+  (:map madmacs-keymap-bib
+    ("d" . citar-denote-dwim)
+    ("e" . citar-denote-open-reference-entry)
+    ("a" . citar-denote-add-citekey)
+    ("o" . citar-denote-open-note )
+    ("k" . citar-denote-remove-citekey)
+    ("r" . citar-denote-find-reference)
+    ("l" . citar-denote-link-reference)
+    ("f" . citar-denote-find-citation)
+    ("x" . citar-denote-nocite)
+    ("y" . citar-denote-cite-nocite)
+    ("z" . citar-denote-nobib))
+
+  :config
+  (add-to-list 'denote-templates '(biblio . "* Abstract\n\n* Notes"))
+  :init
+  (citar-denote-mode))
 
 (provide 'madmacs-org-writing)

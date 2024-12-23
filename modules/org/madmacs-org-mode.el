@@ -12,8 +12,8 @@
     ("p" . org-previous-item))
   
   :custom
-  (org-directory (file-truename "~/org"))
-  (org-attach-id-dir (file-truename "~/org/.attachments"))
+  (org-directory (file-truename "~/Org"))
+  (org-attach-id-dir (file-truename "~/Org/.attachments"))
 
   ;; let's get fast and be nice to our fingers
   ;;(org-use-speed-commands t)

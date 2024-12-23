@@ -50,17 +50,7 @@
   (org-priority-default ?B)
   (org-priority-highest ?A)
   (org-priority-lowest ?F)
-  (org-tag-alist '(("@desk" . ?d)
-                    ("@home" . ?h)
-                    ("@office" . ?o)
-                    ("@market" . ?m)
-                    ("@petstore" . ?p)
-                    ("finance" . ?f)
-                    ("health" . ?H)
-                    ("mind" . ?M)
-                    ("body" . ?b)
-                    ("family" . ?a)
-                    ("career" . ?c)))
+  
   
   (org-use-fast-todo-selection 'expert)
   (org-enforce-todo-dependencies t)
