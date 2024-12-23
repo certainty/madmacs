@@ -21,12 +21,13 @@
   (text-mode . flyspell-mode)
   (git-commit-mode . flyspell-mode)
   :bind
+  (:map goto-map
+    (">" . flyspell-goto-next-error))
   (:map madmacs-keymap-global
-    ("." . flyspell-correct-word))
+    ("." . flyspell-auto-correct-word))
   
   :config
   ;; don't shadow embark or avy bindings
-  (unbind-key "C-," flyspell-mode-map)
   (unbind-key "C-." flyspell-mode-map))
 
 (use-package markdown-mode
@@ -41,7 +42,8 @@
   :after embark
   :bind
   (:map embark-region-map
-        ("t" . google-translate-at-point))
+    ("t" . google-translate-at-point))
+  
   :config
   (setq google-translate-default-target-language "en")
   (setq google-translate-backend-method 'curl)
@@ -126,7 +128,7 @@
 
   (denote-templates
     '((project . "* Objective\n\n* References\n")
-      (meeting . "* Outcome\n\n* Notes\n\n* Tasks\n** Our\n ** Theirs\n\n" )
+      (meeting . "* Outcome\n\n* Notes\n\n* Tasks\n** Our\n** Theirs\n\n" )
       (plain . "")))
   
   :init

@@ -77,7 +77,7 @@ Position the cursor at it's beginning, according to the current mode."
   :demand t
   :bind
   (:map madmacs-mode-map
-    ("C-," . embrace-commander))
+    ("C-\"" . embrace-commander))
   
   :init
   (add-hook 'markdown-mode-hook
