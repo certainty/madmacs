@@ -56,10 +56,4 @@
     (push 'embark--allow-edit
       (alist-get 'eglot-code-actions embark-target-injection-hooks))))
 
-(use-package consult-xref-stack
-  :straight (consult-xref-stack :type git :host github :repo "brett-lempereur/consult-xref-stack" :branch "main")
-  :bind
-  (("C-M-," . consult-xref-stack-forward)
-    ("M-," . consult-xref-stack-backward)))
-
 (provide 'madmacs-code-lsp)

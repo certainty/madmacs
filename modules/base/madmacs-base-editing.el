@@ -98,7 +98,6 @@ Position the cursor at it's beginning, according to the current mode."
   :demand t
   :bind
   (("C-." . embark-act)                 ; this is ok since it gives us xrefs as options
-   ("M-." . embark-dwim)                ; this is also ok since it also gives us xrefs as options
    ("C-h B" . embark-bindings))
   
   :init

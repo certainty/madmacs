@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package project
-  :straight nil
+  :straight (:type built-in)
   :demand t
   :bind
   (:map goto-map

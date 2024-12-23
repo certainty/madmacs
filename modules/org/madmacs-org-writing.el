@@ -1,18 +1,20 @@
 ;; -*- lexical-binding: t; -*-
 
-(defvar madmacs-notes-shared-vault-path (file-truename "~/Vault/Silos/Shared"))
-(defvar madmacs-notes-private-vault-path (file-truename "~/Vault/Silos/Strictly Private"))
-
-(defvar-keymap madmacs-keymap-notes :doc "Writing and note taking")
-
-(which-key-add-keymap-based-replacements madmacs-keymap-global
-  "n" `("Notes+Writing" . ,madmacs-keymap-notes))
 
 (use-package emacs
   :straight nil
   :demand t
   :custom
-  (dictionary-server "dict.org"))
+  (dictionary-server "dict.org")
+
+  :init
+  (defvar madmacs-notes-shared-vault-path (file-truename "~/Vault/Silos/Shared"))
+  (defvar madmacs-notes-private-vault-path (file-truename "~/Vault/Silos/Strictly Private"))
+
+  (defvar-keymap madmacs-keymap-notes :doc "Writing and note taking")
+  (with-eval-after-load 'which-key
+    (which-key-add-keymap-based-replacements madmacs-keymap-global
+      "n" `("Notes+Writing" . ,madmacs-keymap-notes))))
 
 (use-package flyspell
   :straight nil
@@ -65,59 +67,7 @@
     (setopt org-capture-templates
             (append
              org-capture-templates
-             '(("m" "Meeting")
-               ("mm" "Adhoc" entry (file+olp+datetree "meetings.org" "Adhoc")
-                "* %T %?n
-:PROPERTIES:
-:CATEGORY: meetings
-:RECURRING: no
-:CAPTURED: %U
-:REFS: %a
-:END:
-
-"
-                :prepend t
-                :tree-type week)
-               
-               ("mM" "Adhoc (date)" entry (file+olp+datetree "meetings.org" "Adhoc")
-                "* %T %?
-:PROPERTIES:
-:CATEGORY: meetings
-:RECURRING: no
-:CAPTURED: %U
-:REFS: %a
-:END:
-"
-                :prepend t
-                :tree-type week
-                :time-prompt t)
-               
-               ("mo" "1on1" entry (file+olp+datetree "meetings.org" "1on1")
-                "* %T :1on1:
-:PROPERTIES:
-:CATEGORY: meetings
-:CAPTURED: %U
-:RECURRING: yes
-:END:
-
-%?
-"
-                :prepend t
-                :tree-type month)
-
-               ("mO" "1on1" entry (file+olp+datetree "meetings.org" "1on1")
-                "* %T :1on1:
-:PROPERTIES:f
-:CATEGORY: meetings
-:CAPTURED: %U
-:RECURRING: yes
-:END:
-
-%?"
-                :prepend t
-                :time-prompt t
-                :tree-type month)
-               
+             '(
                ("n" "Notes")
                ("nj" "Fleeting note" entry (file+olp+datetree "journal.org")
                 "* %U %?"
@@ -125,8 +75,13 @@
 
 ;; Permanent notes
 (use-package denote
+  :demand t
   :hook (dired-mode . denote-dired-mode)
   :bind
+  (:map madmacs-keymap-global
+    ("C" . denote)
+    ("m" . madmacs-notes-meeting-new-recurring))
+  
   (:map madmacs-keymap-notes
     ("n" . denote)
     ("r" . denote-region) ; "contents" mnemonic
@@ -154,7 +109,7 @@
   (denote-infer-keywords t)
   (denote-sort-keywords t)
   (denote-file-type nil) ; Org is the default, set others here
-  (denote-prompts '(subdirectory title keywords))
+  (denote-prompts '(template title keywords))
   (denote-excluded-directories-regexp nil)
   (denote-excluded-keywords-regexp nil)
   (denote-rename-confirmations '(rewrite-front-matter modify-file-name))
@@ -163,22 +118,94 @@
   (denote-backlinks-show-context t)
   (denote-dired-directories (list denote-directory (concat org-directory "/.attachments")))
 
+  (denote-templates
+    '((project . "* Objective\n\n* References\n")
+      (meeting . "#+CATEGORY: meeting\n\n* Outcome\n\n* Notes\n\n* Tasks\n** Our\n ** Theirs\n\n" )
+      (plain . "")))
+  
   :init
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers "%i\n%?")
-    (add-to-list 'org-capture-templates
-      '("nn" "Permanent Note" plain
+    
+    (cl-pushnew
+      '("nn" "Permanent" plain
          (file denote-last-path)
          #'denote-org-capture
          :no-save nil
          :immediate-finish nil
          :kill-buffer t
-         :jump-to-captured nil)))
+         :jump-to-captured nil)
+       org-capture-templates)
+    
+    (cl-pushnew
+      '("nm" "Meeting Note" plain
+         (file denote-last-path)
+         (function
+           (lambda ()
+             (let ((denote-use-directory (expand-file-name "/Resources/Meetings" (denote-directory)))
+                    (denote-use-keywords (list "meeting"))
+                    (denote-use-template 'meeting))
+               (denote-org-capture))))
+         :no-save t
+         :immediate-finish nil
+         :kill-buffer t
+         :jump-to-captured t)
+      org-capture-templates))
 
   :config
   (require 'denote-org-extras)
   (require 'denote-silo-extras)
-  (denote-rename-buffer-mode 1))
+  (denote-rename-buffer-mode 1)
+
+  ;;; Special support for meeting minutes
+  (defvar madmacs-notes-meeting-directory "/Resources/Meetings"
+    "The directory for meeting minutes")
+  
+  (defvar madmacs-notes-meeting-recurring '("1on1" "monday sync")
+    "The list of recurring meetings that I take notes on")
+
+  (defvar madmacs-notes-meeting-prompt-history nil)
+
+  (defun madmacs-notes-meeting-prompt-recurring ()
+    "Prompt for the recurring meeting to add a note to"
+     (let ((default-value (car madmacs-notes-meeting-recurring)))
+       (completing-read
+         (format-prompt "New entry for recurring meeting" default-value)
+         madmacs-notes-meeting-recurring
+         nil :require-match nil
+         'madmacs-notes-meeting-prompt-history
+         default-value)))
+
+  (defun madmacs-notes-meeting-recurring-get-file (name)
+  "Find file in variable `madmacs-notes-meeting-directory' for NAME recurring meeting.
+If there are more than one files, prompt with completion for one among
+them.
+
+NAME is one among `madmacs-notes-meeting-recurring'."
+    (if-let ((files (denote-directory-files (format "%s.*_meeting" name)))
+              (length-of-files (length files)))
+      (cond
+        ((= length-of-files 1)
+          (car files))
+        ((> length-of-files 1)
+          (completing-read "Select a file: " files nil :require-match)))
+      (user-error "No files for recurring meeting with name `%s'" name))))
+
+(defun madmacs-notes-meeting-new-recurring ()
+  "Prompt for the name of a recurring heading and insert a timestamped heading therein.
+The name of meeting corresponds to at least one file in the variable
+`denote-directory'.  In case there are multiple files, prompt to choose
+one among them and operate therein.
+
+Names are defined in `madmacs-notes-meeting-recurring'."
+  (declare (interactive-only t))
+  (interactive)
+  (let* ((name (madmacs-notes-meeting-prompt-recurring))
+         (file (madmacs-notes-meeting-recurring-get-file name))
+         (time (format-time-string "%F %a %R")))  ; remove %R if you do not want the time
+    (with-current-buffer (find-file file)
+      (goto-char (point-max))
+      (insert (format "* [%s]\n\n" time)))))
 
 (use-package consult-notes
   :after org
@@ -191,23 +218,27 @@
   :custom
   (consult-notes-file-dir-sources
     `(("Org"       ?o "~/Org")
-       ("Shared"    ?n ,madmacs-notes-shared-vault-path)
+       ("Shared"   ?n ,madmacs-notes-shared-vault-path)
        ("Private"  ?p ,madmacs-notes-private-vault-path)))
   :config
   (consult-notes-org-headings-mode)
   (consult-notes-denote-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Bibliography & Citations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;; Bibliography
+(use-package emacs
+  :straight nil
+  :demand t
+  :init
+  (defvar madmacs-notes-bib-path (concat madmacs-notes-shared-vault-path "/Resources/Library/library.bib"))
+  (defvar madmacs-notes-library-path (concat madmacs-notes-shared-vault-path "/Resources/Library"))
+  (defvar-keymap madmacs-keymap-bib :doc "Keymap to manage bibliography notes")
 
-(defvar madmacs-notes-bib-path (concat madmacs-notes-shared-vault-path "/Resources/Library/library.bib"))
-(defvar madmacs-notes-library-path (concat madmacs-notes-shared-vault-path "/Resources/Library"))
-
-(defvar-keymap madmacs-keymap-bib :doc "Keymap to manage bibliography notes")
-
-(with-eval-after-load 'which-key
-  (which-key-add-keymap-based-replacements madmacs-keymap-notes
-    "b" `("Bib" . ,madmacs-keymap-bib)))
+  (with-eval-after-load 'which-key
+    (which-key-add-keymap-based-replacements madmacs-keymap-notes
+      "b" `("Bib" . ,madmacs-keymap-bib))))
 
 (use-package biblio)
 
@@ -242,7 +273,7 @@
   (citar-denote-file-type 'org)
   (citar-denote-keyword "bib")
   (citar-denote-signature nil)
-  (citar-denote-subdir nil)
+  (citar-denote-subdir "/Resources/Library") ; relative to denote dir
   (citar-denote-title-format "title")
   (citar-denote-title-format-andstr "and")
   (citar-denote-title-format-authors 1)
