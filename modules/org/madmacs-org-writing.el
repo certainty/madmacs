@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
 (use-package emacs
   :straight nil
   :demand t
@@ -23,7 +22,8 @@
   (git-commit-mode . flyspell-mode)
   :bind
   (:map madmacs-keymap-global
-        ("." . flyspell-correct-word))
+    ("." . flyspell-correct-word))
+  
   :config
   ;; don't shadow embark or avy bindings
   (unbind-key "C-," flyspell-mode-map)
@@ -73,7 +73,10 @@
                 "* %U %?"
                 :tree-type week))))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Permanent notes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package denote
   :demand t
   :hook (dired-mode . denote-dired-mode)
@@ -84,16 +87,19 @@
   
   (:map madmacs-keymap-notes
     ("n" . denote)
-    ("r" . denote-region) ; "contents" mnemonic
-    ("N" . denote-type)
+    ("N" . denote-subdirectory)
     ("d" . denote-date)
-    ("z" . denote-signature) ; "zettelkasten" mnemonic
-    ("s" . denote-subdirectory)
+    ("r" . denote-region) ; "contents" mnemonic
+
     ("i" . denote-link) ; "insert" mnemonic
-    ("I" . denote-add-links)
+    ("t" . denote-type)
+    ("z" . denote-signature) ; "zettelkasten" mnemonic
+    ("l" . denote-add-links)
     ("b" . denote-backlinks)
+    
     ("f f" . denote-find-link)
     ("f b" . denote-find-backlink)
+    
     ("m" . denote-rename-file)
     ("M" . denote-rename-file-using-front-matter))
 
@@ -120,7 +126,7 @@
 
   (denote-templates
     '((project . "* Objective\n\n* References\n")
-      (meeting . "#+CATEGORY: meeting\n\n* Outcome\n\n* Notes\n\n* Tasks\n** Our\n ** Theirs\n\n" )
+      (meeting . "* Outcome\n\n* Notes\n\n* Tasks\n** Our\n ** Theirs\n\n" )
       (plain . "")))
   
   :init
@@ -297,5 +303,21 @@ Names are defined in `madmacs-notes-meeting-recurring'."
   (add-to-list 'denote-templates '(biblio . "* Abstract\n\n* Notes"))
   :init
   (citar-denote-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Display what was written :)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package DocView
+  :straight (:type built-in))
+
+(use-package esxml)
+
+(use-package nov.el
+  :after esxml
+  :hook (after-init . setup-novel)
+  :config
+  (defun setup-novel (&rest _)
+    (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))))
 
 (provide 'madmacs-org-writing)

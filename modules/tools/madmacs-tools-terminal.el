@@ -7,7 +7,6 @@
   :after popper
   :bind
   ("C-x T" . multi-vterm-project)
-
   
   :config
   (add-to-list 'popper-reference-buffers 'vterm-mode)

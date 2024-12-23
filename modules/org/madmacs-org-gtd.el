@@ -157,14 +157,6 @@
               (org-agenda-deadline-leaders '(" Deadline: " " In %2d d.: " "%2d d. ago: "))
               (org-agenda-time-grid (quote ((today require-timed remove-match) () "      " "┈┈┈┈┈┈┈┈┈┈┈┈┈")))))))
 
-       ("m" "Meetings"
-         ((tags "+CATEGORY=\"meeting\"|+TODO=\"MEETING\""
-            ((org-agenda-overriding-header "Meetings \n")
-              (org-agenda-use-time-grid t)
-              (org-agenda-remove-tags nil)
-              (org-agenda-prefix-format "%-15c %s")
-              (org-agenda-sorting-strategy '(scheduled-down))))))
-
        ("w" "Weekly Review"
          ((todo "*"
             ((org-agenda-overriding-header "🎉 Completed Tasks\n")
