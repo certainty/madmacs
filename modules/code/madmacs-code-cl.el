@@ -4,6 +4,7 @@
 (defvar-keymap madmacs-sly-asdf-keys :doc "Sly asdf keys")
 
 (use-package sly
+  :hook (sly-mode . corfu-mode)
   :custom
   (sly-lisp-implementation 'sbcl)
   (inferior-lisp-program "sbcl")
@@ -167,7 +168,6 @@
     "C-c x" `("Xref" . ,madmacs-sly-xref-keys)))
 
 (use-package sly-asdf
-  :hook sly-mode
   :after sly
   :config
   
@@ -185,14 +185,12 @@
 (use-package sly-quicklisp
   :hook sly-mode)
 
-(use-package sly-macrostep
-  :hook sly-mode)
+(use-package sly-macrostep)
 
 (use-package sly-repl-ansi-color
   :init
   (add-to-list 'sly-contribs 'sly-repl-ansi-color))
 
-(use-package sly-overlay
-  :hook sly-mode)
+(use-package sly-overlay)
 
 (provide 'madmacs-code-cl)

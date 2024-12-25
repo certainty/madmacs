@@ -85,7 +85,7 @@
   :bind
   (:map madmacs-keymap-global
     ("C" . denote)
-    ("m" . madmacs-notes-meeting-new-recurring))
+    ("m" . madmacs-notes-meeting-new-recuraring))
   
   (:map madmacs-keymap-notes
     ("n" . denote)
@@ -110,6 +110,7 @@
     ("C-c C-d C-r" . denote-dired-rename-files)
     ("C-c C-d C-k" . denote-dired-rename-marked-files-with-keywords)
     ("C-c C-d C-R" . denote-dired-rename-marked-files-using-front-matter))
+  
   :custom
   (denote-directory madmacs-notes-shared-vault-path)
   (denote-save-buffers nil)
@@ -127,7 +128,7 @@
   (denote-dired-directories (list denote-directory (concat org-directory "/.attachments")))
 
   (denote-templates
-    '((project . "* Objective\n\n* References\n")
+    '((proj . "* Objective\n\n* References\n")
       (meeting . "* Outcome\n\n* Notes\n\n* Tasks\n** Our\n** Theirs\n\n" )
       (plain . "")))
   
@@ -224,10 +225,15 @@ Names are defined in `madmacs-notes-meeting-recurring'."
     ("n g" . consult-notes-search-in-all-notes))
 
   :custom
+  (consult-notes-denote-files-function (function
+                                         (lambda ()
+                                           (denote-directory-files nil nil t)))) ;; text-only
+
   (consult-notes-file-dir-sources
-    `(("Org"       ?o "~/Org")
+    `(("Org"       ?o ,org-directory)
        ("Shared"   ?n ,madmacs-notes-shared-vault-path)
-       ("Private"  ?p ,madmacs-notes-private-vault-path)))
+       ("Private"  ?p ,madmacs-notes-private-vault-path :hidden t)))
+  
   :config
   (consult-notes-org-headings-mode)
   (consult-notes-denote-mode))
