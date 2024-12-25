@@ -100,7 +100,7 @@
 (when (eq system-type 'darwin)
   (require 'madmacs-base-osx))
 
-(require 'madmacs-base-ui)
+(require 'madmacs-base-ui-nano)
 (require 'madmacs-base-display-elements)
 (require 'madmacs-base-completion)
 (require 'madmacs-base-files)

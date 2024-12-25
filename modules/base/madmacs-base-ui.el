@@ -42,21 +42,21 @@
       :default-weight regular
       :default-slant normal
       :default-height ,madmacs-font-size
-      
+
       :fixed-pitch-family ,madmacs-font
       :fixed-pitch-height 1.0
       :fixed-pitch-serif-height 1.0
-      
+
       :variable-pitch-family ,madmacs-variable-pitch-font
       :variable-pitch-height 1.0)))
-  
+
   :config
   (defun madmacs-toggle-font ()
     (interactive)
     (if (eq fontaine-current-preset 'regular)
       (fontaine-set-preset 'presentation)
       (fontaine-set-preset 'regular)))
-  
+
   (fontaine-mode 1)
   (message "setting font preset")
   (fontaine-set-preset 'regular)
@@ -75,7 +75,7 @@
   :bind
   (:map madmacs-keymap-ux
 	("c" . madmacs-modus-theme-toggle))
-  
+
   :config
   (setq
    modus-themes-custom-auto-reload t
@@ -106,7 +106,7 @@
            (bg-line-number-active unspecified))))
 
     (load-theme name t))
-  
+
   (defvar madmacs--modus-theme-light nil)
 
   (defun madmacs-modus-light-theme ()
@@ -124,7 +124,7 @@
     (if madmacs--modus-theme-light
       (madmacs-modus-dark-theme)
       (madmacs-modus-light-theme)))
-  
+
   (madmacs-modus-dark-theme))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
