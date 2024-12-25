@@ -56,7 +56,8 @@
             "/usr/bin/grep <X> <C> -nH --null -e <R> <F>"))
     (setq xref-search-program (if rgp 'ripgrep 'grep))))
 
-(use-package wgrep
+(use-package
+  wgrep
   :after grep
   :bind
   (:map grep-mode-map
@@ -66,5 +67,10 @@
   :custom
   (wgrep-auto-save-buffer t))
 
+(use-package p-search
+  :straight (:host github :repo "zkry/p-search")
+  :bind
+  (:map search-map
+    ("p" . p-search)))
 
 (provide 'madmacs-base-search)

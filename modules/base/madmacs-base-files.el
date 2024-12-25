@@ -108,6 +108,10 @@
 (use-package wdired
   :straight nil
   :commands (wdired-change-to-wdired-mode)
+  :bind
+  (:map dired-mode-map
+    ("C-x C-q" . wdired-change-to-wdired-mode))
+    
   :custom
   (wdired-allow-to-change-permissions t)
   (wdired-create-parent-directories t))

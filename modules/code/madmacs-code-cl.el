@@ -11,6 +11,9 @@
   (sly-complete-symbol-function #'sly-flex-completions)
 
   :init
+  (with-eval-after-load 'popper
+    (cl-pushnew 'sly-mrepl-mode popper-reference-buffers))
+  
   (add-to-list 'auto-mode-alist '("\\.ros\\'" . lisp-mode))
 
   :config

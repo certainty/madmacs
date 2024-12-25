@@ -176,11 +176,7 @@ The DWIM behaviour of this command is as follows:
 
   (add-to-list 'display-buffer-alist
     '("\\*\\(Output\\|Register Preview\\).*"
-       (display-buffer-reuse-mode-window display-buffer-at-bottom)))
-
-  (add-to-list 'display-buffer-alist
-    '("\\`\\*Async Shell Command\\*\\'"
-      (display-buffer-no-window))))
+       (display-buffer-reuse-mode-window display-buffer-at-bottom))))
 
 (use-package uniquify
   :demand t
@@ -213,8 +209,6 @@ The DWIM behaviour of this command is as follows:
     '("\\*Messages\\*"
        "Output\\*$"
        "\\*Async Shell Command\\*"
-       copilot-chat-mode
-       sly-mrepl-mode
        help-mode
        compilation-mode))
   (popper-mode +1)

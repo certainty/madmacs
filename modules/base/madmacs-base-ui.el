@@ -74,58 +74,28 @@
   :demand t
   :bind
   (:map madmacs-keymap-ux
-	("c" . madmacs-modus-theme-toggle))
+	  ("c" . modus-themes-toggle))
 
   :config
   (setq
-   modus-themes-custom-auto-reload t
-   modus-themes-disable-other-themes nil
-   modus-themes-mixed-fonts t
-   modus-themes-italic-constructs t
-   modus-themes-bold-constructs t
-   modus-themes-variable-pitch-ui t
-   modus-themes-prompts '(extrabold italic)
-   modus-themes-completions
-   '((matches . (extrabold underline))
-     (selection . (semibold italic))))
+    modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi)
+    modus-themes-custom-auto-reload t
+    modus-themes-disable-other-themes nil
+    modus-themes-mixed-fonts t
+    modus-themes-italic-constructs t
+    modus-themes-bold-constructs t
+    modus-themes-variable-pitch-ui t
+    modus-themes-prompts '(extrabold italic)
+    modus-themes-completions
+    '((matches . (extrabold underline))
+       (selection . (semibold italic))))
+  
+  (mapc #'disable-theme custom-enabled-themes)
+  (load-theme 'modus-vivendi-tinted :no-confirm))
 
-  (defun madmacs--defaults-with-overrides (defaults overrides)
-    "Merge overrides into defaults. Overriding any defaults."
-    (append (cl-remove-if (lambda (x) (member (car x) (mapcar 'car overrides))) defaults) overrides))
-
-  (defun madmacs-load-modus-theme (name &optional light)
-    (setq modus-themes-common-palette-overrides
-      (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
-        `(,(unless light '(bg-main "#000000"))
-           ,(unless light '(bg-paren-match bg-magenta-intense))
-           (underline-paren-match fg-main)
-           (border-mode-line-active unspecified)
-           (border-mode-line-inactive unspecified)
-           (fg-line-number-active red-cooler)
-           (bg-line-number-inactive unspecified)
-           (bg-line-number-active unspecified))))
-
-    (load-theme name t))
-
-  (defvar madmacs--modus-theme-light nil)
-
-  (defun madmacs-modus-light-theme ()
-    (interactive)
-    (setq madmacs--modus-theme-light t)
-    (madmacs-load-modus-theme 'modus-operandi-tinted t))
-
-  (defun madmacs-modus-dark-theme ()
-    (interactive)
-    (setq madmacs--modus-theme-light nil)
-    (madmacs-load-modus-theme 'modus-vivendi-tinted))
-
-  (defun madmacs-modus-theme-toggle ()
-    (interactive)
-    (if madmacs--modus-theme-light
-      (madmacs-modus-dark-theme)
-      (madmacs-modus-light-theme)))
-
-  (madmacs-modus-dark-theme))
+(use-package ef-themes
+  :custom
+  (ef-themes-to-toggle '(ef-light ef-dream)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline
@@ -142,6 +112,5 @@
   :demand t
   :config
   (minions-mode))
-
-
+ 
 (provide 'madmacs-base-ui)

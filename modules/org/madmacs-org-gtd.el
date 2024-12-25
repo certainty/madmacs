@@ -243,8 +243,9 @@
     (keymap-set embark-org-heading-map
       "i" #'org-id-get-create))
 
-  (add-to-list 'popper-reference-buffers 'org-agenda-mode)
-  (add-to-list 'popper-reference-buffers "\\*Org Agenda\\*")
+  (with-eval-after-load 'popper
+    (cl-pushnew 'org-agenda-mode popper-reference-buffers)
+    (cl-pushnew "\\*Org Agenda\\*" popper-reference-buffers))
 
   (add-to-list 'display-buffer-alist
              '("\\*Org Agenda\\*"

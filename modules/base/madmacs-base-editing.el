@@ -17,17 +17,7 @@
 	  ("M-z" . zap-up-to-char))
   :custom
   (next-line-add-newlines t)
-  (kill-whole-line t)
-  :config
-
-  (defun smart-open-line-above ()
-  "Insert an empty line above the current line.
-Position the cursor at it's beginning, according to the current mode."
-    (interactive)
-    (move-beginning-of-line nil)
-    (newline-and-indent)
-    (forward-line -1)
-    (indent-according-to-mode)))
+  (kill-whole-line t))
 
 (use-package delsel
   :straight nil

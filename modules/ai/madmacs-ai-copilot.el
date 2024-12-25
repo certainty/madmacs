@@ -5,11 +5,10 @@
   :hook (prog-mode . copilot-mode)
   :bind
   (:map madmacs-mode-map
-    ("C-M-i" . copilot-complete))
+    ("C-c i" . copilot-complete))
   
   (:map madmacs-keymap-ai-copilot
     ("l" . copilot-login)
-    ("L" . copilot-logout)
     ("R" . copilot-reset)
     ("m" . madmacs/copilot-manual-completion-toggle))
 
@@ -18,17 +17,17 @@
     ("M-<tab>" . copilot-next-completion))
   
   :config
-  (setopt copilot-idle-delay nil) ;; disable idle completion
+  (setopt copilot-idle-delay 0.3) ;; disable idle completion
   
   (defun madmacs/copilot-manual-completion-toggle ()
     "Toggle manual completion mode. When enabled, Copilot will NOT automatically complete the current symbol. Instead you will have to trigger manual via C-o"
     (interactive)
     (if copilot-idle-delay              ; automatic completion on
       (progn
-        (setq copilot-idle-delay nil)
+n        (setq copilot-idle-delay nil)
         (message "Copilot manual completion enabled"))
       (progn
-        (setq copilot-idle-delay 0)
+        (setq copilot-idle-delay 0.3)
         (message "Copilot manual completion disabled"))))
   
   (setq warning-suppress-log-types '((copilot copilot-no-mode-indent)))
@@ -68,6 +67,9 @@
   (copilot-chat-frontend 'markdown)
   
   :init
+  (with-eval-after-load 'popper
+    (cl-pushnew 'copilot-chat-mode popper-reference-buffers))
+  
   (which-key-add-keymap-based-replacements madmacs-keymap-ai
     "c" `("Copilot" . ,madmacs-keymap-ai-copilot)))
 

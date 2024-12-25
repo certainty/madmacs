@@ -28,21 +28,16 @@
   (require 'smartparens-config))
 
 
-(use-package svg-tag-mode
-  :when (image-type-available-p 'svg)
-  :hook (prog-mode . svg-tag-mode)
-  :config
-  (setq svg-tag-tags
-    '(
-       ("DONE:"  . ((lambda (tag) (svg-tag-make "DONE:"  :face 'fringe  :inverse t ))))
-       ("FIXME:" . ((lambda (tag) (svg-tag-make "FIXME:" :face 'error   :inverse t))))
-       ("HACK:"  . ((lambda (tag) (svg-tag-make "HACK:"  :face 'warning :inverse t))))
-       ("NOTE:"  . ((lambda (tag) (svg-tag-make "NOTE:"  :face 'info :inverse t))))
-       ("TODO:"  . ((lambda (tag) (svg-tag-make "TODO:"  :face 'warning :inverse t)))))))
-
-
-(use-package fancy-compilation
-    :hook compile-mode)
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :custom
+  (hl-todo-keyword-faces
+    `(("TODO" warning bold)
+       ("FIXME" error bold)
+       ("HACK" warning bold)
+       ("DISCUSS" success bold)
+       ("DEBUG" success bold)
+       ("NOTE" success bold))))
 
 (use-package emacs
   :straight nil
@@ -102,7 +97,13 @@
 
 (use-package flymake
   :straight (:type built-in)
+  :custom
+  (flymake-error-bitmap '(right-triangle compilation-error))
+  (flymake-warning-bitmap '(right-triangle compilation-warning))
+  (flymake-note-bitmap '(right-triangle compilation-info))
+  (flymake-show-diagnostics-at-end-of-line nil) ;; enable this for inline hints
+  
   :hook
   (prog-mode . flymake-mode))
 
-(provide 'madmacs-code-essentials)
+(provide 'madmacs-code-essentials) 

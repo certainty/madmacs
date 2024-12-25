@@ -11,7 +11,9 @@
                      (bookmarks . 8)
                      (recents  . 8)))
   (dashboard-icon-type 'nerd-icons)
-  (dashboard-startup-banner (concat user-emacs-directory "assets/logo.png"))
+  (dashboard-startup-banner
+    (expand-file-name "assets/logo.txt" user-emacs-directory))
+  
   (dashboard-projects-backend 'project-el)
 
   :init
