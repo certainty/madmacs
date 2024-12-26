@@ -59,9 +59,3 @@ The content of the file is a simplified env file, which you can obtain by runnin
 Please double check that you don't have any secrets in this file.
 
 
-## Screenshots
-
-These screenshots might be out of date :)
-
-![image](https://github.com/user-attachments/assets/e89eae96-b7b5-4b26-b44a-b3c8f0b14f0a)
-
