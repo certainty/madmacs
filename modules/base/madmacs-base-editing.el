@@ -43,9 +43,10 @@
   :commands (iedit-mode iedit-dwim)
   :bind
   (:map madmacs-mode-map
-    ("C-c %" . iedit-dwim))
+    ("C-%" . iedit-mode)
+    ("C-;" . iedit-dwim))
   
-  (:map iedit-mode-map
+  (:map iedit-mode-keymap
     ("C-g" . iedit--quit))
   
   :config
