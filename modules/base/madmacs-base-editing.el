@@ -10,8 +10,6 @@
 (use-package emacs
   :demand t
   :straight nil
-  :hook
-  (after-init . repeat-mode)
   :bind
   (:map madmacs-mode-map
     ("M-D" . backward-kill-word) ; a little easier to reach
@@ -26,8 +24,7 @@
   :hook (after-init . delete-selection-mode))
 
 
-(use-package expand-region
-  :demand t)
+(use-package expand-region)
 
 (use-package expreg
   :bind
@@ -35,7 +32,7 @@
 
   (:repeat-map madmacs-expreg-repeat-map
     ("," . expreg-expand)
-    ("C-," . expreg-contract)))
+    ("M-," . expreg-contract)))
   
 (use-package casual-suite
   :bind
@@ -44,10 +41,12 @@
 
 (use-package iedit
   :commands (iedit-mode iedit-dwim)
-  :demand t ; TODO: lazy via hook?
   :bind
   (:map madmacs-mode-map
-    ("C-c %" . iedit-dwim)) 
+    ("C-c %" . iedit-dwim))
+  
+  (:map iedit-mode-map
+    ("C-g" . iedit--quit))
   
   :config
   (defun iedit-dwim (arg)
@@ -66,10 +65,7 @@
             (narrow-to-defun)
             (iedit-start (current-word) (point-min) (point-max))))))))
 
-(use-package multiple-cursors)
-
 (use-package embrace
-  :demand t ; TODO: lazy
   :bind
   (:map madmacs-mode-map
     ("C-\"" . embrace-commander))
@@ -90,31 +86,28 @@
     (embrace--add-internal (region-beginning) (region-end) ?\')))
 
 (use-package embark
-  :demand t ; TODO: lazy
   :bind
-  (("C-." . embark-act)                 ; this is ok since it gives us xrefs as options
-   ("C-h B" . embark-bindings))
+  (:map madmacs-mode-map
+    ("C-." . embark-act)                 ; this is ok since it gives us xrefs as options
+    ("C-h B" . embark-bindings))
+  
+  :custom
+  (embark-prompter 'embark-completing-read-prompter)
+  (embark-indicators
+    '(embark-highlight-indicator
+       embark-isearch-highlight-indicator))
+  
+  :config
+  (add-to-list 'display-buffer-alist
+    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+       nil
+       (window-parameters (mode-line-format . none))))
   
   :init
-  (setq prefix-help-command #'embark-prefix-help-command)
-
-  :config
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none))))
-
-  ;; by default we use completing read instead of which-key like selection
-  (setopt embark-prompter 'embark-completing-read-prompter)
-
-  (setq embark-indicators
-        '(embark-highlight-indicator
-           embark-isearch-highlight-indicator)))
+  (setopt prefix-help-command #'embark-prefix-help-command))
 
 
 (use-package avy
-  :demand t ; TODO: lazy
   :bind
   (:map goto-map
     ("c" . avy-goto-char-timer)

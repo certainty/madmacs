@@ -1,13 +1,13 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package bind-key
-  :straight nil
+  :straight (:type built-in)
   :custom
   (bind-key-describe-special-forms nil))
 
 (use-package repeat
-  :straight nil
-  :demand t
+  :straight (:type built-in)
+  :hook after-init
   :custom
   (repeat-exit-timeout 3)
 
@@ -62,15 +62,13 @@
   :demand t
   :bind
   (:map madmacs-mode-map
-	("C-z" . repeat) ; I don't use suspend frame so this is a nicer binding than C-x z
-	("C-x z" . repeat-complex-command)) ; now this can go here
+	  ("C-z" . repeat) ; I don't use suspend frame so this is a nicer binding than C-x z
+	  ("C-x z" . repeat-complex-command)) ; now this can go here
 
   (:map madmacs-keymap-packages
     ("u" . straight-pull-package)
     ("U" . straight-pull-all))
   (:map goto-map
-    ("{" . xref-go-back)
-    ("}" . xref-go-forward)
     ("#" . jump-to-register))
 
   :config
@@ -272,7 +270,6 @@
 (use-package which-key
   :straight (:type built-in)
   :demand t
-;  :after meow
   :custom
   (which-key-sort-order 'which-key-prefix-then-key-order)
   (which-key-max-display-columns 10)

@@ -1,8 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package files
-  :demand t
-  :straight nil
+  :straight (:type built-in)
   :custom
   (large-file-warning-threshold nil)
   (find-file-visit-truename t)
@@ -14,17 +13,15 @@
   (auto-save-default t)
   (auto-save-files-dir "~/.local/cache/emacs")
   (auto-save-list-file-prefix
-   (concat "~/.local/cache/auto-save-list" "/.saves-")))
+    (concat "~/.local/cache/auto-save-list" "/.saves-")))
 
 (use-package recentf
-  :demand t
-  :straight nil
+  :straight (:type built-in)
+  :hook after-init
   :custom
   (recentf-max-saved-items 100)
   (recentf-max-menu-items 15)
-  (recentf-auto-cleanup 'never)
-  :config
-  (recentf-mode 1))
+  (recentf-auto-cleanup 'never))
 
 (use-package trashed
   :commands (trashed)
@@ -39,7 +36,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package dired
-  :straight nil
+  :straight (:type built-in)
   :hook
   (dired-mode . dired-omit-mode)
   (dired-mode . dired-hide-details-mode)
@@ -72,7 +69,7 @@
     ("C-c m" . casual-dired-tmenu)))
 
 (use-package dired-aux
-  :straight nil
+  :straight (:type built-in)
   :after dired
   :bind
   (:map dired-mode-map
@@ -88,7 +85,7 @@
   (dired-create-destination-dirs-on-trailing-dirsep t))
 
 (use-package dired-x
-  :straight nil
+  :straight (:type built-in)
   :after dired
   :bind
   (:map dired-mode-map
@@ -102,6 +99,7 @@
   (dired-bind-info nil))
 
 (use-package dired-subtree
+  :straight (:type built-in)
   :after dired
   :bind
   (:map dired-mode-map
@@ -113,7 +111,7 @@
   (dired-subtree-use-backgrounds nil))
 
 (use-package wdired
-  :straight nil
+  :straight (:type built-in)
   :commands (wdired-change-to-wdired-mode)
   :bind
   (:map dired-mode-map

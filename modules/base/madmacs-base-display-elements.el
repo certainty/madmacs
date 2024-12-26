@@ -59,8 +59,7 @@ The DWIM behaviour of this command is as follows:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package frame
-  :demand t
-  :straight nil
+  :straight (:type built-in)
   :hook (before-make-frame . window-divider-mode)
   :bind
   (:map madmacs-keymap-ux
@@ -92,10 +91,8 @@ The DWIM behaviour of this command is as follows:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package window
-  :demand t
-  :straight nil
-  :hook
-  (after-init . winner-mode)
+  :straight (:type built-in)
+  :hook (after-init . winner-mode)
   :bind
   (:map madmacs-mode-map
 	  ("C-x {" . shrink-window)
@@ -111,18 +108,16 @@ The DWIM behaviour of this command is as follows:
   ;; I have a wide-screen so I prefer vertical splits
   (split-width-threshold 0)
   (split-height-threshold nil)
-
   (display-buffer-base-action nil))
 
 (use-package ace-window
-  :demand t ; TODO: lazy
   :bind
   (:map madmacs-mode-map
-	("C-x w w" . ace-window)
-	("C-x w x" . ace-swap-window)
-	("C-x w m" . ace-maximize-window)
+	  ("C-x w w" . ace-window)
+	  ("C-x w x" . ace-swap-window)
+	  ("C-x w m" . ace-maximize-window))
   (:map goto-map
-	("w" . ace-window))))
+	  ("w" . ace-window)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -189,21 +184,20 @@ The DWIM behaviour of this command is as follows:
   (uniquify-ignore-buffers-re "^\\*"))
 
 (use-package whitespace
-  :demand t ; TODO: lazy
   :bind
   (:map madmacs-keymap-ux
-	("W" . whitespace-mode))
+	  ("W" . whitespace-mode))
   (:map madmacs-mode-map
-	("C-c z" . delete-trailing-whitespace)))
+	  ("C-c z" . delete-trailing-whitespace)))
 
 (use-package revert-buffer-all)
 
 (use-package popper
   :bind
   (:map madmacs-mode-map
-        ("C-`"  . popper-toggle)
-        ("M-`"  . popper-cycle)
-        ("C-M-`" . popper-toggle-type))
+    ("C-`"  . popper-toggle)
+    ("M-`"  . popper-cycle)
+    ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
     '("\\*Messages\\*"

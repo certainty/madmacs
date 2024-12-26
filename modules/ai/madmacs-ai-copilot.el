@@ -13,7 +13,7 @@
     ("m" . madmacs/copilot-manual-completion-toggle))
 
   (:map copilot-completion-map
-    ("C-<RETURN>" . copilot-accept-completion)
+    ("C-<tab>" . copilot-accept-completion)
     ("M-<tab>" . copilot-next-completion))
   
   :config

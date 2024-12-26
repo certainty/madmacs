@@ -2,7 +2,7 @@
 
 (use-package isearch
   :demand t
-  :straight nil
+  :straight (:type built-in)
   :bind
   (:map minibuffer-local-isearch-map
     ("M-/" . isearch-complete-edit)
@@ -34,13 +34,11 @@
   (list-matching-lines-jump-to-current-line nil))
 
 (use-package re-builder
-  :demand t
   :commands (re-builder regexp-builder)
   :custom
   (reb-re-syntax 'read))
 
 (use-package grep
-  :demand t
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers nil)
@@ -56,8 +54,7 @@
             "/usr/bin/grep <X> <C> -nH --null -e <R> <F>"))
     (setq xref-search-program (if rgp 'ripgrep 'grep))))
 
-(use-package
-  wgrep
+(use-package wgrep
   :after grep
   :bind
   (:map grep-mode-map

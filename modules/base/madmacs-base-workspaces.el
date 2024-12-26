@@ -2,13 +2,12 @@
 
 (use-package project
   :straight (:type built-in)
-  :demand t
   :bind
   (:map goto-map
-	("f" . project-find-file))
+	  ("f" . project-find-file))
   (:map search-map
-	("R" . project-query-replace-regexp))
-  
+	  ("R" . project-query-replace-regexp))
+ 
   :custom
   (project-switch-commands '((project-find-file "Find file")
                              (project-find-regexp "Find regexp")
@@ -33,8 +32,7 @@
        (project-root)))))
 
 (use-package desktop
-  :straight nil
-  :demand t
+  :straight (:type built-in)
   :commands (desktop-save-mode)
   :custom
   (desktop-base-file-name "emacs.desktop")
@@ -51,14 +49,12 @@
       "\\)$")))
 
 (use-package tab-bar
-  :demand t
-  :straight nil
-  :after (project)
+  :straight (:type built-in)
   :commands
   (tab-bar-new-tab
-   tab-bar-switch-to-tab
-   tab-bar-switch-to-next-tab
-   tab-bar-switch-to-prev-tab)
+    tab-bar-switch-to-tab
+    tab-bar-switch-to-next-tab
+    tab-bar-switch-to-prev-tab)
   :custom
   (tab-bar-show 1)
   (tab-bar-tab-hints t) ;; show numbers in tabs
@@ -75,13 +71,12 @@
                     tab-bar-format-add-tab)))
 
 (use-package tabspaces
+  :hook emacs-startup
   :custom
   (tabspaces-use-filtered-buffers-as-default t)
   (tabspaces-initialize-project-with-todo nil)
   :bind
   (:map goto-map
-    ("p" . tabspaces-open-or-create-project-and-workspace))
-  :config
-  (tabspaces-mode))
+    ("p" . tabspaces-open-or-create-project-and-workspace)))
 
 (provide 'madmacs-base-workspaces)

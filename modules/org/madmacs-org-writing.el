@@ -74,7 +74,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package denote
-  :demand t
   :hook (dired-mode . denote-dired-mode)
   :bind
   (:map madmacs-keymap-global
@@ -263,7 +262,6 @@ Names are defined in `madmacs-notes-meeting-recurring'."
   (bibtex-file-path madmacs-notes-library-path))
 
 (use-package citar
-  :demand t
   :custom
   ;; set bibliography's location
   (citar-bibliography (list madmacs-notes-bib-path))
