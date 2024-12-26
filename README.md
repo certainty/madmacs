@@ -4,7 +4,7 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
-**Important: ** This is not a configuration framework. Feel free to steal, but don't expect that this will just work for you. It is tailored to my environment.
+**Important:** This is not a configuration framework. Feel free to steal, but don't expect that this will just work for you. It is tailored to my environment.
 
 ## Modern Emacs UX with focus on programming
 
