@@ -44,7 +44,7 @@
 
 (use-package iedit
   :commands (iedit-mode iedit-dwim)
-  :demand t
+  :demand t ; TODO: lazy via hook?
   :bind
   (:map madmacs-mode-map
     ("C-c %" . iedit-dwim)) 
@@ -69,7 +69,7 @@
 (use-package multiple-cursors)
 
 (use-package embrace
-  :demand t
+  :demand t ; TODO: lazy
   :bind
   (:map madmacs-mode-map
     ("C-\"" . embrace-commander))
@@ -90,7 +90,7 @@
     (embrace--add-internal (region-beginning) (region-end) ?\')))
 
 (use-package embark
-  :demand t
+  :demand t ; TODO: lazy
   :bind
   (("C-." . embark-act)                 ; this is ok since it gives us xrefs as options
    ("C-h B" . embark-bindings))
@@ -114,7 +114,7 @@
 
 
 (use-package avy
-  :demand t
+  :demand t ; TODO: lazy
   :bind
   (:map goto-map
     ("c" . avy-goto-char-timer)
