@@ -61,17 +61,6 @@ Please double check that you don't have any secrets in this file.
 
 ## Screenshots
 
-<img src="https://github.com/certainty/madmacs/assets/338957/d74304b2-3a2f-4f71-949e-a23bff07e17a" width=400px>
+These screenshots might be out of date :)
 
-<img src="https://github.com/user-attachments/assets/b2733cec-9e48-4052-a6a8-ea6ddfbf3bed" width=400px>
-
-<img src="https://github.com/certainty/madmacs/assets/338957/77bc63dd-93dc-4f75-a81d-75327168c246" width=400px>
-
-<img src="https://github.com/user-attachments/assets/dc95b831-14bb-4f49-8564-9df4be1a998e" width=400px>
-
-<img src="https://github.com/user-attachments/assets/fa88abbf-57d0-4907-a965-21567a985ec7" width=400px>
-
-<img src="https://github.com/user-attachments/assets/fd6d0af5-ede0-4aa6-a6de-fcd477534374" width=400px>
-
-<img src="https://github.com/user-attachments/assets/9f2b07fe-0980-43e0-b416-7363334ec6b2" width=400px>
 

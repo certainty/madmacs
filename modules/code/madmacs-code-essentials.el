@@ -136,12 +136,12 @@
 
   :bind
   (:map madmacs-keymap-global
-    (";" . madmacs-flyspell-tmenu))
+    (";" . madmacs-flymake-tmenu))
 
   :config
   ;; a transient menu to manage flymake
   (require 'transient)
-  (transient-define-prefix madmacs-flyspell-tmenu ()
+  (transient-define-prefix madmacs-flymake-tmenu ()
     "Transient menu for Flyspell and Flymake."
     [["Flymake Commands"
         ("d" "Show Diagnostics" consult-flymake)
