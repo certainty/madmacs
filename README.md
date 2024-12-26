@@ -4,14 +4,15 @@
 
 > This is my Emacs configuration. There are many like it, but this one is mine.
 
-## For programmers: Eglot + Copilot/Gptel + Modern Power Ups
+**Important: ** This is not a configuration framework. Feel free to steal, but don't expect that this will just work for you. It is tailored to my environment.
+
+## Modern Emacs UX with focus on programming
 
 This is my emacs configuration, made for me as a software engineer.
 I use vanilla emacs for editing, eglot as my LSP client and I use modern power ups to support my workflow:
 
 * Vertico + Corfu + Marginalia for completion and choices
 * Embark for contextual actions
-* Dirvish for file management and project tree
 * Copilot / Gptel to bring AI to my work
 
 
@@ -35,7 +36,7 @@ There are a couple of very basic conventions that I have applied.
 2. `C-c <letter>` for mode specific global actions, which I bind in the keymaps of the respective mode
 3. `M-g` for going to places and things.
 4. `M-s` for searching things and places.
-5. `C-.` and `M-.` for context specific actions (on point, or region, etc.) via embark
+5. `C-.` for context specific actions (on point, or region, etc.) via embark
 6. When I don't use something often, it's not bound to a key necessarily, because I can always `M-x` it and be just fine.
 
 This follows Emacs standards to a greater extend while minimizing conflicts.
@@ -43,9 +44,6 @@ This follows Emacs standards to a greater extend while minimizing conflicts.
 ## Usage of LLM / AI to assist programming
 
 I've enabled and configured GitHub Copilot and GPTel, ready to be used from within Emacs. Copilot is used for auto-completion of code, while GPTel is made available to interact in any buffer.
-
-All AI related functionality is available via `C-j a c` and `C-j a g` prefixes.
-
 In addition, there are `embark` actions available for `gptel`, so you can use `C-.` to access them in the given context.
 
 ## Environment
