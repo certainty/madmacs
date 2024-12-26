@@ -141,5 +141,10 @@
   :custom
   (yankpad-file (concat org-directory "/snippets.org")))
 
+(use-package org-menu
+  :bind
+  (:map org-mode-map
+    ("C-c C-m" . org-menu)))
+
 
 (provide 'madmacs-org-mode)

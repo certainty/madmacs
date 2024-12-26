@@ -20,14 +20,8 @@
   :hook
   (text-mode . flyspell-mode)
   (git-commit-mode . flyspell-mode)
-  :bind
-  (:map goto-map
-    (">" . flyspell-goto-next-error))
-  (:map madmacs-keymap-global
-    ("." . flyspell-auto-correct-word))
-  
   :config
-  ;; don't shadow embark or avy bindings
+  (unbind-key "C-," flyspell-mode-map)
   (unbind-key "C-." flyspell-mode-map))
 
 (use-package markdown-mode

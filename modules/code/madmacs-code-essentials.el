@@ -93,7 +93,35 @@
   :straight (:type built-in)
   :hook
   (prog-mode . flyspell-prog-mode)
-  (conf-mode . flyspell-prog-mode))
+  (conf-mode . flyspell-prog-mode)
+
+  :bind
+  (:map madmacs-keymap-global
+    ("," . madmacs-flyspell-tmenu))
+
+  :config
+  (unbind-key "C-," flyspell-mode-map)
+  (unbind-key "C-." flyspell-mode-map)
+  
+  (require 'transient)
+  
+  (defun flyspell-correct-word ()
+    "Run flyspell correction at point."
+    (interactive)
+    (if (fboundp 'flyspell-correct-at-point)
+      (flyspell-correct-at-point)
+      (flyspell-auto-correct-word)))
+
+  (transient-define-prefix madmacs-flyspell-tmenu ()
+    "Transient menu for Flyspell and Flymake."
+    [["Flyspell Commands"
+       ("c" "Correct Word" flyspell-correct-word :transient t)
+       ("C" "Correct Word before" flyspell-correct-word-before-point :transient t)
+       ("b" "Check Buffer" flyspell-buffer )
+       ("r" "Check Region" flyspell-region)
+       ("n" "Next Error" flyspell-goto-next-error :transient t)]
+      ["Other"
+        ("q" "Quit" transient-quit-one)]]))
 
 (use-package flymake
   :straight (:type built-in)
@@ -104,6 +132,22 @@
   (flymake-show-diagnostics-at-end-of-line nil) ;; enable this for inline hints
   
   :hook
-  (prog-mode . flymake-mode))
+  (prog-mode . flymake-mode)
+
+  :bind
+  (:map madmacs-keymap-global
+    (";" . madmacs-flyspell-tmenu))
+
+  :config
+  ;; a transient menu to manage flymake
+  (require 'transient)
+  (transient-define-prefix madmacs-flyspell-tmenu ()
+    "Transient menu for Flyspell and Flymake."
+    [["Flymake Commands"
+        ("d" "Show Diagnostics" consult-flymake)
+        ("n" "Next Diagnostic" flymake-goto-next-error :transient t)
+        ("p" "Previous Diagnostic" flymake-goto-prev-error :transient t)]
+      ["Other"
+        ("q" "Quit" transient-quit-one)]]))
 
 (provide 'madmacs-code-essentials) 

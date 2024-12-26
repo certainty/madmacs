@@ -14,6 +14,8 @@
   (after-init . repeat-mode)
   :bind
   (:map madmacs-mode-map
+    ("M-D" . backward-kill-word) ; a little easier to reach
+    ("C-M-D" . backward-kill-sexp) ; a little easier to reach
 	  ("M-z" . zap-up-to-char))
   :custom
   (next-line-add-newlines t)
@@ -29,20 +31,23 @@
 
 (use-package expreg
   :bind
-  ("C->" . expreg-expand)
-  ("C-<" . expreg-contract)
+  ("C-," . expreg-expand)
 
   (:repeat-map madmacs-expreg-repeat-map
-    (">" . expreg-expand)
-    ("<" . expreg-contract)))
+    ("," . expreg-expand)
+    ("C-," . expreg-contract)))
+  
+(use-package casual-suite
+  :bind
+  (:map madmacs-keymap-global
+    ("j " . casual-editkit-main-tmenu)))
 
 (use-package iedit
   :commands (iedit-mode iedit-dwim)
   :demand t
   :bind
   (:map madmacs-mode-map
-    ("C-c '" . iedit-mode)
-    ("C-c \"" . iedit-dwim))
+    ("C-c %" . iedit-dwim)) 
   
   :config
   (defun iedit-dwim (arg)

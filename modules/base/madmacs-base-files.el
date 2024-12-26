@@ -64,6 +64,13 @@
   (when (and (eq system-type 'darwin) (executable-find "gls"))
     (setq insert-directory-program "gls")))
 
+(use-package casual-suite
+  :bind
+  (:map bookmark-bmenu-mode-map
+    ("C-c m" . casual-bookmark-tmenu))
+  (:map dired-mode-map
+    ("C-c m" . casual-dired-tmenu)))
+
 (use-package dired-aux
   :straight nil
   :after dired

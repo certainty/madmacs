@@ -13,7 +13,7 @@
     ("m" . madmacs/copilot-manual-completion-toggle))
 
   (:map copilot-completion-map
-    ("C-y" . copilot-accept-completion)
+    ("C-<RETURN>" . copilot-accept-completion)
     ("M-<tab>" . copilot-next-completion))
   
   :config
@@ -24,7 +24,7 @@
     (interactive)
     (if copilot-idle-delay              ; automatic completion on
       (progn
-n        (setq copilot-idle-delay nil)
+        (setq copilot-idle-delay nil)
         (message "Copilot manual completion enabled"))
       (progn
         (setq copilot-idle-delay 0.3)
@@ -45,8 +45,10 @@ n        (setq copilot-idle-delay nil)
   :bind
   (:map vc-git-log-edit-mode-map
     ("C-c a" . copilot-chat-insert-commit-message))
+  
   (:map madmacs-keymap-global
     ("i" . copilot-chat-ask-and-insert))
+  
   (:map madmacs-keymap-ai-copilot
     ("." . copilot-chat-ask-and-insert)
     ("b" . copilot-chat-add-current-buffer)
@@ -58,10 +60,11 @@ n        (setq copilot-idle-delay nil)
     ("f" . copilot-chat-fix)
     ("p" . copilot-chat-custom-prompt-selection)
     ("v" . copilot-chat-insert-commit-message))
-  
-  (:map copilot-chat-prompt-mode-map
+ 
+   (:map copilot-chat-prompt-mode-map
     ;; avoid conflicts with gptel
-    ("C-c C-c" . copilot-chat-prompt-send))
+     ("C-c C-c" . copilot-chat-prompt-send))
+
   :custom
   (copilot-chat-backend 'curl)
   (copilot-chat-frontend 'markdown)
