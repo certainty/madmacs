@@ -115,7 +115,7 @@ The DWIM behaviour of this command is as follows:
   (display-buffer-base-action nil))
 
 (use-package ace-window
-  :demand t
+  :demand t ; TODO: lazy
   :bind
   (:map madmacs-mode-map
 	("C-x w w" . ace-window)
@@ -189,7 +189,7 @@ The DWIM behaviour of this command is as follows:
   (uniquify-ignore-buffers-re "^\\*"))
 
 (use-package whitespace
-  :demand t
+  :demand t ; TODO: lazy
   :bind
   (:map madmacs-keymap-ux
 	("W" . whitespace-mode))
