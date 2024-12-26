@@ -49,7 +49,7 @@
   :hook after-init)
 
 (use-package marginalia
-  :hook (after-init . marginalia-mode))
+  :hook after-init)
 
 (use-package nerd-icons-completion
   :after marginalia
