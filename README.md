@@ -63,4 +63,5 @@ Please double check that you don't have any secrets in this file.
 
 These screenshots might be out of date :)
 
+![image](https://github.com/user-attachments/assets/e89eae96-b7b5-4b26-b44a-b3c8f0b14f0a)
 
