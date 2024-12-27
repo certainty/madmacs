@@ -12,8 +12,8 @@
     ("p" . org-previous-item))
   
   :custom
-  (org-directory (file-truename "~/Org"))
-  (org-attach-id-dir (file-truename "~/Org/.attachments"))
+  (org-directory (file-truename (expand-file-name "Org" madmacs-shared-silo-path))
+  (org-attach-id-dir (concat org-directory "/.attach/")))
 
   ;; let's get fast and be nice to our fingers
   ;;(org-use-speed-commands t)
@@ -84,25 +84,15 @@
 
   :config
   (require 'org-faces)
-  ;; (dolist (face '((org-level-1 . 1.2)
-  ;;                 (org-level-2 . 1.1)
-  ;;                 (org-level-3 . 1.05)
-  ;;                 (org-level-4 . 1.0)
-  ;;                 (org-level-5 . 1.1)
-  ;;                 (org-level-6 . 1.1)
-  ;;                 (org-level-7 . 1.1)
-  ;;                 (org-level-8 . 1.1)))
-  ;;   (set-face-attribute (car face) nil :font madmacs-variable-pitch-font :weight 'medium :height (cdr face)))
 
-  ;; (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-  ;; (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-  ;; (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  ;; (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  ;; (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  ;; (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
   (add-to-list 'display-buffer-alist
     '("\\*Org \\(Select\\|Note\\)\\*"
@@ -116,12 +106,13 @@
 ;; use org-modern
 (use-package org-modern
   :straight (org-modern :host github :repo "minad/org-modern")
-  :after org
+  :hook
+  (after-init . global-org-modern-mode)
+  (org-agenda-finalize . org-modern-agenda)
+  
   :custom
   (org-modern-fold-stars '(("◉" . "◉") ("○" . "○") ("◈" . "◈") ("◇" . "◇") ("◦" . "◦")))
-  :hook
-  ((org-mode . org-modern-mode)
-    (org-agenda-finalize . org-modern-agenda))
+  
   :config
   (org-indent-mode t))
 

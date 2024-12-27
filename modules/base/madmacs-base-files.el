@@ -62,6 +62,7 @@
     (setq insert-directory-program "gls")))
 
 (use-package casual-suite
+  :demand t
   :bind
   (:map bookmark-bmenu-mode-map
     ("C-c m" . casual-bookmark-tmenu))
@@ -99,16 +100,11 @@
   (dired-bind-info nil))
 
 (use-package dired-subtree
-  :straight (:type built-in)
   :after dired
   :bind
   (:map dired-mode-map
     ("<tab>" . dired-subtree-toggle)
-    ("TAB" . dired-subtree-toggle)
-    ("<backtab>" . dired-subtree-remove)
-    ("S-TAB" . dired-subtree-remove))
-  :custom
-  (dired-subtree-use-backgrounds nil))
+    ("<backtab>" . dired-subtree-cycle)))
 
 (use-package wdired
   :straight (:type built-in)

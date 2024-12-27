@@ -78,7 +78,7 @@
 
   :config
   (setq
-    modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi)
+    modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted)
     modus-themes-custom-auto-reload t
     modus-themes-disable-other-themes nil
     modus-themes-mixed-fonts t

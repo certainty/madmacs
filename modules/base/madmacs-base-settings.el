@@ -38,7 +38,17 @@
 (defcustom madmacs-user-email ""
     "User email"
     :type 'string
-    :group 'madmacs)
+  :group 'madmacs)
+
+(defcustom madmacs-shared-silo-path "~/Documents/Silos/Shared"
+  "The base path to the shared silo for documents, org, files and other shared resources"
+  :type 'string
+  :group 'madmacs)
+
+(defcustom madmacs-private-silo-path "~/Documents/Silos/Strictly Private"
+  "The base path to the private silo for documents, org, files and other shared resources"
+  :type 'string
+  :group 'madmacs)
 
 (use-package emacs
   :custom
