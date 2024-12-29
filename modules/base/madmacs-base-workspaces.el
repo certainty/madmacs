@@ -74,7 +74,7 @@
   :hook emacs-startup
   :custom
   (tabspaces-use-filtered-buffers-as-default t)
-  (tabspaces-initialize-project-with-todo nil)
+  (tabspaces-initialize-project-with-todo t)
   :bind
   (:map goto-map
     ("p" . tabspaces-open-or-create-project-and-workspace)))

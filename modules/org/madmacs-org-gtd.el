@@ -9,7 +9,7 @@
   (:map madmacs-keymap-global
     ("a" . madmacs-personal-agenda)
     ("c" . org-capture)
-    ("t" . madmacs-capture-task))
+    ("T" . madmacs-capture-task))
 
   (:map goto-map
     ("a" . madmacs-personal-agenda)
@@ -22,8 +22,8 @@
   (:map madmacs-keymap-gtd
     ("a" . org-agenda)
     ("c" . org-capture)
-    ("t" . madmacs-capture-task)
-    ("p" . madmacs-capture-project))
+    ("T" . madmacs-capture-task))
+  
   :init
   (require 'org-id)
   
@@ -69,7 +69,6 @@
        ("q" . "quote")))
 
   ;; Capture for GTD
-  ;; More specialised capture templates will be added in the appropriate modules
   (org-capture-templates
     '(("t" "Task" entry (file+headline "tasks.org" "Main")
         "* TODO %?
@@ -77,19 +76,6 @@
 :CAPTURED: %U
 :END:"
         :prepend t)
-
-       ("o" "Codebase Task" entry (file+function "tasks.org" madmacs-ensure-project-heading)
-         "* TODO %?
-:PROPERTIES:
-:CAPTURED: %U
-:PROJECT_ROOT: %(project-root (project-current t))
-:FILE: [[%F][%f]]
-:POS: %l
-:END:
-
-%i
-"
-         :jump-to-captured nil)
        
        ("c" "Contact" entry (file "contacts.org")
          "* %^{Name}
@@ -186,10 +172,6 @@
     (interactive)
     (org-capture nil "t"))
 
-  (defun madmacs-capture-project ()
-    (interactive)
-    (org-capture nil "p"))
-
   (defun madmacs-goto-tasks ()
     (interactive)
     (find-file-other-window (concat org-directory "/tasks.org")))
@@ -203,41 +185,6 @@
     (let ((default-directory org-directory))
       (call-interactively #'grep)))
 
-  (defvar madmacs-capture-project-context nil "The project context of the file from which the capture was started")
-  
-  (defun madmacs-capture-with-project-context (orig-fn &rest args)
-    (let ((madmacs-capture-project-context (madmacs-get-project-info)))
-      (apply orig-fn args)))
-  
-  (advice-add 'org-capture :around #'madmacs-capture-with-project-context)
-
-  (defun madmacs-get-project-info ()
-    "Get project information including parent directory structure."
-    (interactive)
-    (let* ((project-root (project-root (project-current t)))
-            (project-dir (file-name-nondirectory (directory-file-name project-root)))
-            (parent-dir (file-name-nondirectory 
-                          (directory-file-name 
-                            (file-name-directory 
-                              (directory-file-name project-root)))))
-            (project-name (if (string= parent-dir "")
-                            project-dir
-                            (format "%s > %s" parent-dir project-dir))))
-      project-name))
-
-  (defun madmacs-ensure-project-heading ()
-    (let* ((project-name madmacs-capture-project-context)
-            (olp `("Codebases" ,project-name))
-            (marker (ignore-errors (org-find-olp olp t))))
-      (if marker
-        (goto-char marker)
-        (org-ql-select (current-buffer)
-          '(and (level 1) (heading "Codebases"))
-          :action `(progn
-                     (org-insert-subheading "")
-                     (insert ,project-name)
-                     (insert "\n"))))
-      (goto-char (org-find-olp olp t))))
   ;; embark
   (with-eval-after-load 'embark
     (keymap-set embark-org-heading-map
@@ -255,5 +202,32 @@
                (slot . 0)
                 (window-width . 0.4)
                 (reusable-frames . visible))))
+
+(use-package org-project-capture
+  :bind
+  (:map madmacs-keymap-gtd
+    ("p" . org-project-capture-capture-for-current-project)
+    ("P" . org-project-capture-project-todo-completing-read))
+  
+  (:map madmacs-keymap-global
+    ("t" .  org-project-capture-capture-for-current-project))
+  
+  :custom
+  (org-project-capture-backend (make-instance 'org-project-capture-project-backend))
+  (org-project-capture-capture-template "* TODO %?
+:PROPERTIES:
+:CAPTURED: %U
+:FILE: [[%F][%f]]
+:POS: %l
+:END:
+
+%i
+")
+  :config
+  (org-project-capture-per-project)
+
+  ;; upstream version is outdated so we use this
+  (cl-defmethod org-project-capture-current-project ((_backend org-project-capture-project-backend))
+    (project-name (project-current))))
 
 (provide 'madmacs-org-gtd)

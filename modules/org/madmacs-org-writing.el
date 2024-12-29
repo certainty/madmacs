@@ -71,19 +71,6 @@
   :hook
   (text-mode . writegood-mode))
 
-(use-package org
-  :straight (:type built-in)
-  :config
-  (with-eval-after-load 'org-capture
-    (setopt org-capture-templates
-      (append
-        org-capture-templates
-        '(
-           ("n" "Notes")
-           ("nj" "Fleeting note" entry (file+olp+datetree "journal.org")
-             "* %U %?"
-             :tree-type week))))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Permanent notes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -92,8 +79,7 @@
   :hook (dired-mode . denote-dired-mode)
   :bind
   (:map madmacs-keymap-global
-    ("C" . denote)
-    ("m" . madmacs-notes-meeting-new-recuraring))
+    ("C" . denote))
   
   (:map madmacs-keymap-notes
     ("." . denote-add-front-matter) ; "make this denote" mnemonic
@@ -151,11 +137,20 @@
   (denote-templates
     '((proj . "* Objective\n\n* References\n")
       (meeting . "* Outcome\n\n* Notes\n\n* Tasks\n** Our\n** Theirs\n\n" )
+      (journal . "* %U %?\n%i\n%a")
       (plain . "")))
+
+  ;;; journal
+  (denote-journal-extras-title-format 'day-date-month-year)
+  (denote-journal-extras-directory (expand-file-name "Journal" denote-directory))
+  (denote-journal-extras-keywords '("log"))
   
   :init
   (with-eval-after-load 'org-capture
     (setq denote-org-capture-specifiers "%i\n%?")
+    
+    (cl-pushnew
+     '("n" "Notes") org-capture-templates)
     
     (cl-pushnew
       '("nn" "Permanent" plain
@@ -166,9 +161,13 @@
          :kill-buffer t
          :jump-to-captured nil)
        org-capture-templates)
+
+    (cl-pushnew
+      '("m" "Meetings")
+      org-capture-templates)
     
     (cl-pushnew
-      '("nm" "Meeting Note" plain
+      '("mm" "Meeting Note" plain
          (file denote-last-path)
          (function
            (lambda ()
@@ -180,58 +179,55 @@
          :immediate-finish nil
          :kill-buffer t
          :jump-to-captured t)
-      org-capture-templates))
+      org-capture-templates)
+
+    (cl-pushnew
+      '("mo" "1on1" plain
+         (file denote-last-path)
+         (function
+           (lambda ()
+             (let ((denote-use-directory (expand-file-name "Meetings/1on1/" (denote-directory)))
+                    (denote-use-keywords (list "meeting" "1on1"))
+                    (denote-use-title "")
+                    (denote-use-template 'meeting))
+               (denote-org-capture))))
+         :no-save t
+         :immediate-finish nil
+         :kill-buffer t
+         :jump-to-captured t)
+      org-capture-templates)
+
+    (cl-pushnew
+      '("ms" "Weekly sync" plain
+         (file denote-last-path)
+         (function
+           (lambda ()
+             (let ((denote-use-directory (expand-file-name "Meetings/weekly_sync/" (denote-directory)))
+                    (denote-use-keywords (list "meeting" "weeklysync"))
+                    (denote-use-title "")
+                    (denote-use-template 'meeting))
+               (denote-org-capture))))
+         :no-save t
+         :immediate-finish nil
+         :kill-buffer t
+         :jump-to-captured t)
+      org-capture-templates)
+  
+    (cl-pushnew
+      '("j" "Journal" entry
+         (file denote-journal-extras-path-to-new-or-existing-entry)
+         "* %U %?\n%i\n%a"
+         :kill-buffer t
+         :empty-lines 1)
+      org-capture-templates)
 
   :config
+  (require 'denote-journal-extras)
   (require 'denote-silo-extras)
+  
   (denote-rename-buffer-mode 1)
 
-  (defvar madmacs-notes-meeting-recurring '("1on1" "monday sync")
-    "The list of recurring meetings that I take notes on")
-
-  (defvar madmacs-notes-meeting-prompt-history nil)
-
-  (defun madmacs-notes-meeting-prompt-recurring ()
-    "Prompt for the recurring meeting to add a note to"
-     (let ((default-value (car madmacs-notes-meeting-recurring)))
-       (completing-read
-         (format-prompt "New entry for recurring meeting" default-value)
-         madmacs-notes-meeting-recurring
-         nil :require-match nil
-         'madmacs-notes-meeting-prompt-history
-         default-value)))
-
-  (defun madmacs-notes-meeting-recurring-get-file (name)
-  "Find file in variable `madmacs-notes-meeting-directory' for NAME recurring meeting.
-If there are more than one files, prompt with completion for one among
-them.
-
-NAME is one among `madmacs-notes-meeting-recurring'."
-    (if-let ((files (denote-directory-files (format "%s.*_meeting" name)))
-              (length-of-files (length files)))
-      (cond
-        ((= length-of-files 1)
-          (car files))
-        ((> length-of-files 1)
-          (completing-read "Select a file: " files nil :require-match)))
-      (user-error "No files for recurring meeting with name `%s'" name)))
-
-  (defun madmacs-notes-meeting-new-recurring ()
-  "Prompt for the name of a recurring heading and insert a timestamped heading therein.
-The name of meeting corresponds to at least one file in the variable
-`denote-directory'.  In case there are multiple files, prompt to choose
-one among them and operate therein.
-
-Names are defined in `madmacs-notes-meeting-recurring'."
-    (declare (interactive-only t))
-    (interactive)
-    (let* ((name (madmacs-notes-meeting-prompt-recurring))
-            (file (madmacs-notes-meeting-recurring-get-file name))
-            (time (format-time-string "%F %a %R")))  ; remove %R if you do not want the time
-      (with-current-buffer (find-file file)
-        (goto-char (point-max))
-        (insert (format "* [%s]\n\n" time)))))
-
+  ;; show recent notes
   (defun find-recent-denote-files (&optional days)
   "Show recent files in `denote-directory' modified within DAYS (default 8)."
     (interactive "P")
@@ -252,7 +248,7 @@ Names are defined in `madmacs-notes-meeting-recurring'."
                (inhibit-read-only t))
           (erase-buffer)
           (call-process-shell-command cmd nil t)))
-      (pop-to-buffer buf))))
+      (pop-to-buffer buf)))))
 
 (use-package consult-notes
   :after org

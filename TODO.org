@@ -1,8 +1,7 @@
-* Switch to evil
-** Finish which-key replacements for:
-*** sly (local leader based)
-*** lsp (lookup what's provided)
-*** Scala metals (local leader based -> see my normalvim setup)
-*** prolog (local leader based)
-*** elixir (local leader based)
-** Configure good lisp editing mode (parinfer, lispyville?, evil cleverparens?)
+:PROPERTIES:
+:ID:       CB730078-0FFD-4DFC-9754-8BE93F68BE26
+:END:
+
+* TODO Do this 
+* TODO do this
+* TODO This is my todo 
