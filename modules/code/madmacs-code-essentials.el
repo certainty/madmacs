@@ -14,15 +14,16 @@
   :hook prog-mode)
 
 (use-package smartparens
-  :hook ((lisp-mode . smartparens-mode)
+  :hook ((prog-mode . smartparens-mode)
           (text-mode . smartparens-mode)
           (markdown-mode . smartparens-mode))
   :bind
   (:map smartparens-mode-map
-    ("C-M-(" . sp-forward-slurp-sexp)
-    ("C-M-)" . sp-backward-slurp-sexp)
-    ("C-M-<" . sp-forward-barf-sexp)
-    ("C-M->" . sp-backward-barf-sexp))
+    ("M-(" . sp-wrap-round)
+    ("C-)" . sp-forward-slurp-sexp)
+    ("C-(" . sp-backward-slurp-sexp)
+    ("C-}" . sp-forward-barf-sexp)
+    ("C-{" . sp-backward-barf-sexp))
   
   :config
   (require 'smartparens-config))

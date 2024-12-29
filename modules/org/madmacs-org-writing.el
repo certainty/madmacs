@@ -124,7 +124,7 @@
   (denote-infer-keywords t)
   (denote-sort-keywords t)
   (denote-file-type nil) ; Org is the default, set others here
-  (denote-prompts '(template title keywords))
+  (denote-prompts '(title keywords template))
   (denote-excluded-directories-regexp nil)
   (denote-excluded-keywords-regexp nil)
   (denote-rename-confirmations '(rewrite-front-matter modify-file-name))
