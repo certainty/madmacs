@@ -145,6 +145,10 @@ The DWIM behaviour of this command is as follows:
 
 (use-package emacs
   :demand t
+  :bind
+  (:map madmacs-mode-map
+    ("C-x k" . kill-current-buffer))
+  
   :custom
   (auto-save-default nil)
   (auto-window-vscroll nil)
