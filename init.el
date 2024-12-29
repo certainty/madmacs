@@ -37,7 +37,7 @@
 (use-package straight
   :demand t
   :custom
-  (straight-check-for-modific ations '(check-on-save))
+  (straight-check-for-modifications '(check-on-save))
   (straight-use-package 'use-package)
   (straight-use-package-by-default t))
 
