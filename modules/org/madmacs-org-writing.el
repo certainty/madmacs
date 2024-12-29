@@ -101,7 +101,12 @@
     ("f r" . madmacs-find-recent-denote-files)
     
     ("m" . denote-rename-file)
-    ("M" . denote-rename-file-using-front-matter))
+    ("M" . denote-rename-file-using-front-matter)
+
+    ;; journal
+    ("j" . denote-journal-extras-new-or-existing-entry)
+    ("J" . denote-journal-extras-new-entry)
+    ("l" . denote-journal-extras-link-or-create-entry))
 
   (:map goto-map
     ("nr" . madmacs-find-recent-denote-files))
@@ -266,14 +271,15 @@
 
   (consult-notes-file-dir-sources
     `(("Org"        ?o ,org-directory)
+       ("Journal"   ?j ,(concat madmacs-notes-path "/Journal") :hidden t)
        ("Current"   ?c ,madmacs-storage-current-path)
        ("Resources" ?r ,madmacs-storage-resources-path)
        ("Library"   ?l ,madmacs-library-path)
-       ("Archives"  ?c ,madmacs-storage-archive-path :hidden t)))
+       ("Archives"  ?a ,madmacs-storage-archive-path :hidden t)))
   
   :config
   (consult-notes-org-headings-mode)
-  (consult-notes-denote-mode))
+  (consult-notes-denote-mode)) 
 
 (use-package denote-explore
   :bind

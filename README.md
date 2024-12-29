@@ -24,6 +24,14 @@ While my setup starts fairly quickly, I don't focus heavily on startup time. Per
 
 ## Usage
 
+### Install Emacs
+
+```
+make install-emacs
+```
+
+### Set the configuration 
+
 1. clone the repository to ~/.config/emacs
 2. run `make deps`
 3. start emacs

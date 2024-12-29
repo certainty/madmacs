@@ -127,6 +127,7 @@
 (require 'madmacs-code-cl)
 (require 'madmacs-code-racket)
 (require 'madmacs-code-scala)
+(require 'madmacs-code-typescript)
 (require 'madmacs-code-misc) ;; various modes that don't have elaborate configuration
 
 

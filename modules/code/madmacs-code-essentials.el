@@ -80,9 +80,22 @@
        (common-lisp "https://github.com/theHamsta/tree-sitter-commonlisp"))
     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
     (bash "https://github.com/tree-sitter/tree-sitter-bash/"))
-  (treesit-auto-langs '(ruby scala rust typescript javascript yaml dockerfile json html css lua elisp)) ; don't include go and gomod currently until I figure out how to change the tab-width
+  (treesit-auto-langs '(ruby scala rust typescript tsx javascript yaml dockerfile json html css lua elisp)) ; don't include go and gomod currently until I figure out how to change the tab-width
   :config
   (global-treesit-auto-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Structured editing
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package combobulate
+  :straight (:host github :repo "mickeynp/combobulate")
+  :custom
+   ;; You can customize Combobulate's key prefix here.
+   ;; Note that you may have to restart Emacs for this to take effect!
+   (combobulate-key-prefix "C-c o")
+  :hook ((prog-mode . combobulate-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;

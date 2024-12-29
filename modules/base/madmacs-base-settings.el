@@ -31,13 +31,18 @@
     :group 'madmacs)
 
 (defcustom madmacs-user-full-name ""
-    "User full name"
-    :type 'string
-    :group 'madmacs)
+  "User full name"
+  :type 'string
+  :group 'madmacs)
+
+(defcustom madmacs-enable-meow nil
+  "Enable meow mode"
+  :type 'boolean
+  :group 'madmacs)
 
 (defcustom madmacs-user-email ""
-    "User email"
-    :type 'string
+  "User email"
+  :type 'string
   :group 'madmacs)
 
 (defcustom madmacs-shared-silo-path "~/Documents/Silos/Shared"
