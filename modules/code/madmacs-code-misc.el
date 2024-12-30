@@ -105,14 +105,16 @@
 
 (use-package yaml-mode
   :straight nil
-  :mode "\\.ya?ml\\'"
+  :mode ("\\.ya?ml\\'" . yaml-ts-mode)
   :hook
-  (yaml-mode  . eglot-ensure))
+  (yaml-mode  . eglot-ensure)
+  (yaml-ts-mode eglot-ensure))
 
 (use-package json-mode
-  :mode "\\.json\\'"
+  :mode ("\\.json\\'" . json-ts-mode)
   :hook
-  (json-mode . eglot-ensure))
+  (json-mode . eglot-ensure)
+  (json-ts-mode . eglot-ensure))
 
 (use-package csv-mode
   :hook (csv-mode . csv-guess-set-separator)
