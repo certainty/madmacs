@@ -37,13 +37,14 @@
   ;; TODOs
   (org-todo-keywords
     '((sequence "TODO(t)" "DOING(g!)" "|" "DONE(d!)")
+       (sequence "FEATURE(r)" "DOING(g!)" "|" "DONE(d!)")
        (sequence "TECHDEPT(e)" "|" "DONE(d!)")
        (sequence "FIX(f!)" "REVIEW(r!)" "|" "DONE(d)")
        (sequence "POC(p)" "|" "DONE(d)")
        (sequence "REFACTOR(f)" "|" "DONE(d)")
        (sequence "DOC(o)" "|" "DONE(d)")
        (sequence "MEETING(m)" "|" "DONE(d)")
-       (sequence "APPT(a)" "|" "DONE(d)")
+       (sequence "APPT(a)" "|" "DONE(d)") 
        (sequence "|" "BLOCKED(l!)")
        (sequence "|" "CANCELED(c!)")))
 

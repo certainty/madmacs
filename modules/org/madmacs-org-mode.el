@@ -128,9 +128,15 @@
 (use-package yankpad
   :after org
   :bind
-  (("C-c y" . yankpad-insert))
+  (:map madmacs-keymap-global
+    ("yy" . yankpad-insert)
+    ("ye" . yankpad-expand)
+    ("ym" . yankpad-map))
   :custom
-  (yankpad-file (concat org-directory "/snippets.org")))
+  (yankpad-file (expand-file-name "snippets.org" user-emacs-directory))
+  
+  :config
+  (add-to-list 'hippie-expand-try-functions-list #'yankpad-expand))
 
 (use-package org-menu
   :bind
