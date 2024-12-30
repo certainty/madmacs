@@ -1,0 +1,45 @@
+* tsx-ts-mode
+** rnc
+import React from 'react';
+import { View, Text } from 'react-native';
+
+const MyComponent = () => {
+  return (
+    <View>
+      <Text>My Component</Text>
+    </View>
+  );
+};
+
+export default MyComponent;
+** rnfc
+import React from 'react';
+import { View, Text } from 'react-native';
+
+const MyComponent = () => {
+  return (
+    <View>
+      <Text>My Component</Text>
+    </View>
+  );
+};
+
+export default MyComponent;
+** rnview
+<View style={styles.container}>
+  // Add your child components here
+</View>
+** rnredux
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {};
+
+const mySlice = createSlice({
+  name: 'mySlice',
+  initialState,
+  reducers: {
+    // Add your reducer functions here
+  },
+});
+
+export const { actions, reducer } = mySlice;
