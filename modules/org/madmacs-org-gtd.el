@@ -8,7 +8,7 @@
   :bind
   (:map madmacs-keymap-global
     ("a" . madmacs-personal-agenda)
-    ("c" . org-capture)
+    ("o" . org-capture)
     ("T" . madmacs-capture-task))
 
   (:map goto-map
