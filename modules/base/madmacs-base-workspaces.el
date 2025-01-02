@@ -9,12 +9,13 @@
 	  ("R" . project-query-replace-regexp))
  
   :custom
+  (project-mode-line t)
   (project-switch-commands '((project-find-file "Find file")
                              (project-find-regexp "Find regexp")
                              (project-find-dir "Find directory")
                              (project-vc-dir "VC-Dir")
-                             (project-magit-dir "Magit status")))
-
+                              (project-magit-dir "Magit status")))
+  
   (project-vc-extra-root-markers '(".project" "package.json" "autogen.sh" ".projectile" "go.mod")))
 
 (use-package dotenv
