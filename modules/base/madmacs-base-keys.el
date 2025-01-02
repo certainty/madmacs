@@ -5,7 +5,6 @@
   :custom
   (bind-key-describe-special-forms nil))
 
-
 (use-package repeat
   :straight (:type built-in)
   :hook after-init
@@ -92,156 +91,160 @@
   (which-key-add-keymap-based-replacements madmacs-mode-map
     "C-j" `("Madmacs" . ,madmacs-keymap-global)))
 
-;; (use-package meow
-;;   :demand t
-;;   :custom
-;;   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-;;   (meow-use-cursor-position-hack t)
-;;   (meow-use-clipboard t)
-;;   (meow-goto-line-function 'consult-goto-line)
-;;   (meow-keypad-leader-dispatch madmacs-keymap-global)
-;;   (meow-char-thing-table
-;;     '((?\( . round)
-;;       (?\) . round)
-;;       (?\[ . square)
-;;       (?\] . square)
-;;       (?{ . curly)
-;;       (?} . curly)
-;;       (?\" . string)
-;;       (?s . symbol)
-;;       (?w . window)
-;;       (?b . buffer)
-;;       (?p . paragraph)
-;;       (?l . line)
-;;       (?d . defun)
-;;        (?. . sentence)))
+(use-package meow
+  :demand t
+  :custom
+  (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-use-cursor-position-hack t)
+  (meow-use-clipboard t)
+  (meow-goto-line-function 'consult-goto-line)
+  (meow-keypad-leader-dispatch madmacs-keymap-global)
+  (meow-char-thing-table
+    '((?\( . round)
+      (?\) . round)
+      (?\[ . square)
+      (?\] . square)
+      (?{ . curly)
+      (?} . curly)
+      (?\" . string)
+      (?s . symbol)
+      (?w . window)
+      (?b . buffer)
+      (?p . paragraph)
+      (?l . line)
+      (?d . defun)
+       (?. . sentence)))
 
-;;   (meow-mode-state-list
-;;     '((vterm-mode . insert)
-;;        (vc-git-log-edit-mode . insert)
-;;        (eshell-mode . insert)
-;;        (vc-dir-mode . motion)
-;;        (dired-mode . motion)
-;;        (helpful-mode . motion)
-;;        (help-mode . motion)
-;;        (conf-mode . normal)
-;;        (fundamental-mode . normal)
-;;        (prog-mode . normal)
-;;        (text-mode . normal)))
+  (meow-mode-state-list
+    '((vterm-mode . insert)
+       (vc-git-log-edit-mode . insert)
+       (eshell-mode . insert)
+       (vc-dir-mode . motion)
+       (dired-mode . motion)
+       (helpful-mode . motion)
+       (help-mode . motion)
+       (conf-mode . normal)
+       (fundamental-mode . normal)
+       (prog-mode . normal)
+       (text-mode . normal)))
 
-;;   :config
-;;   (setq meow-use-dynamic-face-color nil)
-;;   (setq meow--kbd-delete-char "<deletechar>")
-;;   (with-eval-after-load 'org
-;;     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
+  :config
+  (setq meow-use-dynamic-face-color nil)
+  (setq meow--kbd-delete-char "<deletechar>")
+  (with-eval-after-load 'org
+    (modify-syntax-entry ?@ "_" org-mode-syntax-table))
 
-;;   ;; These keybindings are intentionally close to emacs defaults
-;;   (meow-normal-define-key
-;;     '("0" . meow-expand-0)
-;;     '("9" . meow-expand-9)
-;;     '("8" . meow-expand-8)
-;;     '("7" . meow-expand-7)
-;;     '("6" . meow-expand-6)
-;;     '("5" . meow-expand-5)
-;;     '("4" . meow-expand-4)
-;;     '("3" . meow-expand-3)
-;;     '("2" . meow-expand-2)
-;;     '("1" . meow-expand-1)
+  ;; These keybindings are intentionally close to emacs defaults
+  (meow-normal-define-key
+    '("0" . meow-expand-0)
+    '("9" . meow-expand-9)
+    '("8" . meow-expand-8)
+    '("7" . meow-expand-7)
+    '("6" . meow-expand-6)
+    '("5" . meow-expand-5)
+    '("4" . meow-expand-4)
+    '("3" . meow-expand-3)
+    '("2" . meow-expand-2)
+    '("1" . meow-expand-1)
 
-;;     ;; navigation
-;;     '("i" . meow-prev)
-;;     '("k" . meow-next)
-;;     '("j" . meow-left)
-;;     '("l" . meow-right)
-
-;;     '("[" . meow-pop-to-mark)
-;;     '("]" . meow-unpop-to-mark)
-
-;;     ;; expansion
-;;     '("I" . meow-prev-expand)
-;;     '("K" . meow-next-expand)
-;;     '("J" . meow-left-expand)
-;;     '("L" . meow-right-expand)
-
-;;     '("u" . meow-back-word)
-;;     '("o" . meow-next-word)
-;;     '("(" . meow-back-symbol)
-;;     '(")" . meow-next-symbol)
-
-;;     '("a" . meow-mark-word) ;; p?
-;;     '("A" . meow-mark-symbol) ;; P?
+    ;; navigation
+    '("p" . meow-prev) ; C-p
+    '("n" . meow-next) ; C-n
+    '("b" . meow-left) ; C-b
+    '("f" . meow-right) ; C-f
     
-;;     '("h" . meow-line)
+    '("m" . back-to-indentation) ; M-m in emacs
+    '("%" . meow-pop-to-mark) 
+    '("M" . meow-unpop-to-mark)
+
+    ;; scrolling
+    '("j" . scroll-down-line)
+    '("k" . scroll-up-line)
     
-;;     '("z" . meow-block)
-;;     '("q" . meow-join)
-;;     '("g" . meow-grab)
-;;     '("G" . meow-pop-grab)
-;;     '("m" . meow-swap-grab)
-;;     '("M" . meow-sync-grab)
-;;     '("p" . meow-cancel-selection)
-;;     '("P" . meow-pop-selection)
+    ;; expansion
+    '("P" . meow-prev-expand)
+    '("N" . meow-next-expand)
+    '("B" . meow-left-expand)
+    '("F" . meow-right-expand)
 
-;;     '("t" . meow-till)
-;;     '("T" . meow-find)
-;;     '("s" . meow-visit)
-;;     '("S" . meow-search)
+    '("<" . meow-back-word) ; M-b
+    '(">" . meow-next-word) ; M-f
+    '("(" . meow-back-symbol) ; C-M-b
+    '(")" . meow-next-symbol) ; C-M-f
 
-;;     '("{" . meow-beginning-of-thing)
-;;     '("}" . meow-end-of-thing)
-;;     '("," . meow-inner-of-thing)
-;;     '("." . meow-bounds-of-thing)
-
-;;     ;; editing
-;;     '("w" . meow-kill)
-;;     '("D" . meow-kill-whole-line)
-;;     '("c" . meow-change)
-;;     '("x" . meow-delete)
-;;     '("W" . meow-save)
-;;     '("y" . meow-yank)
-;;     '("Y" . meow-yank-pop)
-
-;;     '("e" . meow-insert)
-;;     '("E" . meow-open-above)
-;;     '("r" . meow-append)
-;;     '("R" . meow-open-below)
-
-;;     '("b" . open-line)
-;;     '("B" . split-line)
-
-;;     '("'" . meow-reverse)
-;;     '("_" . undo)
-;;     '(";" . meow-comment)
-;;     '("+" . expreg-expand)
-;;     '("-" . expreg-contract)
+    '("H" . meow-mark-word) 
+    '("h" . meow-mark-symbol) 
     
-;;     ;; quick actions
-;;     '("<escape>" . ignore)
-;;     '("=" . indent-region)
-;;     '("|" . eglot-code-actions)
-;;     '("\"" . embrace-commander)
-    
-;;     ;; misc
-;;     '("_" . meow-undo)
-;;     '("U" . meow-undo-in-selection)
-;;     '("G" . meow-grab)
-;;     '(":" . meow-swap-grab) ; mnemonic exchange
-;;     '(";" . meow-pop-grab)
-;;     '("/" . meow-pop-selection)
-;;     '("z" . repeat)
-;;     '("q" . meow-quit)
-;;     '("#" . point-to-register))
+    '("l" . meow-line) ; mnemonic line
+        
+    '("o" . meow-block) ; mnemonic blOck
+    '("O" . meow-to-block) ; mnemonic blOck
+    '("^" . meow-join) ; M-^
 
-;;   (add-to-list 'global-mode-string
-;;     '("%e" (:eval (meow-indicator))))
+    `("g" . ,goto-map)
+    '("G" . meow-grab) ; mnemonic grab
+    '("-" . meow-pop-grab)
+    '("x" . meow-swap-grab) ; mnemonic eXchange 
+    '("X" . meow-sync-grab) ; 
+    '("v" . meow-cancel-selection)
+    '("V" . meow-pop-selection)
 
-;;   (meow-global-mode 1))
+    '("t" . meow-till) 
+    '("T" . meow-find)
+    '("s" . meow-visit)
+    '("S" . meow-search)
+    '("r" . isearch-backward)
 
-;; (use-package meow-tree-sitter
-;;   :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
-;;   :after meow
-;;   :init
-;;   (meow-tree-sitter-register-defaults))
+    '("[" . meow-beginning-of-thing)
+    '("]" . meow-end-of-thing)
+    '("{" . meow-inner-of-thing)
+    '("}" . meow-bounds-of-thing)
+
+    '("+" . expreg-expand)
+    '("-" . expreg-contract)
+
+    ;; editing
+    '("w" . meow-kill) ; C-w
+    '("W" . meow-save) ; M-w
+    '("y" . meow-yank) ; C-y
+    '("Y" . meow-yank-pop) ; M-y
+    '("d" . meow-delete) ; C-d
+    '("D" . meow-kill-whole-line) ; C-k
+    '("c" . meow-change) 
+
+    '("a" . meow-insert) ; C-a beginning of line
+    '("i" . meow-insert) ; mnemonic Insert
+    '("A" . meow-open-above) 
+    '("e" . meow-append) ; C-e end of line
+    '("E" . meow-open-below) 
+
+    '("'" . meow-reverse) 
+    '("_" . undo) ; C-_
+    '("u" . undo) ; C-u
+    '(";" . meow-comment) ; M-;
+    '("z" . meow-repeat) ; C-z
+    '("~" . negative-argument)
+
+    ;; quick actions
+    '("=" . indent-region)
+    '("|" . eglot-code-actions) ; act on code
+  
+    '("\"" . embrace-commander)
+    '("." . xref-find-definitions)
+    '("?" . xref-find-references)
+    '("q" . meow-quit)
+    '("<escape>" . meow-cancel-selection))
+
+  (add-to-list 'global-mode-string
+    '("%e" (:eval (meow-indicator))))
+
+  (meow-global-mode 1))
+
+(use-package meow-tree-sitter
+  :straight (meow-tree-sitter :type git :host github :repo "skissue/meow-tree-sitter")
+  :after meow
+  :init
+  (meow-tree-sitter-register-defaults))
 
 ;; it is important to load which-key after meow to make sure the keymaps show up correctly
 (use-package which-key
