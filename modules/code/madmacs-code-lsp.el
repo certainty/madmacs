@@ -45,10 +45,10 @@
 
   (with-eval-after-load 'embark
     (keymap-set embark-identifier-map "e" madmacs-keymap-eglot-embark)
-    (keymap-set embark-general-map "e a" eglot-code-actions)
     
     (push 'embark--allow-edit
       (alist-get 'eglot-rename embark-target-injection-hooks))
+    
     (push 'embark--allow-edit
       (alist-get 'eglot-code-actions embark-target-injection-hooks)))
 

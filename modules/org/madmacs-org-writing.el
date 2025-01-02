@@ -35,9 +35,34 @@
   :hook
   (text-mode . flyspell-mode)
   (git-commit-mode . flyspell-mode)
+  :bind
+  (:map madmacs-keymap-ux
+    ("su" . madmacs-toggle-umlauts)
+    ("sg" . madmacs-dict-german)
+    ("se" . madmacs-dict-english))
+  
   :config
   (unbind-key "C-," flyspell-mode-map)
-  (unbind-key "C-." flyspell-mode-map))
+  (unbind-key "C-." flyspell-mode-map)
+
+  (defun madmacs-toggle-umlauts()
+    "Toggle being able to write umlauts with the Mac option modifier"
+    (interactive)
+    (if mac-option-modifier
+      (setq mac-option-modifier nil)
+      (setq mac-option-modifier 'meta)))
+
+  (defun madmacs-dict-german ()
+    "Change the dictionary to german"
+    (interactive)
+    (ispell-change-dictionary "de_DE"))
+
+  (defun madmacs-dict-english ()
+    "Change the dictionary to english"
+    (interactive)
+    (ispell-change-dictionary "en_US")))
+  
+
 
 (use-package markdown-mode
   :mode "\\.md\\'"

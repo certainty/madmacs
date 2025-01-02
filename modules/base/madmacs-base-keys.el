@@ -5,6 +5,7 @@
   :custom
   (bind-key-describe-special-forms nil))
 
+
 (use-package repeat
   :straight (:type built-in)
   :hook after-init
@@ -136,8 +137,6 @@
 
 ;;   ;; These keybindings are intentionally close to emacs defaults
 ;;   (meow-normal-define-key
-;;     '("<escape>" . meow-cancel-selection)
-    
 ;;     '("0" . meow-expand-0)
 ;;     '("9" . meow-expand-9)
 ;;     '("8" . meow-expand-8)
@@ -150,85 +149,78 @@
 ;;     '("1" . meow-expand-1)
 
 ;;     ;; navigation
-;;     '("f" . meow-right)
-;;     '("F" . meow-right-expand)
-    
-;;     '("b" . meow-left)
-;;     '("B" . meow-left-expand)
-    
-;;     '("n" . meow-next)
-;;     '("N" . meow-next-expand)
-    
-;;     '("p" . meow-prev)
-;;     '("P" . meow-prev-expand)
+;;     '("i" . meow-prev)
+;;     '("k" . meow-next)
+;;     '("j" . meow-left)
+;;     '("l" . meow-right)
 
-;;     '("m" . meow-back-to-indentation)
-    
 ;;     '("[" . meow-pop-to-mark)
 ;;     '("]" . meow-unpop-to-mark)
-;;     '(")" . meow-next-symbol)
+
+;;     ;; expansion
+;;     '("I" . meow-prev-expand)
+;;     '("K" . meow-next-expand)
+;;     '("J" . meow-left-expand)
+;;     '("L" . meow-right-expand)
+
+;;     '("u" . meow-back-word)
+;;     '("o" . meow-next-word)
 ;;     '("(" . meow-back-symbol)
+;;     '(")" . meow-next-symbol)
+
+;;     '("a" . meow-mark-word) ;; p?
+;;     '("A" . meow-mark-symbol) ;; P?
     
-;;     '("<<" . meow-back-word)
-;;     '(">>" . meow-next-word)
-;;     '(">@" . forward-sexp)
-;;     '("<@" . backward-sexp) 
-;;     '(">[" . sp-forward-slurp-sexp)
-;;     '(">]" . sp-forward-barf-sexp)
-;;     '("<[" . sp-backward-slurp-sexp)
-;;     '("<]" . sp-backward-barf-sexp)
-;;     '(">)" . down-list)
-;;     '("<)" . up-list)
-;;     '(">p" . forward-paragraph)
-;;     '("<p" . backward-paragraph)
+;;     '("h" . meow-line)
     
+;;     '("z" . meow-block)
+;;     '("q" . meow-join)
+;;     '("g" . meow-grab)
+;;     '("G" . meow-pop-grab)
+;;     '("m" . meow-swap-grab)
+;;     '("M" . meow-sync-grab)
+;;     '("p" . meow-cancel-selection)
+;;     '("P" . meow-pop-selection)
+
+;;     '("t" . meow-till)
+;;     '("T" . meow-find)
 ;;     '("s" . meow-visit)
 ;;     '("S" . meow-search)
 
-;;     `("g" . ,goto-map)
-    
-;;     ;; scrolling
-;;     '("K" . scroll-down-line)
-;;     '("J" . scroll-up-line)
-    
-;;     ;; selections
-;;     '("~" . negative-argument)
-;;     '("'" . meow-reverse)
-;;     '("@" . meow-mark-symbol)
-;;     '("%" . meow-mark-word)
-;;     '("l" . meow-line)
-;;     '("x" . meow-to-block)
-;;     '("X" . meow-block) ; mnemonic eXpression
-;;     '("t" . meow-till)
-;;     '("T" . meow-find)
-;;     '("j" . meow-join)
-
-;;     ;; things
 ;;     '("{" . meow-beginning-of-thing)
 ;;     '("}" . meow-end-of-thing)
-;;     '("i" . meow-inner-of-thing)  ;; inner
-;;     '("o" . meow-bounds-of-thing) ;; outer 
+;;     '("," . meow-inner-of-thing)
+;;     '("." . meow-bounds-of-thing)
 
 ;;     ;; editing
-;;     '("a" . meow-insert)
-;;     '("A" . meow-open-above)
-;;     '("e" . meow-append)
-;;     '("E" . meow-open-below)
-;;     '("c" . meow-change-char)           
-;;     '("C" . meow-change)
-;;     '("O" . delete-blank-lines)
-    
-;;     ;; acting on selections
-;;     '("M-d" . meow-kill-word)
-;;     '("M-DEL" . meow-backward-kill-word)
 ;;     '("w" . meow-kill)
-;;     '("k" . meow-kill-whole-line)
+;;     '("D" . meow-kill-whole-line)
+;;     '("c" . meow-change)
+;;     '("x" . meow-delete)
 ;;     '("W" . meow-save)
-;;     '("d" . meow-delete)
 ;;     '("y" . meow-yank)
 ;;     '("Y" . meow-yank-pop)
-;;     '("r" . meow-replace)
 
+;;     '("e" . meow-insert)
+;;     '("E" . meow-open-above)
+;;     '("r" . meow-append)
+;;     '("R" . meow-open-below)
+
+;;     '("b" . open-line)
+;;     '("B" . split-line)
+
+;;     '("'" . meow-reverse)
+;;     '("_" . undo)
+;;     '(";" . meow-comment)
+;;     '("+" . expreg-expand)
+;;     '("-" . expreg-contract)
+    
+;;     ;; quick actions
+;;     '("<escape>" . ignore)
+;;     '("=" . indent-region)
+;;     '("|" . eglot-code-actions)
+;;     '("\"" . embrace-commander)
+    
 ;;     ;; misc
 ;;     '("_" . meow-undo)
 ;;     '("U" . meow-undo-in-selection)
@@ -238,22 +230,7 @@
 ;;     '("/" . meow-pop-selection)
 ;;     '("z" . repeat)
 ;;     '("q" . meow-quit)
-;;     '("#" . point-to-register)
-    
-;;     ;; quick actions
-;;     '("\"" . embrace-commander)
-;;     '("." . xref-find-definitions)
-;;     '("?" . xref-find-references)
-;;     '("," . xref-go-back)
-;;     '("$" . eglot-code-actions)
-;;     '("^" . embark-act) 
-;;     '("`" . captialize-dwim)
-;;     '("|" . shell-command-on-region)
-;;     '("=" . indent-region)
-;;     '("\\" . meow-comment)
-;;     '("*" . indent-rigidly)
-;;     '("+" . expreg-expand)
-;;     '("-" . expreg-contract))
+;;     '("#" . point-to-register))
 
 ;;   (add-to-list 'global-mode-string
 ;;     '("%e" (:eval (meow-indicator))))

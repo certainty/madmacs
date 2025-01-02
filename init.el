@@ -96,6 +96,7 @@
 ;; basic modules
 (require 'madmacs-base-settings)
 (require 'madmacs-base-keys)
+(require 'madmacs-base-pin-builtins)
 
 (when (eq system-type 'darwin)
   (require 'madmacs-base-osx))

@@ -68,7 +68,7 @@ The DWIM behaviour of this command is as follows:
   :custom
   (confirm-kill-emacs nil)
   (default-frame-alist
-   '((undecorated . t)
+   '((undecorated . nil) ;; no title window
      (frame-title-format . nil)
      (internal-border-width . 2)
      (tool-bar-lines . 0)
