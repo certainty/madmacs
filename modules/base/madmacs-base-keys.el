@@ -200,9 +200,6 @@
     '("{" . meow-inner-of-thing)
     '("}" . meow-bounds-of-thing)
 
-    '("+" . expreg-expand)
-    '("-" . expreg-contract)
-
     ;; editing
     '("w" . meow-kill) ; C-w
     '("W" . meow-save) ; M-w
