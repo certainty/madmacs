@@ -21,7 +21,7 @@
     ("f b" . eglot-format-buffer)
     ("f f" . eglot-format))
    
-  (:map madmacs-keymap-eglot
+  (:map eglot-mode-map
     ("M-g e a" . xref-find-apropos)
     ("M-g e d" . xref-find-definitions)
     ("M-g e r" . eglot-rename)

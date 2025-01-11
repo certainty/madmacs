@@ -93,45 +93,67 @@
     :lighter " #"
     :keymap (make-sparse-keymap)))
 
+
 ;; basic modules
 (require 'madmacs-base-settings)
-(require 'madmacs-base-keys)
 (require 'madmacs-base-pin-builtins)
+(require 'madmacs-base-keys)
 
-(when (eq system-type 'darwin)
-  (require 'madmacs-base-osx))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Terminal Emacs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(unless (display-graphic-p)
+  (use-package emacs
+    :demand t
+    :bind
+    ("C-z" . nil) ; never suspend
+    :custom
+    (make-backup-files nil)
+    (modus-themes-common-palette-overrides
+      '((bg-main "gray1")))
+    
+    :init
+    (load-theme 'modus-vivendi :no-confirm)))
 
-(require 'madmacs-base-ui)
-(require 'madmacs-base-display-elements)
-(require 'madmacs-base-completion)
-(require 'madmacs-base-files)
-(require 'madmacs-base-search)
-(require 'madmacs-base-editing)
-(require 'madmacs-base-workspaces)
-(require 'madmacs-base-dashboard)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Graphical Emacs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;f
+(when (display-graphic-p)
 
-;; extra modules
+  (when (eq system-type 'darwin)
+    (require 'madmacs-base-osx))
 
-(require 'madmacs-org-mode)
-(require 'madmacs-org-gtd)
-(require 'madmacs-org-writing)
+  (require 'madmacs-base-ui)
+  (require 'madmacs-base-display-elements)
+  (require 'madmacs-base-completion)
+  (require 'madmacs-base-files)
+  (require 'madmacs-base-search)
+  (require 'madmacs-base-editing)
+  (require 'madmacs-base-workspaces)
+  (require 'madmacs-base-dashboard)
 
-(require 'madmacs-tools-vcs)
-(require 'madmacs-tools-terminal)
-(require 'madmacs-tools-pass)
-(require 'madmacs-tools-docker)
+  ;; extra modules
+
+  (require 'madmacs-org-mode)
+  (require 'madmacs-org-gtd)
+  (require 'madmacs-org-writing)
+
+  (require 'madmacs-tools-vcs)
+  (require 'madmacs-tools-terminal)
+  (require 'madmacs-tools-pass)
+  (require 'madmacs-tools-docker)
 
 ;; coding
-(require 'madmacs-code-essentials)
-(require 'madmacs-code-lsp)
-(require 'madmacs-code-elisp)
-(require 'madmacs-code-cl)
-(require 'madmacs-code-racket)
-(require 'madmacs-code-scala)
-(require 'madmacs-code-typescript)
-(require 'madmacs-code-misc) ;; various modes that don't have elaborate configuration
+  (require 'madmacs-code-essentials)
+  (require 'madmacs-code-lsp)
+  (require 'madmacs-code-elisp)
+  (require 'madmacs-code-cl)
+  (require 'madmacs-code-racket)
+  (require 'madmacs-code-scala)
+  (require 'madmacs-code-typescript)
+  (require 'madmacs-code-misc) ;; various modes that don't have elaborate configuration
 
 
-;; ai enhancements
-(require 'madmacs-ai-copilot)
-(require 'madmacs-ai-gptel)
+  ;; ai enhancements
+  (require 'madmacs-ai-copilot)
+  (require 'madmacs-ai-gptel))

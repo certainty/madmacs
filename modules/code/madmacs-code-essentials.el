@@ -1,3 +1,4 @@
+
 ;; -*- lexical-binding: t; -*-
 
 (use-package paren
@@ -74,7 +75,7 @@
 (use-package treesit-auto
   :hook (after-init . global-treesit-auto-mode)
   :custom
-  (treesit-font-lock-level 4) ;; make sure we get the elements highlighted we're interested in
+  (treesit-font-lock-level 5) ;; make sure we get the elements highlighted we're interested in
   (treesit-auto-install 'prompt)
   (treesit-language-source-alist
     '((elisp "https://github.com/Wilfred/tree-sitter-elisp")

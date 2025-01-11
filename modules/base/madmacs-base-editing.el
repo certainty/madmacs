@@ -8,8 +8,6 @@
     ("M-o" . crux-smart-open-line-above)))
 
 (use-package emacs
-  :demand t
-  :straight nil
   :bind
   (:map madmacs-mode-map
     ("M-D" . backward-kill-word) ; a little easier to reach
@@ -29,6 +27,7 @@
 (use-package expreg
   :bind
   ("C-," . expreg-expand)
+  ("C-M-;" . expreg-contract)
 
   (:repeat-map madmacs-expreg-repeat-map
     ("," . expreg-expand)
@@ -72,12 +71,6 @@
     ("C-\"" . embrace-commander))
   
   :init
-  (add-hook 'markdown-mode-hook
-    (lambda ()
-      (embrace-add-pair ?_ "_" "_")
-      (embrace-add-pair ?i "*" "*")
-      (embrace-add-pair ?b "**" "**")))
- 
   (defun embrace-double-quotes ()
     (interactive)
     (embrace--add-internal (region-beginning) (region-end) ?\" ))

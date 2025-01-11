@@ -100,8 +100,7 @@
              (dedicated . t)
              (side . bottom)
              (slot . 0)
-             (window-parameters . ((mode-line-format . none))))))
-
+       (window-parameters . ((mode-line-format . none))))))
 
 ;; use org-modern
 (use-package org-modern
@@ -142,6 +141,20 @@
   :bind
   (:map org-mode-map
     ("C-c C-m" . org-menu)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; babel
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package org
+  :straight (:type built-in)
+  :custom
+  (org-plantuml-exec-mode 'plantuml)
+
+  :config
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((plantuml . t))))
 
 
 (provide 'madmacs-org-mode)

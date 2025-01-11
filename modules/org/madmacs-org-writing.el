@@ -411,13 +411,13 @@
 (use-package DocView
   :straight (:type built-in))
 
-(use-package esxml)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Export
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package nov.el
-  :after esxml
-  :hook (after-init . setup-novel)
+(use-package org
+  :straight (:type built-in)
   :config
-  (defun setup-novel (&rest _)
-    (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))))
+  (require 'ox-md nil t))
 
 (provide 'madmacs-org-writing)

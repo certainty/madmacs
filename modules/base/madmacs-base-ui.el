@@ -71,31 +71,67 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package modus-themes
+  :if t
   :demand t
   :bind
   (:map madmacs-keymap-ux
 	  ("c" . modus-themes-toggle))
 
-  :config
-  (setq
-    modus-themes-to-toggle '(modus-vivendi-tinted modus-operandi-tinted)
-    modus-themes-custom-auto-reload t
-    modus-themes-disable-other-themes nil
-    modus-themes-mixed-fonts t
-    modus-themes-italic-constructs t
-    modus-themes-bold-constructs t
-    modus-themes-variable-pitch-ui t
-    modus-themes-prompts '(extrabold italic)
-    modus-themes-completions
+  :custom
+  (modus-themes-to-toggle '(modus-vivendi modus-operandi))
+  (modus-themes-mode-line '(moody))
+  (modus-themes-custom-auto-reload t)
+  (modus-themes-disable-other-themes nil)
+  (modus-themes-mixed-fonts t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-bold-constructs t)
+  (modus-themes-variable-pitch-ui t)
+  (modus-themes-prompts '(extrabold italic))
+  (modus-themes-paren-match '(bold intense))
+  (modus-themes-org-blocks 'tinted-background)
+  (modus-themes-completions
     '((matches . (extrabold underline))
        (selection . (semibold italic))))
+
+  :config
+  (defun madmacs--defaults-with-overrides (defaults overrides)
+    "Merge overrides into defaults. Overriding any defaults."
+    (append (cl-remove-if (lambda (x) (member (car x) (mapcar 'car overrides))) defaults) overrides))
+
+  ;; I prefer a less vibrant version of the theme (less greenish)
+  (setopt modus-themes-common-palette-overrides
+    (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
+      `((bg-paren-match bg-magenta-intense)
+         (underline-paren-match fg-main)
+         (fg-line-number-active red-cooler)
+         (bg-line-number-inactive unspecified)
+         (bg-line-number-active unspecified))))
+
+  (setopt modus-themes-headings
+      '((1 . (variable-pitch 1.1))
+        (t . (1.0))))
   
-  (mapc #'disable-theme custom-enabled-themes)
-  (load-theme 'modus-vivendi-tinted :no-confirm))
+  (load-theme 'modus-vivendi :no-confirm))
+  
 
 (use-package ef-themes
+  :if nil
+  :demand t
+  :bind
+  (:map madmacs-keymap-ux
+	  ("c" . ef-themes-toggle))
   :custom
-  (ef-themes-to-toggle '(ef-light ef-dream)))
+  (ef-themes-toggle '(ef-kassio ef-owl))
+  (ef-themes-mixed-fonts t)
+  (ef-themes-variable-pitch-ui t)
+  (ef-themes-disable-other-themes t)
+  (ef-owl-palette-overrides
+    '((bg-main "#000000")))
+  (ef-dream-palette-overrides
+    '((bg-main "#000000")))
+  
+  :config
+  (load-theme 'ef-owl :no-confirm))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline

@@ -58,8 +58,6 @@
       (symbol-value keymap))))
 
 (use-package emacs
-  :straight nil
-  :demand t
   :bind
   (:map madmacs-mode-map
 	  ("C-z" . repeat) ; I don't use suspend frame so this is a nicer binding than C-x z
@@ -101,18 +99,19 @@
   (meow-keypad-leader-dispatch madmacs-keymap-global)
   (meow-char-thing-table
     '((?\( . round)
-      (?\) . round)
-      (?\[ . square)
-      (?\] . square)
-      (?{ . curly)
-      (?} . curly)
-      (?\" . string)
-      (?s . symbol)
-      (?w . window)
-      (?b . buffer)
-      (?p . paragraph)
-      (?l . line)
-      (?d . defun)
+       (?\) . round)
+       (?\[ . square)
+       (?\] . square)
+       (?\; . comment)
+       (?{ . curly)
+       (?} . curly)
+       (?g . string)
+       (?s . symbol)
+       (?w . window)
+       (?b . buffer)
+       (?p . paragraph)
+       (?l . line)
+       (?d . defun)
        (?. . sentence)))
 
   (meow-mode-state-list
@@ -127,12 +126,14 @@
        (fundamental-mode . normal)
        (prog-mode . normal)
        (text-mode . normal)))
+  (meow-use-dynamic-face-color nil)
 
   :config
-  (setq meow-use-dynamic-face-color nil)
   (setq meow--kbd-delete-char "<deletechar>")
   (with-eval-after-load 'org
     (modify-syntax-entry ?@ "_" org-mode-syntax-table))
+
+  
 
   ;; These keybindings are intentionally close to emacs defaults
   (meow-normal-define-key
@@ -206,7 +207,7 @@
     '("y" . meow-yank) ; C-y
     '("Y" . meow-yank-pop) ; M-y
     '("d" . meow-delete) ; C-d
-    '("D" . meow-kill-whole-line) ; C-k
+    '("D" . meow-backward-delete)
     '("c" . meow-change) 
 
     '("a" . meow-insert) ; C-a beginning of line
@@ -215,9 +216,11 @@
     '("e" . meow-append) ; C-e end of line
     '("E" . meow-open-below) 
 
+    '("R" . meow-replace)
     '("'" . meow-reverse) 
-    '("_" . undo) ; C-_
-    '("u" . undo) ; C-u
+    '("_" . meow-undo) ; C-_
+    '("u" . meow-undo) ; C-x C-u
+    '("U" . meow-undo-in-selection)
     '(";" . meow-comment) ; M-;
     '("z" . meow-repeat) ; C-z
     '("~" . negative-argument)
