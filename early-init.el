@@ -8,7 +8,7 @@
 
 ;;(setopt use-package-compute-statistics t) 
 
-(when (display-graphic-p)
+
 ;; load the environment file if it exists
   (let ((env-file (expand-file-name "madmacs.env" user-emacs-directory)))
     (when (file-exists-p env-file)
@@ -25,4 +25,4 @@
                   (message ";; Adding content of PATH to exec-path" value)
                   (dolist (value (split-string value ":"))
                     (cl-pushnew value exec-path :test #'string=)))))
-            (forward-line 1)))))))
+            (forward-line 1))))))

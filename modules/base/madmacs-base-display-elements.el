@@ -94,6 +94,9 @@ The DWIM behaviour of this command is as follows:
   :straight (:type built-in)
   :hook (after-init . winner-mode)
   :bind
+  (:map madmacs-keymap-global
+    ("|" . split-window-right)
+    ("=" . split-window-below))
   (:map madmacs-mode-map
 	  ("C-x {" . shrink-window)
 	  ("C-x }" . enlarge-window)

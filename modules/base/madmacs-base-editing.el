@@ -12,7 +12,9 @@
   (:map madmacs-mode-map
     ("M-D" . backward-kill-word) ; a little easier to reach
     ("C-M-D" . backward-kill-sexp) ; a little easier to reach
-	  ("M-z" . zap-up-to-char))
+	  ("M-z" . zap-up-to-char)
+    ("M-]" . next-line)
+    ("M-[" . previous-line))
   :custom
   (next-line-add-newlines t)
   (kill-whole-line t))
@@ -99,8 +101,6 @@
   
   :init
   (setopt prefix-help-command #'embark-prefix-help-command))
-
-
 
 (use-package avy
   :bind

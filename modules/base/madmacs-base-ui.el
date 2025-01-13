@@ -70,6 +70,7 @@
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Modus
 (use-package modus-themes
   :if t
   :demand t
@@ -103,16 +104,28 @@
     (madmacs--defaults-with-overrides modus-themes-preset-overrides-faint
       `((bg-paren-match bg-magenta-intense)
          (underline-paren-match fg-main)
-         (fg-line-number-active red-cooler)
-         (bg-line-number-inactive unspecified)
-         (bg-line-number-active unspecified))))
+         (fg-line-number-active red-cooler))))
 
   (setopt modus-themes-headings
-      '((1 . (variable-pitch 1.1))
-        (t . (1.0))))
+    '((1 . (variable-pitch 1.1))
+       (t . (1.0))))
+
+  (defun madmacs-modus-meow-faces (&rest _)
+    (modus-themes-with-colors
+      (custom-set-faces
+        `(meow-region-cursor-1 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-0)))
+        `(meow-region-cursor-2 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-1)))
+        `(meow-region-cursor-3 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-2)))
+
+        `(meow-position-highlight-number-1 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-0)))
+        `(meow-position-highlight-number-2 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-1)))
+        `(meow-position-highlight-number-3 ((,c :inherit (bold modus-themes-reset-soft) :background ,bg-char-2))))))
+
+  (add-hook 'enable-theme-functions #'madmacs-modus-meow-faces)
   
-  (load-theme 'modus-vivendi :no-confirm))
-  
+  ;; Loaded via circadian based on runrise / unset
+  ;; (load-theme 'modus-vivendi :no-confirm)
+  )
 
 (use-package ef-themes
   :if nil
@@ -132,6 +145,28 @@
   
   :config
   (load-theme 'ef-owl :no-confirm))
+
+(use-package zenburn-theme
+  :if nil
+  :demand t
+  :config
+  (load-theme 'zenburn :no-confirm))
+
+;; Toggle Themes based on sunrise / sunset
+(use-package solar
+  :demand t
+  :straight (:type built-in)
+  :custom
+  (calendar-latitude 53.7)
+  (calendar-longitude 10.0166))
+
+(use-package circadian
+  :after solar
+  :custom
+  (circadian-themes '((:sunrise . modus-operandi)
+                       (:sunset  . modus-vivendi)))
+  :init
+  (circadian-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline
